@@ -1,0 +1,34 @@
+/** \ingroup Learners DecisionTree
+*/
+
+
+/** \file
+
+\brief Calls C4.5 and tests the learned tree.
+
+A wrapper that calls C4.5 to learn a decision tree, times its
+execution, and extracts the important bits from its output.  C4.5 must
+be in your path for this learner to work, you can get it from
+Professor Quinlan's homepage at <a
+href="http://www.cse.unsw.edu.au/~quinlan/">http://www.cse.unsw.edu.au/~quinlan/</a>.
+
+This wrapper runs C4.5, tests the learned tree on the test data (if
+appropriate) and outputs: <code>test set error rate &lt;whitespace&gt;
+size of tree &lt;whitespace&gt; seconds</code>.
+
+You might also be interested in the \ref DecisionTreeReadC45 function.
+
+<h2>Arguments</h2>
+
+- -f &lt;filestem&gt;
+  - Set the stem name (default DF)
+- -args &lt;string&gt; 
+  - Passes these additional arguments to C4.5 (default none)
+- -noPrune 
+  - Reports the results from c4.5's unpurned tree (default reports from pruned tree)
+- -noTest 
+  - Suppress the -u argument, which makes C4.5 output accuracy on the training set (default test accuracy on the &lt;filestem&gt;.test file)
+- -v 
+  - Can be used multiple times to increase the debugging output
+
+*/

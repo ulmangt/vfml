@@ -1,0 +1,508 @@
+.TH "BeliefNet.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+BeliefNet.h \- 
+.SH "Detailed Description"
+.PP 
+A Belief Net Structure with CPT local models. 
+
+This is the interface for creating, using, printing, & serializing Belief Nets (aka Bayesian Networks). This document will first describe the properties of BeliefNets and then of BeliefNetNodes. A belief net is a compact representation of a joint probability distribution of all of the variables in a domain. For each variable there is a local model (represented by a BeliefNetNode) that models the probability of the various values of that varable given the values of the variables that affect them. A BeliefNet is an acyclic graph of the nodes, where an edge represets (loosely) that the variable at the source affects the varable at the target. The exact semantics of an edge are a bit more complex. For a more detailed discussion see \fCDavid Heckerman's Tutorial\fP
+.PP
+\fBWish List\fP
+.RS 4
+A version of this that uses DecisionTree local models instead of full CPTs. This would also need a new structure learning tool (a modification of \fBbnlearn\fP). 
+.RE
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_BeliefNet_\fP"
+.br
+.RI "\fIBelief network ADT. \fP"
+.ti -1c
+.RI "struct \fB_BeliefNetNode_\fP"
+.br
+.RI "\fIBelief net node with full CPTs for local models. \fP"
+.in -1c
+.SS "BeliefNetNode"
+
+.in +1c
+.ti -1c
+.RI "typedef \fB_BeliefNetNode_\fP \fBBeliefNetNodeStruct\fP"
+.br
+.RI "\fIBelief net node with full CPTs for local models. \fP"
+.ti -1c
+.RI "typedef \fB_BeliefNetNode_\fP * \fBBeliefNetNode\fP"
+.br
+.RI "\fIBelief net node with full CPTs for local models. \fP"
+.ti -1c
+.RI "void \fBBNNodeAddParent\fP (\fBBeliefNetNode\fP bnn, \fBBeliefNetNode\fP parent)"
+.br
+.RI "\fIAdds the specified node as a parent to bnn. \fP"
+.ti -1c
+.RI "int \fBBNNodeLookupParentIndex\fP (\fBBeliefNetNode\fP bnn, \fBBeliefNetNode\fP parent)"
+.br
+.RI "\fIReturns the index of parent in bnn's parent list. \fP"
+.ti -1c
+.RI "int \fBBNNodeLookupParentIndexByID\fP (\fBBeliefNetNode\fP bnn, int id)"
+.br
+.RI "\fILooks through the parent list of bnn for a node with node id of 'id'. \fP"
+.ti -1c
+.RI "void \fBBNNodeRemoveParent\fP (\fBBeliefNetNode\fP bnn, int parentIndex)"
+.br
+.RI "\fIRemoves the node with index 'parentIndex' from bnn's parent list. \fP"
+.ti -1c
+.RI "\fBBeliefNetNode\fP \fBBNNodeGetParent\fP (\fBBeliefNetNode\fP bnn, int parentIndex)"
+.br
+.RI "\fIReturns the parent at position 'index' in the node's parent list. \fP"
+.ti -1c
+.RI "int \fBBNNodeGetParentID\fP (\fBBeliefNetNode\fP bnn, int parentIndex)"
+.br
+.RI "\fIReturns the node id of the node at position 'index' in the node's parent list. \fP"
+.ti -1c
+.RI "int \fBBNNodeGetNumParents\fP (\fBBeliefNetNode\fP bnn)"
+.br
+.RI "\fIReturns the number of nodes in the target node's parent list. \fP"
+.ti -1c
+.RI "int \fBBNNodeGetNumChildren\fP (\fBBeliefNetNode\fP bnn)"
+.br
+.RI "\fIReturns the number of nodes in the target node's child list. \fP"
+.ti -1c
+.RI "int \fBBNNodeHasParent\fP (\fBBeliefNetNode\fP bnn, \fBBeliefNetNode\fP parent)"
+.br
+.RI "\fIReturns 1 if and only if parent is in the node's parent list. \fP"
+.ti -1c
+.RI "int \fBBNNodeHasParentID\fP (\fBBeliefNetNode\fP bnn, int parentID)"
+.br
+.RI "\fIReturns 1 if and only if one of the node's parents has the specified node id. \fP"
+.ti -1c
+.RI "int \fBBNNodeGetNumValues\fP (\fBBeliefNetNode\fP bnn)"
+.br
+.RI "\fIReturns the number of values that the variable represented by the node can take. \fP"
+.ti -1c
+.RI "int \fBBNNodeGetNumParameters\fP (\fBBeliefNetNode\fP bnn)"
+.br
+.RI "\fIReturns the number of parameters in the node's CPT. \fP"
+.ti -1c
+.RI "char * \fBBNNodeGetName\fP (\fBBeliefNetNode\fP bnn)"
+.br
+.RI "\fIReturns the name of the node. \fP"
+.ti -1c
+.RI "int \fBBNNodeStructureEqual\fP (\fBBeliefNetNode\fP bnn, \fBBeliefNetNode\fP otherNode)"
+.br
+.RI "\fIReturns 1 if and only if the two nodes have the same parents in the same order. \fP"
+.ti -1c
+.RI "void \fBBNNodeInitCPT\fP (\fBBeliefNetNode\fP bnn)"
+.br
+.RI "\fIAllocates memory for bnn's CPT and zeros the values. \fP"
+.ti -1c
+.RI "void \fBBNNodeZeroCPT\fP (\fBBeliefNetNode\fP bnn)"
+.br
+.RI "\fISets the value of all CPT entries to zero. \fP"
+.ti -1c
+.RI "void \fBBNNodeFreeCPT\fP (\fBBeliefNetNode\fP bnn)"
+.br
+.RI "\fIFrees any memory being used by the node's CPTs. \fP"
+.ti -1c
+.RI "void \fBBNNodeAddSample\fP (\fBBeliefNetNode\fP bnn, \fBExamplePtr\fP e)"
+.br
+.RI "\fIIncrements the count of the appropriate CPT element by 1. \fP"
+.ti -1c
+.RI "void \fBBNNodeAddSamples\fP (\fBBeliefNetNode\fP bnn, \fBVoidListPtr\fP samples)"
+.br
+.RI "\fICalls BNNodeAddSample for each example in the list. \fP"
+.ti -1c
+.RI "void \fBBNNodeAddFractionalSample\fP (\fBBeliefNetNode\fP bnn, \fBExamplePtr\fP e, float weight)"
+.br
+.RI "\fIIncrements the count of the appropriate CPT element by weight. \fP"
+.ti -1c
+.RI "void \fBBNNodeAddFractionalSamples\fP (\fBBeliefNetNode\fP bnn, \fBVoidListPtr\fP samples, float weight)"
+.br
+.RI "\fICalls BNNodeAddFractionalSample for each example in the list. \fP"
+.ti -1c
+.RI "float \fBBNNodeGetCPTRowCount\fP (\fBBeliefNetNode\fP bnn, \fBExamplePtr\fP e)"
+.br
+.RI "\fIReturns the number of samples that have been added to the node with the same parent combination as in e. \fP"
+.ti -1c
+.RI "float \fBBNNodeGetP\fP (\fBBeliefNetNode\fP bnn, int value)"
+.br
+.RI "\fIReturns the marginal probability of the appropriate value of the variable. \fP"
+.ti -1c
+.RI "float \fBBNNodeGetCP\fP (\fBBeliefNetNode\fP bnn, \fBExamplePtr\fP e)"
+.br
+.RI "\fIGet the probability of the value of the target variable given the values of the parent variables. \fP"
+.ti -1c
+.RI "void \fBBNNodeSetCP\fP (\fBBeliefNetNode\fP bnn, \fBExamplePtr\fP e, float probability)"
+.br
+.RI "\fISets the probability without affecting the sum of the CPT row for the parent combination. \fP"
+.ti -1c
+.RI "float \fBBNNodeGetNumSamples\fP (\fBBeliefNetNode\fP bnn)"
+.br
+.RI "\fIReturns the number of samples that have been added to the belief net node. \fP"
+.ti -1c
+.RI "int \fBBNNodeGetNumCPTRows\fP (\fBBeliefNetNode\fP bnn)"
+.br
+.RI "\fIReturns the number rows in the node's CPT. This is the number of parent combinations. \fP"
+.in -1c
+.SS "BeliefNet"
+
+.in +1c
+.ti -1c
+.RI "#define \fBBNGetUserData\fP(bn)   (((\fBBeliefNet\fP)bn)->userData)"
+.br
+.RI "\fIAllows you to store an arbitrary pointer on the BeliefNet. \fP"
+.ti -1c
+.RI "typedef \fB_BeliefNet_\fP \fBBeliefNetStruct\fP"
+.br
+.RI "\fIBelief network ADT. \fP"
+.ti -1c
+.RI "typedef \fB_BeliefNet_\fP * \fBBeliefNet\fP"
+.br
+.RI "\fIBelief network ADT. \fP"
+.ti -1c
+.RI "\fBBeliefNet\fP \fBBNNew\fP (void)"
+.br
+.RI "\fICreates a new belief net with no nodes. \fP"
+.ti -1c
+.RI "void \fBBNFree\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fIFrees the memory associated with the belief net and all nodes. \fP"
+.ti -1c
+.RI "\fBBeliefNet\fP \fBBNClone\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fIMakes a copy of the belief net and all nodes. \fP"
+.ti -1c
+.RI "\fBBeliefNet\fP \fBBNCloneNoCPTs\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fIMakes a copy of the belief net and all nodes, but does not copy the local models at the nodes. \fP"
+.ti -1c
+.RI "\fBBeliefNet\fP \fBBNNewFromSpec\fP (\fBExampleSpecPtr\fP es)"
+.br
+.RI "\fIMakes a new belief net from the example spec. \fP"
+.ti -1c
+.RI "int \fBBNGetSimStructureDifference\fP (\fBBeliefNet\fP bn, \fBBeliefNet\fP otherNet)"
+.br
+.RI "\fIReturns the symetric difference in the structures. \fP"
+.ti -1c
+.RI "void \fBBNSetName\fP (\fBBeliefNet\fP bn, char *name)"
+.br
+.RI "\fISet's the Belief net's name. \fP"
+.ti -1c
+.RI "\fBExampleSpec\fP * \fBBNGetExampleSpec\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fIReturns the ExampleSepc that is associated with the belief net. \fP"
+.ti -1c
+.RI "\fBBeliefNetNode\fP \fBBNGetNodeByID\fP (\fBBeliefNet\fP bn, int id)"
+.br
+.RI "\fIGets the node with the associated index. \fP"
+.ti -1c
+.RI "int \fBBNGetNumNodes\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fIReturns the number of nodes in the Belief Net. \fP"
+.ti -1c
+.RI "\fBBeliefNetNode\fP \fBBNGetNodeByElimOrder\fP (\fBBeliefNet\fP bn, int index)"
+.br
+.RI "\fIReturns nodes by their order in a topological sort. \fP"
+.ti -1c
+.RI "int \fBBNHasCycle\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fIReturns 1 if and only if there is a cycle in the graphical structure of the belief net. \fP"
+.ti -1c
+.RI "void \fBBNFlushStructureCache\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fINeeds to be called anytime you change network structure. \fP"
+.ti -1c
+.RI "void \fBBNAddSample\fP (\fBBeliefNet\fP bn, \fBExamplePtr\fP e)"
+.br
+.RI "\fIModifies all the CPTs in the network by adding a count to the approprite parameters. \fP"
+.ti -1c
+.RI "void \fBBNAddSamples\fP (\fBBeliefNet\fP bn, \fBVoidListPtr\fP samples)"
+.br
+.RI "\fICalls BNAddSample for every example in the list. \fP"
+.ti -1c
+.RI "void \fBBNAddFractionalSample\fP (\fBBeliefNet\fP bn, \fBExamplePtr\fP e, float weight)"
+.br
+.RI "\fIModifies all the CPTs in the network by adding a weighted count to the approprite parameters. \fP"
+.ti -1c
+.RI "void \fBBNAddFractionalSamples\fP (\fBBeliefNet\fP bn, \fBVoidListPtr\fP samples, float weight)"
+.br
+.RI "\fICalls BNAddFractionalSample for every example in the list. \fP"
+.ti -1c
+.RI "long \fBBNGetNumIndependentParameters\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fIReturns the sum over all nodes of the number of independent parameters in the CPTs. \fP"
+.ti -1c
+.RI "long \fBBNGetNumParameters\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fIReturns the sum over all nodes of the number of parameters in the CPTs. \fP"
+.ti -1c
+.RI "long \fBBNGetMaxNodeParameters\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fIReturns the number of parameters in the node with the most parameters. \fP"
+.ti -1c
+.RI "\fBExamplePtr\fP \fBBNGenerateSample\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fISamples from the distribution represented by bn. \fP"
+.ti -1c
+.RI "void \fBBNSetPriorStrength\fP (\fBBeliefNet\fP bn, double strength)"
+.br
+.RI "\fISets prior parameter strength as if some examples have been seen. \fP"
+.ti -1c
+.RI "void \fBBNSmoothProbabilities\fP (\fBBeliefNet\fP bn, double strength)"
+.br
+.RI "\fIAdds a number of samples equal to strength to each CPT entry in the network. \fP"
+.ti -1c
+.RI "void \fBBNSetUserData\fP (\fBBeliefNet\fP bn, void *data)"
+.br
+.RI "\fIAllows you to store an arbitrary pointer on the BeliefNet. \fP"
+.ti -1c
+.RI "\fBBeliefNet\fP \fBBNReadBIF\fP (char *fileName)"
+.br
+.RI "\fIReads a Belief net from the named file. \fP"
+.ti -1c
+.RI "\fBBeliefNet\fP \fBBNReadBIFFILEP\fP (FILE *file)"
+.br
+.RI "\fIReads a Belief net from a file pointer. \fP"
+.ti -1c
+.RI "void \fBBNWriteBIF\fP (\fBBeliefNet\fP bn, FILE *out)"
+.br
+.RI "\fIWrites the belief net to the file. \fP"
+.ti -1c
+.RI "void \fBBNPrintStats\fP (\fBBeliefNet\fP bn)"
+.br
+.RI "\fIPrints some information about the net to stdout. \fP"
+.in -1c
+.SS "Inference with Likelihood Sampling"
+The idea of likelihood sampling is that you have a set of query variables (specified by an example with some of the values unknown) and the system randomly generates samples for the query variables given the values of the non-query variables. After 'enough' samples the distribution of the samples generated for the query variables will be a good match to the 'true' distribution according to the net. The number of samples required can be very large, especially when dealing with events that don't occur often. 
+.in +1c
+.ti -1c
+.RI "\fBBeliefNet\fP \fBBNInitLikelihoodSampling\fP (\fBBeliefNet\fP bn, \fBExamplePtr\fP e)"
+.br
+.RI "\fISet up likelihood sampling and return place holder network. \fP"
+.ti -1c
+.RI "void \fBBNAddLikelihoodSamples\fP (\fBBeliefNet\fP bn, \fBBeliefNet\fP newNet, \fBExamplePtr\fP e, int numSamples)"
+.br
+.RI "\fIAdds the requested number of samples to newNet. \fP"
+.ti -1c
+.RI "\fBBeliefNet\fP \fBBNLikelihoodSampleNTimes\fP (\fBBeliefNet\fP bn, \fBExamplePtr\fP e, int numSamples)"
+.br
+.RI "\fICombines a call to BNInitiLikelihoodSampling with a call to BNAddLikelihoodSamples. \fP"
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define BNGetUserData(bn)   (((\fBBeliefNet\fP)bn)->userData)"
+.PP
+Allows you to store an arbitrary pointer on the BeliefNet. You are responsible for managing any memory that it points to. 
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_BeliefNet_\fP * \fBBeliefNet\fP"
+.PP
+Belief network ADT. See \fBBeliefNet.h\fP for more detail. 
+.SS "typedef struct \fB_BeliefNetNode_\fP * \fBBeliefNetNode\fP"
+.PP
+Belief net node with full CPTs for local models. See \fBBeliefNet.h\fP for more detail. 
+.SS "typedef struct \fB_BeliefNetNode_\fP  \fBBeliefNetNodeStruct\fP"
+.PP
+Belief net node with full CPTs for local models. See \fBBeliefNet.h\fP for more detail. 
+.SS "typedef struct \fB_BeliefNet_\fP  \fBBeliefNetStruct\fP"
+.PP
+Belief network ADT. See \fBBeliefNet.h\fP for more detail. 
+.SH "Function Documentation"
+.PP 
+.SS "void BNAddFractionalSample (\fBBeliefNet\fP bn, \fBExamplePtr\fP e, float weight)"
+.PP
+Modifies all the CPTs in the network by adding a weighted count to the approprite parameters. See the BeliefNetNode functions for a more detailed description of how the CPTs are represented and handled. 
+.SS "void BNAddFractionalSamples (\fBBeliefNet\fP bn, \fBVoidListPtr\fP samples, float weight)"
+.PP
+Calls BNAddFractionalSample for every example in the list. 
+.SS "void BNAddLikelihoodSamples (\fBBeliefNet\fP bn, \fBBeliefNet\fP newNet, \fBExamplePtr\fP e, int numSamples)"
+.PP
+Adds the requested number of samples to newNet. newNet should have been created by a call to BNInitiLikelihoodSampling. Adds the requested number of samples for the unknown variables in e using the distributions in bn. 
+.SS "void BNAddSample (\fBBeliefNet\fP bn, \fBExamplePtr\fP e)"
+.PP
+Modifies all the CPTs in the network by adding a count to the approprite parameters. See the BeliefNetNode functions for a more detailed description of how the CPTs are represented and handled. 
+.SS "void BNAddSamples (\fBBeliefNet\fP bn, \fBVoidListPtr\fP samples)"
+.PP
+Calls BNAddSample for every example in the list. 
+.SS "\fBBeliefNet\fP BNClone (\fBBeliefNet\fP bn)"
+.PP
+Makes a copy of the belief net and all nodes. 
+.SS "\fBBeliefNet\fP BNCloneNoCPTs (\fBBeliefNet\fP bn)"
+.PP
+Makes a copy of the belief net and all nodes, but does not copy the local models at the nodes. 
+.SS "void BNFlushStructureCache (\fBBeliefNet\fP bn)"
+.PP
+Needs to be called anytime you change network structure. That is, any time you add nodes, add or remove edges after calling BNHasCycle, or any ElimOrder stuff. The reason is that these two classes of functions cache topological sorts of the network and changing the structure invalidates these caches. In prinicipal, all of the functions that modify structure could be modified to automatically call this. I think things were done this way for efficiency (but I am not sure it actually helps efficiency... 
+.SS "void BNFree (\fBBeliefNet\fP bn)"
+.PP
+Frees the memory associated with the belief net and all nodes. 
+.SS "\fBExamplePtr\fP BNGenerateSample (\fBBeliefNet\fP bn)"
+.PP
+Samples from the distribution represented by bn. You are responsible for freeing the returned example (using ExampleFree when you are done with it. 
+.SS "\fBExampleSpec\fP* BNGetExampleSpec (\fBBeliefNet\fP bn)"
+.PP
+Returns the ExampleSepc that is associated with the belief net. The spec will be automatically created when you read the network from disk or as you add nodes to the net and values to the nodes. 
+.SS "long BNGetMaxNodeParameters (\fBBeliefNet\fP bn)"
+.PP
+Returns the number of parameters in the node with the most parameters. 
+.SS "\fBBeliefNetNode\fP BNGetNodeByElimOrder (\fBBeliefNet\fP bn, int index)"
+.PP
+Returns nodes by their order in a topological sort. If the nodes can not be topologically sorted (perhaps because there is a cycle) this function returns 0.
+.PP
+Note that this function caches (and uses a cache) of the topological sort and that you might want to call BNFlushStructureCache before calling this if you've changed the structure of the net since the cache was filled. 
+.SS "\fBBeliefNetNode\fP BNGetNodeByID (\fBBeliefNet\fP bn, int id)"
+.PP
+Gets the node with the associated index. This is 0 based (like a C array). 
+.SS "long BNGetNumIndependentParameters (\fBBeliefNet\fP bn)"
+.PP
+Returns the sum over all nodes of the number of independent parameters in the CPTs. This is different from the total number of parameters because one of the parameters in each row can be determined from the values of the others, and so is not independent. 
+.SS "int BNGetNumNodes (\fBBeliefNet\fP bn)"
+.PP
+Returns the number of nodes in the Belief Net. 
+.SS "long BNGetNumParameters (\fBBeliefNet\fP bn)"
+.PP
+Returns the sum over all nodes of the number of parameters in the CPTs. 
+.SS "int BNGetSimStructureDifference (\fBBeliefNet\fP bn, \fBBeliefNet\fP otherNet)"
+.PP
+Returns the symetric difference in the structures. This is defined as the sum for i in nodes of the number of parents that node i of bn has but node i of otherBN does not have plus the number of parents that node i of otherBN has that node i of bn does not have. 
+.SS "int BNHasCycle (\fBBeliefNet\fP bn)"
+.PP
+Returns 1 if and only if there is a cycle in the graphical structure of the belief net. Note that this function caches (and uses a cache) of the topological sort and that you might want to call BNFlushStructureCache before calling this if you've changed the structure of the net since the cache was filled. 
+.SS "\fBBeliefNet\fP BNInitLikelihoodSampling (\fBBeliefNet\fP bn, \fBExamplePtr\fP e)"
+.PP
+Set up likelihood sampling and return place holder network. Returns a new belief net with CPT set to start to acumulate samples for the unknown variables in e, you should free this net when you are done with it. Once the net is created you should add as many samples to it as you like using BNAddLikelihoodSamples and then check the CPTs at the appropriate nodes for the generated distributions. 
+.SS "\fBBeliefNet\fP BNLikelihoodSampleNTimes (\fBBeliefNet\fP bn, \fBExamplePtr\fP e, int numSamples)"
+.PP
+Combines a call to BNInitiLikelihoodSampling with a call to BNAddLikelihoodSamples. 
+.SS "\fBBeliefNet\fP BNNew (void)"
+.PP
+Creates a new belief net with no nodes. 
+.SS "\fBBeliefNet\fP BNNewFromSpec (\fBExampleSpecPtr\fP es)"
+.PP
+Makes a new belief net from the example spec. All attributes in the spec should be discrete. This adds a node, with the appropriate values, to the net for each variable in the spec. The resulting network has no edges and zeroed CPTs 
+.SS "void BNNodeAddFractionalSample (\fBBeliefNetNode\fP bnn, \fBExamplePtr\fP e, float weight)"
+.PP
+Increments the count of the appropriate CPT element by weight. Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. 
+.SS "void BNNodeAddFractionalSamples (\fBBeliefNetNode\fP bnn, \fBVoidListPtr\fP samples, float weight)"
+.PP
+Calls BNNodeAddFractionalSample for each example in the list. 
+.SS "void BNNodeAddParent (\fBBeliefNetNode\fP bnn, \fBBeliefNetNode\fP parent)"
+.PP
+Adds the specified node as a parent to bnn. Both nodes should be from the same BeliefNet structure. 
+.SS "void BNNodeAddSample (\fBBeliefNetNode\fP bnn, \fBExamplePtr\fP e)"
+.PP
+Increments the count of the appropriate CPT element by 1. Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. 
+.SS "void BNNodeAddSamples (\fBBeliefNetNode\fP bnn, \fBVoidListPtr\fP samples)"
+.PP
+Calls BNNodeAddSample for each example in the list. 
+.SS "void BNNodeFreeCPT (\fBBeliefNetNode\fP bnn)"
+.PP
+Frees any memory being used by the node's CPTs. This should be called before changing the node's parents. After a call to this function, you should call BNNodeInitCPT for the node before making any calls that might try to access the CPT (adding samples, doing inference, smoothing probability, comparin networks, etc). 
+.SS "float BNNodeGetCP (\fBBeliefNetNode\fP bnn, \fBExamplePtr\fP e)"
+.PP
+Get the probability of the value of the target variable given the values of the parent variables. Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. 
+.SS "float BNNodeGetCPTRowCount (\fBBeliefNetNode\fP bnn, \fBExamplePtr\fP e)"
+.PP
+Returns the number of samples that have been added to the node with the same parent combination as in e. Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. 
+.SS "char* BNNodeGetName (\fBBeliefNetNode\fP bnn)"
+.PP
+Returns the name of the node. 
+.SS "int BNNodeGetNumChildren (\fBBeliefNetNode\fP bnn)"
+.PP
+Returns the number of nodes in the target node's child list. 
+.SS "int BNNodeGetNumCPTRows (\fBBeliefNetNode\fP bnn)"
+.PP
+Returns the number rows in the node's CPT. This is the number of parent combinations. 
+.SS "int BNNodeGetNumParameters (\fBBeliefNetNode\fP bnn)"
+.PP
+Returns the number of parameters in the node's CPT. 
+.SS "int BNNodeGetNumParents (\fBBeliefNetNode\fP bnn)"
+.PP
+Returns the number of nodes in the target node's parent list. 
+.SS "float BNNodeGetNumSamples (\fBBeliefNetNode\fP bnn)"
+.PP
+Returns the number of samples that have been added to the belief net node. 
+.SS "int BNNodeGetNumValues (\fBBeliefNetNode\fP bnn)"
+.PP
+Returns the number of values that the variable represented by the node can take. 
+.SS "float BNNodeGetP (\fBBeliefNetNode\fP bnn, int value)"
+.PP
+Returns the marginal probability of the appropriate value of the variable. That is, the sum over all rows of the number of counts for that value divided by the sum over all rows of the number of counts in the row.
+.PP
+Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. 
+.SS "\fBBeliefNetNode\fP BNNodeGetParent (\fBBeliefNetNode\fP bnn, int parentIndex)"
+.PP
+Returns the parent at position 'index' in the node's parent list. 
+.SS "int BNNodeGetParentID (\fBBeliefNetNode\fP bnn, int parentIndex)"
+.PP
+Returns the node id of the node at position 'index' in the node's parent list. 
+.SS "int BNNodeHasParent (\fBBeliefNetNode\fP bnn, \fBBeliefNetNode\fP parent)"
+.PP
+Returns 1 if and only if parent is in the node's parent list. 
+.SS "int BNNodeHasParentID (\fBBeliefNetNode\fP bnn, int parentID)"
+.PP
+Returns 1 if and only if one of the node's parents has the specified node id. 
+.SS "void BNNodeInitCPT (\fBBeliefNetNode\fP bnn)"
+.PP
+Allocates memory for bnn's CPT and zeros the values. This allocates enough memory to hold one float for each value of the variable associated with the node for each parent combination (an amount of memory that is exponential in the number of parents). This should be called once all parents are in place. 
+.SS "int BNNodeLookupParentIndex (\fBBeliefNetNode\fP bnn, \fBBeliefNetNode\fP parent)"
+.PP
+Returns the index of parent in bnn's parent list. Returns -1 if parent is not one of node's parents. 
+.SS "int BNNodeLookupParentIndexByID (\fBBeliefNetNode\fP bnn, int id)"
+.PP
+Looks through the parent list of bnn for a node with node id of 'id'. See BNNodeGetID for more info. 
+.SS "void BNNodeRemoveParent (\fBBeliefNetNode\fP bnn, int parentIndex)"
+.PP
+Removes the node with index 'parentIndex' from bnn's parent list. To remove the node 'parent' call BNNodeRemoveParent(bnn, BNNodeLookupParentIndex(bnn, parent)). 
+.SS "void BNNodeSetCP (\fBBeliefNetNode\fP bnn, \fBExamplePtr\fP e, float probability)"
+.PP
+Sets the probability without affecting the sum of the CPT row for the parent combination. This means that the probability has the same prior weight before and after a call to this. Put another way, the set probability is equivilant to having seen the same number of samples at the new probability as at the old.
+.PP
+Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. 
+.SS "int BNNodeStructureEqual (\fBBeliefNetNode\fP bnn, \fBBeliefNetNode\fP otherNode)"
+.PP
+Returns 1 if and only if the two nodes have the same parents in the same order. \fBBug\fP
+.RS 4
+Only returns 1 if the parents are in the same order, but the order probably shouldn't matter. 
+.RE
+.PP
+
+.SS "void BNNodeZeroCPT (\fBBeliefNetNode\fP bnn)"
+.PP
+Sets the value of all CPT entries to zero. Can be called after InitCPT to reset all the table's values to 0. 
+.SS "void BNPrintStats (\fBBeliefNet\fP bn)"
+.PP
+Prints some information about the net to stdout. The information includes num nodes, min max avg num parents, etc. 
+.SS "\fBBeliefNet\fP BNReadBIF (char * fileName)"
+.PP
+Reads a Belief net from the named file. The file should contain a net in \fCBayesian Interchange Format\fP (BIF). 
+.SS "\fBBeliefNet\fP BNReadBIFFILEP (FILE * file)"
+.PP
+Reads a Belief net from a file pointer. The file pointer should be opened for reading and should contain a net in \fCBayesian Interchange Format\fP (BIF). 
+.SS "void BNSetName (\fBBeliefNet\fP bn, char * name)"
+.PP
+Set's the Belief net's name. This doesn't really affect anything (except it is recorded if you write out the belief net), but using it may make you feel better. 
+.SS "void BNSetPriorStrength (\fBBeliefNet\fP bn, double strength)"
+.PP
+Sets prior parameter strength as if some examples have been seen. Multiplies all the counts in all of the network's CPTs so that each parent combination has the equivilant of strength samples, divided acording to that combination's distribution in the network.
+.PP
+Hrm, does that confuse you too? 
+.SS "void BNSetUserData (\fBBeliefNet\fP bn, void * data)"
+.PP
+Allows you to store an arbitrary pointer on the BeliefNet. You are responsible for managing any memory that it points to. 
+.SS "void BNSmoothProbabilities (\fBBeliefNet\fP bn, double strength)"
+.PP
+Adds a number of samples equal to strength to each CPT entry in the network. This effectivly smooths the probabilities towards uniform. 
+.SS "void BNWriteBIF (\fBBeliefNet\fP bn, FILE * out)"
+.PP
+Writes the belief net to the file. Out should be a file open for writing, pass stdout to write to the console. The net it written in \fCBayesian Interchange Format\fP (BIF). 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

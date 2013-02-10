@@ -1,0 +1,37 @@
+\section{cleandata File Reference}
+\label{cleandata}\index{cleandata@{cleandata}}
+
+
+\subsection{Detailed Description}
+Cleans up a data set in several ways. 
+
+This tool cleans a data set in several ways, and outputs the cleaned data. It will scan the training data and gather some simple stats about it (if needed, see below). It then does a pass over training and testing data, filling in missing categorical attribute values with the most common value given the class, and filling in missing continuous attribute values with the average value given the class.
+
+The tool can also add a new attribute value to each categorical attribe, called 'u' (short for unknown) and rewrite the data set as appropriate.
+
+The tool can also remove every attribute in the data set that is marked ignored.
+
+cleandata accepts an input stem and expects to find a file {\em stem\/}.data and {\em stem\/}.names and optionally one called {\em stem\/}.test. cleandata outputs a file named {\em stem\/}-clean.data, {\em stem\/}-clean.names, and optionally {\em stem\/}-clan.test.
+
+cleandata will work with a single pass over the data set if and only if you use -add\-Value and there are no continuous attributes. Otherwise it usues an additional pass.
+
+\begin{Desc}
+\item[{\bf Thanks}]to Chun-Hsiang Hung for doing the core development work for this tool. \end{Desc}
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$\begin{itemize}
+\item Set the stem name (default DF)\end{itemize}
+\item -source $<$dir$>$\begin{itemize}
+\item Set the directory that contains the dataset (default '.')\end{itemize}
+\item -add\-Value\begin{itemize}
+\item Adds a 'u' for unknown value to all categorical attributes (default fill in the most common value)\end{itemize}
+\item -remove\-Ignore\begin{itemize}
+\item removes every attribute marked 'ignored' in names from the data set (default leave them in)\end{itemize}
+\item -h\begin{itemize}
+\item Display usage information and exit.\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+

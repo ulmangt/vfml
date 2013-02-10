@@ -1,0 +1,69 @@
+\section{vfdt File Reference}
+\label{vfdt}\index{vfdt@{vfdt}}
+
+
+\subsection{Detailed Description}
+Learns a decision tree from a high-speed data stream or very large data set. 
+
+vfdt is described in {\tt this paper}. (This version of VFDT has many extensions since that paper was written, including the ability to learn from domains with continuous attributes, we hope to have a more up-to-date paper to cite here soon).
+
+VFDT learns a decision tree as follows. It starts with a single leaf and starts collecting training examples from a data stream (with the -stdin argument) or from the file stem.data. When it has enough data to know, with high confidence (see the -sc parameter below) that it knows which attribute is the best to partition the data with, it turns the leaf into an internal node splitting on the selected attribute and starts learning at the new leaves recursively. VFDT is an incremental online algoriithm in that it has a model available at any time during its run and refines the model over time as it is presented with additional training data (see the {\bf vfdt-engine::h} interface, for an API to the learning engine if you want to incrementially learn decision trees in your own programs). VFDT will cache training examples in RAM if it has enough memory available (see the -grow\-Megs parameter below) or it will just use them to update the statistics in the leaf where they belong and then free them. VFDT will also disable growing at unpromising leaves (and free the associated sufficient statistics) to save additional RAM when needed.
+
+VFDT will be most effective when learning from very large data sets, in the millions or billions, where there is plenty of data for it to make good statistical decisions. For smaller data sets you may consider the -batch parameter which makes it load all data into RAM and learn as a traditional decision tree learner. If you suspect that there is concept drift in the data set you may like to use the {\bf cvfdt} tool instead.
+
+For a more detailed example of vfdt in action see the {\tt mining data streams} walkthrough.
+
+vfdt takes input and does output in {\tt c4.5 format}. It expects to find the files {\tt $<$stem$>$.names} and {\tt $<$stem$>$.data}.
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f 'filestem'\begin{itemize}
+\item Set the name of the dataset (default DF)\end{itemize}
+\item -source 'dir'\begin{itemize}
+\item Set the source data directory (default '.')\end{itemize}
+\item -u\begin{itemize}
+\item Test the learner's accuracy on data in 'stem'.test\end{itemize}
+\item -sc 'prob'\begin{itemize}
+\item Allowed chance of error in each decision (default 0.0000001 that's .00001 percent)\end{itemize}
+\item -tc 'tie error' Call a tie when hoeffding e less than this. (default 0.05)\item -gini\begin{itemize}
+\item Use gini gain instead of information gain (default information gain) (DOESN'T WORK FOR CONTINUOUS ATTRIBUTES)\end{itemize}
+\item -rescans '\#'\begin{itemize}
+\item Naievely consider each example '\#' times with no concern for using it once per level of the induced tree (default 1)\end{itemize}
+\item -chunk 'count'\begin{itemize}
+\item Wait until 'count' examples accumulate at a leaf before testing for a split (default 300)\end{itemize}
+\item -grow\-Megs 'count'\begin{itemize}
+\item Limit dynamic memory allocation to 'count' megabytes (default 1000)\end{itemize}
+\item -stdin\begin{itemize}
+\item Reads training examples from stdin instead of from 'stem'.data (default off) NOTE this disables the rescans switch\end{itemize}
+\item -schedule 'mult'\begin{itemize}
+\item Run tests after 10k examples. Then sets the next test point to the current num examples $\ast$ mult.\end{itemize}
+\item -output\-Tree\begin{itemize}
+\item Output the binary tree at each test point.\end{itemize}
+\item -no\-Cache\-Test\-Set\begin{itemize}
+\item By default vfdt reads test set from disk once and keeps in memory. Use this option to conserve some memory.\end{itemize}
+\item -prune\begin{itemize}
+\item Do reduced error pruning on the resulting tree, reserving 5\% of data up to 2 million samples for pruning (default do not).\end{itemize}
+\item -no\-Restart\-Leaves\begin{itemize}
+\item Do not attempt to restart leaves that were deactivated for memory reasons (default do).\end{itemize}
+\item -no\-Cache\-Training\-Examples\begin{itemize}
+\item Do not use extra RAM to cache training examples (default do).\end{itemize}
+\item -cache\-Prune\-Examples\begin{itemize}
+\item Use extra RAM to cache pruning examples only makes sense if you use -prune (default store prune data in 'stem'.prunedata)\end{itemize}
+\item -batch\begin{itemize}
+\item Run in batch mode, read all examples into RAM, don't do hoeffding bounds (default off).\end{itemize}
+\item -laplace 'count'\begin{itemize}
+\item When starting a new node use the laplace correction with the parent's class and 'count' examples (defult 5)\end{itemize}
+\item -pre\-Prune\-Tau 'pp\-Tau'\begin{itemize}
+\item Will not call tie while delta from null to best attrib 'pp\-Tau', preprune if epsilon less than 'pp\-Tau' makes sense that this be less than or equal to 'tc' (default 0, no preprune)\end{itemize}
+\item -initial\-Pause\begin{itemize}
+\item Pause five seconds before reading the names file, sometimes needed if the file is being generated and then data is being piped to VFDT\end{itemize}
+\item -incremental\-Reporting\begin{itemize}
+\item As each example arrives test the learned model with it and then learn on it (default off).\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output.\end{itemize}
+\item -h\begin{itemize}
+\item Run vfdt -h for a list of the arguments and their meanings.\end{itemize}
+\end{itemize}
+
+

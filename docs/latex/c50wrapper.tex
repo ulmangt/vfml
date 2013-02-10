@@ -1,0 +1,21 @@
+\section{c50wrapper File Reference}
+\label{c50wrapper}\index{c50wrapper@{c50wrapper}}
+
+
+\subsection{Detailed Description}
+Calls C5.0 and tests the learned tree. 
+
+A wrapper that calls C5.0 to learn a decision tree, times its execution, and extracts the important bits from its output. C5.0 must be in your path for this learner to work. It is a commercial product and you can get information about purchasing it from Professor Quinlan's homepage at {\tt http://www.cse.unsw.edu.au/$\sim$quinlan/}.
+
+This wrapper runs C5.0, tests the lerned tree on the test data (if appropriate) and outputs: {\tt test set error rate $<$whitespace$>$ size of tree $<$whitespace$>$ seconds}.
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$ -Set the stem name (default DF)\item -args $<$string$>$\begin{itemize}
+\item Passes these additional arguments to C4.5 (default none)\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+

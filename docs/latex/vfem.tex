@@ -1,0 +1,69 @@
+\section{vfem File Reference}
+\label{vfem}\index{vfem@{vfem}}
+
+
+\subsection{Detailed Description}
+Performs EM clustering. 
+
+Performs EM clustering for sphirical gaussians accelerated with sampling as described in {\tt this paper}. This learner ignores categorical attributes.
+
+vfem performs several iterations of clustering on progressively larger samples until it determines with high confidence (see -delta below) that the clustering it achieves is within -epsilon of the one that would be achieved using infinite data for each decision. vfem can use a fancy optimization to select the number of samples to use in each iteration of the next round, or it can use straight progressive sampling. You can use the -batch argument to turn off the sampling and do traditional em clustering. vfem evaluates the learned centers by comparing to the centers found in $<$stem$>$.test as follows. Learned centers are greedily matched to the closest of the test centers until each center has a match, and then the evaluation is the sum of the squared distance between each test center and its matched learned center.
+
+VFEM takes input and does output in {\tt c4.5 format}. It expects to find the files {\tt $<$stem$>$.names} and {\tt $<$stem$>$.data.} and outputs the learned centers to a file called {\tt $<$stem$>$.centers}.
+
+\begin{Desc}
+\item[{\bf Wish List}]Modify this learner to also learn the variances of the Gaussians. \end{Desc}
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f 'filestem'\begin{itemize}
+\item Set the name of the dataset (default DF)\end{itemize}
+\item -source 'dir'\begin{itemize}
+\item Set the source data directory (default '.')\end{itemize}
+\item -clusters 'num\-Clusters'\begin{itemize}
+\item Set the num clusters to find (REQUIRED)\end{itemize}
+\item -variance 'value'\begin{itemize}
+\item The variance of the Gaussians, the current version of EM needs this as a parameter (default 0.05)\end{itemize}
+\item -assign\-Error\-Scale 'scale'\begin{itemize}
+\item Loosen bound by scaling the assignment part of it by the scale factor (default 1.0)\end{itemize}
+\item -delta 'delta'\begin{itemize}
+\item Find final solution with confidence (1 - 'delta') (default 5\%)\end{itemize}
+\item -epsilon 'epsilon'\begin{itemize}
+\item The maximum distance between a learned centroid and the coresponding infinite data centroid (default .01)\end{itemize}
+\item -converge 'distance'\begin{itemize}
+\item Stop when distance centroids move between iterations squared is less than 'distance' (default .001)\end{itemize}
+\item -batch\begin{itemize}
+\item Do a traditional kmeans run on the whole input file. Doesn't make sense to combine with -stdin (default off)\end{itemize}
+\item -init 'num'\begin{itemize}
+\item Use the 'num'th valid assignment of initial centroids (default 1)\end{itemize}
+\item -max\-Per\-Iteration 'num'\begin{itemize}
+\item Use no more than num examples per iteration (default 1,000,000,000)\end{itemize}
+\item -l 'number'\begin{itemize}
+\item The estimated \# of iterations to converge if you guess wrong and aren't using batch VFEM will fix it for you and do an extra round (default 10)\end{itemize}
+\item -seed 's'\begin{itemize}
+\item Seed to use picking initial centers (default random)\end{itemize}
+\item -progressive\begin{itemize}
+\item Don't use the Lagrange based optimization to pick the \# of samples at each iteration of the next round (default use the optimization)\end{itemize}
+\item -tight\-Bound\begin{itemize}
+\item Use a tighter assignment error bound (requires a second pass over the dataset) (default use a looser one-pass bound)\end{itemize}
+\item -allow\-Bad\-Converge\begin{itemize}
+\item Allows VFEM to converge at a time when em wouldn't (default off).\end{itemize}
+\item -r 'range'\begin{itemize}
+\item The maximum range between pairs of examples (default assume the range of each dimension is 0 - 1.0 and calculate it from that)\end{itemize}
+\item -stdin\begin{itemize}
+\item Reads training examples as a stream from stdin instead of from 'stem'.data (default off)\end{itemize}
+\item -test\-On\-Train\begin{itemize}
+\item Loss is the sum of the square of the distances from allu training examples to their assigned centroid (default compare learned centroids to centroids in 'stem'.test)\end{itemize}
+\item -normal\-Approx\begin{itemize}
+\item Use a normal approximation of the Hoeffding bound (default use hoeffding bound)\end{itemize}
+\item -load\-Centers\begin{itemize}
+\item Load initial centroids from 'stem'.centers (default use random based on -init and -seed)\end{itemize}
+\item -u\begin{itemize}
+\item Output results after each iteration\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\item -h\begin{itemize}
+\item Run vfem -h for a list of the arguments and their meanings.\end{itemize}
+\end{itemize}
+
+

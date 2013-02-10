@@ -1,0 +1,58 @@
+
+import ConfigParser, string, JobQueue, os
+
+# get the parameters
+kHostName = string.split(os.uname()[1], '.')[0]
+
+config = ConfigParser.ConfigParser({"host":kHostName})
+config.read("config")
+
+queueFile  = os.path.abspath(config.get("GLOBAL", "queuefile"))
+lockDir   = os.path.abspath(config.get("GLOBAL", "lockdir"))
+scratchDir = os.path.abspath(config.get("GLOBAL", "scratchdir"))
+resultDir  = os.path.abspath(config.get("GLOBAL", "resultdir"))
+
+
+# set up the directories
+origDir    = os.getcwd()
+toDelete = []
+tmpDir = scratchDir
+while not os.path.exists(tmpDir):
+   toDelete.append(tmpDir)
+   tmpDir = os.path.split(tmpDir)[0]
+
+if not os.path.exists(scratchDir):
+   os.makedirs(scratchDir)
+# should be done by uRunner Master, but just in case!
+if not os.path.exists(resultDir):
+   os.makedirs(resultDir)
+
+
+# set up the environment
+os.environ['resultdir']  = resultDir
+os.environ['scratchdir'] = scratchDir
+os.environ['rundir']     = os.path.abspath(origDir)
+os.environ['host']       = kHostName
+
+
+# run the jobs while there are more of them
+queue = JobQueue.JobQueue(queueFile, lockDir)
+finishedQueue = JobQueue.JobQueue(queueFile + ".finished", lockDir)
+job = queue.GetAndRemoveNextJob()
+while job != None:
+   # make the new directory and go to it
+   if not os.path.exists(scratchDir):
+      os.makedirs(scratchDir)
+   os.chdir(scratchDir)
+
+   # do the work
+   job.Run()
+   finishedQueue.AddJob(job)
+   job = queue.GetAndRemoveNextJob()
+
+   # clean up
+   os.chdir(origDir)
+   for d in toDelete:
+      os.system("rm -rf %s" % (d))
+
+

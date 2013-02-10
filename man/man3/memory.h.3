@@ -1,0 +1,92 @@
+.TH "memory.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+memory.h \- 
+.SH "Detailed Description"
+.PP 
+Tracks the size of allocations made. 
+
+A wrapper for the standard memory manager that tracks the size of the allocations made using it. This requires an extra 8 bytes per allocation. You can turn this off by editing the \fBmemory.h\fP file and commenting out the definition of DEBUGMEMORY, but this will cause some of the features of some of the research learners to fail in unpredictable ways.
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMMemMove\fP(dst, src, bytes)   __SystemMoveMemory(dst, src, bytes)"
+.br
+.RI "\fIWrapper for memmove that works with pointers allocated by this memory module. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void * \fBMNewPtr\fP (int size)"
+.br
+.RI "\fIA wrapper around Malloc that tracks the size of the allocation. \fP"
+.ti -1c
+.RI "void \fBMFreePtr\fP (void *ptr)"
+.br
+.RI "\fIFrees the memory held by the pointer and tracks the change in the module's records. \fP"
+.ti -1c
+.RI "void \fBMSetAllocFailFunction\fP (void(*AllocFail)(int allocationSize))"
+.br
+.RI "\fISets a function that is called if an allocation fails. \fP"
+.ti -1c
+.RI "long \fBMGetTotalAllocation\fP (void)"
+.br
+.RI "\fIReturns the number of bytes that are currently allocated by the module. \fP"
+.ti -1c
+.RI "void \fBMSetActivePool\fP (int poolID)"
+.br
+.RI "\fISet the pool to track future memory allocations. \fP"
+.ti -1c
+.RI "int \fBMGetActivePool\fP (void)"
+.br
+.RI "\fIFind which pool is being used to track memory. \fP"
+.ti -1c
+.RI "long \fBMGetPoolAllocation\fP (int poolID)"
+.br
+.RI "\fIReturns the number of bytes that are currently allocated in the specified pool. \fP"
+.ti -1c
+.RI "void \fBMMovePtrToPool\fP (void *ptr, int poolID)"
+.br
+.RI "\fIMoves the memory from one pool to another. \fP"
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define MMemMove(dst, src, bytes)   __SystemMoveMemory(dst, src, bytes)"
+.PP
+Wrapper for memmove that works with pointers allocated by this memory module. 
+.SH "Function Documentation"
+.PP 
+.SS "void MFreePtr (void * ptr)"
+.PP
+Frees the memory held by the pointer and tracks the change in the module's records. 
+.SS "int MGetActivePool (void)"
+.PP
+Find which pool is being used to track memory. The module supports up to 9 pools of memory, with id 1-9. You can get more fine grained tracking by setting the pool and using MGetPoolAllocation. There is also a special pool, with id 0, and any allocations made when that pool are set are tracked in the pool but will not show up in MGetTotalAllocation. The default pool id is 1. 
+.SS "long MGetPoolAllocation (int poolID)"
+.PP
+Returns the number of bytes that are currently allocated in the specified pool. The module supports up to 9 pools of memory, with id 1-9. You can get more fine grained tracking by setting the pool and using MGetPoolAllocation. There is also a special pool, with id 0, and any allocations made when that pool are set are tracked in the pool but will not show up in MGetTotalAllocation. The default pool id is 1. 
+.SS "long MGetTotalAllocation (void)"
+.PP
+Returns the number of bytes that are currently allocated by the module. 
+.SS "void MMovePtrToPool (void * ptr, int poolID)"
+.PP
+Moves the memory from one pool to another. Changes (if needed) the tracking of the ptr so that it is now counted against the new pool instead of the pool it was allocated into. 
+.SS "void* MNewPtr (int size)"
+.PP
+A wrapper around Malloc that tracks the size of the allocation. Make sure you use MFreePtr to free any memory allocated by this call or your program will probably crash. 
+.SS "void MSetActivePool (int poolID)"
+.PP
+Set the pool to track future memory allocations. The module supports up to 9 pools of memory, with id 1-9. You can get more fine grained tracking by setting the pool and using MGetPoolAllocation. There is also a special pool, with id 0, and any allocations made when that pool are set are tracked in the pool but will not show up in MGetTotalAllocation. The default pool id is 1. 
+.SS "void MSetAllocFailFunction (void(* AllocFail)(int allocationSize))"
+.PP
+Sets a function that is called if an allocation fails. If you call this, then your AllocFail function will be called if an allocation fails. After your function returns the memory module will try the allocation agian, if the allocation fails again, the memory module returns a NULL pointer. You could use AllocFail to flush caches, or clean up the program and quit. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

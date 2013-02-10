@@ -1,0 +1,39 @@
+\section{sprint File Reference}
+\label{sprint}\index{sprint@{sprint}}
+
+
+\subsection{Detailed Description}
+Learn a decision tree from data sets that do not fit in RAM. 
+
+Learns a decision tree from a data set that is larger than RAM as described in {\tt this paper}. SPRINT learns by writing the training data to disk in sorted order and then making one pass reading and writing the data per level of the tree it learns. This mean that no data need be in RAM, but that there is additional overhead for all the disk access (but far less overhead than would be required if by a learner that makes random access to training data and relies on OS supported virtual memory to swap it to disk, as does C4.5). If your data set fits in RAM you are better off using C4.5 or {\bf vfdt} with its -batch option. SPRINT is happiest when it has enough RAM to load all the values for a continuous attribute into RAM at once so that it can sort them. If it doesn't have that it will still work, by sorting the attribute in chunks, but it will be slower.
+
+sprint takes input and does output in {\tt c4.5 format}. It expects to find the files {\tt $<$stem$>$.names} and {\tt $<$stem$>$.data}.
+
+\begin{Desc}
+\item[{\bf Thanks}]to Chun-Hsiang Hung for doing the core development work for {\bf sprint}. \end{Desc}
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f 'filestem'\begin{itemize}
+\item Set the name of the dataset (default DF)\end{itemize}
+\item -source 'dir'\begin{itemize}
+\item Set the source data directory (default '.')\end{itemize}
+\item -grow\-Megs 'count'\begin{itemize}
+\item Limit dynamic memory allocation to 'count' megabytes (default 1024)\end{itemize}
+\item -min\-To\-Split 'count'\begin{itemize}
+\item Do not split any node with fewer than count examples (default 5)\end{itemize}
+\item -smooth\-Class 'count'\begin{itemize}
+\item Smooth leaf class prediction with count towards the most common class at the parent node (default 1)\end{itemize}
+\item -no\-Prune\begin{itemize}
+\item Do not prune the learned tree (default do reduced error prune with the data in 'stem'.prune)\end{itemize}
+\item -output\-Tree\begin{itemize}
+\item Save unpruned tree to 'stem'.unprunedtree and pruned tree to 'stem'.prunedtree (if pruning) (default do not)\end{itemize}
+\item -u\begin{itemize}
+\item Test on data in 'filestem'.test (default do not test)\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\item -h\begin{itemize}
+\item Run sprint -h for a list of the arguments and their meanings.\end{itemize}
+\end{itemize}
+
+

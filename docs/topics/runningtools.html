@@ -1,0 +1,134 @@
+<html>
+
+<head>
+<title>Running VFML's Tools and Learners</title>
+</head>
+
+<body>
+
+<h1>Running VFML's Tools and Learners</h1>
+
+This section describes how you can use the over two dozen tools and
+learning algorithms that come with VFML to help you solve your own
+data mining problems.
+
+<h2>Getting Data</h2>
+
+To use them you will first need to get access to some data sets.  The
+<a href="gettingstarted.htm">getting started</a> documentation
+contains some information on how to download the data sets that come
+with VFML.  We will now briefly talk about how to construct your own.
+The native data format for VFML is the <a href
+="../appendixes/c45.htm">C4.5 Format</a> which was introduced by Ross
+Quinlan with his C4.5 decision tree induction algorithm.  You can see
+the <a href ="../appendixes/c45.htm">VFML appendix</a> for a detailed
+description of the format, but we will also describe it here briefly.
+Each data set in C4.5 format consists of several files, a
+&ltstem&gt.names file that describes the data schema, a
+&ltstem&gt.data file that contains training data, an optional
+&ltstem&gt.test file that contains testing data, and an optional
+&ltstem&gt.prune file that contains prune data.  Pretty much all of
+the VFML tools expect to find at least a .names file, and many also
+require a .data file.
+
+<h3>The .names Format</h3>
+
+A .names file describes the data in the data set.  It enumerates the
+classes, attributes, and their possible values.  Look at the following
+sample .names file:
+
+<hr>
+<pre>
+| This file contains a make-believe problem which has been designed to help
+|  introduce users to the VFML framework.
+
+| The goal is to predict if a banana is edible or spoiled from how many days 
+|  it has been sitting on the counter and how many brown spots it has.
+
+| The classes
+
+edible, spoiled.
+
+| The first attribute, a number representing how many days it has been on the
+|  counter.
+
+days: continuous.
+
+| The second attribute, an indication of how many brown spots the banana has
+
+spots: none, few, many.
+</pre>
+<hr>
+
+As you can see, lines beginning with a | are comments.  The first
+non-comment element in the file is a list of the classes.  Following
+that is a list of the attributes, each of which contains a description
+of the values that it can take (or continuous for ones that can take
+any numeric value).  There is also a distinguished value called
+'ignore', and many of the VFML tools will respect this and will not
+use the attribute.
+
+<h3>The .data, .test, and .prune Formats</h3>
+These three file types share the same format.  See the following
+sample .data file, which contains data conforming to the .names file
+listed above:
+
+<hr>
+<pre>
+1,	few,	edible
+?,	none,	edible
+7,	many,	spoiled
+2, 	many,	spoiled
+?,	many,	spoiled
+</pre>
+<hr>
+
+Each line contains an example with a comma separated list of attribute
+values.  The final value on the line is the value of the class
+attribute.  For instance, the first example represents a banana that
+has been on the table for 1 day, has few spots, and is still edible.
+Notice also that some of the attribute values are '?' which is a
+special feature of the C4.5 format used when the value of the
+attribute is not known.  Many of the VFML tools and learners will
+perform gracefully when faced with such values.
+
+<h2>The VFML tools</h2>
+
+Once you have a data set you will probably want to perform some
+learning.  There are a few useful arguments that are supported by
+practically every VFML program.
+
+<dl>
+<dt> -f &ltstem&gt
+<dd> Tells the tool where to load data from &ltstem&gt.names,
+&ltstem&gt.data, etc.  The default is 'DF'.
+
+<dt> -source &ltdir&gt
+<dd>  Tells the tool to look in the specified directory to find the
+data files.  The default is to look in the current working directory.
+
+<dt> -v
+<dd> Increases the amount of debugging output displayed by the tool.
+Pass the -v argument multiple times to increase amount of output.
+
+<dt> -u
+<dd> For learning programs, this tells the program to measure the
+accuracy of the learned model on the data in &ltstem&gt.test, and
+print the output in a format suitable to be used with batchtest.
+
+<dt> -h
+<dd> A critical argument for users to know about.  This tells the
+program to print out a complete list of its options with descriptions
+of what they do.  These argument lists are the best source of
+documentation for the individual VFML tools.
+</dl>
+
+To learn more about the available tools you should look at the <a
+href="../group__Tools.html">list of tools</a> and to learn more about
+the available learning programs you should look at the <a
+href="../group__Learners.html">list of learners</a>.  Then, when you
+find tools and learners that you are interested in, run them with the
+-h argument to get more detailed documentation.
+
+</body>
+</html>

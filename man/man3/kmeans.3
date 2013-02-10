@@ -1,0 +1,72 @@
+.TH "kmeans" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kmeans \- 
+.SH "Detailed Description"
+.PP 
+Performs k-means clustering. 
+
+Performs k-mean clustering on the continuous attributes in a data set (ignoring any discrete attributes).
+.PP
+The learner takes input and does output in \fCc4.5 format\fP. It expects to find the files \fC<stem>.names\fP and \fC<stem>.data.\fP and outputs the learned centers to a file called \fC<stem>.centers\fP.
+.PP
+Evaluates the learned centers by comparing to the centers found in <stem>.test as follows. Learned centers are greedily matched to the closest of the test centers until each center has a match, and then the evaluation is the sum of the squared distance between each test center and its matched learned center.
+.PP
+You can find a more full-featured kmeans clustering algorithm by running \fBvfkm\fP with the -batch argument (for example you can set initial centroid locations, etc.
+.PP
+\fBWish List\fP
+.RS 4
+Modify this learner to work with discrete attributes. 
+.PP
+Move the features from \fBvfkm\fP into this learner because this learner will be much easier to modify than that one for new users. 
+.RE
+.PP
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem>
+.IP "  \(bu" 4
+Set the stem name (default DF)
+.PP
+
+.IP "\(bu" 2
+-source <dir>
+.IP "  \(bu" 4
+Set the directory that contains the dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-clusters <dir>
+.IP "  \(bu" 4
+Sets the number of clusters to look for, this argument is required.
+.PP
+
+.IP "\(bu" 2
+-threshold <threshold>
+.IP "  \(bu" 4
+Iterate until every centroid moves less than this threshold.
+.PP
+
+.IP "\(bu" 2
+-u
+.IP "  \(bu" 4
+Test by comparing to the centroids in <threshold>.test
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

@@ -1,0 +1,36 @@
+/** \ingroup Tools
+*/
+
+/** \file
+
+\brief Draws a sample from a data set.
+
+<p>sampledata does a scan over a data set and draws a sample from it
+by including each example in the sample with a user specified
+probability.
+
+
+<h2>Arguments</h2>
+
+- -f &lt;filestem&gt; 
+  - Set the stem name (default DF)
+- -fout &lt;filestem&gt; 
+  - Set the name of the output dataset (default DF-out)
+- -source &lt;dir&gt; 
+  - Set the directory that contains the dataset (default '.')
+- -target &lt;dir&gt; 
+  - Set the directory to contain the output dataset (default '.')
+- -seed &lt;seed&gt; 
+  - Sets the random seed, multiple runs with the same seed will produce the same datasets (defaults to a random seed)
+- -sample &lt;n&gt; 
+  - Sets the percentage of the data to sample (default .8 -- that's 80%)
+- -stdin 
+  - Read examples from standard in (default read file)
+- -stdout 
+  - Writes examples to standard out (default write to file)
+- -h 
+  - Display usage information and exit.
+- -v 
+  - Can be used multiple times to increase the debugging output 
+
+*/

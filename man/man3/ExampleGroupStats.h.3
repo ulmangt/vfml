@@ -1,0 +1,331 @@
+.TH "ExampleGroupStats.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ExampleGroupStats.h \- 
+.SH "Detailed Description"
+.PP 
+Sufficient statistics for Entropy and Gini. 
+
+Tracks and maintains the sufficient statistics needed to calculate Entropy and Gini of discrete and continuous attributes, as well as make some queries about the probability of events in the data.
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_ExampleGroupStats_\fP"
+.br
+.RI "\fISufficient statistics for Entropy and Gini. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fB_ExampleGroupStats_\fP \fBExampleGroupStats\fP"
+.br
+.RI "\fISufficient statistics for Entropy and Gini. \fP"
+.ti -1c
+.RI "typedef \fB_ExampleGroupStats_\fP * \fBExampleGroupStatsPtr\fP"
+.br
+.RI "\fISufficient statistics for Entropy and Gini. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBExampleGroupStatsPtr\fP \fBExampleGroupStatsNew\fP (\fBExampleSpecPtr\fP es, AttributeTrackerPtr at)"
+.br
+.RI "\fICreates a structure to track sufficient statistics. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsFree\fP (\fBExampleGroupStatsPtr\fP egs)"
+.br
+.RI "\fIFrees all the memory that was being used by the structure. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsDeactivate\fP (\fBExampleGroupStatsPtr\fP egs)"
+.br
+.RI "\fITemporarily frees the memory being used to hold statistics. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsReactivate\fP (\fBExampleGroupStatsPtr\fP egs)"
+.br
+.RI "\fIReallocates the memory that is freed by a call to ExampleGroupStatsDeactivate. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsAddExample\fP (\fBExampleGroupStatsPtr\fP egs, \fBExamplePtr\fP e)"
+.br
+.RI "\fIAdds the information from the example to the statistics structure. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsWrite\fP (\fBExampleGroupStatsPtr\fP egs, FILE *out)"
+.br
+.RI "\fIA debugging function that prints a representation of the stats structure to specified file. \fP"
+.ti -1c
+.RI "long \fBExampleGroupStatsNumExamplesSeen\fP (\fBExampleGroupStatsPtr\fP egs)"
+.br
+.RI "\fINumber of examples being tracked by the structure. \fP"
+.ti -1c
+.RI "AttributeTrackerPtr \fBExampleGroupStatsGetAttributeTracker\fP (\fBExampleGroupStatsPtr\fP egs)"
+.br
+.RI "\fIReturns the attribute tracker associated with the structure. \fP"
+.ti -1c
+.RI "int \fBExampleGroupStatsIsAttributeActive\fP (\fBExampleGroupStatsPtr\fP egs, int num)"
+.br
+.RI "\fITests if the attribute is active. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsIgnoreAttribute\fP (\fBExampleGroupStatsPtr\fP egs, int num)"
+.br
+.RI "\fIFrees the memory being used by the attribute and stops tracking it. \fP"
+.ti -1c
+.RI "int \fBExampleGroupStatsGetMostCommonClassLaplace\fP (\fBExampleGroupStatsPtr\fP egs, int addClass, int addCount)"
+.br
+.RI "\fIReturns the index of the most common class, but adds addCount samples to addClass. \fP"
+.ti -1c
+.RI "int \fBExampleGroupStatsGetMostCommonClass\fP (\fBExampleGroupStatsPtr\fP egs)"
+.br
+.RI "\fIReturns the index of the most common class. \fP"
+.ti -1c
+.RI "long \fBExampleGroupStatsGetMostCommonClassCount\fP (\fBExampleGroupStatsPtr\fP egs)"
+.br
+.RI "\fIReturns the number of examples with the most common class that were seen by the structure. \fP"
+.ti -1c
+.RI "int \fBExampleGroupStatsGetMostCommonClassForAttVal\fP (\fBExampleGroupStatsPtr\fP egs, int att, int val)"
+.br
+.RI "\fIReturns the most common class among examples where the specified attribute has the specified value. \fP"
+.ti -1c
+.RI "int \fBExampleGroupStatsIsPure\fP (\fBExampleGroupStatsPtr\fP egs)"
+.br
+.RI "\fIReturns 1 if all the examples shown to the structure have the same class. \fP"
+.ti -1c
+.RI "float \fBExampleGroupStatsGetValuePercent\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, int valNum)"
+.br
+.RI "\fIReturns the fraction of examples that have the specified value for the specified attribute. \fP"
+.ti -1c
+.RI "double \fBExampleGroupStatsGetValueGivenClassMEstimate\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, int valNum, int classNum)"
+.br
+.RI "\fIReturns P(att = value | class). \fP"
+.ti -1c
+.RI "float \fBExampleGroupStatsGetClassPercent\fP (\fBExampleGroupStatsPtr\fP egs, int classNum)"
+.br
+.RI "\fIReturns P(class). \fP"
+.ti -1c
+.RI "float \fBExampleGroupStatsGetPercentBelowThreshold\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, float thresh)"
+.br
+.RI "\fIReturns the fraction of examples with a value below the specified threshold. \fP"
+.ti -1c
+.RI "double \fBExampleGroupStatsGetValueGivenClassMEstimateLogP\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, int valNum, int classNum)"
+.br
+.RI "\fIReturns a smoothed P(att = value | class). \fP"
+.ti -1c
+.RI "double \fBExampleGroupStatsGetClassLogP\fP (\fBExampleGroupStatsPtr\fP egs, int classNum)"
+.br
+.RI "\fIReturns the log of the fraction of examples that have the specified class. \fP"
+.ti -1c
+.RI "float \fBExampleGroupStatsEntropyTotal\fP (\fBExampleGroupStatsPtr\fP egs)"
+.br
+.RI "\fIReturns the entropy of the class attribute of all examples seen so far. \fP"
+.ti -1c
+.RI "float \fBExampleGroupStatsEntropyDiscreteAttributeSplit\fP (\fBExampleGroupStatsPtr\fP egs, int attNum)"
+.br
+.RI "\fIReturns the weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. \fP"
+.ti -1c
+.RI "float \fBExampleGroupStatsEntropyPlusDiscreteAttributeSplit\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, float delta)"
+.br
+.RI "\fIReturns upper bound on weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. \fP"
+.ti -1c
+.RI "float \fBExampleGroupStatsEntropyMinusDiscreteAttributeSplit\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, float delta)"
+.br
+.RI "\fIReturns lower bound on weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsEntropyContinuousAttributeSplit\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, float *firstIndex, float *firstThresh, float *secondIndex, float *secondThresh)"
+.br
+.RI "\fIFinds the entropy of the best split thresholds. \fP"
+.ti -1c
+.RI "float \fBExampleGroupStatsGiniTotal\fP (\fBExampleGroupStatsPtr\fP egs)"
+.br
+.RI "\fIReturns the gini index of the class attribute of all examples seen so far. \fP"
+.ti -1c
+.RI "float \fBExampleGroupStatsGiniDiscreteAttributeSplit\fP (\fBExampleGroupStatsPtr\fP egs, int attNum)"
+.br
+.RI "\fIReturns the weighted gini of the class attribute after partitoning the data by the values of the specified attribute. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsGiniContinuousAttributeSplit\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, float *firstIndex, float *firstThresh, float *secondIndex, float *secondThresh)"
+.br
+.RI "\fIFinds the Gini index of the best split thresholds. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsIgnoreSplitsWorseThanEntropy\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, float entropyThresh)"
+.br
+.RI "\fIStop monitoring some thresholds. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsIgnoreSplitsWorseThanGini\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, float giniThresh)"
+.br
+.RI "\fIStop monitoring some thresholds. \fP"
+.ti -1c
+.RI "int \fBExampleGroupStatsLimitSplitsEntropy\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, int maxSplits, int pruneDownTo)"
+.br
+.RI "\fIReduce the number of thresholds being considered if above the max. \fP"
+.ti -1c
+.RI "void \fBExampleGroupStatsStopAddingSplits\fP (\fBExampleGroupStatsPtr\fP egs, int attNum)"
+.br
+.RI "\fIStop adding new split thresholds, but continue to use future examples to evaluate the existing ones. \fP"
+.ti -1c
+.RI "int \fBExampleGroupStatsNumSplitThresholds\fP (\fBExampleGroupStatsPtr\fP egs, int attNum)"
+.br
+.RI "\fIReturns the number of thresholds that are being monitored for the specified attribute. \fP"
+.ti -1c
+.RI "int \fBExampleGroupStatsGetMostCommonClassAboveThreshold\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, float threshold)"
+.br
+.RI "\fIReturns the most common class above the specified value. \fP"
+.ti -1c
+.RI "int \fBExampleGroupStatsGetMostCommonClassBelowThreshold\fP (\fBExampleGroupStatsPtr\fP egs, int attNum, float threshold)"
+.br
+.RI "\fIReturns the most common class below the specified value. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_ExampleGroupStats_\fP  \fBExampleGroupStats\fP"
+.PP
+Sufficient statistics for Entropy and Gini. 
+.SS "typedef struct \fB_ExampleGroupStats_\fP * \fBExampleGroupStatsPtr\fP"
+.PP
+Sufficient statistics for Entropy and Gini. 
+.SH "Function Documentation"
+.PP 
+.SS "void ExampleGroupStatsAddExample (\fBExampleGroupStatsPtr\fP egs, \fBExamplePtr\fP e)"
+.PP
+Adds the information from the example to the statistics structure. 
+.SS "void ExampleGroupStatsDeactivate (\fBExampleGroupStatsPtr\fP egs)"
+.PP
+Temporarily frees the memory being used to hold statistics. Does not free the whole structure. A later call to ExampleGroupStatsReactivate will restore the memory (but not the counts that used to be there). This is a convienient way to focus RAM usage (and learning) in one part of the instance space while keeping the book keeping around to quickly resume learning in another. You shouldn't try to add examples to a deactiveated structure. 
+.SS "void ExampleGroupStatsEntropyContinuousAttributeSplit (\fBExampleGroupStatsPtr\fP egs, int attNum, float * firstIndex, float * firstThresh, float * secondIndex, float * secondThresh)"
+.PP
+Finds the entropy of the best split thresholds. Calculates the entropy of splitting the specified attribute by every threshold under consideration (values are sorted and then a threshold is considered between each pair of adjacent values that have different class). The remaining arguments return the entropy of the best and second best thresholds, along with the thresholds themselves.
+.PP
+This function adds an MDL penelty similar to the one Quinlan uses in C4.5.
+.PP
+Should only be called for continuous attributes. 
+.SS "float ExampleGroupStatsEntropyDiscreteAttributeSplit (\fBExampleGroupStatsPtr\fP egs, int attNum)"
+.PP
+Returns the weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. Should only be called for discrete attributes. 
+.SS "float ExampleGroupStatsEntropyMinusDiscreteAttributeSplit (\fBExampleGroupStatsPtr\fP egs, int attNum, float delta)"
+.PP
+Returns lower bound on weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. This uses the Hoeffding bound and the empirical probabilities to return a value that is lower than the true entropy with probability 1
+.IP "\(bu" 2
+delta.
+.PP
+.PP
+Should only be called for discrete attributes. 
+.SS "float ExampleGroupStatsEntropyPlusDiscreteAttributeSplit (\fBExampleGroupStatsPtr\fP egs, int attNum, float delta)"
+.PP
+Returns upper bound on weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. This uses the Hoeffding bound and the empirical probabilities to return a value that is higher than the true entropy with probability 1
+.IP "\(bu" 2
+delta.
+.PP
+.PP
+Should only be called for discrete attributes. 
+.SS "float ExampleGroupStatsEntropyTotal (\fBExampleGroupStatsPtr\fP egs)"
+.PP
+Returns the entropy of the class attribute of all examples seen so far. 
+.SS "void ExampleGroupStatsFree (\fBExampleGroupStatsPtr\fP egs)"
+.PP
+Frees all the memory that was being used by the structure. 
+.SS "AttributeTrackerPtr ExampleGroupStatsGetAttributeTracker (\fBExampleGroupStatsPtr\fP egs)"
+.PP
+Returns the attribute tracker associated with the structure. 
+.SS "double ExampleGroupStatsGetClassLogP (\fBExampleGroupStatsPtr\fP egs, int classNum)"
+.PP
+Returns the log of the fraction of examples that have the specified class. 
+.SS "float ExampleGroupStatsGetClassPercent (\fBExampleGroupStatsPtr\fP egs, int classNum)"
+.PP
+Returns P(class). 
+.SS "int ExampleGroupStatsGetMostCommonClass (\fBExampleGroupStatsPtr\fP egs)"
+.PP
+Returns the index of the most common class. 
+.SS "int ExampleGroupStatsGetMostCommonClassAboveThreshold (\fBExampleGroupStatsPtr\fP egs, int attNum, float threshold)"
+.PP
+Returns the most common class above the specified value. Should only be called for continuous attributes. 
+.SS "int ExampleGroupStatsGetMostCommonClassBelowThreshold (\fBExampleGroupStatsPtr\fP egs, int attNum, float threshold)"
+.PP
+Returns the most common class below the specified value. Should only be called for continuous attributes. 
+.SS "long ExampleGroupStatsGetMostCommonClassCount (\fBExampleGroupStatsPtr\fP egs)"
+.PP
+Returns the number of examples with the most common class that were seen by the structure. 
+.SS "int ExampleGroupStatsGetMostCommonClassForAttVal (\fBExampleGroupStatsPtr\fP egs, int att, int val)"
+.PP
+Returns the most common class among examples where the specified attribute has the specified value. Should only be called for discrete attributes. 
+.SS "int ExampleGroupStatsGetMostCommonClassLaplace (\fBExampleGroupStatsPtr\fP egs, int addClass, int addCount)"
+.PP
+Returns the index of the most common class, but adds addCount samples to addClass. Use addClass of -1 for no addition (or just call ExampleGroupStatsGetMostCommonClass). This adding allows you to, for example, smooth the class towards the parent class during decision tree induction. 
+.SS "float ExampleGroupStatsGetPercentBelowThreshold (\fBExampleGroupStatsPtr\fP egs, int attNum, float thresh)"
+.PP
+Returns the fraction of examples with a value below the specified threshold. Should only be called for continuous attributes. 
+.SS "double ExampleGroupStatsGetValueGivenClassMEstimate (\fBExampleGroupStatsPtr\fP egs, int attNum, int valNum, int classNum)"
+.PP
+Returns P(att = value | class). Returns the fraction of examples among those that have the specified class that have the specified value for the specified attribute, but smooths the return value by adding a small amount (that decreases with the number of samples seen) to each class count first.
+.PP
+Should only be called for discrete attributes. 
+.SS "double ExampleGroupStatsGetValueGivenClassMEstimateLogP (\fBExampleGroupStatsPtr\fP egs, int attNum, int valNum, int classNum)"
+.PP
+Returns a smoothed P(att = value | class). Returns the log of the fraction of examples among those that have the specified class that have the specified value for the specified attribute, but smooths the return value by adding a small amount (that decreases with the number of samples seen) to each class count first.
+.PP
+Should only be called for discrete attributes. 
+.SS "float ExampleGroupStatsGetValuePercent (\fBExampleGroupStatsPtr\fP egs, int attNum, int valNum)"
+.PP
+Returns the fraction of examples that have the specified value for the specified attribute. Should only be called for discrete attributes. 
+.SS "void ExampleGroupStatsGiniContinuousAttributeSplit (\fBExampleGroupStatsPtr\fP egs, int attNum, float * firstIndex, float * firstThresh, float * secondIndex, float * secondThresh)"
+.PP
+Finds the Gini index of the best split thresholds. Calculates the gini of splitting the specified attribute by every threshold under consideration (values are sorted and then a threshold is considered between each pair of adjacent values that have different class). The remaining arguments return the gini of the best and second best thresholds, along with the thresholds themselves.
+.PP
+Should only be called for continuous attributes. 
+.SS "float ExampleGroupStatsGiniDiscreteAttributeSplit (\fBExampleGroupStatsPtr\fP egs, int attNum)"
+.PP
+Returns the weighted gini of the class attribute after partitoning the data by the values of the specified attribute. Should only be called for discrete attributes. 
+.SS "float ExampleGroupStatsGiniTotal (\fBExampleGroupStatsPtr\fP egs)"
+.PP
+Returns the gini index of the class attribute of all examples seen so far. 
+.SS "void ExampleGroupStatsIgnoreAttribute (\fBExampleGroupStatsPtr\fP egs, int num)"
+.PP
+Frees the memory being used by the attribute and stops tracking it. This is useful if you decide that some attribute will not be used (perhaps using some statistical tests) and would like to use the memory elsewhere. 
+.SS "void ExampleGroupStatsIgnoreSplitsWorseThanEntropy (\fBExampleGroupStatsPtr\fP egs, int attNum, float entropyThresh)"
+.PP
+Stop monitoring some thresholds. Stop monitoring every threshold with an entropy worse than the specified value. This frees some memory, but adding future values to the egs may require some interpolation to estimate the position of the new value in the array of all values for the attribute (and so this introduces some error into future calls for the Entropy or Gini of the attribute).
+.PP
+Should only be called for continuous attributes. 
+.SS "void ExampleGroupStatsIgnoreSplitsWorseThanGini (\fBExampleGroupStatsPtr\fP egs, int attNum, float giniThresh)"
+.PP
+Stop monitoring some thresholds. Stop monitoring every threshold with an Gini worse than the specified value. This frees some memory, but adding future values to the egs may require some interpolation to estimate the position of the new value in the array of all values for the attribute (and so this introduces some error into future calls for the Entropy or Gini of the attribute).
+.PP
+Should only be called for continuous attributes. 
+.SS "int ExampleGroupStatsIsAttributeActive (\fBExampleGroupStatsPtr\fP egs, int num)"
+.PP
+Tests if the attribute is active. Returns 1 if the attribute was active in the initial attribute tracker and has not been ignored by a call to ExampleGroupStatsIgnoreAttribute since then. 
+.SS "int ExampleGroupStatsIsPure (\fBExampleGroupStatsPtr\fP egs)"
+.PP
+Returns 1 if all the examples shown to the structure have the same class. 
+.SS "int ExampleGroupStatsLimitSplitsEntropy (\fBExampleGroupStatsPtr\fP egs, int attNum, int maxSplits, int pruneDownTo)"
+.PP
+Reduce the number of thresholds being considered if above the max. If the attribute is monitoring more than 'maxSplits' split thresholds this function will find the best 'pruneDownTo' based on entropy and start ignoring all the rest. This frees some memory, but adding future values to the egs may require some interpolation to estimate the position of the new value in the array of all values for the attribute (and so this introduces some error into future calls for the Entropy or Gini of the attribute).
+.PP
+Returns the number of thresholds that were pruned.
+.PP
+Should only be called for continuous attributes. 
+.SS "\fBExampleGroupStatsPtr\fP ExampleGroupStatsNew (\fBExampleSpecPtr\fP es, AttributeTrackerPtr at)"
+.PP
+Creates a structure to track sufficient statistics. Creates a structure to track the statistics needed to cacluate several common machine metrics for the attributes that are active in the AttributeTracker. This function takes over the memory for the AttributeTracker and will free it when ExampleGroupStatsFree For categorical attributes this uses memory proportional to the number of classes * the number of values of the attribute. For continuous attributes this uses constant memory at first, but as examples are added with ExampleGroupStatsAddExample the memory grows proportionally with the number of unique values of the attribute. 
+.SS "long ExampleGroupStatsNumExamplesSeen (\fBExampleGroupStatsPtr\fP egs)"
+.PP
+Number of examples being tracked by the structure. Outputs the number of examples added to the structure with ExampleGroupStatsAddExample since the last call to ExampleGroupStatsReactivate. 
+.SS "int ExampleGroupStatsNumSplitThresholds (\fBExampleGroupStatsPtr\fP egs, int attNum)"
+.PP
+Returns the number of thresholds that are being monitored for the specified attribute. Should only be called for continuous attributes. 
+.SS "void ExampleGroupStatsReactivate (\fBExampleGroupStatsPtr\fP egs)"
+.PP
+Reallocates the memory that is freed by a call to ExampleGroupStatsDeactivate. 
+.SS "void ExampleGroupStatsStopAddingSplits (\fBExampleGroupStatsPtr\fP egs, int attNum)"
+.PP
+Stop adding new split thresholds, but continue to use future examples to evaluate the existing ones. Should only be called for continuous attributes. 
+.SS "void ExampleGroupStatsWrite (\fBExampleGroupStatsPtr\fP egs, FILE * out)"
+.PP
+A debugging function that prints a representation of the stats structure to specified file. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

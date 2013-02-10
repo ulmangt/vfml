@@ -1,0 +1,84 @@
+<html>
+
+<head>
+<title>Implement-learner Example </title>
+</head>
+
+<body>
+
+<h1>Implement Learner Example</h1>
+
+<p><strong>Example For</strong>: The framework that every learner will
+need</p>
+
+<p>This is a simple example that presents the simplest possible
+learning algorithm - one that always predicts the most-common-class in
+the test set.&nbsp; This code is very similar to the implementation of
+VFML's  mostcommonclass learner.&nbsp; It includes a makefile and
+a source file which are located in the
+<code>&lt;VFML-root&gt;/examples/implement-learner/</code>
+directory. &nbsp; This document presents an overview of the code which
+should be sufficient to get you started modifying it for your own
+needs.</p>
+
+<p>You might like to go to the
+<code>&lt;VFML-root&gt;/examples/implement-learner/</code> directory
+and get your favorite code/text editor ready.&nbsp; You might also
+like to copy the directory somewhere and begin modifying the example
+for your own needs.</p>
+
+<h2>The Makefile</h2>
+
+<p>This makefile will be a good starting point for your VFML
+projects.&nbsp; Glance at the makefile; the top couple lines contain
+information you would need to update if you want to use the file with
+another project.</p>
+
+<p>Make sure you've properly installed the VFML library (see the <a
+href="../topics/gettingstarted.htm">Getting Started</a> section if you
+haven't done this yet), then type 'make' to build the example
+program.&nbsp; Run it by typing <code>implement-learner -h</code>, and
+look at the output.</p>
+
+<h2>The VC++ 6.0 Project</h2>
+
+<p>We've provided a starter project for windows using VC++ 6.0.&nbsp; It is configured to
+work if you've installed the VFML library into c:/proj/uwml/, if not see the <a
+href="../topics/gettingstarted.htm">Getting Started</a> section for more information on
+how to update the configuration.</p>
+
+<p>The windows version also uses a different source file, implement-learner-windows.c.
+&nbsp; The only difference between this file and implement-learner.c is that it doesn't do
+any timing.&nbsp; HERE WHEN I FINISH THE PLATFORM INDEPENDENT TIMING CODE GET RID OF THIS.</p>
+
+<h2>The Code</h2>
+
+<p>This will be a high-level overview of the code from the example; it should be enough to
+get you started. &nbsp; For a more detailed description of a VFML project see the <a
+href="scan-dataset.htm">scan-dataset</a> example. 
+
+<dl>
+  <dt><strong>Command Line Arguments</strong> </dt>
+  <dd><code>_printUsage</code> and <code>_processArgs</code> work together to get a valid
+    command line and set a collection of globals from it.&nbsp; The example shows you how to
+    accept flags, strings, ints, and doubles from the command line.&nbsp; One note is that you
+    should be careful not to have any arguments that are sub-strings of other arguments - if
+    you don't get the ordering correct the strcmp might accept the longer argument as an
+    instance of the shorter one.</dd>
+  <dt><strong>Datasets</strong></dt>
+  <dd>The example will take <code>-souce &lt;directory&gt;</code> and <code>-f
+    &lt;file-stem&gt;</code> arguments and use them to find a dataset.&nbsp; It then reads the
+    names file into a global, <code>gEs</code>, and iterates over the examples from the .data
+    file.</dd>
+  <dt><strong>Testing</strong></dt>
+  <dd>If you pass the <code>-u</code> argument to the program, it will test its 'model' on the
+    examples in the .test file and output the results in a format appropriate for interfacing
+    with xvalidate and  batchtest.</dd>
+  <dt><strong>Debugging Output</strong></dt>
+  <dd>By default, the program is pretty quiet.&nbsp; If you pass the <code>-v</code> argument,
+    the program will output more information about its progress.&nbsp; In your learner, you
+    might want to implement higher message levels (in response to multiple -v flags on the
+    command line) to print out more detailed information about your learner's progress.</dd>
+</dl>
+</body>
+</html>

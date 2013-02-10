@@ -1,0 +1,63 @@
+\section{bnlearn File Reference}
+\label{bnlearn}\index{bnlearn@{bnlearn}}
+
+
+\subsection{Detailed Description}
+Learns the structure of a Belief\-Net from a data set. Designed to be easily modified. 
+
+Learns the structure and parameters of a Bayesian network using the standard method. The structural prior is set by using P(S) = kappa $^\wedge$ (symetric difference between the net and the prior net). The parameter prior is K2. This is basically a wrapper around the code in bnlearn-engine.h. This program is a stripped down version of the vfbn learner, done so that the code would be clearer and easier to modify.
+
+bnlearn can load training data into RAM, if space is available, or it can scan data repeatedly from disk.
+
+See the documentation for the bnlearn-engine for even more information about the parameters and their meanings.
+
+bnlearn takes input and does output in {\tt c4.5 format}. It expects to find the files {\tt $<$stem$>$.names} and {\tt $<$stem$>$.data}.
+
+\begin{Desc}
+\item[{\bf Thanks}]to Matthew Richardson for making substantial optimizations to the bnlearn program. \end{Desc}
+
+
+\begin{Desc}
+\item[{\bf Wish List}]A version of this program that is intelligent about dealing with unobserved (or partially observed) variables. \end{Desc}
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f 'filestem'\begin{itemize}
+\item Set the name of the dataset (default DF)\end{itemize}
+\item -source 'dir'\begin{itemize}
+\item Set the source data directory (default '.')\end{itemize}
+\item -start\-From 'filename'\begin{itemize}
+\item Use net in filename as starting point, must be BIF file (default start from empty net)\end{itemize}
+\item -output\-To 'filename'\begin{itemize}
+\item Output the learned net to filename\end{itemize}
+\item -limit\-Megs 'count'\begin{itemize}
+\item Limit dynamic memory allocation to 'count' megabytes, don't consider networks that take too much space (default no limit)\end{itemize}
+\item -limit\-Minutes 'count'\begin{itemize}
+\item Limit the run to 'count' minutes then return current model (default no limit)\end{itemize}
+\item -no\-Cache\-Train\-Set\begin{itemize}
+\item Repeatedly read training data from disk and do not cache it in RAM (default read data into RAM at beginning of run)\end{itemize}
+\item -stdin\begin{itemize}
+\item Reads training examples from stdin instead of from stem.data causes a 2 second delay to help give input time to setup (default off, not compatable with -no\-Cache\-Train\-Set)\end{itemize}
+\item -no\-Reverse\begin{itemize}
+\item Doesn't reverse links to make nets for next search step (default reverse links)\end{itemize}
+\item -parameters\-Only\begin{itemize}
+\item Only estimate parameters for current structure, no other learning\end{itemize}
+\item -seed 's'\begin{itemize}
+\item Seed for random numbers (default random)\end{itemize}
+\item -max\-Search\-Steps 'num'\begin{itemize}
+\item Limit to 'num' search steps (default no max).\end{itemize}
+\item -max\-Parents\-Per\-Node 'num'\begin{itemize}
+\item Limit each node to 'num' parents (default no max).\end{itemize}
+\item -max\-Parameter\-Growth\-Mult 'mult'\begin{itemize}
+\item Limit net to 'mult' times starting \# of parameters (default no max).\end{itemize}
+\item -max\-Parameter\-Count 'count'\begin{itemize}
+\item Limit net to 'count' parameters (default no max).\end{itemize}
+\item -kappa 'kappa'\begin{itemize}
+\item The structure prior penalty for batch (0 - 1), 1 is no penalty (default 0.5)\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\item -h\begin{itemize}
+\item Run bnlearn -h for a list of the arguments and their meanings.\end{itemize}
+\end{itemize}
+
+

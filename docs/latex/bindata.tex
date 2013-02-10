@@ -1,0 +1,43 @@
+\section{bindata File Reference}
+\label{bindata}\index{bindata@{bindata}}
+
+
+\subsection{Detailed Description}
+Converts continuous attributes into discrete ones. 
+
+Converts all continuous attributes in a data set to categorical ones. Uses two passes over data, one to gather the stats needed to pick bin boundaries, and one to do the conversion (although the first pass can be done on a sample with the -samples argument below).
+
+bindata uses one of two methods to select bin boundaries. The first is to find the range of each attribute (by identifing its highest and lowest value) and then dividing the range into even with bins. This is the default method. The other method assumes that the attribute was generated from a Gaussian, estimates the mean and variance of the Gaussian from data, and sets bin boundaries so that each bin holds an even amount of the Gaussian's probability mass.
+
+\begin{Desc}
+\item[{\bf Thanks}]to Chun-Hsiang Hung for doing the core development work for this tool. \end{Desc}
+
+
+\begin{Desc}
+\item[{\bf Wish List}]that this tool would have more methods for selecting bin boundaries, for example to reduce entropy. \end{Desc}
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$\begin{itemize}
+\item Set the stem name (default DF)\end{itemize}
+\item -fout $<$filestem$>$\begin{itemize}
+\item Set the name of the output dataset (default DF-out)\end{itemize}
+\item -source $<$dir$>$\begin{itemize}
+\item Set the directory that contains the dataset (default '.')\end{itemize}
+\item -target $<$dir$>$\begin{itemize}
+\item Set the directory to contain the output dataset (default '.')\end{itemize}
+\item -test\begin{itemize}
+\item Also converts the test set (but does not use the test set to pick boundaries)\end{itemize}
+\item -samples $<$n$>$\begin{itemize}
+\item Use the first n examples to pick bin boundaries (default use the whole train set)\end{itemize}
+\item -bins $<$n$>$\begin{itemize}
+\item Sets the number of bins (default 10)\end{itemize}
+\item -gaussian\begin{itemize}
+\item Pick bin boundaries by fitting a Gaussian and making even probability bins\end{itemize}
+\item -h\begin{itemize}
+\item Display usage information and exit.\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+

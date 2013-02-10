@@ -1,0 +1,124 @@
+.TH "beliefnetcorrupt" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+beliefnetcorrupt \- 
+.SH "Detailed Description"
+.PP 
+Makes some random changes to a BeliefNet. 
+
+This program loading an existing belief network (in \fCBIF format\fP) and corrupts it in several, user controlable, ways. This can be used to generate prior networks for structure learning, or to create several similar synthetic concepts (with the help of \fCbeliefnetdata\fP) from a single \fCbenchmark network\fP.
+.PP
+Multiple runs with the same seed parameter produce the same results.
+.PP
+VFML comes with a collection of benchmark belief nets, and you may want \fCmore information on these\fP.
+.PP
+\fBWish List\fP
+.RS 4
+This tool does not do anything smart with parameters when it changes the structure, and it should. 
+.RE
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <file name for output>
+.IP "  \(bu" 4
+(default DFOut.bif)
+.PP
+
+.IP "\(bu" 2
+-target <dir>
+.IP "  \(bu" 4
+Set the directory to contain the output dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-bnf <file containing belief net>
+.IP "  \(bu" 4
+(default DF.bif)
+.PP
+
+.IP "\(bu" 2
+-stdout
+.IP "  \(bu" 4
+output the new net to stdout (default to <stem>.data)
+.PP
+
+.IP "\(bu" 2
+-startFromEmpty
+.IP "  \(bu" 4
+Remove all links from net before making any changes (default start from the net the way it is)
+.PP
+
+.PP
+.PP
+.IP "\(bu" 2
+-epsilon <val>
+.IP "  \(bu" 4
+Change every parameter in the network by adding or subtracing (with even probability) a number selected randomly in the range 0 -- \fIval\fP. The CPTs in the network are then renormalized. This step is taken before any structure changes are made. The default is to leave parameters unchanged and to only change structure.
+.PP
+
+.PP
+.PP
+.IP "\(bu" 2
+-maxParentsPerNode <num>
+.IP "  \(bu" 4
+Limit each node to <num> parents (default no limit)
+.PP
+
+.PP
+.PP
+.IP "\(bu" 2
+-numChanges <num>
+.IP "  \(bu" 4
+Randomly add 2*num, then remove 2*num, then reverse 2*num links (default num defaults to 4). Each of these changes affects the parameters in the network. The current version of this tool does not do anything smart with these, so once this option is invoked do not trust the parameter values. This option will not introduce changes that violate the \fImaxParentsPerNode\fP parameter, or that introduce cycles. If it is trying to add or reverse a link and can not without violating these constraints after trying 100 random operations beliefnetcorrupt will give up on the change and move on to the next one. This option is overridden by the -random option if it is used.
+.PP
+
+.PP
+.PP
+.IP "\(bu" 2
+-random <num>
+.IP "  \(bu" 4
+Random starting net with <num> links. This option will override the (default) numChanges behavior. More specifically, this option starts by removing all edges from the net, and then adding random edges (so that no changes add a cycle or violate the maxParents constraint).
+.PP
+
+.PP
+.PP
+.IP "\(bu" 2
+-seed <seed>
+.IP "  \(bu" 4
+Sets the random seed, multiple runs with the same options and seed will produce the same network (defaults to a random seed)
+.PP
+
+.PP
+.PP
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Run with this argument to get a list of arguments and their meanings.
+.PP
+
+.PP
+.PP
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+.PP
+.SS "Example"
+.PP
+\fC\fP
+.PP
+\fCbeliefnetcorrupt -f corrupted -bnf alarm.bif -numChanges 2 -seed 111\fP
+.PP
+Creates a network based on the alarm network by adding 2 links, then removing 2 links, then reversing 2 links. Reproduce the same network everytime the same arguments are used (thanks to the seed parameter).
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

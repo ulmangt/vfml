@@ -1,0 +1,394 @@
+\section{Example\-Group\-Stats.h File Reference}
+\label{ExampleGroupStats_8h}\index{ExampleGroupStats.h@{ExampleGroupStats.h}}
+
+
+\subsection{Detailed Description}
+Sufficient statistics for Entropy and Gini. 
+
+Tracks and maintains the sufficient statistics needed to calculate Entropy and Gini of discrete and continuous attributes, as well as make some queries about the probability of events in the data.
+
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-Example\-Group\-Stats\_\-}
+\begin{CompactList}\small\item\em Sufficient statistics for Entropy and Gini. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef {\bf \_\-Example\-Group\-Stats\_\-} {\bf Example\-Group\-Stats}
+\begin{CompactList}\small\item\em Sufficient statistics for Entropy and Gini. \item\end{CompactList}\item 
+typedef {\bf \_\-Example\-Group\-Stats\_\-} $\ast$ {\bf Example\-Group\-Stats\-Ptr}
+\begin{CompactList}\small\item\em Sufficient statistics for Entropy and Gini. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Example\-Group\-Stats\-Ptr} {\bf Example\-Group\-Stats\-New} ({\bf Example\-Spec\-Ptr} es, Attribute\-Tracker\-Ptr at)
+\begin{CompactList}\small\item\em Creates a structure to track sufficient statistics. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Free} ({\bf Example\-Group\-Stats\-Ptr} egs)
+\begin{CompactList}\small\item\em Frees all the memory that was being used by the structure. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Deactivate} ({\bf Example\-Group\-Stats\-Ptr} egs)
+\begin{CompactList}\small\item\em Temporarily frees the memory being used to hold statistics. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Reactivate} ({\bf Example\-Group\-Stats\-Ptr} egs)
+\begin{CompactList}\small\item\em Reallocates the memory that is freed by a call to Example\-Group\-Stats\-Deactivate. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Add\-Example} ({\bf Example\-Group\-Stats\-Ptr} egs, {\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Adds the information from the example to the statistics structure. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Write} ({\bf Example\-Group\-Stats\-Ptr} egs, FILE $\ast$out)
+\begin{CompactList}\small\item\em A debugging function that prints a representation of the stats structure to specified file. \item\end{CompactList}\item 
+long {\bf Example\-Group\-Stats\-Num\-Examples\-Seen} ({\bf Example\-Group\-Stats\-Ptr} egs)
+\begin{CompactList}\small\item\em Number of examples being tracked by the structure. \item\end{CompactList}\item 
+Attribute\-Tracker\-Ptr {\bf Example\-Group\-Stats\-Get\-Attribute\-Tracker} ({\bf Example\-Group\-Stats\-Ptr} egs)
+\begin{CompactList}\small\item\em Returns the attribute tracker associated with the structure. \item\end{CompactList}\item 
+int {\bf Example\-Group\-Stats\-Is\-Attribute\-Active} ({\bf Example\-Group\-Stats\-Ptr} egs, int num)
+\begin{CompactList}\small\item\em Tests if the attribute is active. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Ignore\-Attribute} ({\bf Example\-Group\-Stats\-Ptr} egs, int num)
+\begin{CompactList}\small\item\em Frees the memory being used by the attribute and stops tracking it. \item\end{CompactList}\item 
+int {\bf Example\-Group\-Stats\-Get\-Most\-Common\-Class\-Laplace} ({\bf Example\-Group\-Stats\-Ptr} egs, int add\-Class, int add\-Count)
+\begin{CompactList}\small\item\em Returns the index of the most common class, but adds add\-Count samples to add\-Class. \item\end{CompactList}\item 
+int {\bf Example\-Group\-Stats\-Get\-Most\-Common\-Class} ({\bf Example\-Group\-Stats\-Ptr} egs)
+\begin{CompactList}\small\item\em Returns the index of the most common class. \item\end{CompactList}\item 
+long {\bf Example\-Group\-Stats\-Get\-Most\-Common\-Class\-Count} ({\bf Example\-Group\-Stats\-Ptr} egs)
+\begin{CompactList}\small\item\em Returns the number of examples with the most common class that were seen by the structure. \item\end{CompactList}\item 
+int {\bf Example\-Group\-Stats\-Get\-Most\-Common\-Class\-For\-Att\-Val} ({\bf Example\-Group\-Stats\-Ptr} egs, int att, int val)
+\begin{CompactList}\small\item\em Returns the most common class among examples where the specified attribute has the specified value. \item\end{CompactList}\item 
+int {\bf Example\-Group\-Stats\-Is\-Pure} ({\bf Example\-Group\-Stats\-Ptr} egs)
+\begin{CompactList}\small\item\em Returns 1 if all the examples shown to the structure have the same class. \item\end{CompactList}\item 
+float {\bf Example\-Group\-Stats\-Get\-Value\-Percent} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, int val\-Num)
+\begin{CompactList}\small\item\em Returns the fraction of examples that have the specified value for the specified attribute. \item\end{CompactList}\item 
+double {\bf Example\-Group\-Stats\-Get\-Value\-Given\-Class\-MEstimate} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, int val\-Num, int class\-Num)
+\begin{CompactList}\small\item\em Returns P(att = value $|$ class). \item\end{CompactList}\item 
+float {\bf Example\-Group\-Stats\-Get\-Class\-Percent} ({\bf Example\-Group\-Stats\-Ptr} egs, int class\-Num)
+\begin{CompactList}\small\item\em Returns P(class). \item\end{CompactList}\item 
+float {\bf Example\-Group\-Stats\-Get\-Percent\-Below\-Threshold} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, float thresh)
+\begin{CompactList}\small\item\em Returns the fraction of examples with a value below the specified threshold. \item\end{CompactList}\item 
+double {\bf Example\-Group\-Stats\-Get\-Value\-Given\-Class\-MEstimate\-Log\-P} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, int val\-Num, int class\-Num)
+\begin{CompactList}\small\item\em Returns a smoothed P(att = value $|$ class). \item\end{CompactList}\item 
+double {\bf Example\-Group\-Stats\-Get\-Class\-Log\-P} ({\bf Example\-Group\-Stats\-Ptr} egs, int class\-Num)
+\begin{CompactList}\small\item\em Returns the log of the fraction of examples that have the specified class. \item\end{CompactList}\item 
+float {\bf Example\-Group\-Stats\-Entropy\-Total} ({\bf Example\-Group\-Stats\-Ptr} egs)
+\begin{CompactList}\small\item\em Returns the entropy of the class attribute of all examples seen so far. \item\end{CompactList}\item 
+float {\bf Example\-Group\-Stats\-Entropy\-Discrete\-Attribute\-Split} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num)
+\begin{CompactList}\small\item\em Returns the weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. \item\end{CompactList}\item 
+float {\bf Example\-Group\-Stats\-Entropy\-Plus\-Discrete\-Attribute\-Split} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, float delta)
+\begin{CompactList}\small\item\em Returns upper bound on weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. \item\end{CompactList}\item 
+float {\bf Example\-Group\-Stats\-Entropy\-Minus\-Discrete\-Attribute\-Split} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, float delta)
+\begin{CompactList}\small\item\em Returns lower bound on weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Entropy\-Continuous\-Attribute\-Split} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, float $\ast$first\-Index, float $\ast$first\-Thresh, float $\ast$second\-Index, float $\ast$second\-Thresh)
+\begin{CompactList}\small\item\em Finds the entropy of the best split thresholds. \item\end{CompactList}\item 
+float {\bf Example\-Group\-Stats\-Gini\-Total} ({\bf Example\-Group\-Stats\-Ptr} egs)
+\begin{CompactList}\small\item\em Returns the gini index of the class attribute of all examples seen so far. \item\end{CompactList}\item 
+float {\bf Example\-Group\-Stats\-Gini\-Discrete\-Attribute\-Split} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num)
+\begin{CompactList}\small\item\em Returns the weighted gini of the class attribute after partitoning the data by the values of the specified attribute. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Gini\-Continuous\-Attribute\-Split} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, float $\ast$first\-Index, float $\ast$first\-Thresh, float $\ast$second\-Index, float $\ast$second\-Thresh)
+\begin{CompactList}\small\item\em Finds the Gini index of the best split thresholds. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Ignore\-Splits\-Worse\-Than\-Entropy} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, float entropy\-Thresh)
+\begin{CompactList}\small\item\em Stop monitoring some thresholds. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Ignore\-Splits\-Worse\-Than\-Gini} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, float gini\-Thresh)
+\begin{CompactList}\small\item\em Stop monitoring some thresholds. \item\end{CompactList}\item 
+int {\bf Example\-Group\-Stats\-Limit\-Splits\-Entropy} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, int max\-Splits, int prune\-Down\-To)
+\begin{CompactList}\small\item\em Reduce the number of thresholds being considered if above the max. \item\end{CompactList}\item 
+void {\bf Example\-Group\-Stats\-Stop\-Adding\-Splits} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num)
+\begin{CompactList}\small\item\em Stop adding new split thresholds, but continue to use future examples to evaluate the existing ones. \item\end{CompactList}\item 
+int {\bf Example\-Group\-Stats\-Num\-Split\-Thresholds} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num)
+\begin{CompactList}\small\item\em Returns the number of thresholds that are being monitored for the specified attribute. \item\end{CompactList}\item 
+int {\bf Example\-Group\-Stats\-Get\-Most\-Common\-Class\-Above\-Threshold} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, float threshold)
+\begin{CompactList}\small\item\em Returns the most common class above the specified value. \item\end{CompactList}\item 
+int {\bf Example\-Group\-Stats\-Get\-Most\-Common\-Class\-Below\-Threshold} ({\bf Example\-Group\-Stats\-Ptr} egs, int att\-Num, float threshold)
+\begin{CompactList}\small\item\em Returns the most common class below the specified value. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStats@{ExampleGroupStats}}
+\index{ExampleGroupStats@{ExampleGroupStats}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Example\-Group\-Stats\_\-}  {\bf Example\-Group\-Stats}}\label{ExampleGroupStats_8h_a4}
+
+
+Sufficient statistics for Entropy and Gini. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsPtr@{ExampleGroupStatsPtr}}
+\index{ExampleGroupStatsPtr@{ExampleGroupStatsPtr}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Example\-Group\-Stats\_\-} $\ast$ {\bf Example\-Group\-Stats\-Ptr}}\label{ExampleGroupStats_8h_a5}
+
+
+Sufficient statistics for Entropy and Gini. 
+
+
+
+\subsection{Function Documentation}
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsAddExample@{ExampleGroupStatsAddExample}}
+\index{ExampleGroupStatsAddExample@{ExampleGroupStatsAddExample}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Add\-Example ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, {\bf Example\-Ptr} {\em e})}\label{ExampleGroupStats_8h_a24}
+
+
+Adds the information from the example to the statistics structure. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsDeactivate@{ExampleGroupStatsDeactivate}}
+\index{ExampleGroupStatsDeactivate@{ExampleGroupStatsDeactivate}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Deactivate ({\bf Example\-Group\-Stats\-Ptr} {\em egs})}\label{ExampleGroupStats_8h_a22}
+
+
+Temporarily frees the memory being used to hold statistics. 
+
+Does not free the whole structure. A later call to Example\-Group\-Stats\-Reactivate will restore the memory (but not the counts that used to be there). This is a convienient way to focus RAM usage (and learning) in one part of the instance space while keeping the book keeping around to quickly resume learning in another. You shouldn't try to add examples to a deactiveated structure. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsEntropyContinuousAttributeSplit@{ExampleGroupStatsEntropyContinuousAttributeSplit}}
+\index{ExampleGroupStatsEntropyContinuousAttributeSplit@{ExampleGroupStatsEntropyContinuousAttributeSplit}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Entropy\-Continuous\-Attribute\-Split ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, float $\ast$ {\em first\-Index}, float $\ast$ {\em first\-Thresh}, float $\ast$ {\em second\-Index}, float $\ast$ {\em second\-Thresh})}\label{ExampleGroupStats_8h_a46}
+
+
+Finds the entropy of the best split thresholds. 
+
+Calculates the entropy of splitting the specified attribute by every threshold under consideration (values are sorted and then a threshold is considered between each pair of adjacent values that have different class). The remaining arguments return the entropy of the best and second best thresholds, along with the thresholds themselves.
+
+This function adds an MDL penelty similar to the one Quinlan uses in C4.5.
+
+Should only be called for continuous attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsEntropyDiscreteAttributeSplit@{ExampleGroupStatsEntropyDiscreteAttributeSplit}}
+\index{ExampleGroupStatsEntropyDiscreteAttributeSplit@{ExampleGroupStatsEntropyDiscreteAttributeSplit}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Example\-Group\-Stats\-Entropy\-Discrete\-Attribute\-Split ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num})}\label{ExampleGroupStats_8h_a43}
+
+
+Returns the weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. 
+
+Should only be called for discrete attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsEntropyMinusDiscreteAttributeSplit@{ExampleGroupStatsEntropyMinusDiscreteAttributeSplit}}
+\index{ExampleGroupStatsEntropyMinusDiscreteAttributeSplit@{ExampleGroupStatsEntropyMinusDiscreteAttributeSplit}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Example\-Group\-Stats\-Entropy\-Minus\-Discrete\-Attribute\-Split ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, float {\em delta})}\label{ExampleGroupStats_8h_a45}
+
+
+Returns lower bound on weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. 
+
+This uses the Hoeffding bound and the empirical probabilities to return a value that is lower than the true entropy with probability 1\begin{itemize}
+\item delta.\end{itemize}
+
+
+Should only be called for discrete attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsEntropyPlusDiscreteAttributeSplit@{ExampleGroupStatsEntropyPlusDiscreteAttributeSplit}}
+\index{ExampleGroupStatsEntropyPlusDiscreteAttributeSplit@{ExampleGroupStatsEntropyPlusDiscreteAttributeSplit}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Example\-Group\-Stats\-Entropy\-Plus\-Discrete\-Attribute\-Split ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, float {\em delta})}\label{ExampleGroupStats_8h_a44}
+
+
+Returns upper bound on weighted entropy of the class attribute after partitoning the data by the values of the specified attribute. 
+
+This uses the Hoeffding bound and the empirical probabilities to return a value that is higher than the true entropy with probability 1\begin{itemize}
+\item delta.\end{itemize}
+
+
+Should only be called for discrete attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsEntropyTotal@{ExampleGroupStatsEntropyTotal}}
+\index{ExampleGroupStatsEntropyTotal@{ExampleGroupStatsEntropyTotal}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Example\-Group\-Stats\-Entropy\-Total ({\bf Example\-Group\-Stats\-Ptr} {\em egs})}\label{ExampleGroupStats_8h_a42}
+
+
+Returns the entropy of the class attribute of all examples seen so far. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsFree@{ExampleGroupStatsFree}}
+\index{ExampleGroupStatsFree@{ExampleGroupStatsFree}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Free ({\bf Example\-Group\-Stats\-Ptr} {\em egs})}\label{ExampleGroupStats_8h_a21}
+
+
+Frees all the memory that was being used by the structure. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetAttributeTracker@{ExampleGroupStatsGetAttributeTracker}}
+\index{ExampleGroupStatsGetAttributeTracker@{ExampleGroupStatsGetAttributeTracker}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Attribute\-Tracker\-Ptr Example\-Group\-Stats\-Get\-Attribute\-Tracker ({\bf Example\-Group\-Stats\-Ptr} {\em egs})}\label{ExampleGroupStats_8h_a27}
+
+
+Returns the attribute tracker associated with the structure. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetClassLogP@{ExampleGroupStatsGetClassLogP}}
+\index{ExampleGroupStatsGetClassLogP@{ExampleGroupStatsGetClassLogP}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Example\-Group\-Stats\-Get\-Class\-Log\-P ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em class\-Num})}\label{ExampleGroupStats_8h_a41}
+
+
+Returns the log of the fraction of examples that have the specified class. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetClassPercent@{ExampleGroupStatsGetClassPercent}}
+\index{ExampleGroupStatsGetClassPercent@{ExampleGroupStatsGetClassPercent}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Example\-Group\-Stats\-Get\-Class\-Percent ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em class\-Num})}\label{ExampleGroupStats_8h_a38}
+
+
+Returns P(class). 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetMostCommonClass@{ExampleGroupStatsGetMostCommonClass}}
+\index{ExampleGroupStatsGetMostCommonClass@{ExampleGroupStatsGetMostCommonClass}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Group\-Stats\-Get\-Most\-Common\-Class ({\bf Example\-Group\-Stats\-Ptr} {\em egs})}\label{ExampleGroupStats_8h_a31}
+
+
+Returns the index of the most common class. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetMostCommonClassAboveThreshold@{ExampleGroupStatsGetMostCommonClassAboveThreshold}}
+\index{ExampleGroupStatsGetMostCommonClassAboveThreshold@{ExampleGroupStatsGetMostCommonClassAboveThreshold}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Group\-Stats\-Get\-Most\-Common\-Class\-Above\-Threshold ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, float {\em threshold})}\label{ExampleGroupStats_8h_a55}
+
+
+Returns the most common class above the specified value. 
+
+Should only be called for continuous attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetMostCommonClassBelowThreshold@{ExampleGroupStatsGetMostCommonClassBelowThreshold}}
+\index{ExampleGroupStatsGetMostCommonClassBelowThreshold@{ExampleGroupStatsGetMostCommonClassBelowThreshold}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Group\-Stats\-Get\-Most\-Common\-Class\-Below\-Threshold ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, float {\em threshold})}\label{ExampleGroupStats_8h_a56}
+
+
+Returns the most common class below the specified value. 
+
+Should only be called for continuous attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetMostCommonClassCount@{ExampleGroupStatsGetMostCommonClassCount}}
+\index{ExampleGroupStatsGetMostCommonClassCount@{ExampleGroupStatsGetMostCommonClassCount}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Example\-Group\-Stats\-Get\-Most\-Common\-Class\-Count ({\bf Example\-Group\-Stats\-Ptr} {\em egs})}\label{ExampleGroupStats_8h_a32}
+
+
+Returns the number of examples with the most common class that were seen by the structure. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetMostCommonClassForAttVal@{ExampleGroupStatsGetMostCommonClassForAttVal}}
+\index{ExampleGroupStatsGetMostCommonClassForAttVal@{ExampleGroupStatsGetMostCommonClassForAttVal}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Group\-Stats\-Get\-Most\-Common\-Class\-For\-Att\-Val ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att}, int {\em val})}\label{ExampleGroupStats_8h_a33}
+
+
+Returns the most common class among examples where the specified attribute has the specified value. 
+
+Should only be called for discrete attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetMostCommonClassLaplace@{ExampleGroupStatsGetMostCommonClassLaplace}}
+\index{ExampleGroupStatsGetMostCommonClassLaplace@{ExampleGroupStatsGetMostCommonClassLaplace}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Group\-Stats\-Get\-Most\-Common\-Class\-Laplace ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em add\-Class}, int {\em add\-Count})}\label{ExampleGroupStats_8h_a30}
+
+
+Returns the index of the most common class, but adds add\-Count samples to add\-Class. 
+
+Use add\-Class of -1 for no addition (or just call Example\-Group\-Stats\-Get\-Most\-Common\-Class). This adding allows you to, for example, smooth the class towards the parent class during decision tree induction. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetPercentBelowThreshold@{ExampleGroupStatsGetPercentBelowThreshold}}
+\index{ExampleGroupStatsGetPercentBelowThreshold@{ExampleGroupStatsGetPercentBelowThreshold}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Example\-Group\-Stats\-Get\-Percent\-Below\-Threshold ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, float {\em thresh})}\label{ExampleGroupStats_8h_a39}
+
+
+Returns the fraction of examples with a value below the specified threshold. 
+
+Should only be called for continuous attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetValueGivenClassMEstimate@{ExampleGroupStatsGetValueGivenClassMEstimate}}
+\index{ExampleGroupStatsGetValueGivenClassMEstimate@{ExampleGroupStatsGetValueGivenClassMEstimate}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Example\-Group\-Stats\-Get\-Value\-Given\-Class\-MEstimate ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, int {\em val\-Num}, int {\em class\-Num})}\label{ExampleGroupStats_8h_a37}
+
+
+Returns P(att = value $|$ class). 
+
+Returns the fraction of examples among those that have the specified class that have the specified value for the specified attribute, but smooths the return value by adding a small amount (that decreases with the number of samples seen) to each class count first.
+
+Should only be called for discrete attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetValueGivenClassMEstimateLogP@{ExampleGroupStatsGetValueGivenClassMEstimateLogP}}
+\index{ExampleGroupStatsGetValueGivenClassMEstimateLogP@{ExampleGroupStatsGetValueGivenClassMEstimateLogP}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Example\-Group\-Stats\-Get\-Value\-Given\-Class\-MEstimate\-Log\-P ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, int {\em val\-Num}, int {\em class\-Num})}\label{ExampleGroupStats_8h_a40}
+
+
+Returns a smoothed P(att = value $|$ class). 
+
+Returns the log of the fraction of examples among those that have the specified class that have the specified value for the specified attribute, but smooths the return value by adding a small amount (that decreases with the number of samples seen) to each class count first.
+
+Should only be called for discrete attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGetValuePercent@{ExampleGroupStatsGetValuePercent}}
+\index{ExampleGroupStatsGetValuePercent@{ExampleGroupStatsGetValuePercent}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Example\-Group\-Stats\-Get\-Value\-Percent ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, int {\em val\-Num})}\label{ExampleGroupStats_8h_a35}
+
+
+Returns the fraction of examples that have the specified value for the specified attribute. 
+
+Should only be called for discrete attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGiniContinuousAttributeSplit@{ExampleGroupStatsGiniContinuousAttributeSplit}}
+\index{ExampleGroupStatsGiniContinuousAttributeSplit@{ExampleGroupStatsGiniContinuousAttributeSplit}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Gini\-Continuous\-Attribute\-Split ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, float $\ast$ {\em first\-Index}, float $\ast$ {\em first\-Thresh}, float $\ast$ {\em second\-Index}, float $\ast$ {\em second\-Thresh})}\label{ExampleGroupStats_8h_a49}
+
+
+Finds the Gini index of the best split thresholds. 
+
+Calculates the gini of splitting the specified attribute by every threshold under consideration (values are sorted and then a threshold is considered between each pair of adjacent values that have different class). The remaining arguments return the gini of the best and second best thresholds, along with the thresholds themselves.
+
+Should only be called for continuous attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGiniDiscreteAttributeSplit@{ExampleGroupStatsGiniDiscreteAttributeSplit}}
+\index{ExampleGroupStatsGiniDiscreteAttributeSplit@{ExampleGroupStatsGiniDiscreteAttributeSplit}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Example\-Group\-Stats\-Gini\-Discrete\-Attribute\-Split ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num})}\label{ExampleGroupStats_8h_a48}
+
+
+Returns the weighted gini of the class attribute after partitoning the data by the values of the specified attribute. 
+
+Should only be called for discrete attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsGiniTotal@{ExampleGroupStatsGiniTotal}}
+\index{ExampleGroupStatsGiniTotal@{ExampleGroupStatsGiniTotal}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Example\-Group\-Stats\-Gini\-Total ({\bf Example\-Group\-Stats\-Ptr} {\em egs})}\label{ExampleGroupStats_8h_a47}
+
+
+Returns the gini index of the class attribute of all examples seen so far. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsIgnoreAttribute@{ExampleGroupStatsIgnoreAttribute}}
+\index{ExampleGroupStatsIgnoreAttribute@{ExampleGroupStatsIgnoreAttribute}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Ignore\-Attribute ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em num})}\label{ExampleGroupStats_8h_a29}
+
+
+Frees the memory being used by the attribute and stops tracking it. 
+
+This is useful if you decide that some attribute will not be used (perhaps using some statistical tests) and would like to use the memory elsewhere. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsIgnoreSplitsWorseThanEntropy@{ExampleGroupStatsIgnoreSplitsWorseThanEntropy}}
+\index{ExampleGroupStatsIgnoreSplitsWorseThanEntropy@{ExampleGroupStatsIgnoreSplitsWorseThanEntropy}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Ignore\-Splits\-Worse\-Than\-Entropy ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, float {\em entropy\-Thresh})}\label{ExampleGroupStats_8h_a50}
+
+
+Stop monitoring some thresholds. 
+
+Stop monitoring every threshold with an entropy worse than the specified value. This frees some memory, but adding future values to the egs may require some interpolation to estimate the position of the new value in the array of all values for the attribute (and so this introduces some error into future calls for the Entropy or Gini of the attribute).
+
+Should only be called for continuous attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsIgnoreSplitsWorseThanGini@{ExampleGroupStatsIgnoreSplitsWorseThanGini}}
+\index{ExampleGroupStatsIgnoreSplitsWorseThanGini@{ExampleGroupStatsIgnoreSplitsWorseThanGini}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Ignore\-Splits\-Worse\-Than\-Gini ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, float {\em gini\-Thresh})}\label{ExampleGroupStats_8h_a51}
+
+
+Stop monitoring some thresholds. 
+
+Stop monitoring every threshold with an Gini worse than the specified value. This frees some memory, but adding future values to the egs may require some interpolation to estimate the position of the new value in the array of all values for the attribute (and so this introduces some error into future calls for the Entropy or Gini of the attribute).
+
+Should only be called for continuous attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsIsAttributeActive@{ExampleGroupStatsIsAttributeActive}}
+\index{ExampleGroupStatsIsAttributeActive@{ExampleGroupStatsIsAttributeActive}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Group\-Stats\-Is\-Attribute\-Active ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em num})}\label{ExampleGroupStats_8h_a28}
+
+
+Tests if the attribute is active. 
+
+Returns 1 if the attribute was active in the initial attribute tracker and has not been ignored by a call to Example\-Group\-Stats\-Ignore\-Attribute since then. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsIsPure@{ExampleGroupStatsIsPure}}
+\index{ExampleGroupStatsIsPure@{ExampleGroupStatsIsPure}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Group\-Stats\-Is\-Pure ({\bf Example\-Group\-Stats\-Ptr} {\em egs})}\label{ExampleGroupStats_8h_a34}
+
+
+Returns 1 if all the examples shown to the structure have the same class. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsLimitSplitsEntropy@{ExampleGroupStatsLimitSplitsEntropy}}
+\index{ExampleGroupStatsLimitSplitsEntropy@{ExampleGroupStatsLimitSplitsEntropy}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Group\-Stats\-Limit\-Splits\-Entropy ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num}, int {\em max\-Splits}, int {\em prune\-Down\-To})}\label{ExampleGroupStats_8h_a52}
+
+
+Reduce the number of thresholds being considered if above the max. 
+
+If the attribute is monitoring more than 'max\-Splits' split thresholds this function will find the best 'prune\-Down\-To' based on entropy and start ignoring all the rest. This frees some memory, but adding future values to the egs may require some interpolation to estimate the position of the new value in the array of all values for the attribute (and so this introduces some error into future calls for the Entropy or Gini of the attribute).
+
+Returns the number of thresholds that were pruned.
+
+Should only be called for continuous attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsNew@{ExampleGroupStatsNew}}
+\index{ExampleGroupStatsNew@{ExampleGroupStatsNew}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Example\-Group\-Stats\-Ptr} Example\-Group\-Stats\-New ({\bf Example\-Spec\-Ptr} {\em es}, Attribute\-Tracker\-Ptr {\em at})}\label{ExampleGroupStats_8h_a20}
+
+
+Creates a structure to track sufficient statistics. 
+
+Creates a structure to track the statistics needed to cacluate several common machine metrics for the attributes that are active in the Attribute\-Tracker. This function takes over the memory for the Attribute\-Tracker and will free it when Example\-Group\-Stats\-Free For categorical attributes this uses memory proportional to the number of classes $\ast$ the number of values of the attribute. For continuous attributes this uses constant memory at first, but as examples are added with Example\-Group\-Stats\-Add\-Example the memory grows proportionally with the number of unique values of the attribute. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsNumExamplesSeen@{ExampleGroupStatsNumExamplesSeen}}
+\index{ExampleGroupStatsNumExamplesSeen@{ExampleGroupStatsNumExamplesSeen}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Example\-Group\-Stats\-Num\-Examples\-Seen ({\bf Example\-Group\-Stats\-Ptr} {\em egs})}\label{ExampleGroupStats_8h_a26}
+
+
+Number of examples being tracked by the structure. 
+
+Outputs the number of examples added to the structure with Example\-Group\-Stats\-Add\-Example since the last call to Example\-Group\-Stats\-Reactivate. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsNumSplitThresholds@{ExampleGroupStatsNumSplitThresholds}}
+\index{ExampleGroupStatsNumSplitThresholds@{ExampleGroupStatsNumSplitThresholds}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Group\-Stats\-Num\-Split\-Thresholds ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num})}\label{ExampleGroupStats_8h_a54}
+
+
+Returns the number of thresholds that are being monitored for the specified attribute. 
+
+Should only be called for continuous attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsReactivate@{ExampleGroupStatsReactivate}}
+\index{ExampleGroupStatsReactivate@{ExampleGroupStatsReactivate}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Reactivate ({\bf Example\-Group\-Stats\-Ptr} {\em egs})}\label{ExampleGroupStats_8h_a23}
+
+
+Reallocates the memory that is freed by a call to Example\-Group\-Stats\-Deactivate. 
+
+\index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsStopAddingSplits@{ExampleGroupStatsStopAddingSplits}}
+\index{ExampleGroupStatsStopAddingSplits@{ExampleGroupStatsStopAddingSplits}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Stop\-Adding\-Splits ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, int {\em att\-Num})}\label{ExampleGroupStats_8h_a53}
+
+
+Stop adding new split thresholds, but continue to use future examples to evaluate the existing ones. 
+
+Should only be called for continuous attributes. \index{ExampleGroupStats.h@{Example\-Group\-Stats.h}!ExampleGroupStatsWrite@{ExampleGroupStatsWrite}}
+\index{ExampleGroupStatsWrite@{ExampleGroupStatsWrite}!ExampleGroupStats.h@{Example\-Group\-Stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Group\-Stats\-Write ({\bf Example\-Group\-Stats\-Ptr} {\em egs}, FILE $\ast$ {\em out})}\label{ExampleGroupStats_8h_a25}
+
+
+A debugging function that prints a representation of the stats structure to specified file. 
+

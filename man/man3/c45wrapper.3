@@ -1,0 +1,56 @@
+.TH "c45wrapper" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+c45wrapper \- 
+.SH "Detailed Description"
+.PP 
+Calls C4.5 and tests the learned tree. 
+
+A wrapper that calls C4.5 to learn a decision tree, times its execution, and extracts the important bits from its output. C4.5 must be in your path for this learner to work, you can get it from Professor Quinlan's homepage at \fChttp://www.cse.unsw.edu.au/~quinlan/\fP.
+.PP
+This wrapper runs C4.5, tests the learned tree on the test data (if appropriate) and outputs: \fCtest set error rate <whitespace> size of tree <whitespace> seconds\fP.
+.PP
+You might also be interested in the \fBDecisionTreeReadC45\fP function.
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem>
+.IP "  \(bu" 4
+Set the stem name (default DF)
+.PP
+
+.IP "\(bu" 2
+-args <string>
+.IP "  \(bu" 4
+Passes these additional arguments to C4.5 (default none)
+.PP
+
+.IP "\(bu" 2
+-noPrune
+.IP "  \(bu" 4
+Reports the results from c4.5's unpurned tree (default reports from pruned tree)
+.PP
+
+.IP "\(bu" 2
+-noTest
+.IP "  \(bu" 4
+Suppress the -u argument, which makes C4.5 output accuracy on the training set (default test accuracy on the <filestem>.test file)
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

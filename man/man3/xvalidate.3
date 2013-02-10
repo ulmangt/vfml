@@ -1,0 +1,87 @@
+.TH "xvalidate" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+xvalidate \- 
+.SH "Detailed Description"
+.PP 
+Performs cross validation of a learner on a data set. 
+
+You will probably want to use the \fBbatchtest\fP tool for large experiments; xvalidate will help you to quickly test things, perhaps as a debugging aid.
+.PP
+You can use xvalidate with large datasets, but you will need enough disk space to hold 'folds' copies of the data.  The learner you use with xvalidate must also be able to work with large datasets.
+.PP
+Xvalidate takes input in \fCC4.5 format\fP and uses \fBfolddata\fP, which must be in your path. You use the -c option to tell xvalidate how to run the learner. Xvalidate will append the names of the folds of the datasets to the end of the -c string, the learner must accept the name and read input appropriately.
+.PP
+Xvalidate expects the learner to output results in the following format: 
+.PP
+\fCerror-rate size\fP 
+.PP
+The learner's error rate on the test set, followed by some whitespace, followed by the size of the learned model (in whatever unit you want), followed by a newline. 
+.PP
+Xvalidate will collect the output of the runs of the learner, average them, and report:
+.PP
+\fCmean-error-rate (standard deviation of error rate) mean-size (standard deviation of size) average-utime (standard deviation of utime) average-stime (standard deviation of stime)\fP
+.PP
+for example:
+.PP
+\fC26.111 (5.500) 0.000 (0.000) 0.013 (0.005) 0.010 (0.008)\fP
+.PP
+The times are very accurate on UNIX. Under CYGNUS (windows) utime will be slightly overestimated and stime will be zero.
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem>
+.IP "  \(bu" 4
+Set the name of the dataset (default DF)
+.PP
+
+.IP "\(bu" 2
+-source <dir>
+.IP "  \(bu" 4
+Set the source data directory (default '.')
+.PP
+
+.IP "\(bu" 2
+-c <command>
+.IP "  \(bu" 4
+Set the learner command. The name of the dataset will be appended to the end of this string and used to invoke the learner (\fBThis is a required argument\fP)
+.PP
+
+.IP "\(bu" 2
+-folds <n>
+.IP "  \(bu" 4
+Sets the number of train/test sets to create (default 10)
+.PP
+
+.IP "\(bu" 2
+-seed <n>
+.IP "  \(bu" 4
+Sets the random seed, multiple runs with the same seed will produce the same datasets (defaults to a random seed).  If you use a random seed, the value of the randomly selected seed will be printed at the start of the run.  You can later use that seed to repeat the experiment.  You can also pass the same seed to \fBfolddata\fP to recreate the exact test/training sets for closer inspection.
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+.PP
+.SS "Example"
+.PP
+\fC\fP
+.PP
+\fC\fP
+.PP
+\fCxvalidate -source datasets/mushroom -f mushroom -folds 15 -seed 100 -c ''mostcommonclass -u -f''\fP 
+.PP
+Does 15-fold cross-validation of the 'mostcommonclass' learner on the dataset called 'mushroom' in the 'datasets/mushroom' directory.  The mostcommonclass learner will be invoked as: \fCmostcommonclass -u -f <constructed-dataset-name> \fPfor each of the 15 constructed datasets.  It will use a seeded random number generator so the exact experiment could be reproduced. 
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

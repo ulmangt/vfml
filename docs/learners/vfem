@@ -1,0 +1,88 @@
+/** \ingroup Learners Clustering
+*/
+
+
+/** \file
+
+\brief Performs EM clustering.
+
+<p>Performs EM clustering for sphirical gaussians accelerated with
+sampling as described in <a
+href="http://citeseer.nj.nec.com/541935.html">this paper</a>.  This
+learner ignores categorical attributes. 
+
+vfem performs several iterations of clustering on progressively larger
+samples until it determines with high confidence (see -delta below)
+that the clustering it achieves is within -epsilon of the one that
+would be achieved using infinite data for each decision.  vfem can use
+a fancy optimization to select the number of samples to use in each
+iteration of the next round, or it can use straight progressive
+sampling.  You can use the -batch argument to turn off the sampling
+and do traditional em clustering.  vfem evaluates the learned centers
+by comparing to the centers found in &lt;stem&gt;.test as follows.
+Learned centers are greedily matched to the closest of the test
+centers until each center has a match, and then the evaluation is the
+sum of the squared distance between each test center and its matched
+learned center.
+
+<p>VFEM takes input and does output in <a
+href="../appendixes/c45.htm">c4.5 format</a>. It expects to find the
+files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data.</code> and outputs the learned centers to a
+file called <code>&lt;stem&gt;.centers</code>.
+
+\wish Modify this learner to also learn the variances of the
+Gaussians.
+
+<h2>Arguments</h2>
+
+- -f 'filestem'
+  - Set the name of the dataset (default DF)
+- -source 'dir'
+  - Set the source data directory (default '.')
+- -clusters 'numClusters'
+  - Set the num clusters to find (REQUIRED)
+- -variance 'value'
+  - The variance of the Gaussians, the current  version of EM needs this as a parameter (default 0.05)
+- -assignErrorScale 'scale'
+  - Loosen bound by scaling the assignment part of it by the scale factor (default 1.0)
+- -delta 'delta'
+  - Find final solution with confidence (1 - 'delta') (default 5%)
+- -epsilon 'epsilon'
+  - The maximum distance between a learned centroid and the coresponding infinite data centroid (default .01)
+- -converge 'distance'
+  - Stop when distance centroids move between iterations squared is less than 'distance' (default .001)
+- -batch
+  - Do a traditional kmeans run on the whole input file.  Doesn't make sense to combine with -stdin (default off)
+- -init 'num'
+  - Use the 'num'th valid assignment of initial centroids (default 1)
+- -maxPerIteration 'num'
+  - Use no more than num examples per iteration (default 1,000,000,000)
+- -l 'number'
+  - The estimated # of iterations to converge if you guess wrong and aren't using batch VFEM will fix it for you and do an extra round (default 10)
+- -seed 's'
+  - Seed to use picking initial centers (default random)
+- -progressive
+  - Don't use the Lagrange based optimization to pick the # of samples at each iteration of the next round (default use the optimization)
+- -tightBound
+  - Use a tighter assignment error bound (requires a second pass over the dataset) (default use a looser one-pass bound)
+- -allowBadConverge
+  - Allows VFEM to converge at a time when em wouldn't (default off).
+- -r 'range'
+  - The maximum range between pairs of examples (default assume the range of each dimension is 0 - 1.0 and calculate it from that)
+- -stdin
+  - Reads training examples as a stream from stdin instead of from 'stem'.data (default off)
+- -testOnTrain 
+  - Loss is the sum of the square of the distances from allu training examples to their assigned centroid (default compare learned centroids to centroids in 'stem'.test)
+- -normalApprox
+  - Use a normal approximation of the Hoeffding bound (default use hoeffding bound)
+- -loadCenters
+  - Load initial centroids from 'stem'.centers (default use random based on -init and -seed)
+- -u
+  - Output results after each iteration
+- -v
+  - Can be used multiple times to increase the debugging output
+- -h
+  - Run vfem -h for a list of the arguments and their meanings.
+
+*/

@@ -1,0 +1,31 @@
+\section{shuffledata File Reference}
+\label{shuffledata}\index{shuffledata@{shuffledata}}
+
+
+\subsection{Detailed Description}
+Randomizes the order of a data set and rewrites it. 
+
+shuffledata reads a data set into RAM and outputs it in random order. Data sets that do not fit in RAM are difficult to randomize and VFML does not have a tool to deal with such data sets.
+
+\begin{Desc}
+\item[{\bf Wish List}]for a version of this tool that works on disk and does not need to load data into RAM. \end{Desc}
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$\begin{itemize}
+\item Set the stem name (default DF)\end{itemize}
+\item -fout $<$filestem$>$\begin{itemize}
+\item Set the name of the output dataset (default shuffled)\end{itemize}
+\item -source $<$dir$>$\begin{itemize}
+\item Set the directory that contains the dataset (default '.')\end{itemize}
+\item -target $<$dir$>$\begin{itemize}
+\item Set the directory to contain the output dataset (default '.')\end{itemize}
+\item -seed $<$seed$>$\begin{itemize}
+\item Sets the random seed, multiple runs with the same seed will produce the same datasets (defaults to a random seed)\end{itemize}
+\item -h\begin{itemize}
+\item Display usage information and exit.\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+

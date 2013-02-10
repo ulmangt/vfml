@@ -1,0 +1,88 @@
+.TH "AttributeTracker.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AttributeTracker.h \- 
+.SH "Detailed Description"
+.PP 
+Keep a record of which attributes are active. 
+
+Sometimes you need to keep track of which attributes you have already considered, and which are still available for consideration. The attribute tracker interface helps you efficiently acomplish this task; you can think of it as a wrapper around a bit field.
+.PP
+For example, when learning a decision tree, each split on a discrete attribute deactivates an attribute from further consideration. In this situation you would deactivate the attribute, and then make one clone for each child.
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "AttributeTrackerPtr \fBAttributeTrackerNew\fP (int numAttributes)"
+.br
+.RI "\fIAllocates memory for a new AttributeTracker structure. \fP"
+.ti -1c
+.RI "void \fBAttributeTrackerFree\fP (AttributeTrackerPtr at)"
+.br
+.RI "\fIFrees the memory associated with the attribute tracker. \fP"
+.ti -1c
+.RI "AttributeTrackerPtr \fBAttributeTrackerInitial\fP (\fBExampleSpecPtr\fP es)"
+.br
+.RI "\fIRespects 'ignore's in the ExampleSpec. \fP"
+.ti -1c
+.RI "AttributeTrackerPtr \fBAttributeTrackerClone\fP (AttributeTrackerPtr at)"
+.br
+.RI "\fICreates a copy of the passed AttributeTracker and returns the copy. \fP"
+.ti -1c
+.RI "void \fBAttributeTrackerMarkActive\fP (AttributeTrackerPtr at, int attNum)"
+.br
+.RI "\fIMarks the specified attribute as active. \fP"
+.ti -1c
+.RI "void \fBAttributeTrackerMarkInactive\fP (AttributeTrackerPtr at, int attNum)"
+.br
+.RI "\fIMarks the specified attribute as inactive. \fP"
+.ti -1c
+.RI "int \fBAttributeTrackerIsActive\fP (AttributeTrackerPtr at, int attNum)"
+.br
+.RI "\fIReturns 1 if the specified attribute is active. \fP"
+.ti -1c
+.RI "int \fBAttributeTrackerAreAllInactive\fP (AttributeTrackerPtr at)"
+.br
+.RI "\fIReturns 1 if none of the attributes are active. \fP"
+.ti -1c
+.RI "int \fBAttributeTrackerNumActive\fP (AttributeTrackerPtr at)"
+.br
+.RI "\fIReturns a count of at's active attributes. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int AttributeTrackerAreAllInactive (AttributeTrackerPtr at)"
+.PP
+Returns 1 if none of the attributes are active. This is a constant time operation (it does not depend on the number of attributes). 
+.SS "AttributeTrackerPtr AttributeTrackerClone (AttributeTrackerPtr at)"
+.PP
+Creates a copy of the passed AttributeTracker and returns the copy. 
+.SS "void AttributeTrackerFree (AttributeTrackerPtr at)"
+.PP
+Frees the memory associated with the attribute tracker. 
+.SS "AttributeTrackerPtr AttributeTrackerInitial (\fBExampleSpecPtr\fP es)"
+.PP
+Respects 'ignore's in the ExampleSpec. Creates an attribute tracker to track the attributes in the passed ExampleSpec. Any of es's attributes marked as ignore will be initially set to inactive. 
+.SS "int AttributeTrackerIsActive (AttributeTrackerPtr at, int attNum)"
+.PP
+Returns 1 if the specified attribute is active. 
+.SS "void AttributeTrackerMarkActive (AttributeTrackerPtr at, int attNum)"
+.PP
+Marks the specified attribute as active. 
+.SS "void AttributeTrackerMarkInactive (AttributeTrackerPtr at, int attNum)"
+.PP
+Marks the specified attribute as inactive. 
+.SS "AttributeTrackerPtr AttributeTrackerNew (int numAttributes)"
+.PP
+Allocates memory for a new AttributeTracker structure. Creates a new attribute tracker with one bit for each of numAttributes. All the attributes are initially marked as active. 
+.SS "int AttributeTrackerNumActive (AttributeTrackerPtr at)"
+.PP
+Returns a count of at's active attributes. This is a constant time operation (it does not depend on the number of attributes). 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

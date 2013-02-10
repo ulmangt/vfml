@@ -1,0 +1,17 @@
+
+import ConfigParser, os, string
+
+kClientProgram = "uRunnerClient"
+
+kHostName = string.split(os.uname()[1], '.')[0]
+
+config = ConfigParser.ConfigParser({"host":kHostName})
+config.read("config")
+
+resultDir  = os.path.abspath(config.get("GLOBAL", "resultdir"))
+if not os.path.exists(resultDir):
+   os.makedirs(resultDir)
+
+clients = config.get("GLOBAL", "clients")
+for client in string.split(clients):
+    os.system("(rsh -n %s \"cd %s ; %s\") &" % (client, os.getcwd(), kClientProgram))

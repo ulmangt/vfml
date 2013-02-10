@@ -1,0 +1,294 @@
+.TH "DecisionTree.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DecisionTree.h \- 
+.SH "Detailed Description"
+.PP 
+A Decision Tree Structure. 
+
+This is the interface for creating, using, printing, & serializing Decision Trees. A decision tree is a recursive structure. Each internal node partitions the data based on the values of an attribute. Each leaf contains a prediction for the distinguished target attribute. For a more detailed discussion see chapter 3 of \fCTom Mitchell's book on machine learning\fP.
+.PP
+Note that all the DecisionTrees created with an ExampleSpec maintain a pointer to the it; you shouldn't free or modify the ExampleSpec until you are done with all the DecisionTrees referencing it.
+.PP
+\fBWish List\fP
+.RS 4
+A standard in memory decision tree induction algorithm. Maybe the best starting point would be the \fBdecisionstump\fP learner. 
+.PP
+This isn't the right place for this wish, but it would be nice to have a RuleSet structure similar to this DecisionTree structure 
+.RE
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_DecisionTree_\fP"
+.br
+.RI "\fIADT for working with decision trees. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fB_DecisionTree_\fP \fBDecisionTree\fP"
+.br
+.RI "\fIADT for working with decision trees. \fP"
+.ti -1c
+.RI "typedef \fB_DecisionTree_\fP * \fBDecisionTreePtr\fP"
+.br
+.RI "\fIADT for working with decision trees. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDecisionTreePtr\fP \fBDecisionTreeNew\fP (\fBExampleSpecPtr\fP spec)"
+.br
+.RI "\fICreates a new decision tree node. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeFree\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIFrees the memory associated with the decision tree and all of its children. \fP"
+.ti -1c
+.RI "\fBDecisionTreePtr\fP \fBDecisionTreeClone\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIRecursively creates a copy of dt and returns it. \fP"
+.ti -1c
+.RI "int \fBDecisionTreeIsLeaf\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIReturns 1 if dt is a leaf node and 0 otherwise. \fP"
+.ti -1c
+.RI "int \fBDecisionTreeIsTreeGrowing\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIReturns 1 if dt is a growing node has any children which are, and 0 otherwise. \fP"
+.ti -1c
+.RI "int \fBDecisionTreeIsNodeGrowing\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIReturns 1 if dt is a growing node and 0 otherwise. \fP"
+.ti -1c
+.RI "int \fBDecisionTreeGetClass\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIReturns the index of the class which dt predicts. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeSetClass\fP (\fBDecisionTreePtr\fP dt, int theClass)"
+.br
+.RI "\fISets dt's class prediction to theClass. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeAddToClassDistribution\fP (\fBDecisionTreePtr\fP dt, \fBExamplePtr\fP e)"
+.br
+.RI "\fIPut the example in the class distribution at the node. \fP"
+.ti -1c
+.RI "float \fBDecisionTreeGetClassProb\fP (\fBDecisionTreePtr\fP dt, int theClass)"
+.br
+.RI "\fIReturns the probability of the class. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeSetClassProb\fP (\fBDecisionTreePtr\fP dt, int theClass, float prob)"
+.br
+.RI "\fISets the probability of the class. \fP"
+.ti -1c
+.RI "float \fBDecisionTreeGetClassDistributionSampleCount\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIReturns the number of samples added to the node's distribution. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeZeroClassDistribution\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fISets the nodes distribution to zeros. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeSetTypeLeaf\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIChanges dt into a leaf node without changing its class prediction. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeSetTypeGrowing\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIChanges dt into a growing node. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeSplitOnDiscreteAttribute\fP (\fBDecisionTreePtr\fP dt, int attNum)"
+.br
+.RI "\fIChanges dt into a discrete split. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeSplitOnContinuousAttribute\fP (\fBDecisionTreePtr\fP dt, int attNum, float threshold)"
+.br
+.RI "\fIChanges dt into a continuous split. \fP"
+.ti -1c
+.RI "int \fBDecisionTreeGetChildCount\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIReturns a count of the direct decendants of dt. \fP"
+.ti -1c
+.RI "\fBDecisionTreePtr\fP \fBDecisionTreeGetChild\fP (\fBDecisionTreePtr\fP dt, int index)"
+.br
+.RI "\fIReturns one of the direct decendants of dt. \fP"
+.ti -1c
+.RI "\fBDecisionTreePtr\fP \fBDecisionTreeOneStepClassify\fP (\fBDecisionTreePtr\fP dt, \fBExamplePtr\fP e)"
+.br
+.RI "\fIDoes one step of classifing e with dt. \fP"
+.ti -1c
+.RI "int \fBDecisionTreeClassify\fP (\fBDecisionTreePtr\fP dt, \fBExamplePtr\fP e)"
+.br
+.RI "\fIUses dt to classify e and returns the index of the predicted class. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeGatherGrowingNodes\fP (\fBDecisionTreePtr\fP dt, VoidAListPtr list)"
+.br
+.RI "\fISearches dt and appends all its growing nodes to the passed list. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeGatherLeaves\fP (\fBDecisionTreePtr\fP dt, VoidAListPtr list)"
+.br
+.RI "\fISearches dt and appends all its leaf nodes to the passed list. \fP"
+.ti -1c
+.RI "int \fBDecisionTreeCountNodes\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIReturns a count of the number of nodes (of any type) in dt. \fP"
+.ti -1c
+.RI "int \fBDecisionTreeGetMostCommonClass\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIReturn the index of the class that is predicted most commonly by leaf nodes in dt. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeSetGrowingData\fP (\fBDecisionTreePtr\fP dt, void *data)"
+.br
+.RI "\fIEach decision tree node has a pointer reserved for your use. \fP"
+.ti -1c
+.RI "void * \fBDecisionTreeGetGrowingData\fP (\fBDecisionTreePtr\fP dt)"
+.br
+.RI "\fIEach decision tree node has a pointer reserved for your use. \fP"
+.ti -1c
+.RI "void \fBDecisionTreePrint\fP (\fBDecisionTreePtr\fP dt, FILE *out)"
+.br
+.RI "\fIPrints the decision tree to the passed file. \fP"
+.ti -1c
+.RI "void \fBDecisionTreePrintStats\fP (\fBDecisionTreePtr\fP dt, FILE *out)"
+.br
+.RI "\fIPrints counts of leaves at each level of the tree. \fP"
+.ti -1c
+.RI "\fBDecisionTreePtr\fP \fBDecisionTreeReadC45\fP (FILE *in, \fBExampleSpecPtr\fP spec)"
+.br
+.RI "\fIAttempts to read a decision tree from the passed file. \fP"
+.ti -1c
+.RI "\fBDecisionTreePtr\fP \fBDecisionTreeRead\fP (FILE *in, \fBExampleSpecPtr\fP spec)"
+.br
+.RI "\fIAttempts to read a decision tree from the passed file. \fP"
+.ti -1c
+.RI "void \fBDecisionTreeWrite\fP (\fBDecisionTreePtr\fP dt, FILE *out)"
+.br
+.RI "\fIWrites the decision tree to the passed file. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_DecisionTree_\fP  \fBDecisionTree\fP"
+.PP
+ADT for working with decision trees. See \fBDecisionTree.h\fP for more detail. 
+.SS "typedef struct \fB_DecisionTree_\fP * \fBDecisionTreePtr\fP"
+.PP
+ADT for working with decision trees. See \fBDecisionTree.h\fP for more detail. 
+.SH "Function Documentation"
+.PP 
+.SS "void DecisionTreeAddToClassDistribution (\fBDecisionTreePtr\fP dt, \fBExamplePtr\fP e)"
+.PP
+Put the example in the class distribution at the node. Updates the class distribution at the node with the class of the example. This does not make recursive calls, so you should use DecisionTreeOneStepClassify and add it everywhere until you get to a leaf (if that is what you intend). 
+.SS "int DecisionTreeClassify (\fBDecisionTreePtr\fP dt, \fBExamplePtr\fP e)"
+.PP
+Uses dt to classify e and returns the index of the predicted class. 
+.SS "\fBDecisionTreePtr\fP DecisionTreeClone (\fBDecisionTreePtr\fP dt)"
+.PP
+Recursively creates a copy of dt and returns it. This function copies the user data pointers, but doesn't copy the data they point to. 
+.SS "int DecisionTreeCountNodes (\fBDecisionTreePtr\fP dt)"
+.PP
+Returns a count of the number of nodes (of any type) in dt. 
+.SS "void DecisionTreeFree (\fBDecisionTreePtr\fP dt)"
+.PP
+Frees the memory associated with the decision tree and all of its children. This function doesn't do anything with user growing data you may have attached using DecisionTreeSetGrowingData; you must deal with that before calling this function. 
+.SS "void DecisionTreeGatherGrowingNodes (\fBDecisionTreePtr\fP dt, VoidAListPtr list)"
+.PP
+Searches dt and appends all its growing nodes to the passed list. 
+.SS "void DecisionTreeGatherLeaves (\fBDecisionTreePtr\fP dt, VoidAListPtr list)"
+.PP
+Searches dt and appends all its leaf nodes to the passed list. 
+.SS "\fBDecisionTreePtr\fP DecisionTreeGetChild (\fBDecisionTreePtr\fP dt, int index)"
+.PP
+Returns one of the direct decendants of dt. Index should be between 0 and DecisionTreeGetChildCount(dt) - 1. For nodes that split on continuous attributes use index 0 for the left child (<) and index 1 for the right child (>=). 
+.SS "int DecisionTreeGetChildCount (\fBDecisionTreePtr\fP dt)"
+.PP
+Returns a count of the direct decendants of dt. That is, return a count of all the nodes that you can reach from dt by taking one step towards the leaves. 
+.SS "int DecisionTreeGetClass (\fBDecisionTreePtr\fP dt)"
+.PP
+Returns the index of the class which dt predicts. This makes the most sense if dt is a Leaf node, but may be useful at other times as well. 
+.SS "float DecisionTreeGetClassDistributionSampleCount (\fBDecisionTreePtr\fP dt)"
+.PP
+Returns the number of samples added to the node's distribution. 
+.SS "float DecisionTreeGetClassProb (\fBDecisionTreePtr\fP dt, int theClass)"
+.PP
+Returns the probability of the class. Returns what portion of the examples that were added to the class distribution at this node have the associated class. 
+.SS "void* DecisionTreeGetGrowingData (\fBDecisionTreePtr\fP dt)"
+.PP
+Each decision tree node has a pointer reserved for your use. Use the GetGrowingData function to access the value of the pointer. 
+.SS "int DecisionTreeGetMostCommonClass (\fBDecisionTreePtr\fP dt)"
+.PP
+Return the index of the class that is predicted most commonly by leaf nodes in dt. 
+.SS "int DecisionTreeIsLeaf (\fBDecisionTreePtr\fP dt)"
+.PP
+Returns 1 if dt is a leaf node and 0 otherwise. 
+.SS "int DecisionTreeIsNodeGrowing (\fBDecisionTreePtr\fP dt)"
+.PP
+Returns 1 if dt is a growing node and 0 otherwise. 
+.SS "int DecisionTreeIsTreeGrowing (\fBDecisionTreePtr\fP dt)"
+.PP
+Returns 1 if dt is a growing node has any children which are, and 0 otherwise. 
+.SS "\fBDecisionTreePtr\fP DecisionTreeNew (\fBExampleSpecPtr\fP spec)"
+.PP
+Creates a new decision tree node. You should use the accessor methods to initialize it and attach it to an existing DecisionTree as needed. 
+.SS "\fBDecisionTreePtr\fP DecisionTreeOneStepClassify (\fBDecisionTreePtr\fP dt, \fBExamplePtr\fP e)"
+.PP
+Does one step of classifing e with dt. Returns the direct decendant of dt corresponding to the correct value of dt's test attribute. If dt is a leaf or growing node this function will return dt. 
+.SS "void DecisionTreePrint (\fBDecisionTreePtr\fP dt, FILE * out)"
+.PP
+Prints the decision tree to the passed file. FILE * should be opened for writing. The decision tree will be written so as to be understandable by humans. Your mileage may vary.
+.PP
+Note that you could pass STDOUT to the function to write a decision tree to the console. 
+.SS "void DecisionTreePrintStats (\fBDecisionTreePtr\fP dt, FILE * out)"
+.PP
+Prints counts of leaves at each level of the tree. The passed FILE * should be opened for writing. Note that you could pass STDOUT to the function to write the stats to the console. 
+.SS "\fBDecisionTreePtr\fP DecisionTreeRead (FILE * in, \fBExampleSpecPtr\fP spec)"
+.PP
+Attempts to read a decision tree from the passed file. FILE * should be opened for reading. Attaches the ExampleSpec to the read decision tree.
+.PP
+This function allocates memory which should be freed by calling DecisionTreeFree. 
+.SS "\fBDecisionTreePtr\fP DecisionTreeReadC45 (FILE * in, \fBExampleSpecPtr\fP spec)"
+.PP
+Attempts to read a decision tree from the passed file. FILE * should be opened for reading. The file, in, should contain a decision tree written in C4.5's binary format, not the pretty-printed text format. A run of C4.5 with its default arguments will produce 2 such files, stem.tree and stem.unpruned.
+.PP
+This function handles leaves, continuous splits, and discrete splits and will not be able to read trees built with C4.5's subsetting options. 
+.SS "void DecisionTreeSetClass (\fBDecisionTreePtr\fP dt, int theClass)"
+.PP
+Sets dt's class prediction to theClass. Does not change dt's type to leaf node. This might be useful for anytime algorithms where a growing node needs to contain a reasonable prediction at all times. 
+.SS "void DecisionTreeSetClassProb (\fBDecisionTreePtr\fP dt, int theClass, float prob)"
+.PP
+Sets the probability of the class. Changes the probability of the class without changing the sample count (unless the sample count was zero in which case it is set to 1). 
+.SS "void DecisionTreeSetGrowingData (\fBDecisionTreePtr\fP dt, void * data)"
+.PP
+Each decision tree node has a pointer reserved for your use. Use the SetGrowingData function to change the value of the pointer. You can set the pointer to anything you like (for example, to store sufficient statistics on growing nodes), but remember that you are responsible to manage any memory that it points to. 
+.SS "void DecisionTreeSetTypeGrowing (\fBDecisionTreePtr\fP dt)"
+.PP
+Changes dt into a growing node. 
+.SS "void DecisionTreeSetTypeLeaf (\fBDecisionTreePtr\fP dt)"
+.PP
+Changes dt into a leaf node without changing its class prediction. If dt is not a growing node this function also frees all of dt's children. Remember that you are responsible for anything stored in any of dt's children's growing pointers and you should clean up these pointers before calling this function. 
+.SS "void DecisionTreeSplitOnContinuousAttribute (\fBDecisionTreePtr\fP dt, int attNum, float threshold)"
+.PP
+Changes dt into a continuous split. The new node splits on a threshold on a continuous attribute and adds children to dt for values of attNum < and >= the threshold. The created children start as growing nodes. 
+.SS "void DecisionTreeSplitOnDiscreteAttribute (\fBDecisionTreePtr\fP dt, int attNum)"
+.PP
+Changes dt into a discrete split. The new node splits on the values of a discrete attribute and adds one child to dt for each value of attribute attNum. The created children start as growing nodes. 
+.SS "void DecisionTreeWrite (\fBDecisionTreePtr\fP dt, FILE * out)"
+.PP
+Writes the decision tree to the passed file. FILE * should be opened for writing. The decision tree will be written in a binary format suitable to be read by DecisionTreeRead, but this function ignores any growing data that you've associated with dt -- if you need to save growing data you will need to serialize it some other way.
+.PP
+Note that you could pass STDOUT to the function to write an example to the console. 
+.SS "void DecisionTreeZeroClassDistribution (\fBDecisionTreePtr\fP dt)"
+.PP
+Sets the nodes distribution to zeros. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

@@ -1,0 +1,44 @@
+<html>
+
+<head>
+<title>Create Your Own Learners </title>
+</head>
+
+<body>
+
+<h1>Create Your Own Learner</h1>
+
+<p>When you implement a learner you need to worry about more than the learning; you need
+to interface with your environment, deal with command line arguments, locate and load
+files, interface with other tools.&nbsp; All these things are important, but aren't
+particularly interesting.&nbsp; This page describes the main issues to consider when
+working in the VFML environment.&nbsp; The <a href="../examples/implement-learner.htm">implement-learner</a>
+example will present a framework that implements solutions for these issues. 
+
+<dl>
+  <dt><strong>Locating datafiles</strong> </dt>
+  <dd>VFML currently support <a href="../appendixes/c45.htm">C4.5 format</a>.for datafiles;
+    your learners will need to accept the filestem name as an argument, locate and open
+    .names, .data, and perhaps .test files.&nbsp; We suggest you accept the command line
+    argument, -f &lt;filestem&gt; as this will allow you to easily interface with VFML's <a
+    href="../tools/xvalidate.htm">xvalidate</a> and <a href="../tools/batchtest.htm">batchtest</a>
+    tools.</dd>
+  <dt><strong>Testing &amp; reporting error rate</strong> </dt>
+  <dd>You will probably also want to accept a command line flag (we suggest -u) to tell your
+    learner to test its accuracy on the examples in &lt;filestem&gt;.names and report the
+    results.&nbsp; To completely integrate with VFML's <a href="../tools/xvalidate.htm">xvalidate</a>
+    and <a href="../tools/batchtest.htm">batchtest</a>, you should also accept a flag that
+    causes your learner to limit its output to: &lt;error-rate on test set&gt; &lt;size of
+    learned model&gt;.&nbsp; VFML generally overloads the -u flag to perform both functions.</dd>
+  <dt><strong>Other command line arguments</strong> </dt>
+  <dd>You will probably want to accept other command line arguments to configure the execution
+    of your learner.&nbsp; The <a href="../examples/implement-learner.htm">implement-learner</a>
+    example accepts a few dummy arguments to help get you started.</dd>
+  <dt><strong>Building and linking with VFML</strong></dt>
+  <dd>Any learner build with VFML should include uwml.h and link with the VFML library. &nbsp;
+    The <a href="../examples/implement-learner.htm">implement-learner</a> example provides a
+    makefile that shows you how to do this under UNIX as well as a VC++6.0 project that helps
+    get you started under Windows.</dd>
+</dl>
+</body>
+</html>

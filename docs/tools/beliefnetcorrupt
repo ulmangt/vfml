@@ -1,0 +1,90 @@
+/** \ingroup Tools BeliefNet
+*/
+
+
+/** \file
+
+\brief Makes some random changes to a BeliefNet
+
+<p>This program loading an existing belief network (in <A
+HREF="../appendixes/bif.htm">BIF format</a>) and corrupts it in
+several, user controlable, ways.  This can be used to generate prior
+networks for structure learning, or to create several similar
+synthetic concepts (with the help of <a
+href="beliefnetdata.htm">beliefnetdata</a>) from a single <a
+href="../appendixes/beliefnets.htm">benchmark network</a>.
+
+
+<p> Multiple runs with the same seed parameter produce the same
+results.
+
+<p>VFML comes with a collection of benchmark belief nets, and you may
+want <a href="appendixes/beliefnets.htm">more information on these</a>.
+
+\wish This tool does not do anything smart with parameters when it
+changes the structure, and it should.
+
+<h2>Arguments</h2>
+
+- -f &lt;file name for output&gt;
+  - (default DFOut.bif)
+- -target &lt;dir&gt;
+  - Set the directory to contain the output dataset (default '.')
+- -bnf &lt;file containing belief net&gt;
+  - (default DF.bif)
+- -stdout
+  - output the new net to stdout (default to &lt;stem&gt;.data)
+- -startFromEmpty
+  - Remove all links from net before making any changes (default start from the net the way it is)
+
+- -epsilon &lt;val&gt;
+  - Change every parameter in the network by adding or subtracing
+  (with even probability) a number selected randomly in the range 0 --
+  <i>val</i>.  The CPTs in the network are then renormalized.  This
+  step is taken before any structure changes are made.  The default is
+  to leave parameters unchanged and to only change structure.
+
+- -maxParentsPerNode &lt;num&gt;
+  - Limit each node to &lt;num&gt; parents (default no limit)
+
+- -numChanges &lt;num&gt;
+  - Randomly add 2*num, then remove 2*num, then reverse 2*num links
+  (default num defaults to 4).  Each of these changes affects the
+  parameters in the network.  The current version of this tool does
+  not do anything smart with these, so once this option is invoked do
+  not trust the parameter values.  This option will not introduce
+  changes that violate the
+  <i>maxParentsPerNode</i> parameter, or that introduce cycles.  If it
+  is trying to add or reverse a link and can not without violating
+  these constraints after trying 100 random operations
+  beliefnetcorrupt will give up on the change and move on to the next
+  one.  This option is overridden by the -random option if it is used.
+
+- -random &lt;num&gt;
+  - Random starting net with &lt;num&gt; links.  This option
+  will override the (default) numChanges behavior.  More specifically,
+  this option starts by removing all edges from the net, and then
+  adding random edges (so that no changes add a cycle or violate the
+  maxParents constraint).
+
+- -seed &lt;seed&gt; 
+  - Sets the random seed, multiple runs with the same options and seed will produce the same network (defaults to a random seed)
+
+- -h
+  - Run with this argument to get a list of arguments and their meanings.
+
+- -v 
+  - Can be used multiple times to increase the debugging output
+
+<h2>Example</h2>
+
+<p><code>
+
+beliefnetcorrupt -f corrupted -bnf alarm.bif -numChanges 2 -seed 111</code></p>
+
+<p>Creates a network based on the alarm network by adding 2 links,
+then removing 2 links, then reversing 2 links.  Reproduce the same
+network everytime the same arguments are used (thanks to the seed
+parameter).
+
+*/

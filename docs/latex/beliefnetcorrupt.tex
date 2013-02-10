@@ -1,0 +1,81 @@
+\section{beliefnetcorrupt File Reference}
+\label{beliefnetcorrupt}\index{beliefnetcorrupt@{beliefnetcorrupt}}
+
+
+\subsection{Detailed Description}
+Makes some random changes to a Belief\-Net. 
+
+This program loading an existing belief network (in {\tt BIF format}) and corrupts it in several, user controlable, ways. This can be used to generate prior networks for structure learning, or to create several similar synthetic concepts (with the help of {\tt beliefnetdata}) from a single {\tt benchmark network}.
+
+Multiple runs with the same seed parameter produce the same results.
+
+VFML comes with a collection of benchmark belief nets, and you may want {\tt more information on these}.
+
+\begin{Desc}
+\item[{\bf Wish List}]This tool does not do anything smart with parameters when it changes the structure, and it should. \end{Desc}
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$file name for output$>$\begin{itemize}
+\item (default DFOut.bif)\end{itemize}
+\item -target $<$dir$>$\begin{itemize}
+\item Set the directory to contain the output dataset (default '.')\end{itemize}
+\item -bnf $<$file containing belief net$>$\begin{itemize}
+\item (default DF.bif)\end{itemize}
+\item -stdout\begin{itemize}
+\item output the new net to stdout (default to $<$stem$>$.data)\end{itemize}
+\item -start\-From\-Empty\begin{itemize}
+\item Remove all links from net before making any changes (default start from the net the way it is)\end{itemize}
+\end{itemize}
+
+
+\begin{itemize}
+\item -epsilon $<$val$>$\begin{itemize}
+\item Change every parameter in the network by adding or subtracing (with even probability) a number selected randomly in the range 0 -- {\em val\/}. The CPTs in the network are then renormalized. This step is taken before any structure changes are made. The default is to leave parameters unchanged and to only change structure.\end{itemize}
+\end{itemize}
+
+
+\begin{itemize}
+\item -max\-Parents\-Per\-Node $<$num$>$\begin{itemize}
+\item Limit each node to $<$num$>$ parents (default no limit)\end{itemize}
+\end{itemize}
+
+
+\begin{itemize}
+\item -num\-Changes $<$num$>$\begin{itemize}
+\item Randomly add 2$\ast$num, then remove 2$\ast$num, then reverse 2$\ast$num links (default num defaults to 4). Each of these changes affects the parameters in the network. The current version of this tool does not do anything smart with these, so once this option is invoked do not trust the parameter values. This option will not introduce changes that violate the {\em max\-Parents\-Per\-Node\/} parameter, or that introduce cycles. If it is trying to add or reverse a link and can not without violating these constraints after trying 100 random operations beliefnetcorrupt will give up on the change and move on to the next one. This option is overridden by the -random option if it is used.\end{itemize}
+\end{itemize}
+
+
+\begin{itemize}
+\item -random $<$num$>$\begin{itemize}
+\item Random starting net with $<$num$>$ links. This option will override the (default) num\-Changes behavior. More specifically, this option starts by removing all edges from the net, and then adding random edges (so that no changes add a cycle or violate the max\-Parents constraint).\end{itemize}
+\end{itemize}
+
+
+\begin{itemize}
+\item -seed $<$seed$>$\begin{itemize}
+\item Sets the random seed, multiple runs with the same options and seed will produce the same network (defaults to a random seed)\end{itemize}
+\end{itemize}
+
+
+\begin{itemize}
+\item -h\begin{itemize}
+\item Run with this argument to get a list of arguments and their meanings.\end{itemize}
+\end{itemize}
+
+
+\begin{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+
+\subsubsection*{Example}
+
+{\tt }
+
+{\tt beliefnetcorrupt -f corrupted -bnf alarm.bif -num\-Changes 2 -seed 111}
+
+Creates a network based on the alarm network by adding 2 links, then removing 2 links, then reversing 2 links. Reproduce the same network everytime the same arguments are used (thanks to the seed parameter).
+

@@ -1,0 +1,127 @@
+.TH "vfbn2" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+vfbn2 \- 
+.SH "Detailed Description"
+.PP 
+Learns the structure of a BeliefNet from a very large data set using sampling and a new search proceedure. 
+
+Learns the structure and parameters of a Bayesian network, accelerated with sampling as described in \fCthis paper\fP. All variables must be categorical. vfbn2 searches for high scoring Bayesian network structures by considering adding and removing every possible edge (but not reversing as traditional methods do), making the one that has highest score on training data, and repeating until no change improves the score. Unlike other learners, vfbn2 uses statistical tests and only uses enough data to be sure that it knows which change is best with high confidence (see the -delta parameter below). This allows vfbn2 to be much faster than traditional methods when there is enough data to make good decisions. It also allows it to learn from data streams (see the -stdin flag below). vfbn2 also differs from traditional Bayesian network learners by running the search for the model at each variable in parallel. Whenever the statistical tests at one node indicate that a change should be made it is made, and this fact is broadcast to the searches at the other nodes which immediately stop considering any changes that would add a cycle to the network given the change just made.
+.PP
+vfbn2 takes input and does output in \fCc4.5 format\fP. It expects to find the files \fC<stem>.names\fP and \fC<stem>.data\fP.
+.PP
+\fBWish List\fP
+.RS 4
+An API to this learner like the one to learning BeliefNet structure in beliefnet-engine.h 
+.RE
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f 'filestem'
+.IP "  \(bu" 4
+Set the name of the dataset (default DF)
+.PP
+
+.IP "\(bu" 2
+-source 'dir'
+.IP "  \(bu" 4
+Set the source data directory (default '.')
+.PP
+
+.IP "\(bu" 2
+-startFrom 'filename'
+.IP "  \(bu" 4
+Use net in 'filename' as starting point, must be BIF file (default start from empty net)
+.PP
+
+.IP "\(bu" 2
+-outputTo 'filename'
+.IP "  \(bu" 4
+Output the learned net to 'filename' in BIF format.
+.PP
+
+.IP "\(bu" 2
+-delta 'prob'
+.IP "  \(bu" 4
+Allowed chance of error in each decision (default 0.0000000001 that's .00000001 percent)
+.PP
+
+.IP "\(bu" 2
+-tau 'tie error'
+.IP "  \(bu" 4
+Call a tie when score might change less than tau percent (default 0.001)
+.PP
+
+.IP "\(bu" 2
+-chunk 'count'
+.IP "  \(bu" 4
+Accumulate 'count' examples before testing for a winning search step(default 10000)
+.PP
+
+.IP "\(bu" 2
+-noRemove
+.IP "  \(bu" 4
+VFBN2 won't consider removing links (default remove)
+.PP
+
+.IP "\(bu" 2
+-inStep
+.IP "  \(bu" 4
+VFBN2 won't let any search make a second step before everyone makes a step (default no restriction)
+.PP
+
+.IP "\(bu" 2
+-limitMegs 'count'
+.IP "  \(bu" 4
+Limit dynamic memory allocation to 'count' megabytes networks that are too large will not be considered (default no limit)
+.PP
+
+.IP "\(bu" 2
+-limitMinutes 'count'
+.IP "  \(bu" 4
+Limit the run to 'count' minutes then return current model (default no limit)
+.PP
+
+.IP "\(bu" 2
+-stdin
+.IP "  \(bu" 4
+Reads training examples from stdin instead of from 'stem'.data causes a 2 second delay to help give data generation time to setup (default off) -seed 's'
+.IP "  \(bu" 4
+Seed for random numbers (default random)
+.PP
+
+.IP "\(bu" 2
+-maxParentsPerNode 'num'
+.IP "  \(bu" 4
+Limit each node to 'num' parents (default no max).
+.PP
+
+.IP "\(bu" 2
+-maxParameterCount 'count'
+.IP "  \(bu" 4
+Limit net to 'count' parameters (default no max).
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Run vfbn2 -h for a list of the arguments and their meanings.
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

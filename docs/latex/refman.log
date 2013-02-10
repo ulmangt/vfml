@@ -1,0 +1,1325 @@
+This is pdfTeX, Version 3.14159-14h-released-20010417 (Web2C 7.3.3.1) (format=pdflatex 2002.10.2)  16 JUL 2003 01:12
+**refman.tex
+(./refman.tex{/usr/local/share/texmf/pdftex/config/pdftex.cfg}
+LaTeX2e <2000/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, i
+talian, nohyphenation, loaded.
+(/usr/local/share/texmf/tex/latex/base/book.cls
+Document Class: book 2000/05/19 v1.4b Standard LaTeX document class
+(/usr/local/share/texmf/tex/latex/base/bk10.clo
+File: bk10.clo 2000/05/19 v1.4b Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/share/texmf/tex/latex/misc/a4wide.sty
+Package: a4wide 1994/08/30
+
+(/usr/local/share/texmf/tex/latex/ntgclass/a4.sty
+Package: a4 1999/03/03 v1.2f A4 based page layout
+))
+(/usr/local/share/texmf/tex/latex/base/makeidx.sty
+Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
+)
+(/usr/local/share/texmf/tex/latex/fancyhdr/fancyhdr.sty
+\headwidth=\dimen103
+)
+(/usr/local/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 1999/02/16 v1.0l Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/share/texmf/tex/latex/config/graphics.cfg)
+Package graphics Info: Driver file: pdftex.def on input line 80.
+
+(/usr/local/share/texmf/tex/latex/graphics/pdftex.def
+File: pdftex.def 2001/11/29 v0.03i graphics/color for pdftex
+\Gread@gobject=\count88
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+(/usr/local/share/texmf/tex/latex/tools/multicol.sty
+Package: multicol 2000/07/10 v1.5z multicolumn formatting (FMi)
+\c@tracingmulticols=\count89
+\mult@box=\box26
+\multicol@leftmargin=\dimen106
+\c@unbalance=\count90
+\c@collectmore=\count91
+\doublecol@number=\count92
+\multicoltolerance=\count93
+\multicolpretolerance=\count94
+\full@width=\dimen107
+\page@free=\dimen108
+\premulticols=\dimen109
+\postmulticols=\dimen110
+\multicolsep=\skip43
+\multicolbaselineskip=\skip44
+\partial@page=\box27
+\last@line=\box28
+\mult@rightbox=\box29
+\mult@grightbox=\box30
+\mult@gfirstbox=\box31
+\mult@firstbox=\box32
+\@tempa=\box33
+\@tempa=\box34
+\@tempa=\box35
+\@tempa=\box36
+\@tempa=\box37
+\@tempa=\box38
+\@tempa=\box39
+\@tempa=\box40
+\@tempa=\box41
+\@tempa=\box42
+\@tempa=\box43
+\@tempa=\box44
+\@tempa=\box45
+\@tempa=\box46
+\@tempa=\box47
+\@tempa=\box48
+\@tempa=\box49
+\c@columnbadness=\count95
+\c@finalcolumnbadness=\count96
+\last@try=\dimen111
+\multicolovershoot=\dimen112
+\multicolundershoot=\dimen113
+\mult@nat@firstbox=\box50
+\colbreak@box=\box51
+)
+(/usr/local/share/texmf/tex/latex/misc/float.sty
+Package: float 1999/05/29 v1.2d Float enhancements (AL)
+\c@float@type=\count97
+\float@box=\box52
+\@floatcapt=\box53
+)
+(/usr/local/share/texmf/tex/latex/base/textcomp.sty
+Package: textcomp 2000/08/30 v1.91 Standard LaTeX package
+
+(/usr/local/share/texmf/tex/latex/base/ts1enc.def
+File: ts1enc.def 1998/06/12 v3.0d (jk/car/fm) Standard LaTeX file
+))
+(/usr/local/share/texmf/tex/latex/base/alltt.sty
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+) (./doxygen.sty
+Package: doxygen 
+
+(/usr/local/share/texmf/tex/latex/tools/calc.sty
+Package: calc 1998/07/07 v4.1b Infix arithmetic (KKT,FJ)
+\calc@Acount=\count98
+\calc@Bcount=\count99
+\calc@Adimen=\dimen114
+\calc@Bdimen=\dimen115
+\calc@Askip=\skip45
+\calc@Bskip=\skip46
+LaTeX Info: Redefining \setlength on input line 59.
+LaTeX Info: Redefining \addtolength on input line 60.
+\calc@denominator=\count100
+)
+(/usr/local/share/texmf/tex/latex/tools/array.sty
+Package: array 1998/05/13 v2.3m Tabular extension package (FMi)
+\col@sep=\dimen116
+\extrarowheight=\dimen117
+\NC@list=\toks15
+\extratabsurround=\skip47
+\backup@length=\skip48
+)
+\tmplength=\skip49
+)
+\@indexfile=\write3
+\openout3 = `refman.idx'.
+
+
+Writing index file refman.idx
+(./refman.aux (./group__UtilAPI.aux) (./group__DecisionTree.aux)
+(./group__BeliefNet.aux) (./group__Clustering.aux) (./group__Learners.aux)
+(./group__Tools.aux) (./struct__BeliefNetNode__.aux) (./struct__BITFIELD__.aux)
+(./struct__DecisionTree__.aux) (./struct__Example__.aux)
+(./struct__ExampleGenerator__.aux) (./struct__ExampleGroupStats__.aux)
+(./struct__ExampleSpec__.aux) (./struct__StatTracker__.aux)
+(./struct__VFDT__.aux) (./structFloatListPtr.aux) (./structHashTable.aux)
+(./structIntListPtr.aux) (./structVoidListPtr.aux) (./batchtest.aux)
+(./BeliefNet_8h.aux) (./beliefnetcorrupt.aux) (./beliefnetdata.aux)
+(./beliefnetscore.aux) (./bindata.aux) (./bitfield_8h.aux) (./bnlearn.aux)
+(./bnlearn-engine_8h.aux) (./C45interface_8h.aux) (./c45wrapper.aux)
+(./c50wrapper.aux) (./cleandata.aux) (./clusterdata.aux) (./combinedata.aux)
+(./cvfdt.aux) (./Debug_8h.aux) (./decisionstump.aux) (./DecisionTree_8h.aux)
+(./doxygen_8h.aux) (./Example_8h.aux) (./ExampleGenerator_8h.aux)
+(./ExampleGroupStats_8h.aux) (./ExampleSpec_8h.aux) (./folddata.aux)
+(./HashTable_8h.aux) (./kmeans.aux) (./lists_8h.aux) (./memory_8h.aux)
+(./mostcommonclass.aux) (./naivebayes.aux) (./random_8h.aux) (./REPrune_8h.aux)
+(./sampledata.aux) (./shuffledata.aux) (./sprint.aux) (./stats_8h.aux)
+(./treedata.aux) (./uRunner.aux) (./vfbn1.aux) (./vfbn2.aux) (./vfdt.aux)
+(./vfdt-engine_8h.aux) (./vfem.aux) (./vfkm.aux) (./xvalidate.aux) (./wish.aux)
+(./bug.aux))
+\openout1 = `refman.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 14.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 14.
+ (/usr/local/share/texmf/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 14.
+
+(/usr/local/share/texmf/tex/context/base/supp-pdf.tex
+(/usr/local/share/texmf/tex/context/base/supp-mis.tex
+loading : Context Support Macros / Missing
+\protectiondepth=\count101
+\scratchcounter=\count102
+\scratchtoks=\toks16
+\scratchdimen=\dimen118
+\scratchskip=\skip50
+\scratchmuskip=\muskip10
+\scratchbox=\box54
+\scratchread=\read1
+\scratchwrite=\write4
+\zeropoint=\dimen119
+\nextbox=\box55
+\nextdepth=\dimen120
+\everyline=\toks17
+\!!counta=\count103
+\!!countb=\count104
+\recursecounter=\count105
+)
+loading : Context Support Macros / PDF
+\nofMPsegments=\count106
+\nofMParguments=\count107
+\everyMPtoPDFconversion=\toks18
+) [1
+
+
+{/usr/local/share/texmf/dvips/config/pdftex.map}] [2
+
+] (./refman.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 2.
+
+[1
+
+] [2])
+\tf@toc=\write5
+\openout5 = `refman.toc'.
+
+ [3] [4
+
+]
+Chapter 1.
+(./main.tex
+Underfull \vbox (badness 1810) has occurred while \output is active []
+
+ [1
+
+]
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 75--75
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--79
+
+ []
+
+) [3] [4
+
+]
+Chapter 2.
+(./modules.tex) [5] [6
+
+]
+Chapter 3.
+(./annotated.tex) [7] [8
+
+]
+Chapter 4.
+(./files.tex [9]) [10]
+Chapter 5.
+(./pages.tex) [11
+
+] [12
+
+]
+Chapter 6.
+(./group__CoreAPI.tex [13]) [14]
+\openout2 = `group__UtilAPI.aux'.
+
+ (./group__UtilAPI.tex) [15
+
+]
+\openout2 = `group__DecisionTree.aux'.
+
+
+(./group__DecisionTree.tex [16
+
+
+]) [17]
+\openout2 = `group__BeliefNet.aux'.
+
+ (./group__BeliefNet.tex) [18
+
+
+]
+\openout2 = `group__Clustering.aux'.
+
+
+(./group__Clustering.tex) [19
+
+
+]
+\openout2 = `group__Learners.aux'.
+
+ (./group__Learners.tex) [20
+
+
+]
+\openout2 = `group__Tools.aux'.
+
+ (./group__Tools.tex) [21
+
+
+] [22
+
+
+]
+Chapter 7.
+(./struct__BeliefNet__.tex) [23]
+\openout2 = `struct__BeliefNetNode__.aux'.
+
+ (./struct__BeliefNetNode__.tex) [24
+
+]
+\openout2 = `struct__BITFIELD__.aux'.
+
+
+(./struct__BITFIELD__.tex) [25
+
+
+]
+\openout2 = `struct__DecisionTree__.aux'.
+
+ (./struct__DecisionTree__.tex) [26
+
+
+]
+\openout2 = `struct__Example__.aux'.
+
+
+(./struct__Example__.tex) [27
+
+
+]
+\openout2 = `struct__ExampleGenerator__.aux'.
+
+ (./struct__ExampleGenerator__.tex) [28
+
+
+]
+\openout2 = `struct__ExampleGroupStats__.aux'.
+
+
+(./struct__ExampleGroupStats__.tex) [29
+
+
+]
+\openout2 = `struct__ExampleSpec__.aux'.
+
+ (./struct__ExampleSpec__.tex) [30
+
+
+]
+\openout2 = `struct__StatTracker__.aux'.
+
+
+(./struct__StatTracker__.tex) [31
+
+
+]
+\openout2 = `struct__VFDT__.aux'.
+
+ (./struct__VFDT__.tex) [32
+
+
+]
+\openout2 = `structFloatListPtr.aux'.
+
+
+(./structFloatListPtr.tex) [33
+
+
+]
+\openout2 = `structHashTable.aux'.
+
+ (./structHashTable.tex) [34
+
+
+]
+\openout2 = `structIntListPtr.aux'.
+
+
+(./structIntListPtr.tex) [35
+
+
+]
+\openout2 = `structVoidListPtr.aux'.
+
+ (./structVoidListPtr.tex) [36
+
+
+]
+Chapter 8.
+(./AttributeTracker_8h.tex [37
+
+
+] [38]) [39]
+\openout2 = `batchtest.aux'.
+
+ (./batchtest.tex
+Underfull \hbox (badness 10000) in paragraph at lines 24--25
+[]/cmtt10/mean-error-rate (standard deviation of error rate) mean-size (standar
+d deviation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--25
+/cmtt10/of size) average-utime (standard deviation of utime) average-stime (sta
+ndard
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 33--33
+
+ []
+
+[40
+
+]) [41]
+\openout2 = `BeliefNet_8h.aux'.
+
+ (./BeliefNet_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 11--11
+
+ []
+
+[42
+
+
+]
+Underfull \hbox (badness 1132) in paragraph at lines 66--67
+[]/cmr10/void /cmbx10/BNNode-Add-Fractional-Sample /cmr10/(/cmbx10/Belief-Net-N
+ode /cmr10/bnn, /cmbx10/Example-Ptr /cmr10/e, float
+ []
+
+[43] [44] [45] [46] [47] [48] [49] [50] [51] [52]
+Underfull \hbox (badness 10000) in paragraph at lines 550--550
+
+ []
+
+[53]) [54]
+\openout2 = `beliefnetcorrupt.aux'.
+
+ (./beliefnetcorrupt.tex
+Underfull \hbox (badness 10000) in paragraph at lines 15--15
+
+ []
+
+[55
+
+
+]) [56]
+\openout2 = `beliefnetdata.aux'.
+
+ (./beliefnetdata.tex [57
+
+
+]) [58]
+\openout2 = `beliefnetscore.aux'.
+
+ (./beliefnetscore.tex
+Underfull \hbox (badness 10000) in paragraph at lines 15--15
+
+ []
+
+) [59
+
+
+]
+\openout2 = `bindata.aux'.
+
+ (./bindata.tex
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--17
+
+ []
+
+) [60
+
+
+] [61]
+\openout2 = `bitfield_8h.aux'.
+
+ (./bitfield_8h.tex [62
+
+
+]) [63]
+\openout2 = `bnlearn.aux'.
+
+ (./bnlearn.tex
+Underfull \hbox (badness 10000) in paragraph at lines 17--17
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--21
+
+ []
+
+[64
+
+
+]) [65]
+\openout2 = `bnlearn-engine_8h.aux'.
+
+ (./bnlearn-engine_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 15--15
+
+ []
+
+) [66
+
+
+]
+\openout2 = `C45interface_8h.aux'.
+
+ (./C45interface_8h.tex) [67
+
+
+]
+\openout2 = `c45wrapper.aux'.
+
+ (./c45wrapper.tex) [68
+
+
+]
+\openout2 = `c50wrapper.aux'.
+
+ (./c50wrapper.tex)
+[69
+
+
+]
+\openout2 = `cleandata.aux'.
+
+ (./cleandata.tex
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+
+ []
+
+) [70
+
+
+]
+\openout2 = `clusterdata.aux'.
+
+ (./clusterdata.tex [71
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 46--47
+/cmtt10/clusterdata -continuous 20 -clusters 3 -stdev 0.05 -concept-Seed 21 -se
+ed 1234
+ []
+
+) [72]
+\openout2 = `combinedata.aux'.
+
+ (./combinedata.tex
+Underfull \hbox (badness 10000) in paragraph at lines 34--35
+/cmtt10/combinedata -names test -fout big-data -data-Files small-data0 small-da
+ta1
+ []
+
+) [73
+
+
+]
+\openout2 = `cvfdt.aux'.
+
+ (./cvfdt.tex
+Underfull \hbox (badness 10000) in paragraph at lines 15--15
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+
+ []
+
+[74
+
+
+]) [75]
+\openout2 = `Debug_8h.aux'.
+
+ (./Debug_8h.tex [76
+
+
+]) [77]
+\openout2 = `decisionstump.aux'.
+
+ (./decisionstump.tex) [78
+
+
+]
+\openout2 = `DecisionTree_8h.aux'.
+
+
+(./DecisionTree_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+
+ []
+
+[79
+
+
+] [80] [81] [82] [83] [84] [85]) [86]
+\openout2 = `doxygen_8h.aux'.
+
+ (./doxygen_8h.tex) [87
+
+
+]
+\openout2 = `Example_8h.aux'.
+
+
+(./Example_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
+[]/cmr10/#define /cmbx10/Example-Get-Num-Attributes/cmr10/(e) (VALLength(((/cmb
+x10/Example-Ptr/cmr10/)e) $/cmsy10/!$ /cmr10/at-
+ []
+
+[88
+
+
+] [89] [90] [91] [92]) [93]
+\openout2 = `ExampleGenerator_8h.aux'.
+
+ (./ExampleGenerator_8h.tex [94
+
+
+]) [95]
+\openout2 = `ExampleGroupStats_8h.aux'.
+
+
+(./ExampleGroupStats_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 39--40
+[]/cmr10/Attribute-Tracker-Ptr /cmbx10/Example-Group-Stats-Get-Attribute-Tracke
+r /cmr10/(/cmbx10/Example-Group-
+ []
+
+[96
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
+[]/cmr10/double /cmbx10/Example-Group-Stats-Get-Value-Given-Class-MEstimate /cm
+r10/(/cmbx10/Example-Group-
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 58.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 58.
+
+Underfull \hbox (badness 3977) in paragraph at lines 61--62
+[]/cmr10/float /cmbx10/Example-Group-Stats-Get-Percent-Below-Threshold /cmr10/(
+/cmbx10/Example-Group-Stats-Ptr
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 63--64
+[]/cmr10/double /cmbx10/Example-Group-Stats-Get-Value-Given-Class-MEstimate-Log
+-P /cmr10/(/cmbx10/Example-
+ []
+
+[97]
+Underfull \hbox (badness 2221) in paragraph at lines 69--70
+[]/cmr10/float /cmbx10/Example-Group-Stats-Entropy-Discrete-Attribute-Split /cm
+r10/(/cmbx10/Example-Group-Stats-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
+[]/cmr10/void /cmbx10/Example-Group-Stats-Entropy-Continuous-Attribute-Split /c
+mr10/(/cmbx10/Example-Group-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
+[]/cmr10/float /cmbx10/Example-Group-Stats-Gini-Discrete-Attribute-Split /cmr10
+/(/cmbx10/Example-Group-Stats-Ptr
+ []
+
+
+Underfull \hbox (badness 3536) in paragraph at lines 81--82
+[]/cmr10/void /cmbx10/Example-Group-Stats-Ignore-Splits-Worse-Than-Gini /cmr10/
+(/cmbx10/Example-Group-Stats-Ptr
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--90
+[]/cmr10/int /cmbx10/Example-Group-Stats-Get-Most-Common-Class-Above-Threshold 
+/cmr10/(/cmbx10/Example-
+ []
+
+[98] [99] [100] [101] [102]
+Underfull \vbox (badness 1152) has occurred while \output is active []
+
+ [103])
+[104]
+\openout2 = `ExampleSpec_8h.aux'.
+
+ (./ExampleSpec_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 11--11
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
+[]/cmr10/#define /cmbx10/Example-Spec-Get-Attribute-Type/cmr10/(es, num) ( Attr
+ibute-Spec-Get-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 26--27
+[]/cmr10/#define /cmbx10/Example-Spec-Get-Attribute-Value-Name/cmr10/(es, att-N
+um, val-Num) ( (char
+ []
+
+[105
+
+
+]
+Underfull \hbox (badness 2103) in paragraph at lines 48--49
+[]/cmr10/void /cmbx10/Example-Spec-Add-Attribute-Value /cmr10/(/cmbx10/Example-
+Spec-Ptr /cmr10/es, int att-Num, char
+ []
+
+[106] [107] [108] [109]) [110]
+\openout2 = `folddata.aux'.
+
+ (./folddata.tex [111
+
+
+]) [112]
+\openout2 = `HashTable_8h.aux'.
+
+ (./HashTable_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 9--9
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+
+ []
+
+[113
+
+
+]) [114]
+\openout2 = `kmeans.aux'.
+
+ (./kmeans.tex
+Underfull \hbox (badness 1859) in paragraph at lines 10--11
+/cmmi10/<$/cmtt10/stem$/cmmi10/>$/cmtt10/.names /cmr10/and $/cmmi10/<$/cmtt10/s
+tem$/cmmi10/>$/cmtt10/.data. /cmr10/and out-puts the learned cen-ters to a file
+ called
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--17
+
+ []
+
+) [115
+
+
+]
+\openout2 = `lists_8h.aux'.
+
+ (./lists_8h.tex [116
+
+
+] [117]) [118]
+\openout2 = `memory_8h.aux'.
+
+ (./memory_8h.tex [119
+
+
+] [120])
+[121]
+\openout2 = `mostcommonclass.aux'.
+
+ (./mostcommonclass.tex) [122
+
+
+]
+\openout2 = `naivebayes.aux'.
+
+ (./naivebayes.tex
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+
+ []
+
+) [123
+
+
+]
+\openout2 = `random_8h.aux'.
+
+ (./random_8h.tex [124
+
+
+]) [125]
+\openout2 = `REPrune_8h.aux'.
+
+ (./REPrune_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+
+ []
+
+) [126
+
+
+]
+\openout2 = `sampledata.aux'.
+
+ (./sampledata.tex) [127
+
+
+]
+\openout2 = `shuffledata.aux'.
+
+ (./shuffledata.tex
+Underfull \hbox (badness 10000) in paragraph at lines 11--11
+
+ []
+
+) [128
+
+
+]
+\openout2 = `sprint.aux'.
+
+ (./sprint.tex
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+
+ []
+
+[129
+
+
+]) [130]
+\openout2 = `stats_8h.aux'.
+
+ (./stats_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 11--11
+
+ []
+
+[131
+
+
+] [132]) [133] [134]
+\openout2 = `treedata.aux'.
+
+ (./treedata.tex [135
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
+/cmtt10/treedata -discrete 10 -continuous 0 -noise 15 -concept-Seed 21 -seed 12
+34 -prune-
+ []
+
+) [136]
+\openout2 = `uRunner.aux'.
+
+ (./uRunner.tex [137
+
+
+]
+Overfull \hbox (64.17078pt too wide) in paragraph at lines 65--65
+[]/cmtt8/nice -5 $rundir/clusterdata -continuous 12 -clusters 18 -stdev 0.0300 
+-train 10000000 -seed 9177 -conceptSeed 18354[] 
+ []
+
+
+Overfull \hbox (85.42108pt too wide) in paragraph at lines 65--65
+[]/cmtt8/nice -5 $rundir/vfkm -progressive -allowBadConverge -clusters 18 -dbSi
+ze 10000000 -converge 0.021600 -seed 9178 > output[] 
+ []
+
+
+Overfull \hbox (144.92194pt too wide) in paragraph at lines 65--65
+[]/cmtt8/nice -5 $rundir/vfkm -progressive -allowBadConverge -clusters 18 -dbSi
+ze 10000000 -normalApprox -converge 0.021600 -seed 9178 > output[] 
+ []
+
+
+Overfull \hbox (42.92047pt too wide) in paragraph at lines 65--65
+[]/cmtt8/nice -5 $rundir/vfkm -batch -clusters 18 -dbSize 10000000 -normalAppro
+x -converge 0.021600 -seed 9178 > output[] 
+ []
+
+) [138]
+\openout2 = `vfbn1.aux'.
+
+ (./vfbn1.tex
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+
+ []
+
+[139
+
+
+]) [140]
+\openout2 = `vfbn2.aux'.
+
+ (./vfbn2.tex
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+
+ []
+
+[141
+
+
+]) [142]
+\openout2 = `vfdt.aux'.
+
+ (./vfdt.tex [143
+
+
+] [144]) [145]
+\openout2 = `vfdt-engine_8h.aux'.
+
+ (./vfdt-engine_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 13--13
+
+ []
+
+
+Underfull \hbox (badness 2970) in paragraph at lines 31--32
+[]/cmbx10/VFDTPtr VFDT-New /cmr10/(/cmbx10/Example-Spec-Ptr /cmr10/spec, float 
+split-Confidence, float tie-
+ []
+
+[146
+
+
+] [147] [148] [149]) [150]
+\openout2 = `vfem.aux'.
+
+ (./vfem.tex
+Underfull \hbox (badness 10000) in paragraph at lines 15--15
+
+ []
+
+[151
+
+
+] [152]) [153]
+\openout2 = `vfkm.aux'.
+
+ (./vfkm.tex
+Underfull \hbox (badness 1859) in paragraph at lines 10--11
+/cmmi10/<$/cmtt10/stem$/cmmi10/>$/cmtt10/.names /cmr10/and $/cmmi10/<$/cmtt10/s
+tem$/cmmi10/>$/cmtt10/.data. /cmr10/and out-puts the learned cen-ters to a file
+ called
+ []
+
+[154
+
+
+]) [155]
+\openout2 = `xvalidate.aux'.
+
+ (./xvalidate.tex
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
+[]/cmtt10/mean-error-rate (standard deviation of error rate) mean-size (standar
+d deviation
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--23
+/cmtt10/of size) average-utime (standard deviation of utime) average-stime (sta
+ndard
+ []
+
+[156
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 54--55
+/cmtt10/xvalidate -source datasets/mushroom -f mushroom -folds 15 -seed 100 -c
+ []
+
+) [157] [158
+
+
+]
+Chapter 9.
+(./thanks.tex) [159]
+\openout2 = `wish.aux'.
+
+ (./wish.tex [160
+
+]) [161]
+\openout2 = `bug.aux'.
+
+ (./bug.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--4
+[]
+ []
+
+) [162
+
+
+] (./refman.ind [163
+
+
+] [164] [165]
+Underfull \hbox (badness 10000) in paragraph at lines 325--326
+[]| /cmr10/De-ci-sion-TreeAd-dTo-Class-Dis-tri-bu-tion,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--336
+[]| /cmr10/De-ci-sion-TreeGet-Class-Dis-tri-bu-tion-Sam-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 354--355
+[]| /cmr10/De-ci-sion-TreeSpli-tOn-Con-tin-u-ousAt-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 355--356
+[]| /cmr10/De-ci-sion-TreeSpli-tOnDis-creteAt-tribute,
+ []
+
+
+Overfull \hbox (11.94336pt too wide) in paragraph at lines 378--379
+[]/cmr10/DecisionTreeGetClassDistributionSampleCount 
+ []
+
+[166]
+Underfull \hbox (badness 10000) in paragraph at lines 437--438
+[]| /cmr10/Ex-am-pleGet-Con-tin-u-ousAt-tribute-Value,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 450--451
+[]| /cmr10/Ex-am-ple-Set-Con-tin-u-ousAt-tribute-Value,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 494--495
+[]| /cmr10/Ex-am-ple-Group-Stat-sEn-tropy-Con-tin-u-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 495--496
+[]| /cmr10/Ex-am-ple-Group-Stat-sEn-tropy-Dis-creteAt-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 498--499
+[]| /cmr10/Ex-am-ple-Group-Stats-Ge-tAt-tribute-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 500--501
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-ClassPer-cent,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 501--502
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-Most-Com-mon-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 502--503
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-Most-Com-mon-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 503--504
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-Most-Com-mon-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 504--505
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-Most-Com-mon-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 505--506
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-Most-Com-mon-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 506--507
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-Most-Com-mon-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 507--508
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-Per-cent-Be-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 508--509
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-Val-ue-Given-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 509--510
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-Val-ue-Given-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 510--511
+[]| /cmr10/Ex-am-ple-Group-Stats-Get-Val-uePer-cent,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 511--512
+[]| /cmr10/Ex-am-ple-Group-Stats-Gini-Con-tin-u-ousAt-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 512--513
+[]| /cmr10/Ex-am-ple-Group-Stats-Gini-Dis-creteAt-
+ []
+
+[167]
+Underfull \hbox (badness 10000) in paragraph at lines 514--515
+[]| /cmr10/Ex-am-ple-Group-Stat-sIg-nore-At-tribute,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 515--516
+[]| /cmr10/Ex-am-ple-Group-Stat-sIg-nore-S-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 516--517
+[]| /cmr10/Ex-am-ple-Group-Stat-sIg-nore-S-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 517--518
+[]| /cmr10/Ex-am-ple-Group-Stat-sIsAt-tribute-Ac-tive,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 519--520
+[]| /cmr10/Ex-am-ple-Group-Stat-sLim-it-Split-sEn-tropy,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 521--522
+[]| /cmr10/Ex-am-ple-Group-Stat-sNu-mEx-am-p-lesSeen,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 522--523
+[]| /cmr10/Ex-am-ple-Group-Stat-sNum-Split-Thresh-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 525--526
+[]| /cmr10/Ex-am-ple-Group-StatsStopAddingSplits,
+ []
+
+
+Overfull \hbox (40.19356pt too wide) in paragraph at lines 531--532
+[]/cmr10/ExampleGroupStatsEntropyContinuousAttributeSplit 
+ []
+
+
+Overfull \hbox (26.19348pt too wide) in paragraph at lines 533--534
+[]/cmr10/ExampleGroupStatsEntropyDiscreteAttributeSplit 
+ []
+
+
+Overfull \hbox (65.54077pt too wide) in paragraph at lines 547--548
+[]/cmr10/ExampleGroupStatsGetMostCommonClassAboveThreshold 
+ []
+
+
+Overfull \hbox (64.29076pt too wide) in paragraph at lines 549--550
+[]/cmr10/ExampleGroupStatsGetMostCommonClassBelowThreshold 
+ []
+
+
+Overfull \hbox (21.01291pt too wide) in paragraph at lines 551--552
+[]/cmr10/ExampleGroupStatsGetMostCommonClassCount 
+ []
+
+
+Overfull \hbox (38.12405pt too wide) in paragraph at lines 553--554
+[]/cmr10/ExampleGroupStatsGetMostCommonClassForAttVal 
+ []
+
+
+Overfull \hbox (27.5407pt too wide) in paragraph at lines 555--556
+[]/cmr10/ExampleGroupStatsGetMostCommonClassLaplace 
+ []
+
+
+Overfull \hbox (12.90172pt too wide) in paragraph at lines 557--558
+[]/cmr10/ExampleGroupStatsGetPercentBelowThreshold 
+ []
+
+
+Overfull \hbox (30.94345pt too wide) in paragraph at lines 559--560
+[]/cmr10/ExampleGroupStatsGetValueGivenClassMEstimate 
+ []
+
+
+Overfull \hbox (53.99907pt too wide) in paragraph at lines 561--562
+[]/cmr10/ExampleGroupStatsGetValueGivenClassMEstimateLogP 
+ []
+
+
+Overfull \hbox (23.7074pt too wide) in paragraph at lines 565--566
+[]/cmr10/ExampleGroupStatsGiniContinuousAttributeSplit 
+ []
+
+
+Overfull \hbox (9.70732pt too wide) in paragraph at lines 567--568
+[]/cmr10/ExampleGroupStatsGiniDiscreteAttributeSplit 
+ []
+
+
+Overfull \hbox (31.11017pt too wide) in paragraph at lines 573--574
+[]/cmr10/ExampleGroupStatsIgnoreSplitsWorseThanEntropy 
+ []
+
+
+Overfull \hbox (14.62401pt too wide) in paragraph at lines 575--576
+[]/cmr10/ExampleGroupStatsIgnoreSplitsWorseThanGini 
+ []
+
+[168]
+Underfull \hbox (badness 10000) in paragraph at lines 628--629
+[]| /cmr10/Ex-am-ple-SpecAd-d-Con-tin-u-ousAt-tribute,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 633--634
+[]| /cmr10/Ex-am-ple-SpecGe-tAt-tribute-Val-ue-Count,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--635
+[]| /cmr10/Ex-am-ple-SpecGe-tAt-tribute-Val-u-e-Name,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 638--639
+[]| /cmr10/Ex-am-ple-SpecIsAt-tribute-Con-tin-u-ous,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 641--642
+[]| /cmr10/Ex-am-ple-SpecLooku-pAt-tribute-Name,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 642--643
+[]| /cmr10/Ex-am-ple-SpecLooku-pAt-tribute-Val-u-e-
+ []
+
+[169] [170] [171] [172
+
+]) (./refman.aux (./group__UtilAPI.aux)
+(./group__DecisionTree.aux) (./group__BeliefNet.aux) (./group__Clustering.aux)
+(./group__Learners.aux) (./group__Tools.aux) (./struct__BeliefNetNode__.aux)
+(./struct__BITFIELD__.aux) (./struct__DecisionTree__.aux)
+(./struct__Example__.aux) (./struct__ExampleGenerator__.aux)
+(./struct__ExampleGroupStats__.aux) (./struct__ExampleSpec__.aux)
+(./struct__StatTracker__.aux) (./struct__VFDT__.aux) (./structFloatListPtr.aux)
+(./structHashTable.aux) (./structIntListPtr.aux) (./structVoidListPtr.aux)
+(./batchtest.aux) (./BeliefNet_8h.aux) (./beliefnetcorrupt.aux)
+(./beliefnetdata.aux) (./beliefnetscore.aux) (./bindata.aux) (./bitfield_8h.aux
+) (./bnlearn.aux) (./bnlearn-engine_8h.aux) (./C45interface_8h.aux)
+(./c45wrapper.aux) (./c50wrapper.aux) (./cleandata.aux) (./clusterdata.aux)
+(./combinedata.aux) (./cvfdt.aux) (./Debug_8h.aux) (./decisionstump.aux)
+(./DecisionTree_8h.aux) (./doxygen_8h.aux) (./Example_8h.aux)
+(./ExampleGenerator_8h.aux) (./ExampleGroupStats_8h.aux) (./ExampleSpec_8h.aux)
+(./folddata.aux) (./HashTable_8h.aux) (./kmeans.aux) (./lists_8h.aux)
+(./memory_8h.aux) (./mostcommonclass.aux) (./naivebayes.aux) (./random_8h.aux)
+(./REPrune_8h.aux) (./sampledata.aux) (./shuffledata.aux) (./sprint.aux)
+(./stats_8h.aux) (./treedata.aux) (./uRunner.aux) (./vfbn1.aux) (./vfbn2.aux)
+(./vfdt.aux) (./vfdt-engine_8h.aux) (./vfem.aux) (./vfkm.aux) (./xvalidate.aux)
+(./wish.aux) (./bug.aux)) ) 
+Here is how much of TeX's memory you used:
+ 2635 strings out of 50460
+ 38270 string characters out of 690213
+ 96670 words of memory out of 1500001
+ 5122 multiletter control sequences out of 10000+25000
+ 10831 words of font info for 38 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 10000
+ 31i,12n,40p,1226b,567s stack positions out of 3000i,500n,3000p,50000b,5000s
+</usr/local/share/texmf/fonts/type1/bluesky/cm/cmsy9
+.pfb></usr/local/share/texmf/fonts/type1/bluesky/cm/cmbx9.pfb></usr/local/share
+/texmf/fonts/type1/bluesky/cm/cmsy7.pfb></usr/local/share/texmf/fonts/type1/blu
+esky/cm/cmti10.pfb></usr/local/share/texmf/fonts/type1/bluesky/cm/cmsy10.pfb></
+usr/local/share/texmf/fonts/type1/bluesky/cm/cmmi10.pfb></usr/local/share/texmf
+/fonts/type1/bluesky/cm/cmbxti10.pfb></usr/local/share/texmf/fonts/type1/bluesk
+y/cm/cmti9.pfb></usr/local/share/texmf/fonts/type1/bluesky/cm/cmtt8.pfb> </usr/
+local/share/texmf/fonts/pk/ljfour/pk600/ec/tcrm1000.600pk></usr/local/share/tex
+mf/fonts/type1/bluesky/cm/cmtt10.pfb></usr/local/share/texmf/fonts/type1/bluesk
+y/cm/cmbx7.pfb></usr/local/share/texmf/fonts/type1/bluesky/cm/cmr10.pfb></usr/l
+ocal/share/texmf/fonts/type1/bluesky/cm/cmbx10.pfb></usr/local/share/texmf/font
+s/type1/bluesky/cm/cmbx12.pfb></usr/local/share/texmf/fonts/type1/bluesky/cm/cm
+r9.pfb></usr/local/share/texmf/fonts/type1/bluesky/cm/cmr12.pfb>
+Output written on refman.pdf (178 pages, 481839 bytes).

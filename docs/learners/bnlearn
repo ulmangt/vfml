@@ -1,0 +1,73 @@
+/** \ingroup Learners BeliefNet
+*/
+
+
+/** \file
+
+\brief Learns the structure of a BeliefNet from a data set.  Designed
+to be easily modified.
+
+Learns the structure and parameters of a Bayesian network using the
+standard method.  The structural prior is set by using P(S) = kappa ^
+(symetric difference between the net and the prior net).  The
+parameter prior is K2.  This is basically a wrapper around the code in
+bnlearn-engine.h.  This program is a stripped down version of the vfbn
+learner, done so that the code would be clearer and easier to modify.
+
+bnlearn can load training data into RAM, if space is available, or it
+  can scan data repeatedly from disk.
+
+See the documentation for the bnlearn-engine for even more information
+about the parameters and their meanings.
+
+bnlearn takes input and does output in <a
+href="../appendixes/c45.htm">c4.5 format</a>. It expects to find the
+files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data</code>.
+
+\thanks to Matthew Richardson for making substantial optimizations to the
+bnlearn program.
+
+\wish A version of this program that is intelligent about dealing with
+unobserved (or partially observed) variables.
+
+<h2>Arguments</h2>
+
+- -f 'filestem'
+   - Set the name of the dataset (default DF)
+- -source 'dir'
+   - Set the source data directory (default '.')
+- -startFrom 'filename'
+   - Use net in filename as starting point,  must be BIF file (default start from empty net)
+- -outputTo 'filename'
+   - Output the learned net to filename
+- -limitMegs 'count'
+   - Limit dynamic memory allocation to 'count' megabytes, don't consider networks that take too much space (default no limit)
+- -limitMinutes 'count'
+   - Limit the run to 'count' minutes then return current model (default no limit)
+- -noCacheTrainSet
+   - Repeatedly read training data from disk and do not cache it in  RAM (default read data into RAM at beginning of run)
+- -stdin
+   - Reads training examples from stdin instead of from stem.data causes a 2 second delay to help give input time to setup (default off, not compatable with -noCacheTrainSet)
+- -noReverse
+   -  Doesn't reverse links to make nets for next search step (default reverse links)
+- -parametersOnly
+   - Only estimate parameters for current structure, no other learning
+- -seed 's'
+   - Seed for random numbers (default random)
+- -maxSearchSteps 'num'
+   - Limit to 'num' search steps (default no max).
+- -maxParentsPerNode 'num'
+   - Limit each node to 'num' parents (default no max).
+- -maxParameterGrowthMult 'mult'
+   - Limit net to 'mult' times starting # of parameters (default no max).
+- -maxParameterCount 'count'
+   - Limit net to 'count' parameters (default no max).
+- -kappa 'kappa'
+   - The structure prior penalty for batch (0 - 1), 1 is no penalty (default 0.5)
+- -v  
+   - Can be used multiple times to increase the debugging output
+- -h
+   - Run bnlearn -h for a list of the arguments and their meanings.
+*/
+

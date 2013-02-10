@@ -1,0 +1,35 @@
+\section{sampledata File Reference}
+\label{sampledata}\index{sampledata@{sampledata}}
+
+
+\subsection{Detailed Description}
+Draws a sample from a data set. 
+
+sampledata does a scan over a data set and draws a sample from it by including each example in the sample with a user specified probability.
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$\begin{itemize}
+\item Set the stem name (default DF)\end{itemize}
+\item -fout $<$filestem$>$\begin{itemize}
+\item Set the name of the output dataset (default DF-out)\end{itemize}
+\item -source $<$dir$>$\begin{itemize}
+\item Set the directory that contains the dataset (default '.')\end{itemize}
+\item -target $<$dir$>$\begin{itemize}
+\item Set the directory to contain the output dataset (default '.')\end{itemize}
+\item -seed $<$seed$>$\begin{itemize}
+\item Sets the random seed, multiple runs with the same seed will produce the same datasets (defaults to a random seed)\end{itemize}
+\item -sample $<$n$>$\begin{itemize}
+\item Sets the percentage of the data to sample (default .8 -- that's 80\%)\end{itemize}
+\item -stdin\begin{itemize}
+\item Read examples from standard in (default read file)\end{itemize}
+\item -stdout\begin{itemize}
+\item Writes examples to standard out (default write to file)\end{itemize}
+\item -h\begin{itemize}
+\item Display usage information and exit.\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+

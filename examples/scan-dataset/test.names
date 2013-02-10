@@ -1,0 +1,18 @@
+| This file contains a make-believe problem which has been designed to help
+|  introduce users to the VFML framework.
+
+| The goal is to predict if a banana is edible or spoiled from how many days 
+|  it has been sitting on the counter and how many brown spots it has.
+
+| The classes
+
+edible, spoiled.
+
+| The first attribute, a number representing how many days it has been on the
+|  counter.
+
+days: continuous.
+
+| The second attribute, an indication of how many brown spots the banana has
+
+spots: none, few, many.

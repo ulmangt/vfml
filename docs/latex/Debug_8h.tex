@@ -1,0 +1,78 @@
+\section{Debug.h File Reference}
+\label{Debug_8h}\index{Debug.h@{Debug.h}}
+
+
+\subsection{Detailed Description}
+A set of functions that help your programs produce debugging output in a consistent way. 
+
+
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void {\bf Debug\-Warn} (int condition, char $\ast$str)
+\begin{CompactList}\small\item\em Outputs string to the current target if condition is non-zero. \item\end{CompactList}\item 
+void {\bf Debug\-Error} (int condidion, char $\ast$str)
+\begin{CompactList}\small\item\em If condition is non-zero outputs string to the current target and halts the program. \item\end{CompactList}\item 
+void {\bf Debug\-Set\-Message\-Level} (int level)
+\begin{CompactList}\small\item\em Sets the level of message that will be reported by Debug\-Message. \item\end{CompactList}\item 
+int {\bf Debug\-Get\-Message\-Level} (void)
+\begin{CompactList}\small\item\em Returns the current message level. \item\end{CompactList}\item 
+void {\bf Debug\-Message} (int condition, int level, char $\ast$str,...)
+\begin{CompactList}\small\item\em Formats and prints a message if conditions are met. \item\end{CompactList}\item 
+void {\bf Debug\-Set\-Target} (FILE $\ast$target)
+\begin{CompactList}\small\item\em Sets the target for debugging output. \item\end{CompactList}\item 
+FILE $\ast$ {\bf Debug\-Get\-Target} (void)
+\begin{CompactList}\small\item\em Gets the current target for debugging output. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Debug.h@{Debug.h}!DebugError@{DebugError}}
+\index{DebugError@{DebugError}!Debug.h@{Debug.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Debug\-Error (int {\em condidion}, char $\ast$ {\em str})}\label{Debug_8h_a1}
+
+
+If condition is non-zero outputs string to the current target and halts the program. 
+
+\index{Debug.h@{Debug.h}!DebugGetMessageLevel@{DebugGetMessageLevel}}
+\index{DebugGetMessageLevel@{DebugGetMessageLevel}!Debug.h@{Debug.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Debug\-Get\-Message\-Level (void)}\label{Debug_8h_a3}
+
+
+Returns the current message level. 
+
+\index{Debug.h@{Debug.h}!DebugGetTarget@{DebugGetTarget}}
+\index{DebugGetTarget@{DebugGetTarget}!Debug.h@{Debug.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}FILE$\ast$ Debug\-Get\-Target (void)}\label{Debug_8h_a6}
+
+
+Gets the current target for debugging output. 
+
+\index{Debug.h@{Debug.h}!DebugMessage@{DebugMessage}}
+\index{DebugMessage@{DebugMessage}!Debug.h@{Debug.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Debug\-Message (int {\em condition}, int {\em level}, char $\ast$ {\em str}, ...)}\label{Debug_8h_a4}
+
+
+Formats and prints a message if conditions are met. 
+
+If the condition is non-zero and the current message level is greater than level this calls printf with str as the format string, and any additional arguments as arguments. \index{Debug.h@{Debug.h}!DebugSetMessageLevel@{DebugSetMessageLevel}}
+\index{DebugSetMessageLevel@{DebugSetMessageLevel}!Debug.h@{Debug.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Debug\-Set\-Message\-Level (int {\em level})}\label{Debug_8h_a2}
+
+
+Sets the level of message that will be reported by Debug\-Message. 
+
+Defaults to 0. \index{Debug.h@{Debug.h}!DebugSetTarget@{DebugSetTarget}}
+\index{DebugSetTarget@{DebugSetTarget}!Debug.h@{Debug.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Debug\-Set\-Target (FILE $\ast$ {\em target})}\label{Debug_8h_a5}
+
+
+Sets the target for debugging output. 
+
+Defaults to stdout. All future calls to the Debug functions will sent output to the specified file. \index{Debug.h@{Debug.h}!DebugWarn@{DebugWarn}}
+\index{DebugWarn@{DebugWarn}!Debug.h@{Debug.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Debug\-Warn (int {\em condition}, char $\ast$ {\em str})}\label{Debug_8h_a0}
+
+
+Outputs string to the current target if condition is non-zero. 
+

@@ -1,0 +1,281 @@
+#ifndef DECISIONTREEH
+#define DECISIONTREEH
+
+/** \ingroup CoreAPI DecisionTree
+*/
+
+#include "ExampleSpec.h"
+#include "Example.h"
+#include "../util/lists.h"
+/*#include <stdio.h>*/
+
+
+/** \file 
+
+\brief A Decision Tree Structure
+
+This is the interface for creating, using, printing, & serializing
+Decision Trees. A decision tree is a recursive structure. Each
+internal node partitions the data based on the values of an
+attribute. Each leaf contains a prediction for the distinguished
+target attribute. For a more detailed discussion see chapter 3 of <A
+HREF="http://www-2.cs.cmu.edu/afs/cs.cmu.edu/user/mitchell/ftp/\
+mlbook.html">Tom Mitchell's book on machine learning</A>.
+
+Note that all the DecisionTrees created with an ExampleSpec maintain a
+pointer to the it; you shouldn't free or modify the ExampleSpec until
+you are done with all the DecisionTrees referencing it.
+
+\wish A standard in memory decision tree induction algorithm.  Maybe
+the best starting point would be the \ref decisionstump learner.
+
+\wish This isn't the right place for this wish, but it would be nice
+to have a RuleSet structure similar to this DecisionTree structure
+
+*/
+
+
+typedef enum { dtnLeaf, dtnContinuous, dtnDiscrete, dtnGrowing } NodeType;
+
+/** \brief ADT for working with decision trees. 
+
+See DecisionTree.h for more detail.
+*/
+typedef struct _DecisionTree_ {
+   NodeType nodeType;
+
+   ExampleSpecPtr spec;
+   void *growingData;
+
+   int splitAttribute;
+   float splitThreshold; /* for continuous attributes */
+
+   VoidAListPtr children;
+
+   int myclass;
+
+   float *classDistribution;
+   float distributionSampleCount;
+} DecisionTree, *DecisionTreePtr;
+
+/** \brief Creates a new decision tree node.  
+
+You should use the accessor methods to initialize it and attach it to
+an existing DecisionTree as needed.
+*/
+DecisionTreePtr DecisionTreeNew(ExampleSpecPtr spec);
+
+/** \brief Frees the memory associated with the decision tree and all
+of its children.
+
+This function doesn't do anything with user growing data you may have
+attached using DecisionTreeSetGrowingData; you must deal with that
+before calling this function.
+*/
+void DecisionTreeFree(DecisionTreePtr dt);
+
+/** \brief Recursively creates a copy of dt and returns it.
+
+This function copies the user data pointers, but doesn't copy the data
+they point to.
+*/
+DecisionTreePtr DecisionTreeClone(DecisionTreePtr dt);
+
+/** \brief Returns 1 if dt is a leaf node and 0 otherwise. */
+int DecisionTreeIsLeaf(DecisionTreePtr dt);
+
+/** \brief Returns 1 if dt is a growing node has any children which
+are, and 0 otherwise.
+*/
+int DecisionTreeIsTreeGrowing(DecisionTreePtr dt);
+
+/** \brief Returns 1 if dt is a growing node and 0 otherwise. */
+int DecisionTreeIsNodeGrowing(DecisionTreePtr dt);
+
+/** \brief Returns the index of the class which dt predicts.
+
+This makes the most sense if dt is a Leaf node, but may be useful at
+other times as well.
+*/
+int DecisionTreeGetClass(DecisionTreePtr dt);
+
+/** \brief Sets dt's class prediction to theClass 
+
+Does not change dt's type to leaf node. This might be useful for
+anytime algorithms where a growing node needs to contain a reasonable
+prediction at all times.
+*/
+void DecisionTreeSetClass(DecisionTreePtr dt, int theClass);
+
+/** \brief Put the example in the class distribution at the node.
+
+Updates the class distribution at the node with the class of the
+example.  This does not make recursive calls, so you should use
+DecisionTreeOneStepClassify and add it everywhere until you get to a
+leaf (if that is what you intend).
+*/
+void DecisionTreeAddToClassDistribution(DecisionTreePtr dt, ExamplePtr e);
+
+/** \brief Returns the probability of the class.
+
+Returns what portion of the examples that were added to the class
+distribution at this node have the associated class.
+*/
+float DecisionTreeGetClassProb(DecisionTreePtr dt, int theClass);
+
+/** \brief Sets the probability of the class.
+
+Changes the probability of the class without changing the sample count
+(unless the sample count was zero in which case it is set to 1).
+*/
+void  DecisionTreeSetClassProb(DecisionTreePtr dt, int theClass, float prob);
+
+/** \brief Returns the number of samples added to the node's distribution */
+float DecisionTreeGetClassDistributionSampleCount(DecisionTreePtr dt);
+
+/** \brief Sets the nodes distribution to zeros. */
+void DecisionTreeZeroClassDistribution(DecisionTreePtr dt);
+
+/** \brief  Changes dt into a leaf node without changing its class prediction.
+
+If dt is not a growing node this function also frees all of dt's
+children.  Remember that you are responsible for anything stored in
+any of dt's children's growing pointers and you should clean up these
+pointers before calling this function.
+*/
+void DecisionTreeSetTypeLeaf(DecisionTreePtr dt);
+
+/** \brief Changes dt into a growing node. */
+void DecisionTreeSetTypeGrowing(DecisionTreePtr dt);
+
+/** \brief Changes dt into a discrete split.
+
+The new node splits on the values of a discrete attribute and adds one
+child to dt for each value of attribute attNum. The created children
+start as growing nodes.
+*/
+void DecisionTreeSplitOnDiscreteAttribute(DecisionTreePtr dt,
+                                                            int attNum);
+
+/** \brief Changes dt into a continuous split.
+
+The new node splits on a threshold on a continuous attribute and adds
+children to dt for values of attNum < and >= the threshold. The
+created children start as growing nodes.
+*/
+void DecisionTreeSplitOnContinuousAttribute(DecisionTreePtr dt,
+                                            int attNum, float threshold);
+
+/** \brief Returns a count of the direct decendants of dt.  
+
+That is, return a count of all the nodes that you can reach from dt by
+taking one step towards the leaves.
+*/
+int DecisionTreeGetChildCount(DecisionTreePtr dt);
+
+/** \brief Returns one of the direct decendants of dt.
+
+Index should be between 0 and DecisionTreeGetChildCount(dt) - 1. For
+nodes that split on continuous attributes use index 0 for the left
+child (<) and index 1 for the right child (>=).
+*/
+DecisionTreePtr DecisionTreeGetChild(DecisionTreePtr dt, int index);
+
+/** \brief Does one step of classifing e with dt
+
+Returns the direct decendant of dt corresponding to the correct value
+of dt's test attribute. If dt is a leaf or growing node this function
+will return dt.
+*/
+DecisionTreePtr DecisionTreeOneStepClassify(DecisionTreePtr dt, ExamplePtr e);
+
+/** \brief Uses dt to classify e and returns the index of the predicted class. */
+int DecisionTreeClassify(DecisionTreePtr dt, ExamplePtr e);
+
+/** \brief Searches dt and appends all its growing nodes to the passed list. */
+void DecisionTreeGatherGrowingNodes(DecisionTreePtr dt, VoidAListPtr list);
+
+/** \brief Searches dt and appends all its leaf nodes to the passed list.*/
+void DecisionTreeGatherLeaves(DecisionTreePtr dt, VoidAListPtr list);
+
+/** \brief Returns a count of the number of nodes (of any type) in dt.*/
+int  DecisionTreeCountNodes(DecisionTreePtr dt);
+
+/** \brief Return the index of the class that is predicted most commonly by leaf nodes in dt.*/
+int DecisionTreeGetMostCommonClass(DecisionTreePtr dt);
+
+/** \brief Each decision tree node has a pointer reserved for your use.
+
+Use the SetGrowingData function to change the value of the
+pointer. You can set the pointer to anything you like (for example, to
+store sufficient statistics on growing nodes), but remember that you
+are responsible to manage any memory that it points to.
+*/
+void DecisionTreeSetGrowingData(DecisionTreePtr dt, void *data);
+
+
+/**\brief Each decision tree node has a pointer reserved for your use.
+
+Use the GetGrowingData function to access the value of the pointer. 
+*/
+void *DecisionTreeGetGrowingData(DecisionTreePtr dt);
+
+
+/** \brief Prints the decision tree to the passed file.
+
+FILE * should be opened for writing. The decision tree will be written
+so as to be understandable by humans.  Your mileage may vary.
+
+Note that you could pass STDOUT to the function to write a decision
+tree to the console.
+*/
+void DecisionTreePrint(DecisionTreePtr dt, FILE *out);
+
+
+/** \brief Prints counts of leaves at each level of the tree.
+
+The passed FILE * should be opened for writing. Note that you could
+pass STDOUT to the function to write the stats to the console.
+*/
+void DecisionTreePrintStats(DecisionTreePtr dt, FILE *out);
+
+
+/** \brief Attempts to read a decision tree from the passed file.
+
+FILE * should be opened for reading.  The file, in, should contain a
+decision tree written in C4.5's binary format, not the pretty-printed
+text format.  A run of C4.5 with its default arguments will produce 2
+such files, stem.tree and stem.unpruned.
+
+This function handles leaves, continuous splits, and discrete splits
+and will not be able to read trees built with C4.5's subsetting
+options.
+*/
+DecisionTreePtr DecisionTreeReadC45(FILE *in, ExampleSpecPtr spec);
+DecisionTreePtr DecisionTreeReadC45Overprune(FILE *in, ExampleSpecPtr spec);
+
+/** \brief Attempts to read a decision tree from the passed file.
+
+FILE * should be opened for reading. Attaches the ExampleSpec to the
+read decision tree.
+
+This function allocates memory which should be freed by calling
+DecisionTreeFree.
+*/
+DecisionTreePtr DecisionTreeRead(FILE *in, ExampleSpecPtr spec);
+
+/** \brief Writes the decision tree to the passed file.
+
+FILE * should be opened for writing. The decision tree will be written
+in a binary format suitable to be read by DecisionTreeRead, but this
+function ignores any growing data that you've associated with dt -- if
+you need to save growing data you will need to serialize it some other
+way.
+
+Note that you could pass STDOUT to the function to write an example to
+the console.
+*/
+void DecisionTreeWrite(DecisionTreePtr dt, FILE *out);
+
+#endif /* DECISIONTREEH */
+

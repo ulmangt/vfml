@@ -1,0 +1,34 @@
+/** \ingroup Learners
+*/
+
+
+/** \file
+
+\brief A Naive Bayes learner.
+
+An implementation of Naive Bayes that works with categorical
+attributes.  This learner works in time proportional to the number of
+training examples.  It also requires memory that is proportional to
+the number of classes * number attributes * number of values.
+
+<p>The learner takes input and does output in <a
+href="../appendixes/c45.htm">c4.5 format</a>.  &nbsp; It expects to
+find the files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data.</code> Depending on command line argument, it
+will either output the model if you use the -v argument enough or test
+its error rate on <code>&lt;stem&gt;.test</code>.</p>
+
+\wish Modify this learner to work with continuous attributes.
+
+<h2>Arguments</h2>
+
+- -f &lt;filestem&gt;
+  - Set the stem name (default DF)
+- -source &lt;dir&gt;
+  - Set the directory that contains the dataset (default '.')
+- -u 
+  - Test on the examples in &lt;stem&gt;.test and output in a format appropriate for interface with xvalidate and batchtest&nbsp; (defaults to off)
+- -v
+  - Can be used multiple times to increase the debugging output
+
+*/

@@ -1,0 +1,33 @@
+<html>
+
+<head>
+<title>Running VFML's Tools and Learners</title>
+</head>
+
+<body>
+
+<h1>Running VFML's Tools and Learners</h1>
+
+This section describes how you can use the over two dozen tools and
+learning algorithms that come with VFML to help you solve your own
+data mining problems.
+
+<h2>Getting Data</h2>
+
+To use them you will first need to get access to some data sets.  The
+<a href="gettingstarted.htm">getting started</a> documentation
+contains some information on how to download the data sets that come
+with VFML.  We will now briefly talk about how to construct your own.
+The native data format for VFML is the <a href
+="../appendixes/c45.htm">C4.5 Format</a> which was introduced by Ross
+Quinlan with his C4.5 decision tree induction algorithm.  You can see
+the <a href ="../appendixes/c45.htm">VFML appendex</a> for a detailed
+description of the format, but we will also describe it here briefly.
+Each data set in C4.5 format consists of several files, a
+&gtstem&lt.names file that describes the data schema, a
+&gtstem&lt.data file that contains training data, an optional
+&gtstem&lt.test file that contains testing data, and an optional
+&gtstem&lt.prune file that contains prune data.
+
+</body>
+</html>

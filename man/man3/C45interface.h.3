@@ -1,0 +1,30 @@
+.TH "C45interface.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+C45interface.h \- 
+.SH "Detailed Description"
+.PP 
+Calls the C4.5 decision tree learning system and returns the learned tree. 
+
+An interface that writes the examples to a file, calls C4.5 on them, and returns the tree that C4.5 learns. See the \fCexample program\fP for more information on how to use this interface. C4.5 must be in your path for this to work, you can grab it from Professor Quinlan's homepage at http://www.cse.unsw.edu.au/~quinlan/.
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDecisionTreePtr\fP \fBC45Learn\fP (\fBExampleSpecPtr\fP es, \fBVoidListPtr\fP examples)"
+.br
+.RI "\fIMakes the call and returns the tree. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBDecisionTreePtr\fP C45Learn (\fBExampleSpecPtr\fP es, \fBVoidListPtr\fP examples)"
+.PP
+Makes the call and returns the tree. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

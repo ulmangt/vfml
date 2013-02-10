@@ -1,0 +1,71 @@
+.TH "cleandata" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+cleandata \- 
+.SH "Detailed Description"
+.PP 
+Cleans up a data set in several ways. 
+
+This tool cleans a data set in several ways, and outputs the cleaned data. It will scan the training data and gather some simple stats about it (if needed, see below). It then does a pass over training and testing data, filling in missing categorical attribute values with the most common value given the class, and filling in missing continuous attribute values with the average value given the class.
+.PP
+The tool can also add a new attribute value to each categorical attribe, called 'u' (short for unknown) and rewrite the data set as appropriate.
+.PP
+The tool can also remove every attribute in the data set that is marked ignored.
+.PP
+cleandata accepts an input stem and expects to find a file \fIstem\fP.data and \fIstem\fP.names and optionally one called \fIstem\fP.test. cleandata outputs a file named \fIstem\fP-clean.data, \fIstem\fP-clean.names, and optionally \fIstem\fP-clan.test.
+.PP
+cleandata will work with a single pass over the data set if and only if you use -addValue and there are no continuous attributes. Otherwise it usues an additional pass.
+.PP
+\fBThanks\fP
+.RS 4
+to Chun-Hsiang Hung for doing the core development work for this tool. 
+.RE
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem>
+.IP "  \(bu" 4
+Set the stem name (default DF)
+.PP
+
+.IP "\(bu" 2
+-source <dir>
+.IP "  \(bu" 4
+Set the directory that contains the dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-addValue
+.IP "  \(bu" 4
+Adds a 'u' for unknown value to all categorical attributes (default fill in the most common value)
+.PP
+
+.IP "\(bu" 2
+-removeIgnore
+.IP "  \(bu" 4
+removes every attribute marked 'ignored' in names from the data set (default leave them in)
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Display usage information and exit.
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

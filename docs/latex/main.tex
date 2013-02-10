@@ -1,0 +1,81 @@
+Welcome to the VFML (Very Fast Machine Learning toolkit) for mining high-speed data streams and very large data sets. VFML is made up of three main components. The first is a collection of tools and APIs that help a user develop new learning algorithms. The second component is a collection of implementations of important learning algorithms. The third component is a collection of scalable learning algorithms that were developed by Pedro Domingos and Geoff Hulten (with the help of several other people see {\bf Thanks}). VFML is written in standard C (and a bit of Python), and provides a series of tutorials and examples as well as extensive in-source documentation in Java\-Doc format. VFML is being distributed under a modified {\tt BSD license}.
+
+VFML provides code to help read and process training data, to gather sufficient statistics from it, ADTs for several important machine learning structures, and various helper code. You can get an overview of what is provided by visiting the {\bf Core APIs} and {\bf Utility APIs} sections of the documentation.
+
+VFML contains a series of tools for working with data sets: cleaning them, sampling them, splitting them into train/test sets. It also has tools to help you experiment with learning algorithms. See the {\bf Other Tools} documentation heading for more information.
+
+VFML contains tools for learning decision trees, for learning the structure belief nets (aka Bayesian networks), and for clustering. Much of this code is easy to modify or extend (several other researchers have benefited from the {\bf bnlearn} program, for example), and much of it can scale to learning from very large data sets or from data streams. You can get an overview of all the learners by checking out the {\bf Learning Programs} section.\section{Downloads}\label{downloads}
+\begin{itemize}
+\item See the {\tt Getting Started} page for links to the software.\item {\tt UCI Datasets}\item {\tt Benchmark Bayesian Networks}\end{itemize}
+\section{User Documentation}\label{topics}
+These links take you to some tutorials and example code on parts of the VFML system.
+
+\begin{itemize}
+\item {\tt Getting Started with VFML} including details about how to get the code, build, and install the tools. \item A description of how to {\tt run the tools and learners} that come with VFML. \item A tutorial on {\tt comparing learning algorithms} using the tools in VFML. \item A brief description of how to use the learners in VFML to {\tt mine data streams}. \end{itemize}
+
+
+The following sections contain more detailed documentation about VFML's tool and learning programs.
+
+\begin{itemize}
+\item The {\bf Tools Section} describes all the data manipulation and generation tools contained in VFML.\item The {\bf Learners Section} describes all of the learners that are included in VFML.\end{itemize}
+\section{Developer and Reference Documentation}\label{details}
+\begin{itemize}
+\item An overview of what you will need to do to {\tt create your own learner} as well as a description of an example learning program that can be a starting point for your own projects. \item A tutorial and example program on using VFML's APIs to {\tt load a data set} into a program. \item An example on how to {\tt interface with C4.5} in your programs \end{itemize}
+
+
+The following sections contain links to the documentation for all of the APIs that you might find useful. You might like to download the reference manual (which contains all this information) in {\tt pdf format}.
+
+\begin{itemize}
+\item The {\bf Core APIs} describes learning related APIs and ADTs.\item The {\bf Utility APIs} describes generic APIs that may help you.\item The {\bf Decision Tree Section} contains documentation for the parts of VFML that are relevant to working with decision trees.\item The {\bf Belief Net Section} contains documentation for the parts of VFML that are relevant to working with belief nets.\item The {\bf Clustering Setction} contains documentation for the parts of VFML that are relevant to clustering.\end{itemize}
+\section{Appendixes}\label{appendixes}
+\begin{itemize}
+\item {\tt C4.5 Format}\item {\tt Bayesian Interchange Format}\end{itemize}
+\section{Contact Us}\label{contact}
+If you have any comments, suggestions, or bug reports, please feel free to send us email: {\tt ghulten@cs.washington.edu} and {\tt pedrod@cs.washington.edu}. You can also post messages to our {\tt sourceforge forums}.\section{Terms Of Use}\label{license}
+You are welcome to use the code under the terms of the modified BSD license for research or commercial purposes, however please acknowledge its use with a citation:
+
+Hulten, G. and Domingos, P. \char`\"{}VFML -- A toolkit for mining high-speed time-changing data streams\char`\"{} {\tt http://www.cs.washington.edu/dm/vfml/.} 2003.
+
+Here is a Bi\-BTe\-X entry:
+
+
+
+\footnotesize\begin{verbatim}
+   @unpublished{VFML,
+      author = "Geoff Hulten and Pedro Domingos",
+      title = "{V}{F}{M}{L} -- A toolkit for mining high-speed time-changing data streams",
+      url = "http://www.cs.washington.edu/dm/vfml/",
+      year = 2003}
+\end{verbatim}\normalsize
+
+
+If you like, please also drop us a line about what you do with VFML and what results you obtain. We'd love to know, and it will help us in directing the future developments of VFML.
+
+
+
+
+
+The official license information follows:
+
+VFML - Very Fast Machine Learning toolkit Copyright (C) 2003, Geoff Hulten and Pedro Domingos All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+Neither the name of the University of Washington nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \char`\"{}AS IS\char`\"{} AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+
+
+
+\begin{Desc}
+\item[{\bf Thanks}]VFML was made possible by a gift from the Ford Motor Company. \end{Desc}
+See {\bf Thanks} for a list of additional people that have contributed to VFML.
+
+\begin{Desc}
+\item[{\bf Wish List}]The windows distribution needs to be brought up to date. \end{Desc}

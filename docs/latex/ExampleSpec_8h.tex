@@ -1,0 +1,266 @@
+\section{Example\-Spec.h File Reference}
+\label{ExampleSpec_8h}\index{ExampleSpec.h@{ExampleSpec.h}}
+
+
+\subsection{Detailed Description}
+Schema for training data. 
+
+This is based off of Ross Quinlan's {\tt C4.5 format} and can read and write that format to disk.
+
+\begin{Desc}
+\item[{\bf Bug}]Under Cygnus (and windows) lex doesn't seem to do the right thing with EOF rules, so you need to put an extra return at the end of your .names files. \end{Desc}
+
+
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-Example\-Spec\_\-}
+\begin{CompactList}\small\item\em Schema for training data. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf Example\-Spec\-Get\-Attribute\-Type}(es, num)\ ( Attribute\-Spec\-Get\-Type(((Attribute\-Spec\-Ptr)VALIndex(es $\rightarrow$ attributes, num))) )
+\begin{CompactList}\small\item\em Returns the type of the specified attribute. \item\end{CompactList}\item 
+\#define {\bf Example\-Spec\-Get\-Attribute\-Value\-Count}(es, att\-Num)\ ( Attribute\-Spec\-Get\-Num\-Values(((Attribute\-Spec\-Ptr)VALIndex(es $\rightarrow$ attributes, att\-Num))) )
+\begin{CompactList}\small\item\em Returns the number of values of the attribute. \item\end{CompactList}\item 
+\#define {\bf Example\-Spec\-Get\-Attribute\-Value\-Name}(es, att\-Num, val\-Num)\ ( (char $\ast$)Attribute\-Spec\-Get\-Value\-Name(((Attribute\-Spec\-Ptr)VALIndex(es $\rightarrow$ attributes, att\-Num)), val\-Num) )
+\begin{CompactList}\small\item\em Return the name of the specified value of the specified attribute. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef {\bf \_\-Example\-Spec\_\-} {\bf Example\-Spec}
+\begin{CompactList}\small\item\em Schema for training data. \item\end{CompactList}\item 
+typedef {\bf \_\-Example\-Spec\_\-} $\ast$ {\bf Example\-Spec\-Ptr}
+\begin{CompactList}\small\item\em Schema for training data. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Example\-Spec\-Ptr} {\bf Example\-Spec\-New} (void)
+\begin{CompactList}\small\item\em Programmatically creates a new Example\-Spec. \item\end{CompactList}\item 
+void {\bf Example\-Spec\-Free} ({\bf Example\-Spec\-Ptr} es)
+\begin{CompactList}\small\item\em Frees all the memory being used by the Example\-Spec. \item\end{CompactList}\item 
+void {\bf Example\-Spec\-Add\-Class} ({\bf Example\-Spec\-Ptr} es, char $\ast$class\-Name)
+\begin{CompactList}\small\item\em Adds a new class to the Example\-Spec and gives it the specified name. \item\end{CompactList}\item 
+int {\bf Example\-Spec\-Add\-Discrete\-Attribute} ({\bf Example\-Spec\-Ptr} es, char $\ast$name)
+\begin{CompactList}\small\item\em Adds a new discrete attribute to the Example\-Spec and gives it the specified name. \item\end{CompactList}\item 
+int {\bf Example\-Spec\-Add\-Continuous\-Attribute} ({\bf Example\-Spec\-Ptr} es, char $\ast$name)
+\begin{CompactList}\small\item\em Adds a new continuous attribute to the Example\-Spec and gives it the specified name. \item\end{CompactList}\item 
+void {\bf Example\-Spec\-Add\-Attribute\-Value} ({\bf Example\-Spec\-Ptr} es, int att\-Num, char $\ast$name)
+\begin{CompactList}\small\item\em Adds a new value to the specified attribute and gives it the specified name. \item\end{CompactList}\item 
+{\bf Example\-Spec\-Ptr} {\bf Example\-Spec\-Read} (char $\ast$file\-Name)
+\begin{CompactList}\small\item\em Reads a .names formated file and build an Example\-Spec. \item\end{CompactList}\item 
+int {\bf Example\-Spec\-Get\-Num\-Attributes} ({\bf Example\-Spec\-Ptr} es)
+\begin{CompactList}\small\item\em Returns the number of attributes that the example spec contains. \item\end{CompactList}\item 
+int {\bf Example\-Spec\-Is\-Attribute\-Discrete} ({\bf Example\-Spec\-Ptr} es, int num)
+\begin{CompactList}\small\item\em Returns 1 if the specified attribute is discrete and 0 otherwise. \item\end{CompactList}\item 
+int {\bf Example\-Spec\-Is\-Attribute\-Continuous} ({\bf Example\-Spec\-Ptr} es, int num)
+\begin{CompactList}\small\item\em Returns 1 if the specified attribute is continuous and 0 otherwise. \item\end{CompactList}\item 
+int {\bf Example\-Spec\-Is\-Attribute\-Ignored} ({\bf Example\-Spec\-Ptr} es, int num)
+\begin{CompactList}\small\item\em Returns 1 if the specified attribute should be ignored and 0 otherwise. \item\end{CompactList}\item 
+char $\ast$ {\bf Example\-Spec\-Get\-Attribute\-Name} ({\bf Example\-Spec\-Ptr} es, int att\-Num)
+\begin{CompactList}\small\item\em If the att\-Num is valid, this returns the name of the associated attribute. \item\end{CompactList}\item 
+int {\bf Example\-Spec\-Lookup\-Attribute\-Name} ({\bf Example\-Spec\-Ptr} es, char $\ast$val\-Name)
+\begin{CompactList}\small\item\em Returns the index of the named attribute. \item\end{CompactList}\item 
+int {\bf Example\-Spec\-Lookup\-Attribute\-Value\-Name} ({\bf Example\-Spec\-Ptr} es, int att\-Num, char $\ast$val\-Name)
+\begin{CompactList}\small\item\em Returns the index of the named value. \item\end{CompactList}\item 
+int {\bf Example\-Spec\-Lookup\-Class\-Name} ({\bf Example\-Spec\-Ptr} es, char $\ast$name)
+\begin{CompactList}\small\item\em If name is a valid class name, this returns the index associated with the class. \item\end{CompactList}\item 
+char $\ast$ {\bf Example\-Spec\-Get\-Class\-Value\-Name} ({\bf Example\-Spec\-Ptr} es, int class\-Num)
+\begin{CompactList}\small\item\em If the class\-Num is valid, this returns the name of the associated class. \item\end{CompactList}\item 
+int {\bf Example\-Spec\-Get\-Num\-Classes} ({\bf Example\-Spec\-Ptr} es)
+\begin{CompactList}\small\item\em Returns the number of classes in the Example\-Spec. \item\end{CompactList}\item 
+void {\bf Example\-Spec\-Write} ({\bf Example\-Spec\-Ptr} es, FILE $\ast$out)
+\begin{CompactList}\small\item\em Outputs the Example\-Spec in .names format. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecGetAttributeType@{ExampleSpecGetAttributeType}}
+\index{ExampleSpecGetAttributeType@{ExampleSpecGetAttributeType}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Example\-Spec\-Get\-Attribute\-Type(es, num)\ ( Attribute\-Spec\-Get\-Type(((Attribute\-Spec\-Ptr)VALIndex(es $\rightarrow$ attributes, num))) )}\label{ExampleSpec_8h_a3}
+
+
+Returns the type of the specified attribute. 
+
+There are currently four supported types:\begin{itemize}
+\item as\-Ignore\item as\-Continuous\item as\-Discrete\-Named\item as\-Discrete\-No\-Name\end{itemize}
+
+
+The programmatic construction interface only supports as\-Ignore, as\-Continuous, and as\-Discrete\-Named, but the other is needed to fully support the C4.5 format. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecGetAttributeValueCount@{ExampleSpecGetAttributeValueCount}}
+\index{ExampleSpecGetAttributeValueCount@{ExampleSpecGetAttributeValueCount}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Example\-Spec\-Get\-Attribute\-Value\-Count(es, att\-Num)\ ( Attribute\-Spec\-Get\-Num\-Values(((Attribute\-Spec\-Ptr)VALIndex(es $\rightarrow$ attributes, att\-Num))) )}\label{ExampleSpec_8h_a4}
+
+
+Returns the number of values of the attribute. 
+
+If the att\-Num is valid and Example\-Spec\-Is\-Attribute\-Discrete(es, att\-Num) returns 1, this function will return the number of values that attribute has. Remember that these values will be 0 indexed. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecGetAttributeValueName@{ExampleSpecGetAttributeValueName}}
+\index{ExampleSpecGetAttributeValueName@{ExampleSpecGetAttributeValueName}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Example\-Spec\-Get\-Attribute\-Value\-Name(es, att\-Num, val\-Num)\ ( (char $\ast$)Attribute\-Spec\-Get\-Value\-Name(((Attribute\-Spec\-Ptr)VALIndex(es $\rightarrow$ attributes, att\-Num)), val\-Num) )}\label{ExampleSpec_8h_a5}
+
+
+Return the name of the specified value of the specified attribute. 
+
+If att\-Num is valid, and Example\-Spec\-Is\-Attribute\-Discrete(es, att\-Num) returns 1, and val\-Num is valid, this returns the name of the specified value of the specified attribute. 
+
+\subsection{Typedef Documentation}
+\index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpec@{ExampleSpec}}
+\index{ExampleSpec@{ExampleSpec}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Example\-Spec\_\-}  {\bf Example\-Spec}}\label{ExampleSpec_8h_a8}
+
+
+Schema for training data. 
+
+\index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecPtr@{ExampleSpecPtr}}
+\index{ExampleSpecPtr@{ExampleSpecPtr}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Example\-Spec\_\-} $\ast$ {\bf Example\-Spec\-Ptr}}\label{ExampleSpec_8h_a9}
+
+
+Schema for training data. 
+
+
+
+\subsection{Function Documentation}
+\index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecAddAttributeValue@{ExampleSpecAddAttributeValue}}
+\index{ExampleSpecAddAttributeValue@{ExampleSpecAddAttributeValue}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Spec\-Add\-Attribute\-Value ({\bf Example\-Spec\-Ptr} {\em es}, int {\em att\-Num}, char $\ast$ {\em name})}\label{ExampleSpec_8h_a30}
+
+
+Adds a new value to the specified attribute and gives it the specified name. 
+
+The specified attribute had better be a discrete attribute. The main use of the name is to read/write Examples and Example\-Specs in human readable format.
+
+Note that this function takes over the memory associated with the name argument and will free it later. This means that you shouldn't pass in static strings, or strings that were allocated on the stack. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecAddClass@{ExampleSpecAddClass}}
+\index{ExampleSpecAddClass@{ExampleSpecAddClass}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Spec\-Add\-Class ({\bf Example\-Spec\-Ptr} {\em es}, char $\ast$ {\em class\-Name})}\label{ExampleSpec_8h_a26}
+
+
+Adds a new class to the Example\-Spec and gives it the specified name. 
+
+The main use of the name is to read/write Examples and Example\-Specs in human readable format. The new class is assigned a value which you can retrieve by calling: Example\-Spec\-Lookup\-Class\-Name(es, class\-Name).
+
+Note that this function takes over the memory associated with the class\-Name argument and will free it later. This means that you shouldn't pass in static strings, or strings that were allocated on the stack. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecAddContinuousAttribute@{ExampleSpecAddContinuousAttribute}}
+\index{ExampleSpecAddContinuousAttribute@{ExampleSpecAddContinuousAttribute}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Spec\-Add\-Continuous\-Attribute ({\bf Example\-Spec\-Ptr} {\em es}, char $\ast$ {\em name})}\label{ExampleSpec_8h_a29}
+
+
+Adds a new continuous attribute to the Example\-Spec and gives it the specified name. 
+
+The main use of the name is to read/write Example\-Specs in human readable format. The function returns the index of the new attribute.
+
+Note that this function takes over the memory associated with the name argument and will free it later. This means that you shouldn't pass in static strings, or strings that were allocated on the stack. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecAddDiscreteAttribute@{ExampleSpecAddDiscreteAttribute}}
+\index{ExampleSpecAddDiscreteAttribute@{ExampleSpecAddDiscreteAttribute}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Spec\-Add\-Discrete\-Attribute ({\bf Example\-Spec\-Ptr} {\em es}, char $\ast$ {\em name})}\label{ExampleSpec_8h_a28}
+
+
+Adds a new discrete attribute to the Example\-Spec and gives it the specified name. 
+
+The main use of the name is to read/write Example\-Specs in human readable format. The function returns the index of the new attribute, you can use the index to add values to the attribute using Example\-Spec\-Add\-Attribute\-Value.
+
+Note that this function takes over the memory associated with the name argument and will free it later. This means that you shouldn't pass in static strings, or strings that were allocated on the stack. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecFree@{ExampleSpecFree}}
+\index{ExampleSpecFree@{ExampleSpecFree}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Spec\-Free ({\bf Example\-Spec\-Ptr} {\em es})}\label{ExampleSpec_8h_a25}
+
+
+Frees all the memory being used by the Example\-Spec. 
+
+Note that all the Examples created with an Example\-Spec maintain a pointer to the Example\-Spec, so you shouldn't free it or modify the Example\-Spec until you are done with all the Examples referencing it. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecGetAttributeName@{ExampleSpecGetAttributeName}}
+\index{ExampleSpecGetAttributeName@{ExampleSpecGetAttributeName}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Example\-Spec\-Get\-Attribute\-Name ({\bf Example\-Spec\-Ptr} {\em es}, int {\em att\-Num})}\label{ExampleSpec_8h_a38}
+
+
+If the att\-Num is valid, this returns the name of the associated attribute. 
+
+\index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecGetClassValueName@{ExampleSpecGetClassValueName}}
+\index{ExampleSpecGetClassValueName@{ExampleSpecGetClassValueName}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Example\-Spec\-Get\-Class\-Value\-Name ({\bf Example\-Spec\-Ptr} {\em es}, int {\em class\-Num})}\label{ExampleSpec_8h_a42}
+
+
+If the class\-Num is valid, this returns the name of the associated class. 
+
+\index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecGetNumAttributes@{ExampleSpecGetNumAttributes}}
+\index{ExampleSpecGetNumAttributes@{ExampleSpecGetNumAttributes}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Spec\-Get\-Num\-Attributes ({\bf Example\-Spec\-Ptr} {\em es})}\label{ExampleSpec_8h_a33}
+
+
+Returns the number of attributes that the example spec contains. 
+
+Remember that the attributes are indexed in a 0-based fashion (like C arrays) so the actual valid index for the attributes will be from 0 to Example\-Spec\-Get\-Num\-Attributes(es) - 1. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecGetNumClasses@{ExampleSpecGetNumClasses}}
+\index{ExampleSpecGetNumClasses@{ExampleSpecGetNumClasses}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Spec\-Get\-Num\-Classes ({\bf Example\-Spec\-Ptr} {\em es})}\label{ExampleSpec_8h_a43}
+
+
+Returns the number of classes in the Example\-Spec. 
+
+Remember that the classes will have indexes 0 - Example\-Spec\-Get\-Num\-Classes(es) - 1. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecIsAttributeContinuous@{ExampleSpecIsAttributeContinuous}}
+\index{ExampleSpecIsAttributeContinuous@{ExampleSpecIsAttributeContinuous}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Spec\-Is\-Attribute\-Continuous ({\bf Example\-Spec\-Ptr} {\em es}, int {\em num})}\label{ExampleSpec_8h_a35}
+
+
+Returns 1 if the specified attribute is continuous and 0 otherwise. 
+
+Be sure not to ask for an attribute numbered $>$= Example\-Spec\-Get\-Num\-Attributes(es). \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecIsAttributeDiscrete@{ExampleSpecIsAttributeDiscrete}}
+\index{ExampleSpecIsAttributeDiscrete@{ExampleSpecIsAttributeDiscrete}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Spec\-Is\-Attribute\-Discrete ({\bf Example\-Spec\-Ptr} {\em es}, int {\em num})}\label{ExampleSpec_8h_a34}
+
+
+Returns 1 if the specified attribute is discrete and 0 otherwise. 
+
+Be sure not to ask for an attribute numbered $>$= Example\-Spec\-Get\-Num\-Attributes(es). \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecIsAttributeIgnored@{ExampleSpecIsAttributeIgnored}}
+\index{ExampleSpecIsAttributeIgnored@{ExampleSpecIsAttributeIgnored}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Spec\-Is\-Attribute\-Ignored ({\bf Example\-Spec\-Ptr} {\em es}, int {\em num})}\label{ExampleSpec_8h_a36}
+
+
+Returns 1 if the specified attribute should be ignored and 0 otherwise. 
+
+Be sure not to ask for an attribute numbered $>$= Example\-Spec\-Get\-Num\-Attributes(es). \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecLookupAttributeName@{ExampleSpecLookupAttributeName}}
+\index{ExampleSpecLookupAttributeName@{ExampleSpecLookupAttributeName}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Spec\-Lookup\-Attribute\-Name ({\bf Example\-Spec\-Ptr} {\em es}, char $\ast$ {\em val\-Name})}\label{ExampleSpec_8h_a39}
+
+
+Returns the index of the named attribute. 
+
+Does a linear search through the Example\-Spec's attributes looking for the first one named attribute\-Name. Returns the index of the first matching attribute or -1 if there is no match. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecLookupAttributeValueName@{ExampleSpecLookupAttributeValueName}}
+\index{ExampleSpecLookupAttributeValueName@{ExampleSpecLookupAttributeValueName}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Spec\-Lookup\-Attribute\-Value\-Name ({\bf Example\-Spec\-Ptr} {\em es}, int {\em att\-Num}, char $\ast$ {\em val\-Name})}\label{ExampleSpec_8h_a40}
+
+
+Returns the index of the named value. 
+
+If attrib\-Num is a valid attribute index this does a linear search through the associated attribute's values for one named attribute\-Name. Returns the index or -1 if there is no match. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecLookupClassName@{ExampleSpecLookupClassName}}
+\index{ExampleSpecLookupClassName@{ExampleSpecLookupClassName}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Spec\-Lookup\-Class\-Name ({\bf Example\-Spec\-Ptr} {\em es}, char $\ast$ {\em name})}\label{ExampleSpec_8h_a41}
+
+
+If name is a valid class name, this returns the index associated with the class. 
+
+\index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecNew@{ExampleSpecNew}}
+\index{ExampleSpecNew@{ExampleSpecNew}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Example\-Spec\-Ptr} Example\-Spec\-New (void)}\label{ExampleSpec_8h_a24}
+
+
+Programmatically creates a new Example\-Spec. 
+
+Use the Example\-Spec\-Add\-FOO functions to add classes, attributes, and their values to the spec.
+
+This function allocates memory which should be freed by calling Example\-Spec\-Free. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecRead@{ExampleSpecRead}}
+\index{ExampleSpecRead@{ExampleSpecRead}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Example\-Spec\-Ptr} Example\-Spec\-Read (char $\ast$ {\em file\-Name})}\label{ExampleSpec_8h_a31}
+
+
+Reads a .names formated file and build an Example\-Spec. 
+
+Attempts to read an example from the passed FILE $\ast$, which should be opened for reading. The file should contain an Example\-Spec in C4.5 format, that is the file should be a C4.5 names file.
+
+This function will return 0 (NULL) if it is unable to read an Example\-Spec from the file (bad input or the file does not exist). If the input is badly formed, the function will also output an error to the console.
+
+Note that you could pass stdin to the function to read an Example\-Spec from the console.
+
+This function allocates memory which should be freed by calling Example\-Spec\-Free. \index{ExampleSpec.h@{Example\-Spec.h}!ExampleSpecWrite@{ExampleSpecWrite}}
+\index{ExampleSpecWrite@{ExampleSpecWrite}!ExampleSpec.h@{Example\-Spec.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Spec\-Write ({\bf Example\-Spec\-Ptr} {\em es}, FILE $\ast$ {\em out})}\label{ExampleSpec_8h_a44}
+
+
+Outputs the Example\-Spec in .names format. 
+
+Writes the example to the passed FILE $\ast$, which should be opened for writing. The example will be written in C4.5 names format, and could later be read in using Example\-Spec\-Read.
+
+Note that you could pass stdout to the function to write an Example\-Spec to the console. 

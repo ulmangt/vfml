@@ -1,0 +1,55 @@
+/** \ingroup Learners DecisionTree
+*/
+
+
+/** \file
+
+\brief Learns a decision stump (a DecisionTree with only one split).
+
+This is a very simple learner, but it may be useful as a baseline
+to compare your learner against.
+
+<p>The decisionstump learner works in time proportional to the number
+of training examples.  It also requires memory that is proportional to
+the number of classes * number attributes * number of values.  Note
+that this can be very large for continuous attributes (which, in the
+worst case, have a separate value for each training example).  The
+maxThresholds argument can be used to control this.</p>
+
+<p>The learner takes input and does output in <a
+href="../appendixes/c45.htm">c4.5 format</a>.  &nbsp; It expects to
+find the files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data.</code> Depending on command line argument, it
+will either output the decision stump or test its error rate on
+<code>&lt;stem&gt;.test</code>.</p>
+
+<h2>Arguments</h2>
+
+- -f &lt;filestem&gt;
+  - Set the stem name (default DF)
+- -source &lt;dir&gt;
+  - Set the directory that contains the dataset (default '.')
+- -u 
+  - Test on the examples in &lt;stem&gt;.test and output in a format appropriate for interface with xvalidate and batchtest&nbsp; (defaults to off)
+- -a
+  - Outputs the name of the selected attribute
+- -outputGains
+  - Outputs the information gain (and best threshold) for each attribute
+- -outputStump
+  - Prints the learned stump.  Defaults to output without the -u flag
+  and not output with it
+- -maxThresholds &lt;num&gt;
+  - Use the first num values from the training set as thresholds
+  for continuous attributes, allows this program to be run on very
+  large data sets (default use all values)
+- -v 
+  - Can be used multiple times to increase the debugging output
+
+<h2>Example</h2>
+
+<code>decisionstump -f banana -source datasets/banana</code>
+
+Looks for a dataset named 'banana' in the 'datasets/banana'
+directory.&nbsp; Outputs the decision stump learned from the data set.
+
+*/

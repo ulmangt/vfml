@@ -1,0 +1,47 @@
+/** \ingroup Learners
+*/
+
+
+/** \file
+
+\brief Performs k-means clustering.
+
+Performs k-mean clustering on the continuous attributes in a data
+set (ignoring any discrete attributes).
+
+<p>The learner takes input and does output in <a
+href="../appendixes/c45.htm">c4.5 format</a>. It expects to find the
+files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data.</code> and outputs the learned centers to a
+file called <code>&lt;stem&gt;.centers</code>.
+
+<p>Evaluates the learned centers by comparing to the centers found in
+&lt;stem&gt;.test as follows.  Learned centers are greedily matched to
+the closest of the test centers until each center has a match, and
+then the evaluation is the sum of the squared distance between each
+test center and its matched learned center.
+
+<p>You can find a more full-featured kmeans clustering algorithm by
+running \ref vfkm with the -batch argument (for
+example you can set initial centroid locations, etc.
+
+\wish Modify this learner to work with discrete attributes.
+\wish Move the features from \ref vfkm into this learner because this
+learner will be much easier to modify than that one for new users.
+
+<h2>Arguments</h2>
+
+- -f &lt;filestem&gt; 
+  - Set the stem name (default DF)
+- -source &lt;dir&gt; 
+  - Set the directory that contains the dataset (default '.')
+- -clusters  &lt;dir&gt; 
+  - Sets the number of clusters to look for, this argument is required.
+- -threshold  &lt;threshold&gt; 
+  - Iterate until every centroid moves less than this threshold.
+- -u 
+  - Test by comparing to the centroids in &lt;threshold&gt;.test 
+- -v 
+  - Can be used multiple times to increase the debugging output
+
+*/

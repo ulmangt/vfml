@@ -1,0 +1,41 @@
+/** \ingroup Tools BeliefNet
+*/
+
+
+/** \file
+
+\brief Creates a data set by sampling from a Bayesian Network.
+
+>This program creates a synthetic data set by loading an existing
+belief network (in <A HREF="appendixes/bif.htm">BIF format</a>) and
+sampling from it, possibly introducing noise.  This program will also
+create a .names file for the resulting data set.  More specifically,
+belifnetdata reads the network, generates samples from it with
+<strong>BNGenerateSample</strong>, and adds noise to them (if
+requested) with <strong>ExampleAddNoise</strong>. 
+
+<p> Multiple runs with the same seed parameter produce the same
+results.  Also note that running this command with one level of -v
+will output some statistics about the belif net which you might find
+useful.
+
+<p>VFML comes with a collection of benchmark belief nets, and you may
+want <a href="appendixes/beliefnets.htm">more information on these</a>.
+
+<h2>Arguments</h2>
+
+- -h
+  - Run with this argument to get a list of arguments and their meanings.<br>
+
+<h2>Example</h2>
+
+<p><code>
+
+beliefnetdata -f train -bnf alarm.bif -train 1000 -seed 111 -noise 5</code></p>
+
+<p>Creates 1000 samples from the alarm network, randomly corrupts 5%
+of their values, write the resulting samples to train.data (and create
+a file train.names) and reproduce the same data set everytime the same
+arguments are used (thanks to the seed parameter)
+
+*/

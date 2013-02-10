@@ -1,0 +1,30 @@
+/** \ingroup Learners Clustering
+*/
+
+
+/** \file
+
+\brief Performs k-means clustering accelerated with sampling
+
+Performs k-mean clustering accelerated with sampling as described in
+<a href="http://citeseer.nj.nec.com/domingos01general.html">this
+paper</a>.  This learner ignores categorical attributes.
+
+The learner takes input and does output in <a
+href="../appendixes/c45.htm">c4.5 format</a>. It expects to find the
+files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data.</code> and outputs the learned centers to a
+file called <code>&lt;stem&gt;.centers</code>.
+
+It evaluates the learned centers by comparing to the centers found in
+&lt;stem&gt;.test as follows.  Learned centers are greedily matched to
+the closest of the test centers until each center has a match, and
+then the evaluation is the sum of the squared distance between each
+test center and its matched learned center.
+
+<h2>Arguments</h2>
+
+- -h 
+  - Run vfkm -h for a list of the arguments and their meanings.
+
+*/

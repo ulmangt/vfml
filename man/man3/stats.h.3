@@ -1,0 +1,142 @@
+.TH "stats.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+stats.h \- 
+.SH "Detailed Description"
+.PP 
+Some statistical functions. 
+
+The stat module has some basic statistical functions and the StatTracker type, which watches a series of samples, keeps some simple summary statistics (sum and sumSquare in the current implementation), and can report on the mean, variance, stdev, etc. of the sample.
+.PP
+\fBWish List\fP
+.RS 4
+The StatTracker would track more interesting things. 
+.RE
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_StatTracker_\fP"
+.br
+.RI "\fIHolds simple summary statistics of a sample. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fB_StatTracker_\fP \fBStatTrackerStruct\fP"
+.br
+.RI "\fIHolds simple summary statistics of a sample. \fP"
+.ti -1c
+.RI "typedef \fB_StatTracker_\fP * \fBStatTracker\fP"
+.br
+.RI "\fIHolds simple summary statistics of a sample. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBStatTracker\fP \fBStatTrackerNew\fP (void)"
+.br
+.RI "\fICreates a new stat tracker that is ready to have samples added to it. \fP"
+.ti -1c
+.RI "void \fBStatTrackerFree\fP (\fBStatTracker\fP st)"
+.br
+.RI "\fIFrees the memory associated with the StatTracker. \fP"
+.ti -1c
+.RI "void \fBStatTrackerAddSample\fP (\fBStatTracker\fP st, double x)"
+.br
+.RI "\fIRecords the sample in the tracker. \fP"
+.ti -1c
+.RI "double \fBStatTrackerGetMean\fP (\fBStatTracker\fP st)"
+.br
+.RI "\fIReturns the mean of the samples that have been shown to the tracker. \fP"
+.ti -1c
+.RI "double \fBStatTrackerGetVariance\fP (\fBStatTracker\fP st)"
+.br
+.RI "\fIReturns the variance of the samples that have been shown to the tracker. \fP"
+.ti -1c
+.RI "double \fBStatTrackerGetStdev\fP (\fBStatTracker\fP st)"
+.br
+.RI "\fIReturns the standard deviation of the samples that have been shown to the tracker. \fP"
+.ti -1c
+.RI "long \fBStatTrackerGetNumSamples\fP (\fBStatTracker\fP st)"
+.br
+.RI "\fIReturns the number of samples shown to the stat tracker. \fP"
+.ti -1c
+.RI "double \fBStatTrackerGetNormalBound\fP (\fBStatTracker\fP st, double delta)"
+.br
+.RI "\fIAssume Gaussian and return a high confidence bound of the sample . \fP"
+.ti -1c
+.RI "double \fBStatGetNormalBound\fP (double variance, long n, double delta)"
+.br
+.RI "\fIReturn a high confidence bound from the normal distribution. \fP"
+.ti -1c
+.RI "double \fBStatHoeffdingBoundOne\fP (double range, double delta, long n)"
+.br
+.RI "\fIReturns the one sided Hoeffding bound. \fP"
+.ti -1c
+.RI "double \fBStatHoeffdingBoundTwo\fP (double range, double delta, long n)"
+.br
+.RI "\fIReturns the two sided Hoeffding bound. \fP"
+.ti -1c
+.RI "float \fBStatLogGamma\fP (float xx)"
+.br
+.RI "\fIReturns the log of the gamma function of xx. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_StatTracker_\fP * \fBStatTracker\fP"
+.PP
+Holds simple summary statistics of a sample. See \fBstats.h\fP for more detail. 
+.SS "typedef struct \fB_StatTracker_\fP  \fBStatTrackerStruct\fP"
+.PP
+Holds simple summary statistics of a sample. See \fBstats.h\fP for more detail. 
+.SH "Function Documentation"
+.PP 
+.SS "double StatGetNormalBound (double variance, long n, double delta)"
+.PP
+Return a high confidence bound from the normal distribution. Assumes a Gaussian distribution and returns the distance from the mean within which 1 - delta  of the mass lies (esentially the same function as StatTrackerGetNormalBound). 
+.SS "double StatHoeffdingBoundOne (double range, double delta, long n)"
+.PP
+Returns the one sided Hoeffding bound. With n observations of a variable with the specified range. That is, the true value is less than the observed mean + this function's result with probability 1 - delta. 
+.SS "double StatHoeffdingBoundTwo (double range, double delta, long n)"
+.PP
+Returns the two sided Hoeffding bound. With n observations of a variable with the specified range. That is, the true value is within this function's result of the obseved mean with probability 1 - delta. 
+.SS "float StatLogGamma (float xx)"
+.PP
+Returns the log of the gamma function of xx. This function is lifted from Numerical Recipes in C. 
+.SS "void StatTrackerAddSample (\fBStatTracker\fP st, double x)"
+.PP
+Records the sample in the tracker. 
+.SS "void StatTrackerFree (\fBStatTracker\fP st)"
+.PP
+Frees the memory associated with the StatTracker. 
+.SS "double StatTrackerGetMean (\fBStatTracker\fP st)"
+.PP
+Returns the mean of the samples that have been shown to the tracker. If you have not shown the tracker any samples this will probably crash. 
+.SS "double StatTrackerGetNormalBound (\fBStatTracker\fP st, double delta)"
+.PP
+Assume Gaussian and return a high confidence bound of the sample . Assumes a Gaussian distribution and returns the distance from the mean within which 1 - delta  of the mass lies. This calls the GetStdev function internally and will crash if that crashes. 
+.SS "long StatTrackerGetNumSamples (\fBStatTracker\fP st)"
+.PP
+Returns the number of samples shown to the stat tracker. 
+.SS "double StatTrackerGetStdev (\fBStatTracker\fP st)"
+.PP
+Returns the standard deviation of the samples that have been shown to the tracker. If you have not shown the tracker at least two samples this will probably crash. 
+.SS "double StatTrackerGetVariance (\fBStatTracker\fP st)"
+.PP
+Returns the variance of the samples that have been shown to the tracker. If you have not shown the tracker at least two samples this will probably crash. 
+.SS "\fBStatTracker\fP StatTrackerNew (void)"
+.PP
+Creates a new stat tracker that is ready to have samples added to it. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

@@ -1,0 +1,99 @@
+\section{Attribute\-Tracker.h File Reference}
+\label{AttributeTracker_8h}\index{AttributeTracker.h@{AttributeTracker.h}}
+
+
+\subsection{Detailed Description}
+Keep a record of which attributes are active. 
+
+Sometimes you need to keep track of which attributes you have already considered, and which are still available for consideration. The attribute tracker interface helps you efficiently acomplish this task; you can think of it as a wrapper around a bit field.
+
+For example, when learning a decision tree, each split on a discrete attribute deactivates an attribute from further consideration. In this situation you would deactivate the attribute, and then make one clone for each child.
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+Attribute\-Tracker\-Ptr {\bf Attribute\-Tracker\-New} (int num\-Attributes)
+\begin{CompactList}\small\item\em Allocates memory for a new Attribute\-Tracker structure. \item\end{CompactList}\item 
+void {\bf Attribute\-Tracker\-Free} (Attribute\-Tracker\-Ptr at)
+\begin{CompactList}\small\item\em Frees the memory associated with the attribute tracker. \item\end{CompactList}\item 
+Attribute\-Tracker\-Ptr {\bf Attribute\-Tracker\-Initial} ({\bf Example\-Spec\-Ptr} es)
+\begin{CompactList}\small\item\em Respects 'ignore's in the Example\-Spec. \item\end{CompactList}\item 
+Attribute\-Tracker\-Ptr {\bf Attribute\-Tracker\-Clone} (Attribute\-Tracker\-Ptr at)
+\begin{CompactList}\small\item\em Creates a copy of the passed Attribute\-Tracker and returns the copy. \item\end{CompactList}\item 
+void {\bf Attribute\-Tracker\-Mark\-Active} (Attribute\-Tracker\-Ptr at, int att\-Num)
+\begin{CompactList}\small\item\em Marks the specified attribute as active. \item\end{CompactList}\item 
+void {\bf Attribute\-Tracker\-Mark\-Inactive} (Attribute\-Tracker\-Ptr at, int att\-Num)
+\begin{CompactList}\small\item\em Marks the specified attribute as inactive. \item\end{CompactList}\item 
+int {\bf Attribute\-Tracker\-Is\-Active} (Attribute\-Tracker\-Ptr at, int att\-Num)
+\begin{CompactList}\small\item\em Returns 1 if the specified attribute is active. \item\end{CompactList}\item 
+int {\bf Attribute\-Tracker\-Are\-All\-Inactive} (Attribute\-Tracker\-Ptr at)
+\begin{CompactList}\small\item\em Returns 1 if none of the attributes are active. \item\end{CompactList}\item 
+int {\bf Attribute\-Tracker\-Num\-Active} (Attribute\-Tracker\-Ptr at)
+\begin{CompactList}\small\item\em Returns a count of at's active attributes. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{AttributeTracker.h@{Attribute\-Tracker.h}!AttributeTrackerAreAllInactive@{AttributeTrackerAreAllInactive}}
+\index{AttributeTrackerAreAllInactive@{AttributeTrackerAreAllInactive}!AttributeTracker.h@{Attribute\-Tracker.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Attribute\-Tracker\-Are\-All\-Inactive (Attribute\-Tracker\-Ptr {\em at})}\label{AttributeTracker_8h_a9}
+
+
+Returns 1 if none of the attributes are active. 
+
+This is a constant time operation (it does not depend on the number of attributes). \index{AttributeTracker.h@{Attribute\-Tracker.h}!AttributeTrackerClone@{AttributeTrackerClone}}
+\index{AttributeTrackerClone@{AttributeTrackerClone}!AttributeTracker.h@{Attribute\-Tracker.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Attribute\-Tracker\-Ptr Attribute\-Tracker\-Clone (Attribute\-Tracker\-Ptr {\em at})}\label{AttributeTracker_8h_a5}
+
+
+Creates a copy of the passed Attribute\-Tracker and returns the copy. 
+
+\index{AttributeTracker.h@{Attribute\-Tracker.h}!AttributeTrackerFree@{AttributeTrackerFree}}
+\index{AttributeTrackerFree@{AttributeTrackerFree}!AttributeTracker.h@{Attribute\-Tracker.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Attribute\-Tracker\-Free (Attribute\-Tracker\-Ptr {\em at})}\label{AttributeTracker_8h_a3}
+
+
+Frees the memory associated with the attribute tracker. 
+
+\index{AttributeTracker.h@{Attribute\-Tracker.h}!AttributeTrackerInitial@{AttributeTrackerInitial}}
+\index{AttributeTrackerInitial@{AttributeTrackerInitial}!AttributeTracker.h@{Attribute\-Tracker.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Attribute\-Tracker\-Ptr Attribute\-Tracker\-Initial ({\bf Example\-Spec\-Ptr} {\em es})}\label{AttributeTracker_8h_a4}
+
+
+Respects 'ignore's in the Example\-Spec. 
+
+Creates an attribute tracker to track the attributes in the passed Example\-Spec. Any of es's attributes marked as ignore will be initially set to inactive. \index{AttributeTracker.h@{Attribute\-Tracker.h}!AttributeTrackerIsActive@{AttributeTrackerIsActive}}
+\index{AttributeTrackerIsActive@{AttributeTrackerIsActive}!AttributeTracker.h@{Attribute\-Tracker.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Attribute\-Tracker\-Is\-Active (Attribute\-Tracker\-Ptr {\em at}, int {\em att\-Num})}\label{AttributeTracker_8h_a8}
+
+
+Returns 1 if the specified attribute is active. 
+
+\index{AttributeTracker.h@{Attribute\-Tracker.h}!AttributeTrackerMarkActive@{AttributeTrackerMarkActive}}
+\index{AttributeTrackerMarkActive@{AttributeTrackerMarkActive}!AttributeTracker.h@{Attribute\-Tracker.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Attribute\-Tracker\-Mark\-Active (Attribute\-Tracker\-Ptr {\em at}, int {\em att\-Num})}\label{AttributeTracker_8h_a6}
+
+
+Marks the specified attribute as active. 
+
+\index{AttributeTracker.h@{Attribute\-Tracker.h}!AttributeTrackerMarkInactive@{AttributeTrackerMarkInactive}}
+\index{AttributeTrackerMarkInactive@{AttributeTrackerMarkInactive}!AttributeTracker.h@{Attribute\-Tracker.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Attribute\-Tracker\-Mark\-Inactive (Attribute\-Tracker\-Ptr {\em at}, int {\em att\-Num})}\label{AttributeTracker_8h_a7}
+
+
+Marks the specified attribute as inactive. 
+
+\index{AttributeTracker.h@{Attribute\-Tracker.h}!AttributeTrackerNew@{AttributeTrackerNew}}
+\index{AttributeTrackerNew@{AttributeTrackerNew}!AttributeTracker.h@{Attribute\-Tracker.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Attribute\-Tracker\-Ptr Attribute\-Tracker\-New (int {\em num\-Attributes})}\label{AttributeTracker_8h_a2}
+
+
+Allocates memory for a new Attribute\-Tracker structure. 
+
+Creates a new attribute tracker with one bit for each of num\-Attributes. All the attributes are initially marked as active. \index{AttributeTracker.h@{Attribute\-Tracker.h}!AttributeTrackerNumActive@{AttributeTrackerNumActive}}
+\index{AttributeTrackerNumActive@{AttributeTrackerNumActive}!AttributeTracker.h@{Attribute\-Tracker.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Attribute\-Tracker\-Num\-Active (Attribute\-Tracker\-Ptr {\em at})}\label{AttributeTracker_8h_a10}
+
+
+Returns a count of at's active attributes. 
+
+This is a constant time operation (it does not depend on the number of attributes). 

@@ -1,0 +1,147 @@
+<html>
+
+<head>
+<title>Benchmark Belief Nets</title>
+</head>
+
+<body>
+<h1 align="center">Benchmark Belief Nets</h1>
+
+
+These datasets were collected from the repository at: <a
+href="http://www.cs.huji.ac.il/labs/compbio/Repository/">http://www.cs.huji.ac.il/labs/compbio/Repository/</a>
+
+<p>
+
+These are all the <a href = "bif.htm">BIF format</a> ones from that
+site except for two: the Barley which requires specific premission for
+scientific use and the Diabetes one which I downloaded an incomplete
+version of.
+
+<p>
+
+The best source I could find for the BIF format is at <a
+href="http://www-2.cs.cmu.edu/~fgcozman/Research/InterchangeFormat/Old/xmlbif02.html">http://www-2.cs.cmu.edu/~fgcozman/Research/InterchangeFormat/Old/xmlbif02.html</a>.
+But the authors of the format seem to have moved on to some XML based
+thing so I'm keeping a <a href="bif.htm">local copy</a> with UWML.  I
+have extended the format in sevaral ways so as to parse the datasets
+from this repository.
+
+<ul>
+<li>Allow a string to begin with and contain _, -, %, or 0-9
+<li>Allow variable values to be numbers
+<li>Allow 0 and 1 to be probabilities (format required 0.0 and 1.0)
+</ul>
+
+Some of these supposed BIF files do not comply with this version of
+the BIF format.  UWML also doesn't deal with noisy functions, default
+values, or properties.  
+
+<p>
+
+Belief Net Stats for <a href="../downloads/beliefnets/alarm.bif">alarm.bif</a>:
+<ul>
+<li>   Num Nodes:           37
+<li>   Max Values:          4
+<li>   Max Parents:         4
+<li>   Max CPT Entries:     108
+</ul>
+
+Belief Net Stats for <a href="../downloads/beliefnets/insurance.bif">insurance.bif</a>:
+<ul>
+<li>   Num Nodes:           27
+<li>   Max Values:          5
+<li>   Max Parents:         3
+<li>   Max CPT Entries:     200
+</ul>
+
+Belief Net Stats for <a
+href="../downloads/beliefnets/Munin1.bif">Munin1.bif</a>:
+<ul>
+<li>   Num Nodes:           189
+<li>   Max Values:          21
+<li>   Max Parents:         3
+<li>   Max CPT Entries:     600
+</ul>
+
+Belief Net Stats for <a href="../downloads/beliefnets/Munin2.bif">Munin2.bif</a>:
+<ul>
+<li>   Num Nodes:           1003
+<li>   Max Values:          21
+<li>   Max Parents:         3
+<li>   Max CPT Entries:     600
+</ul>
+
+Belief Net Stats for <a
+href="../downloads/beliefnets/Munin3.bif">Munin3.bif</a>:
+<ul>
+<li>   Num Nodes:           1044
+<li>   Max Values:          21
+<li>   Max Parents:         3
+<li>   Max CPT Entries:     600
+</ul>
+
+Belief Net Stats for <a
+href="../downloads/beliefnets/Munin4.bif">Munin4.bif</a>:
+<ul>
+<li>   Num Nodes:           1041
+<li>   Max Values:          21
+<li>   Max Parents:         3
+<li>   Max CPT Entries:     600
+</ul>
+
+Belief Net Stats for <a href="../downloads/beliefnets/Water.bif">Water.bif</a>:
+<ul>
+<li>   Num Nodes:           32
+<li>   Max Values:          4
+<li>   Max Parents:         5
+<li>   Max CPT Entries:     3072
+</ul>
+
+Belief Net Stats for <a href="../downloads/beliefnets/Link.bif">Link.bif</a>:
+<ul>
+<li>   Num Nodes:           724
+<li>   Max Values:          4
+<li>   Max Parents:         3
+<li>   Max CPT Entries:     128
+</ul>
+
+Belief Net Stats for <a
+href="../downloads/beliefnets/Mildew.bif">Mildew.bif</a>:
+<ul>
+<li>   Num Nodes:           35
+<li>   Max Values:          100
+<li>   Max Parents:         3
+<li>   Max CPT Entries:     280000
+</ul>
+
+Belief Net Stats for <a
+href="../downloads/beliefnets/hailfinder.bif">hailfinder.bif</a>:
+<ul>
+<li>   Num Nodes:           56
+<li>   Max Values:          11
+<li>   Max Parents:         4
+<li>   Max CPT Entries:     1188
+</ul>
+
+Belief Net Stats for <a href="../downloads/beliefnets/Pigs.bif">Pigs.bif</a>:
+<ul>
+<li>   Num Nodes:           441
+<li>   Max Values:          3
+<li>   Max Parents:         2
+<li>   Max CPT Entries:     27
+</ul>
+
+
+The following files can not be parsed by the current version of the
+BIF parser in UWML.
+
+<dl>
+<dt><a href="../downloads/beliefnets/carpo.bif">carpo.bif</a>
+<dd>Contains noisy functions
+</dl>
+
+
+</body>
+</html>
+

@@ -1,0 +1,202 @@
+.TH "vfdt-engine.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+vfdt-engine.h \- 
+.SH "Detailed Description"
+.PP 
+An API which lets your program learn a DecisionTree from a high-speed data stream. 
+
+An API to VFML's engine for learning decision trees from high-speed data streams. The \fBvfdt\fP program is basically a wrapper around this interface. You can use this interface to learn decision trees from a stream of data as it arrives, and use the tree in a parallel to make predictions.
+.PP
+To use this interface you generate a VFDTPtr using the VFDTNew function, set any parameters you want to use to control the learning using the functions that are described below, and then repeatedly feed examples to the VFDTPtr using the VFDTProcessExample function. You can call VFDTGetLearnedTree at anytime to get a copy of the current learned tree. Note that vfdt-engine will take over the memory of any examples feed to it, and you should not free them or your program will crash.
+.PP
+\fBWish List\fP
+.RS 4
+A function that checkpoints the learning procedure to disk so that it can be restored at a later time. I think the hard part of this would be checkpointing the ExampleGroupStats structure. 
+.RE
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_VFDT_\fP"
+.br
+.RI "\fIHolds the information needed to learn decision trees from data streams. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fB_VFDT_\fP \fBVFDT\fP"
+.br
+.RI "\fIHolds the information needed to learn decision trees from data streams. \fP"
+.ti -1c
+.RI "typedef \fB_VFDT_\fP * \fBVFDTPtr\fP"
+.br
+.RI "\fIHolds the information needed to learn decision trees from data streams. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVFDTPtr\fP \fBVFDTNew\fP (\fBExampleSpecPtr\fP spec, float splitConfidence, float tieConfidence)"
+.br
+.RI "\fIAllocate memory to learn a decision tree from a data stream. \fP"
+.ti -1c
+.RI "void \fBVFDTFree\fP (\fBVFDTPtr\fP vfdt)"
+.br
+.RI "\fIfrees all the memory being used by the learning process. \fP"
+.ti -1c
+.RI "void \fBVFDTSetMessageLevel\fP (\fBVFDTPtr\fP vfdt, int value)"
+.br
+.RI "\fIHigher message levels print more output to the console. \fP"
+.ti -1c
+.RI "void \fBVFDTSetMaxAllocationMegs\fP (\fBVFDTPtr\fP vfdt, int value)"
+.br
+.RI "\fIPut a limit on the dynamic memory used by the program. \fP"
+.ti -1c
+.RI "void \fBVFDTSetProcessChunkSize\fP (\fBVFDTPtr\fP vfdt, int value)"
+.br
+.RI "\fISets the number of examples before checks for tree growth. \fP"
+.ti -1c
+.RI "void \fBVFDTSetUseGini\fP (\fBVFDTPtr\fP vfdt, int value)"
+.br
+.RI "\fISet the evaluation function to Gini (default is Entropy). \fP"
+.ti -1c
+.RI "void \fBVFDTSetRestartLeaves\fP (\fBVFDTPtr\fP vfdt, int value)"
+.br
+.RI "\fIConsider reactivating leaves where growing was stopped to save RAM. \fP"
+.ti -1c
+.RI "void \fBVFDTSetCacheTrainingExamples\fP (\fBVFDTPtr\fP vfdt, int value)"
+.br
+.RI "\fIUse extra RAM to cache training examples. \fP"
+.ti -1c
+.RI "void \fBVFDTSetPrePruneTau\fP (\fBVFDTPtr\fP vfdt, float value)"
+.br
+.RI "\fISet the pre-prune parameter. \fP"
+.ti -1c
+.RI "void \fBVFDTSetLaplace\fP (\fBVFDTPtr\fP vfdt, int value)"
+.br
+.RI "\fISet how many examples worth of smoothing to do in class probability estimates. \fP"
+.ti -1c
+.RI "void \fBVFDTProcessExamples\fP (\fBVFDTPtr\fP vfdt, FILE *input)"
+.br
+.RI "\fIRead as many examples as possible from the file and learn from them. \fP"
+.ti -1c
+.RI "void \fBVFDTProcessExamplesBatch\fP (\fBVFDTPtr\fP vfdt, FILE *input)"
+.br
+.RI "\fILearn from the examples in batch mode. \fP"
+.ti -1c
+.RI "void \fBVFDTProcessExampleBatch\fP (\fBVFDTPtr\fP vfdt, \fBExamplePtr\fP e)"
+.br
+.RI "\fIAdd the example to the learner without checking for splits. \fP"
+.ti -1c
+.RI "void \fBVFDTBatchExamplesDone\fP (\fBVFDTPtr\fP vfdt)"
+.br
+.RI "\fIForces vfdt-engine to make as many splits as possible using traditional methods. \fP"
+.ti -1c
+.RI "void \fBVFDTProcessExample\fP (\fBVFDTPtr\fP vfdt, \fBExamplePtr\fP e)"
+.br
+.RI "\fIAdds another example to the learning process. \fP"
+.ti -1c
+.RI "int \fBVFDTIsDoneLearning\fP (\fBVFDTPtr\fP vfdt)"
+.br
+.RI "\fIReturns 1 if no nodes in the tree are still active. \fP"
+.ti -1c
+.RI "long \fBVFDTGetNumGrowing\fP (\fBVFDTPtr\fP vfdt)"
+.br
+.RI "\fIReturns the number of nodes that are growing. \fP"
+.ti -1c
+.RI "long \fBVFDTGetNumBoundsUsed\fP (\fBVFDTPtr\fP vfdt)"
+.br
+.RI "\fIReturns the number of statistical tests made. \fP"
+.ti -1c
+.RI "void \fBVFDTPrintStats\fP (\fBVFDTPtr\fP vfdt, FILE *out)"
+.br
+.RI "\fIPrints some information about the growing nodes to the file. \fP"
+.ti -1c
+.RI "\fBDecisionTreePtr\fP \fBVFDTGetLearnedTree\fP (\fBVFDTPtr\fP vfdt)"
+.br
+.RI "\fIReturns the current tree. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_VFDT_\fP  \fBVFDT\fP"
+.PP
+Holds the information needed to learn decision trees from data streams. 
+.SS "typedef struct \fB_VFDT_\fP * \fBVFDTPtr\fP"
+.PP
+Holds the information needed to learn decision trees from data streams. 
+.SH "Function Documentation"
+.PP 
+.SS "void VFDTBatchExamplesDone (\fBVFDTPtr\fP vfdt)"
+.PP
+Forces vfdt-engine to make as many splits as possible using traditional methods. 
+.SS "void VFDTFree (\fBVFDTPtr\fP vfdt)"
+.PP
+frees all the memory being used by the learning process. 
+.SS "\fBDecisionTreePtr\fP VFDTGetLearnedTree (\fBVFDTPtr\fP vfdt)"
+.PP
+Returns the current tree. This will guess on which class to predict at the growing leaves (smoothing with strength of the lapace paramterer towards the distribution seen at the parent). Returns a copy of the internally growing decision tree, and so vfdt-engine can continue to learn on the internal tree unaffected. 
+.SS "long VFDTGetNumBoundsUsed (\fBVFDTPtr\fP vfdt)"
+.PP
+Returns the number of statistical tests made. 
+.SS "long VFDTGetNumGrowing (\fBVFDTPtr\fP vfdt)"
+.PP
+Returns the number of nodes that are growing. 
+.SS "int VFDTIsDoneLearning (\fBVFDTPtr\fP vfdt)"
+.PP
+Returns 1 if no nodes in the tree are still active. This may happen because RAM runs out, or because everything was pre-pruned. 
+.SS "\fBVFDTPtr\fP VFDTNew (\fBExampleSpecPtr\fP spec, float splitConfidence, float tieConfidence)"
+.PP
+Allocate memory to learn a decision tree from a data stream. Sets up the learning, makes an initial tree with a single node. splitConfidence is the delta parameter from our paper (the probability of making a mistake with the sampling we use) and the tieConfidence is tau (the minimum difference in gain that you care about). splitConfidence should be a small non-zero number, maybe 10^-7. And tieConfidence should be something in the range of 0 - .1 (although slightly bigger values may be useful). 
+.SS "void VFDTPrintStats (\fBVFDTPtr\fP vfdt, FILE * out)"
+.PP
+Prints some information about the growing nodes to the file. 
+.SS "void VFDTProcessExample (\fBVFDTPtr\fP vfdt, \fBExamplePtr\fP e)"
+.PP
+Adds another example to the learning process. Check for splits as needed (according to the chunk size). 
+.SS "void VFDTProcessExampleBatch (\fBVFDTPtr\fP vfdt, \fBExamplePtr\fP e)"
+.PP
+Add the example to the learner without checking for splits. When you have added all the examples you want call VFDTBatchExamplesDone to tell vfdt-engine it is time to make splits. 
+.SS "void VFDTProcessExamples (\fBVFDTPtr\fP vfdt, FILE * input)"
+.PP
+Read as many examples as possible from the file and learn from them. This will repeatedly read and learn from examples in the file until it can not read any more. Note that this function will block until that time. 
+.SS "void VFDTProcessExamplesBatch (\fBVFDTPtr\fP vfdt, FILE * input)"
+.PP
+Learn from the examples in batch mode. That is, read them all into RAM and use every example to make every learning decision. 
+.SS "void VFDTSetCacheTrainingExamples (\fBVFDTPtr\fP vfdt, int value)"
+.PP
+Use extra RAM to cache training examples. Default is to cache. This keeps examples in memory to possibly use them to help make several decisions, speeding up the induction. When RAM is full vfdt-engine starts deactivating example caches at the least promising leaves. All caches will be deactivated before any leaves are deactived. 
+.SS "void VFDTSetLaplace (\fBVFDTPtr\fP vfdt, int value)"
+.PP
+Set how many examples worth of smoothing to do in class probability estimates. 
+.SS "void VFDTSetMaxAllocationMegs (\fBVFDTPtr\fP vfdt, int value)"
+.PP
+Put a limit on the dynamic memory used by the program. This requires that DEBUGMEMORY is defined in \fBmemory.h\fP (which is the default). By setting this you limit the amount of memory allocated with calls to MemNewPtr by either your program and by vfdt-engine. This means any other calls you make to VFML functions (e.g. reading examples from disk) will be counted against vfdt's total. (you can use MSetActivePool with pool id 0 to get around this).
+.PP
+If this memory threshold is crossed vfdt-engine starts purging its allocations by first throwing away cahed examples and then disabling learning at the least promising leaves. 
+.SS "void VFDTSetMessageLevel (\fBVFDTPtr\fP vfdt, int value)"
+.PP
+Higher message levels print more output to the console. Levels above 2 print a lot of output. More than you want. I promise. 
+.SS "void VFDTSetPrePruneTau (\fBVFDTPtr\fP vfdt, float value)"
+.PP
+Set the pre-prune parameter. The default is 0.0, which means no pre-pruning. If the gain of all attributes is less than this value then pre-prune. Also, do not call a tie unless an attribute beats another by at least this much. 
+.SS "void VFDTSetProcessChunkSize (\fBVFDTPtr\fP vfdt, int value)"
+.PP
+Sets the number of examples before checks for tree growth. Check for growth at a leaf once every time it accumulates this many examples. Default is 300. 
+.SS "void VFDTSetRestartLeaves (\fBVFDTPtr\fP vfdt, int value)"
+.PP
+Consider reactivating leaves where growing was stopped to save RAM. The default value for this is true, so periodically vfdt-engine looks at all the deactivated leaves to see if any of them are more promising than any of the currently active ones, and makes adjustments. If set to false any leaf that is deactivated is effectively pre-pruned. 
+.SS "void VFDTSetUseGini (\fBVFDTPtr\fP vfdt, int value)"
+.PP
+Set the evaluation function to Gini (default is Entropy). 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

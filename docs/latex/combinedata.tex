@@ -1,0 +1,37 @@
+\section{combinedata File Reference}
+\label{combinedata}\index{combinedata@{combinedata}}
+
+
+\subsection{Detailed Description}
+Combines a series of data sets into a single large one. 
+
+Sometimes you may need to combine a collection of small data files into one large one. Usually this could be accomplished with the unix cat utility, but sometimes it will not be available and sometimes it may not perfrom as needed (for example, when the source files do not end with newlines). combinedata was created for those situations.
+
+combinedata reads a collection of files as specified by the required -data\-Files argument and writes them to the name specified by the -fout argument.
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -names $<$filename$>$\begin{itemize}
+\item Set the names file (default DF.names)\end{itemize}
+\item -fout $<$filename$>$\begin{itemize}
+\item Set the name of the output dataset (default DF-out)\end{itemize}
+\item -target $<$dir$>$\begin{itemize}
+\item Set the output directory (default '.')\end{itemize}
+\item -source $<$dir$>$\begin{itemize}
+\item Set the directory that contains the dataset (default '.')\end{itemize}
+\item -h\begin{itemize}
+\item Display usage information and exit\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\item -data\-Files $<$list of files$>$\begin{itemize}
+\item till the end of the line list the files to combine (REQUIRED)\end{itemize}
+\end{itemize}
+
+
+\subsubsection*{Example}
+
+{\tt combinedata -names test -fout big-data -data\-Files small-data0 small-data1 small-data2}
+
+Will create a file called big-data.data which contains the examples from the three specified files. All data files had better share the format specified in test.names.
+

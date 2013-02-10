@@ -1,0 +1,100 @@
+\section{Wish List}\label{wish}
+\label{_wish000001}
+ \begin{description}
+\item[page {\bf VFML} ]The windows distribution needs to be brought up to date. \end{description}
+
+
+\label{_wish000015}
+ \begin{description}
+\item[File {\bf batchtest} ]I think the input format for batchtest is a little brittle and it could use some improvement \end{description}
+
+
+\label{_wish000002}
+ \begin{description}
+\item[File {\bf Belief\-Net.h} ]A version of this that uses Decision\-Tree local models instead of full CPTs. This would also need a new structure learning tool (a modification of {\bf bnlearn}). \end{description}
+
+
+\label{_wish000016}
+ \begin{description}
+\item[File {\bf beliefnetcorrupt} ]This tool does not do anything smart with parameters when it changes the structure, and it should. \end{description}
+
+
+\label{_wish000017}
+ \begin{description}
+\item[File {\bf beliefnetscore} ]Move the comparision mode from this tool into a new tool, beliefnetcompare, and have that tool do more interesting comparisions (e.g. measure the KL-distance between the distriutions encoded in the networks). \end{description}
+
+
+\label{_wish000018}
+ \begin{description}
+\item[File {\bf bindata} ]that this tool would have more methods for selecting bin boundaries, for example to reduce entropy. \end{description}
+
+
+\label{_wish000008}
+ \begin{description}
+\item[File {\bf bnlearn} ]A version of this program that is intelligent about dealing with unobserved (or partially observed) variables. \end{description}
+
+
+\label{_wish000009}
+ \begin{description}
+\item[File {\bf cvfdt} ]Modify this learner to work with continuous attributes. 
+
+An API to this learner like the one to learning Belief\-Net structure in beliefnet-engine.h \end{description}
+
+
+\label{_wish000003}
+ \begin{description}
+\item[File {\bf Decision\-Tree.h} ]A standard in memory decision tree induction algorithm. Maybe the best starting point would be the {\bf decisionstump} learner. 
+
+This isn't the right place for this wish, but it would be nice to have a Rule\-Set structure similar to this Decision\-Tree structure \end{description}
+
+
+\label{_wish000005}
+ \begin{description}
+\item[File {\bf Hash\-Table.h} ]A cleaner hash table interface (without the compare function). I think that the sprint learner is the only thing that uses this currently so there isn't much to change to fix this. \end{description}
+
+
+\label{_wish000010}
+ \begin{description}
+\item[File {\bf kmeans} ]Modify this learner to work with discrete attributes. 
+
+Move the features from {\bf vfkm} into this learner because this learner will be much easier to modify than that one for new users. \end{description}
+
+
+\label{_wish000012}
+ \begin{description}
+\item[File {\bf naivebayes} ]Modify this learner to work with continuous attributes. \end{description}
+
+
+\label{_wish000004}
+ \begin{description}
+\item[File {\bf REPrune.h} ]More pruning methods, and more sophisticated REPruning (for example, all the leaves to prune could be selected in a single pass over the tree). \end{description}
+
+
+\label{_wish000019}
+ \begin{description}
+\item[File {\bf shuffledata} ]for a version of this tool that works on disk and does not need to load data into RAM. \end{description}
+
+
+\label{_wish000006}
+ \begin{description}
+\item[File {\bf stats.h} ]The Stat\-Tracker would track more interesting things. \end{description}
+
+
+\label{_wish000013}
+ \begin{description}
+\item[File {\bf vfbn1} ]An API to this learner like the one to learning Belief\-Net structure in beliefnet-engine.h \end{description}
+
+
+\label{_wish000014}
+ \begin{description}
+\item[File {\bf vfbn2} ]An API to this learner like the one to learning Belief\-Net structure in beliefnet-engine.h \end{description}
+
+
+\label{_wish000007}
+ \begin{description}
+\item[File {\bf vfdt-engine.h} ]A function that checkpoints the learning procedure to disk so that it can be restored at a later time. I think the hard part of this would be checkpointing the Example\-Group\-Stats structure. \end{description}
+
+
+\label{_wish000011}
+ \begin{description}
+\item[File {\bf vfem} ]Modify this learner to also learn the variances of the Gaussians. \end{description}

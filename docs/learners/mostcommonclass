@@ -1,0 +1,43 @@
+/** \ingroup Learners
+*/
+
+
+/** \file
+
+\brief Predicts the most common class in the training data.
+
+This is a very simple 'learner', but it may be useful as a baseline to
+compare your learner against; predicting with 99% accuracy isn't
+impressive if 98% of the examples have the same class.
+
+The mostcommonclass learner works in time proportional to the number
+of training examples and uses space proportional to the number of
+classes.&nbsp; It should be able to work on large datasets.</p>
+
+<p>The learner takes input and does output in <a
+href="../appendixes/c45.htm">c4.5 format</a>.  &nbsp; It expects to
+find the files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data.</code> Depending on command line argument, it
+will either output the most common class or test its error rate on
+<code>&lt;stem&gt;.test</code>.</p>
+
+<h2>Arguments</h2>
+
+- -f &lt;filestem&gt; </dt>
+  - Set the stem name (default DF)<br>
+- -source &lt;dir&gt; </dt>
+  - Set the directory that contains the dataset (default '.')<br>
+- -u </dt>
+  - Test on the examples in &lt;stem&gt;.test and output in a format appropriate for interface with xvalidate and batchtest&nbsp; (defaults to off)<br>
+- -v </dt>
+  - Can be used multiple times to increase the debugging output </dd>
+
+<h2>Example</h2>
+
+<code>mostcommonclass -f banana -source datasets/banana</code>
+
+Looks for a dataset named 'banana' in the 'datasets/banana'
+directory.&nbsp; Outputs the name of the most common class in the
+dataset.
+
+*/

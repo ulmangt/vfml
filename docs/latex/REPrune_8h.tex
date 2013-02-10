@@ -1,0 +1,40 @@
+\section{REPrune.h File Reference}
+\label{REPrune_8h}\index{REPrune.h@{REPrune.h}}
+
+
+\subsection{Detailed Description}
+Peforms reduced error pruning on a decision tree. 
+
+Takes a decision tree and a collection of examples and prunes every portion of the tree that does not contribute to an increase of accuracy on the data set. This requires a single pass over the prune set, and then on order of one pass over the tree for each node that is pruned.
+
+REPrune uses the growing data fields of the decision tree, so it will overwrite anything that you may have there. If you want to trying pruning a tree and then continue growing it you should make a clone of the tree and pass the clone to this interface so that the origional will remain untouched.
+
+\begin{Desc}
+\item[{\bf Wish List}]More pruning methods, and more sophisticated REPruning (for example, all the leaves to prune could be selected in a single pass over the tree). \end{Desc}
+
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void {\bf REPrune\-Batch} ({\bf Decision\-Tree\-Ptr} dt, Void\-AList\-Ptr examples)
+\begin{CompactList}\small\item\em Get the prune set from the in-memory list. \item\end{CompactList}\item 
+void {\bf REPrune\-Batch\-File} ({\bf Decision\-Tree\-Ptr} dt, FILE $\ast$example\-In, long prune\-Max)
+\begin{CompactList}\small\item\em Get the prune set from the file. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{REPrune.h@{REPrune.h}!REPruneBatch@{REPruneBatch}}
+\index{REPruneBatch@{REPruneBatch}!REPrune.h@{REPrune.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void REPrune\-Batch ({\bf Decision\-Tree\-Ptr} {\em dt}, Void\-AList\-Ptr {\em examples})}\label{REPrune_8h_a0}
+
+
+Get the prune set from the in-memory list. 
+
+\index{REPrune.h@{REPrune.h}!REPruneBatchFile@{REPruneBatchFile}}
+\index{REPruneBatchFile@{REPruneBatchFile}!REPrune.h@{REPrune.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void REPrune\-Batch\-File ({\bf Decision\-Tree\-Ptr} {\em dt}, FILE $\ast$ {\em example\-In}, long {\em prune\-Max})}\label{REPrune_8h_a1}
+
+
+Get the prune set from the file. 
+
+Do not use more than prune\-Max of the examples from the file for pruning; setting prune\-Max to 0 means 'no max' (and uses all examples from the file for pruning). 

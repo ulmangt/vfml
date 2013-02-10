@@ -1,0 +1,240 @@
+.TH "ExampleSpec.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ExampleSpec.h \- 
+.SH "Detailed Description"
+.PP 
+Schema for training data. 
+
+This is based off of Ross Quinlan's \fCC4.5 format\fP and can read and write that format to disk.
+.PP
+\fBBug\fP
+.RS 4
+Under Cygnus (and windows) lex doesn't seem to do the right thing with EOF rules, so you need to put an extra return at the end of your .names files. 
+.RE
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_ExampleSpec_\fP"
+.br
+.RI "\fISchema for training data. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBExampleSpecGetAttributeType\fP(es, num)   ( AttributeSpecGetType(((AttributeSpecPtr)VALIndex(es->attributes, num))) )"
+.br
+.RI "\fIReturns the type of the specified attribute. \fP"
+.ti -1c
+.RI "#define \fBExampleSpecGetAttributeValueCount\fP(es, attNum)   ( AttributeSpecGetNumValues(((AttributeSpecPtr)VALIndex(es->attributes, attNum))) )"
+.br
+.RI "\fIReturns the number of values of the attribute. \fP"
+.ti -1c
+.RI "#define \fBExampleSpecGetAttributeValueName\fP(es, attNum, valNum)   ( (char *)AttributeSpecGetValueName(((AttributeSpecPtr)VALIndex(es->attributes, attNum)), valNum) )"
+.br
+.RI "\fIReturn the name of the specified value of the specified attribute. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fB_ExampleSpec_\fP \fBExampleSpec\fP"
+.br
+.RI "\fISchema for training data. \fP"
+.ti -1c
+.RI "typedef \fB_ExampleSpec_\fP * \fBExampleSpecPtr\fP"
+.br
+.RI "\fISchema for training data. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBExampleSpecPtr\fP \fBExampleSpecNew\fP (void)"
+.br
+.RI "\fIProgrammatically creates a new ExampleSpec. \fP"
+.ti -1c
+.RI "void \fBExampleSpecFree\fP (\fBExampleSpecPtr\fP es)"
+.br
+.RI "\fIFrees all the memory being used by the ExampleSpec. \fP"
+.ti -1c
+.RI "void \fBExampleSpecAddClass\fP (\fBExampleSpecPtr\fP es, char *className)"
+.br
+.RI "\fIAdds a new class to the ExampleSpec and gives it the specified name. \fP"
+.ti -1c
+.RI "int \fBExampleSpecAddDiscreteAttribute\fP (\fBExampleSpecPtr\fP es, char *name)"
+.br
+.RI "\fIAdds a new discrete attribute to the ExampleSpec and gives it the specified name. \fP"
+.ti -1c
+.RI "int \fBExampleSpecAddContinuousAttribute\fP (\fBExampleSpecPtr\fP es, char *name)"
+.br
+.RI "\fIAdds a new continuous attribute to the ExampleSpec and gives it the specified name. \fP"
+.ti -1c
+.RI "void \fBExampleSpecAddAttributeValue\fP (\fBExampleSpecPtr\fP es, int attNum, char *name)"
+.br
+.RI "\fIAdds a new value to the specified attribute and gives it the specified name. \fP"
+.ti -1c
+.RI "\fBExampleSpecPtr\fP \fBExampleSpecRead\fP (char *fileName)"
+.br
+.RI "\fIReads a .names formated file and build an ExampleSpec. \fP"
+.ti -1c
+.RI "int \fBExampleSpecGetNumAttributes\fP (\fBExampleSpecPtr\fP es)"
+.br
+.RI "\fIReturns the number of attributes that the example spec contains. \fP"
+.ti -1c
+.RI "int \fBExampleSpecIsAttributeDiscrete\fP (\fBExampleSpecPtr\fP es, int num)"
+.br
+.RI "\fIReturns 1 if the specified attribute is discrete and 0 otherwise. \fP"
+.ti -1c
+.RI "int \fBExampleSpecIsAttributeContinuous\fP (\fBExampleSpecPtr\fP es, int num)"
+.br
+.RI "\fIReturns 1 if the specified attribute is continuous and 0 otherwise. \fP"
+.ti -1c
+.RI "int \fBExampleSpecIsAttributeIgnored\fP (\fBExampleSpecPtr\fP es, int num)"
+.br
+.RI "\fIReturns 1 if the specified attribute should be ignored and 0 otherwise. \fP"
+.ti -1c
+.RI "char * \fBExampleSpecGetAttributeName\fP (\fBExampleSpecPtr\fP es, int attNum)"
+.br
+.RI "\fIIf the attNum is valid, this returns the name of the associated attribute. \fP"
+.ti -1c
+.RI "int \fBExampleSpecLookupAttributeName\fP (\fBExampleSpecPtr\fP es, char *valName)"
+.br
+.RI "\fIReturns the index of the named attribute. \fP"
+.ti -1c
+.RI "int \fBExampleSpecLookupAttributeValueName\fP (\fBExampleSpecPtr\fP es, int attNum, char *valName)"
+.br
+.RI "\fIReturns the index of the named value. \fP"
+.ti -1c
+.RI "int \fBExampleSpecLookupClassName\fP (\fBExampleSpecPtr\fP es, char *name)"
+.br
+.RI "\fIIf name is a valid class name, this returns the index associated with the class. \fP"
+.ti -1c
+.RI "char * \fBExampleSpecGetClassValueName\fP (\fBExampleSpecPtr\fP es, int classNum)"
+.br
+.RI "\fIIf the classNum is valid, this returns the name of the associated class. \fP"
+.ti -1c
+.RI "int \fBExampleSpecGetNumClasses\fP (\fBExampleSpecPtr\fP es)"
+.br
+.RI "\fIReturns the number of classes in the ExampleSpec. \fP"
+.ti -1c
+.RI "void \fBExampleSpecWrite\fP (\fBExampleSpecPtr\fP es, FILE *out)"
+.br
+.RI "\fIOutputs the ExampleSpec in .names format. \fP"
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define ExampleSpecGetAttributeType(es, num)   ( AttributeSpecGetType(((AttributeSpecPtr)VALIndex(es->attributes, num))) )"
+.PP
+Returns the type of the specified attribute. There are currently four supported types:
+.IP "\(bu" 2
+asIgnore
+.IP "\(bu" 2
+asContinuous
+.IP "\(bu" 2
+asDiscreteNamed
+.IP "\(bu" 2
+asDiscreteNoName
+.PP
+.PP
+The programmatic construction interface only supports asIgnore, asContinuous, and asDiscreteNamed, but the other is needed to fully support the C4.5 format. 
+.SS "#define ExampleSpecGetAttributeValueCount(es, attNum)   ( AttributeSpecGetNumValues(((AttributeSpecPtr)VALIndex(es->attributes, attNum))) )"
+.PP
+Returns the number of values of the attribute. If the attNum is valid and ExampleSpecIsAttributeDiscrete(es, attNum) returns 1, this function will return the number of values that attribute has. Remember that these values will be 0 indexed. 
+.SS "#define ExampleSpecGetAttributeValueName(es, attNum, valNum)   ( (char *)AttributeSpecGetValueName(((AttributeSpecPtr)VALIndex(es->attributes, attNum)), valNum) )"
+.PP
+Return the name of the specified value of the specified attribute. If attNum is valid, and ExampleSpecIsAttributeDiscrete(es, attNum) returns 1, and valNum is valid, this returns the name of the specified value of the specified attribute. 
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_ExampleSpec_\fP  \fBExampleSpec\fP"
+.PP
+Schema for training data. 
+.SS "typedef struct \fB_ExampleSpec_\fP * \fBExampleSpecPtr\fP"
+.PP
+Schema for training data. 
+.SH "Function Documentation"
+.PP 
+.SS "void ExampleSpecAddAttributeValue (\fBExampleSpecPtr\fP es, int attNum, char * name)"
+.PP
+Adds a new value to the specified attribute and gives it the specified name. The specified attribute had better be a discrete attribute. The main use of the name is to read/write Examples and ExampleSpecs in human readable format.
+.PP
+Note that this function takes over the memory associated with the name argument and will free it later. This means that you shouldn't pass in static strings, or strings that were allocated on the stack. 
+.SS "void ExampleSpecAddClass (\fBExampleSpecPtr\fP es, char * className)"
+.PP
+Adds a new class to the ExampleSpec and gives it the specified name. The main use of the name is to read/write Examples and ExampleSpecs in human readable format. The new class is assigned a value which you can retrieve by calling: ExampleSpecLookupClassName(es, className).
+.PP
+Note that this function takes over the memory associated with the className argument and will free it later. This means that you shouldn't pass in static strings, or strings that were allocated on the stack. 
+.SS "int ExampleSpecAddContinuousAttribute (\fBExampleSpecPtr\fP es, char * name)"
+.PP
+Adds a new continuous attribute to the ExampleSpec and gives it the specified name. The main use of the name is to read/write ExampleSpecs in human readable format. The function returns the index of the new attribute.
+.PP
+Note that this function takes over the memory associated with the name argument and will free it later. This means that you shouldn't pass in static strings, or strings that were allocated on the stack. 
+.SS "int ExampleSpecAddDiscreteAttribute (\fBExampleSpecPtr\fP es, char * name)"
+.PP
+Adds a new discrete attribute to the ExampleSpec and gives it the specified name. The main use of the name is to read/write ExampleSpecs in human readable format. The function returns the index of the new attribute, you can use the index to add values to the attribute using ExampleSpecAddAttributeValue.
+.PP
+Note that this function takes over the memory associated with the name argument and will free it later. This means that you shouldn't pass in static strings, or strings that were allocated on the stack. 
+.SS "void ExampleSpecFree (\fBExampleSpecPtr\fP es)"
+.PP
+Frees all the memory being used by the ExampleSpec. Note that all the Examples created with an ExampleSpec maintain a pointer to the ExampleSpec, so you shouldn't free it or modify the ExampleSpec until you are done with all the Examples referencing it. 
+.SS "char* ExampleSpecGetAttributeName (\fBExampleSpecPtr\fP es, int attNum)"
+.PP
+If the attNum is valid, this returns the name of the associated attribute. 
+.SS "char* ExampleSpecGetClassValueName (\fBExampleSpecPtr\fP es, int classNum)"
+.PP
+If the classNum is valid, this returns the name of the associated class. 
+.SS "int ExampleSpecGetNumAttributes (\fBExampleSpecPtr\fP es)"
+.PP
+Returns the number of attributes that the example spec contains. Remember that the attributes are indexed in a 0-based fashion (like C arrays) so the actual valid index for the attributes will be from 0 to ExampleSpecGetNumAttributes(es) - 1. 
+.SS "int ExampleSpecGetNumClasses (\fBExampleSpecPtr\fP es)"
+.PP
+Returns the number of classes in the ExampleSpec. Remember that the classes will have indexes 0 - ExampleSpecGetNumClasses(es) - 1. 
+.SS "int ExampleSpecIsAttributeContinuous (\fBExampleSpecPtr\fP es, int num)"
+.PP
+Returns 1 if the specified attribute is continuous and 0 otherwise. Be sure not to ask for an attribute numbered >= ExampleSpecGetNumAttributes(es). 
+.SS "int ExampleSpecIsAttributeDiscrete (\fBExampleSpecPtr\fP es, int num)"
+.PP
+Returns 1 if the specified attribute is discrete and 0 otherwise. Be sure not to ask for an attribute numbered >= ExampleSpecGetNumAttributes(es). 
+.SS "int ExampleSpecIsAttributeIgnored (\fBExampleSpecPtr\fP es, int num)"
+.PP
+Returns 1 if the specified attribute should be ignored and 0 otherwise. Be sure not to ask for an attribute numbered >= ExampleSpecGetNumAttributes(es). 
+.SS "int ExampleSpecLookupAttributeName (\fBExampleSpecPtr\fP es, char * valName)"
+.PP
+Returns the index of the named attribute. Does a linear search through the ExampleSpec's attributes looking for the first one named attributeName. Returns the index of the first matching attribute or -1 if there is no match. 
+.SS "int ExampleSpecLookupAttributeValueName (\fBExampleSpecPtr\fP es, int attNum, char * valName)"
+.PP
+Returns the index of the named value. If attribNum is a valid attribute index this does a linear search through the associated attribute's values for one named attributeName. Returns the index or -1 if there is no match. 
+.SS "int ExampleSpecLookupClassName (\fBExampleSpecPtr\fP es, char * name)"
+.PP
+If name is a valid class name, this returns the index associated with the class. 
+.SS "\fBExampleSpecPtr\fP ExampleSpecNew (void)"
+.PP
+Programmatically creates a new ExampleSpec. Use the ExampleSpecAddFOO functions to add classes, attributes, and their values to the spec.
+.PP
+This function allocates memory which should be freed by calling ExampleSpecFree. 
+.SS "\fBExampleSpecPtr\fP ExampleSpecRead (char * fileName)"
+.PP
+Reads a .names formated file and build an ExampleSpec. Attempts to read an example from the passed FILE *, which should be opened for reading. The file should contain an ExampleSpec in C4.5 format, that is the file should be a C4.5 names file.
+.PP
+This function will return 0 (NULL) if it is unable to read an ExampleSpec from the file (bad input or the file does not exist). If the input is badly formed, the function will also output an error to the console.
+.PP
+Note that you could pass stdin to the function to read an ExampleSpec from the console.
+.PP
+This function allocates memory which should be freed by calling ExampleSpecFree. 
+.SS "void ExampleSpecWrite (\fBExampleSpecPtr\fP es, FILE * out)"
+.PP
+Outputs the ExampleSpec in .names format. Writes the example to the passed FILE *, which should be opened for writing. The example will be written in C4.5 names format, and could later be read in using ExampleSpecRead.
+.PP
+Note that you could pass stdout to the function to write an ExampleSpec to the console. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

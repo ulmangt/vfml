@@ -1,0 +1,61 @@
+.TH "mostcommonclass" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mostcommonclass \- 
+.SH "Detailed Description"
+.PP 
+Predicts the most common class in the training data. 
+
+This is a very simple 'learner', but it may be useful as a baseline to compare your learner against; predicting with 99% accuracy isn't impressive if 98% of the examples have the same class.
+.PP
+The mostcommonclass learner works in time proportional to the number of training examples and uses space proportional to the number of classes.  It should be able to work on large datasets.
+.PP
+The learner takes input and does output in \fCc4.5 format\fP.   It expects to find the files \fC<stem>.names\fP and \fC<stem>.data.\fP Depending on command line argument, it will either output the most common class or test its error rate on \fC<stem>.test\fP.
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem> 
+.IP "  \(bu" 4
+Set the stem name (default DF)
+.br
+
+.PP
+
+.IP "\(bu" 2
+-source <dir> 
+.IP "  \(bu" 4
+Set the directory that contains the dataset (default '.')
+.br
+
+.PP
+
+.IP "\(bu" 2
+-u 
+.IP "  \(bu" 4
+Test on the examples in <stem>.test and output in a format appropriate for interface with xvalidate and batchtest  (defaults to off)
+.br
+
+.PP
+
+.IP "\(bu" 2
+-v 
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output 
+.PP
+
+.PP
+.PP
+.SS "Example"
+.PP
+\fCmostcommonclass -f banana -source datasets/banana\fP
+.PP
+Looks for a dataset named 'banana' in the 'datasets/banana' directory.  Outputs the name of the most common class in the dataset.
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

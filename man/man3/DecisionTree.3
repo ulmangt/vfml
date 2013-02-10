@@ -1,0 +1,109 @@
+.TH "Decision Tree Section" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Decision Tree Section \- 
+.SH "Detailed Description"
+.PP 
+All of these are related to the use and construction of decision trees. 
+.SS "Files"
+
+.in +1c
+.ti -1c
+.RI "file \fBAttributeTracker.h\fP"
+.br
+.RI "\fIKeep a record of which attributes are active. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBC45interface.h\fP"
+.br
+.RI "\fICalls the C4.5 decision tree learning system and returns the learned tree. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBc45wrapper\fP"
+.br
+.RI "\fICalls C4.5 and tests the learned tree. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBc50wrapper\fP"
+.br
+.RI "\fICalls C5.0 and tests the learned tree. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBcvfdt\fP"
+.br
+.RI "\fILearns a DecisionTree from a high-speed time-changing data stream (or very large data set). \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBdecisionstump\fP"
+.br
+.RI "\fILearns a decision stump (a DecisionTree with only one split). \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBDecisionTree.h\fP"
+.br
+.RI "\fIA Decision Tree Structure. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBExample.h\fP"
+.br
+.RI "\fIADT for training (and testing, etc.) data. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBExampleGroupStats.h\fP"
+.br
+.RI "\fISufficient statistics for Entropy and Gini. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBExampleSpec.h\fP"
+.br
+.RI "\fISchema for training data. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBREPrune.h\fP"
+.br
+.RI "\fIPeforms reduced error pruning on a decision tree. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBtreedata\fP"
+.br
+.RI "\fICreates a synthetic data set by sampling from a randomly generated DecisionTree. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBvfdt\fP"
+.br
+.RI "\fILearns a decision tree from a high-speed data stream or very large data set. \fP"
+.PP
+.in +1c
+
+.ti -1c
+.RI "file \fBvfdt-engine.h\fP"
+.br
+.RI "\fIAn API which lets your program learn a DecisionTree from a high-speed data stream. \fP"
+.PP
+
+.in -1c

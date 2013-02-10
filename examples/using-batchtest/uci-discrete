@@ -1,0 +1,20 @@
+# If you download the UCI-C45-format distribution that we've put together for
+#  UWML, you can use this file to test on the datasets that contain only
+#  discrete attributes.  Just update the paths (use something like 
+#  search/replace to do it quickly)
+
+../../../datasets/UCI/audiology :: audiology
+../../../datasets/UCI/breast-cancer-wisconsin :: breast-cancer-wisconsin
+
+# breast-cancer is a restricted dataset
+#../../../datasets/UCI/breast-cancer :: breast-cancer
+../../../datasets/UCI/car :: car
+../../../datasets/UCI/house :: house
+../../../datasets/UCI/monks :: monks
+../../../datasets/UCI/mushroom :: mushroom
+../../../datasets/UCI/nursery :: nursery
+../../../datasets/UCI/promoter :: promoter
+../../../datasets/UCI/splice-jxn :: splice-jxn
+../../../datasets/UCI/tic-tac-toe :: tic-tac-toe
+../../../datasets/UCI/voting :: voting
+../../../datasets/UCI/zoo :: zoo

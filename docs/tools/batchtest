@@ -1,0 +1,131 @@
+/** \ingroup Tools
+*/
+
+
+/** \file
+
+\brief Performs cross validation of a collection of learners on a
+collection of datasets.
+
+<p><strong>Requires</strong>: \ref xvalidate and \ref folddata be in
+your path.</p>
+
+<p>You can use batchtest with large datasets, but you will need enough
+disk space to hold 'folds' copies of the largest dataset.&nbsp; Of
+course, the learners you use with batchtest must also be able to work
+with the large datasets.</p>
+
+<p>Batchtest expects to find two input files: one that contains
+descriptions of the datasets it should use, and one that contains
+descriptions of the learners it should run on them.&nbsp; In these
+files blank lines are ignored and lines beginning with '#' as the
+first character on the line are ignored as comments; every other line
+contains a description of a learner or a dataset.&nbsp; In the dataset
+file, the description lines have the following format:</p>
+
+<p><code>[path to the directory holding the dataset] :: [file stem of
+the dataset]</code></p>
+
+<p>In the learners file, the description lines should contain the
+command to run with the appropriate arguments.&nbsp; When batchtest
+invokes a learner, it will run the exact line from the learners file
+with the <code>&lt;filestem&gt;</code> of the current cross-validation
+fold of the current dataset appended.&nbsp; The learner should be
+prepared to look for input in in C4.5 format in
+<code>&lt;filestem&gt;.names</code> and
+<code>&lt;filestem&gt;.data</code>; it should test on the examples in
+<code>&lt;filestem&gt;.test</code> and print the following to standard
+out:</p>
+
+<p><code>error-rate&nbsp;&nbsp; size</code></p>
+
+<p>The learner's error rate on the test set, followed by some
+whitespace, followed by the size of the learned model (in whatever
+unit you want), followed by a newline. </p>
+
+<p>Batchtest will collect the output of the runs of the learners, average them and report:</p>
+
+<p><code>mean-error-rate (standard deviation of error rate) mean-size
+(standard deviation of size) average-utime (standard deviation of
+utime) average-stime (standard deviation of stime)</code></p>
+
+<p>for example:</p>
+
+<p><code>26.111 (5.500) 0.000 (0.000) 0.013 (0.005) 0.010 (0.008)</code></p>
+
+<p>The times are very accurate on UNIX. Under CYGNUS (windows) utime
+will be a good estimate, but not as accurate and stime will be
+zero.</p>
+
+\wish I think the input format for batchtest is a little brittle and it
+could use some improvement
+
+<h2>Arguments</h2>
+
+- -data &lt;dataset file&gt; 
+  - Set the path to the file containing the dataset descriptions (default datasets)
+- -learn &lt;learner file&gt; 
+  - Set the path to the file containing the learner descriptions (default learners)
+- -folds &lt;n&gt; 
+  - Sets the number of train/test sets to create (default 10)
+- -seed &lt;n&gt;
+  - Sets the random seed, multiple runs with the same seed will
+  produce the same datasets (defaults to a random seed).&nbsp; If you
+  use a random seed, the value of the randomly  selected seed will be
+  printed at the start of the run.&nbsp; You can later use that seed
+  to repeat the experiment.&nbsp; You can pass the same seed to <a
+  href="xvalidate.htm">xvalidate</a> to focus on a particular
+  learner/dataset combination for debugging.&nbsp; If that doesn't
+  help enough, you can pass the same seed to <a
+  href="folddata.htm">folddata</a> to recreate the exact test/training sets for closer inspection.
+- -v 
+  - Can be used multiple times to increase the debugging output
+
+<h2>Example</h2>
+
+<p>Contents of datasets file:</p>
+
+\verbatim
+  # Here are the datasets<br>
+  ../../datasets/mushroom/ :: mushroom
+
+  ../../datasets/voting/ :: voting
+\endverbatim
+
+<p>Contents of the learners file: </p>
+
+\verbatim
+  <p># A simple learner to set a baseline
+  mostcommonclass -u -f
+  # My fancy learner with a couple different parameter sets
+  deep-thought -tc 4.7 -e 1.1 -u -f
+  deep-thought -tc 2 -e 5 -u -f
+\endverbatim
+
+
+<p><code>batchtest -data datasets -learn learners -folds 15 -seed 100</code> </p>
+
+<p>Does 15-fold cross-validation of the learners in the learners file
+on the datasets in the datasets file.&nbsp; It will use a seeded
+random number generator so the exact experiment could be
+reproduced.&nbsp; The actual calls to the learners will look something
+like this:</p>
+
+\verbatim
+  mostcommonclass -u -f mushroom0
+  mostcommonclass -u -f mushroom1
+  mostcommonclass -u -f mushroom2
+  ...
+  deep-thought -tc 4.7 -e 1.1 -u -f mushroom0
+  deep-thought -tc 4.7 -e 1.1 -u -f mushroom1
+  ...
+  etc...
+\endverbatim
+
+
+<p>You should see the <a
+href="examples/using-batchtest.htm">using-batchtest</a> example for
+a more detailed example complete with sample -data and -learn
+files.</p>
+
+*/

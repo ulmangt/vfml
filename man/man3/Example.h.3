@@ -1,0 +1,216 @@
+.TH "Example.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Example.h \- 
+.SH "Detailed Description"
+.PP 
+ADT for training (and testing, etc.) data. 
+
+This is the interface for working with instances of the Example ADT. Note that all access to attributes is 0 based (just like C arrays).
+.PP
+Note that all the Examples created with an ExampleSpec maintain a pointer to the ExampleSpec, so you shouldn't free it or modify the ExampleSpec until you are done with all the Examples referencing it.
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_Example_\fP"
+.br
+.RI "\fIADT for working with examples. \fP"
+.in -1c
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBExampleIsAttributeUnknown\fP(e, attNum)   ( VALIndex(e->attributes, attNum) == 0 )"
+.br
+.RI "\fIReturns 1 if the specified attribute is marked as unknown and 0 otherwise. \fP"
+.ti -1c
+.RI "#define \fBExampleGetNumAttributes\fP(e)   (VALLength(((\fBExamplePtr\fP)e)->attributes))"
+.br
+.RI "\fIReturns the number of attributes that this example has. \fP"
+.ti -1c
+.RI "#define \fBExampleGetClass\fP(e)   (((\fBExamplePtr\fP)e)->myclass)"
+.br
+.RI "\fIReturns the value of the example's class. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fB_Example_\fP \fBExample\fP"
+.br
+.RI "\fIADT for working with examples. \fP"
+.ti -1c
+.RI "typedef \fB_Example_\fP * \fBExamplePtr\fP"
+.br
+.RI "\fIADT for working with examples. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBExamplePtr\fP \fBExampleNew\fP (\fBExampleSpecPtr\fP es)"
+.br
+.RI "\fIProgrammatically creates a new example. \fP"
+.ti -1c
+.RI "void \fBExampleFree\fP (\fBExamplePtr\fP e)"
+.br
+.RI "\fIFrees all the memory being used by the passed example. \fP"
+.ti -1c
+.RI "\fBExamplePtr\fP \fBExampleClone\fP (\fBExamplePtr\fP e)"
+.br
+.RI "\fIAllocates memory and copies the example into it. \fP"
+.ti -1c
+.RI "void \fBExampleSetAttributeUnknown\fP (\fBExamplePtr\fP e, int attNum)"
+.br
+.RI "\fIMarks the specified attribute value as unknown. \fP"
+.ti -1c
+.RI "void \fBExampleSetDiscreteAttributeValue\fP (\fBExamplePtr\fP e, int attNum, int value)"
+.br
+.RI "\fIConsiders the specified attribute to be discrete and sets its value to the specified value. \fP"
+.ti -1c
+.RI "void \fBExampleSetContinuousAttributeValue\fP (\fBExamplePtr\fP e, int attNum, double value)"
+.br
+.RI "\fIConsiders the specified attribute to be continuous and sets its value to the specified value. \fP"
+.ti -1c
+.RI "void \fBExampleSetClass\fP (\fBExamplePtr\fP e, int theClass)"
+.br
+.RI "\fISets the example's class to the specified class. \fP"
+.ti -1c
+.RI "void \fBExampleSetClassUnknown\fP (\fBExamplePtr\fP e)"
+.br
+.RI "\fIMarks the example's class as unknown. \fP"
+.ti -1c
+.RI "void \fBExampleAddNoise\fP (\fBExamplePtr\fP e, float p, int doClass, int attrib)"
+.br
+.RI "\fIRandomly corrupts the attributes and class of the example. \fP"
+.ti -1c
+.RI "\fBExamplePtr\fP \fBExampleRead\fP (FILE *file, \fBExampleSpecPtr\fP es)"
+.br
+.RI "\fIAttempts to read an example from the passed file pointer. \fP"
+.ti -1c
+.RI "\fBVoidListPtr\fP \fBExamplesRead\fP (FILE *file, \fBExampleSpecPtr\fP es)"
+.br
+.RI "\fIReads as many examples as possible from the file pointer. \fP"
+.ti -1c
+.RI "int \fBExampleIsAttributeDiscrete\fP (\fBExamplePtr\fP e, int attNum)"
+.br
+.RI "\fIReturns 1 if the specified attribute is discrete and 0 otherwise. \fP"
+.ti -1c
+.RI "int \fBExampleIsAttributeContinuous\fP (\fBExamplePtr\fP e, int attNum)"
+.br
+.RI "\fIReturns 1 if the specified attribute is continuous and 0 otherwise. \fP"
+.ti -1c
+.RI "int \fBExampleGetDiscreteAttributeValue\fP (\fBExamplePtr\fP e, int attNum)"
+.br
+.RI "\fIReturns the value of the indicated discrete attribute. \fP"
+.ti -1c
+.RI "double \fBExampleGetContinuousAttributeValue\fP (\fBExamplePtr\fP e, int attNum)"
+.br
+.RI "\fIReturns the value of the indicated continuous attribute. \fP"
+.ti -1c
+.RI "int \fBExampleIsClassUnknown\fP (\fBExamplePtr\fP e)"
+.br
+.RI "\fIReturns 1 if the value of the example's class is known, and 0 otherwise. \fP"
+.ti -1c
+.RI "float \fBExampleDistance\fP (\fBExamplePtr\fP e, \fBExamplePtr\fP dst)"
+.br
+.RI "\fIReturns the euclidian distance between the two examples. \fP"
+.ti -1c
+.RI "void \fBExampleWrite\fP (\fBExamplePtr\fP e, FILE *out)"
+.br
+.RI "\fIWrites the example to the passed file point.er. \fP"
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define ExampleGetClass(e)   (((\fBExamplePtr\fP)e)->myclass)"
+.PP
+Returns the value of the example's class. If the value of the example's class is known this returns the value, otherwise this returns -1. 
+.SS "#define ExampleGetNumAttributes(e)   (VALLength(((\fBExamplePtr\fP)e)->attributes))"
+.PP
+Returns the number of attributes that this example has. This will be equal to the number of attributes that were in the ExampleSpec used to construct the example. 
+.SS "#define ExampleIsAttributeUnknown(e, attNum)   ( VALIndex(e->attributes, attNum) == 0 )"
+.PP
+Returns 1 if the specified attribute is marked as unknown and 0 otherwise. Be sure not to ask for an attNum >= \fBExampleGetNumAttributes(e)\fP. 
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_Example_\fP  \fBExample\fP"
+.PP
+ADT for working with examples. See \fBExample.h\fP for more detail. 
+.SS "typedef struct \fB_Example_\fP * \fBExamplePtr\fP"
+.PP
+ADT for working with examples. See \fBExample.h\fP for more detail. 
+.SH "Function Documentation"
+.PP 
+.SS "void ExampleAddNoise (\fBExamplePtr\fP e, float p, int doClass, int attrib)"
+.PP
+Randomly corrupts the attributes and class of the example. p should be a number between 0-1, which is interpreted as a probability (e.g. a value of .732 would be interpreted as 73.2%). class and attrib are flags which should be 1 if you want noise added to that part of the example and 0 otherwise. Then, for each discrete thing selected by the flags, this function will have the specified probability of changing it, without replacement, to a randomly selected value. This function changes the value of each continuous attribute by adding to it a value drawn from a normal distribution with mean 0 and with standard deviation p. 
+.SS "\fBExamplePtr\fP ExampleClone (\fBExamplePtr\fP e)"
+.PP
+Allocates memory and copies the example into it. 
+.SS "float ExampleDistance (\fBExamplePtr\fP e, \fBExamplePtr\fP dst)"
+.PP
+Returns the euclidian distance between the two examples. This ignores discrete attributes. 
+.SS "void ExampleFree (\fBExamplePtr\fP e)"
+.PP
+Frees all the memory being used by the passed example. 
+.SS "double ExampleGetContinuousAttributeValue (\fBExamplePtr\fP e, int attNum)"
+.PP
+Returns the value of the indicated continuous attribute. If the attNum is valid, and ExampleGetAttributeUnknown(e, attNum) returns 0, and ExampleIsAttributeContinuous(e, attNum) returns 1, this function will return the value of the attribute. If the conditions aren't met, there is a good chance that calling this will crash your program. 
+.SS "int ExampleGetDiscreteAttributeValue (\fBExamplePtr\fP e, int attNum)"
+.PP
+Returns the value of the indicated discrete attribute. If the attNum is valid, and ExampleGetAttributeUnknown(e, attNum) returns 0, and ExampleIsAttributeDiscrete(e, attNum) returns 1, this function will return the value of the attribute. If the conditions aren't met, there is a good chance that calling this will crash your program. 
+.SS "int ExampleIsAttributeContinuous (\fBExamplePtr\fP e, int attNum)"
+.PP
+Returns 1 if the specified attribute is continuous and 0 otherwise. Be sure not to ask for an attNum >= \fBExampleGetNumAttributes(e)\fP. 
+.SS "int ExampleIsAttributeDiscrete (\fBExamplePtr\fP e, int attNum)"
+.PP
+Returns 1 if the specified attribute is discrete and 0 otherwise. Be sure not to ask for an attNum >= \fBExampleGetNumAttributes(e)\fP. 
+.SS "int ExampleIsClassUnknown (\fBExamplePtr\fP e)"
+.PP
+Returns 1 if the value of the example's class is known, and 0 otherwise. 
+.SS "\fBExamplePtr\fP ExampleNew (\fBExampleSpecPtr\fP es)"
+.PP
+Programmatically creates a new example. Allocates enough memory to hold all the attributes mentioned in the ExampleSpec passed. Use the ExampleSetFoo functions (see below) to set the values of the attributes and class.
+.PP
+This function allocates memory which should be freed by calling ExampleFree. 
+.SS "\fBExamplePtr\fP ExampleRead (FILE * file, \fBExampleSpecPtr\fP es)"
+.PP
+Attempts to read an example from the passed file pointer. FILE * should be opened for reading. The file should contain examples in C4.5 format. Uses the ExampleSpec to determine how many, what types, and how to interpret the attributes it needs to read.
+.PP
+This function will return 0 (NULL) if it is unable to read an example from the file (bad input or EOF). If the input is badly formed, the function will also output an error to the console.
+.PP
+Note that you could pass STDIN to the function to read an example from the console.
+.PP
+This function allocates memory which should be freed by calling ExampleFree. 
+.SS "void ExampleSetAttributeUnknown (\fBExamplePtr\fP e, int attNum)"
+.PP
+Marks the specified attribute value as unknown. Future calls to ExampleGetAttributeUnknown for that attribute will return 1. 
+.SS "void ExampleSetClass (\fBExamplePtr\fP e, int theClass)"
+.PP
+Sets the example's class to the specified class. The function doesn't do much error checking so be sure that you call it consistent with ExampleSpecGetNumClasses. If you don't, there is a chance the example could cause your program to crash. 
+.SS "void ExampleSetClassUnknown (\fBExamplePtr\fP e)"
+.PP
+Marks the example's class as unknown. 
+.SS "void ExampleSetContinuousAttributeValue (\fBExamplePtr\fP e, int attNum, double value)"
+.PP
+Considers the specified attribute to be continuous and sets its value to the specified value. This function doesn't do much error checking so be sure that you call it consistent with ExampleIsAttributeDiscrete, and ExampleIsAttributeContinuous. If you don't, there is a chance the example could cause your program to crash. 
+.SS "void ExampleSetDiscreteAttributeValue (\fBExamplePtr\fP e, int attNum, int value)"
+.PP
+Considers the specified attribute to be discrete and sets its value to the specified value. This function doesn't do much error checking so be sure that you call it consistent with ExampleIsAttributeDiscrete, ExampleIsAttributeContinuous and ExampleSpecGetAttributeValueCount. If you don't, there is a chance the example could cause your program to crash. 
+.SS "\fBVoidListPtr\fP ExamplesRead (FILE * file, \fBExampleSpecPtr\fP es)"
+.PP
+Reads as many examples as possible from the file pointer. Calls ExampleRead until it gets a 0, allocates a list and adds each example to it. You are responsible for freeing the examples and the list. 
+.SS "void ExampleWrite (\fBExamplePtr\fP e, FILE * out)"
+.PP
+Writes the example to the passed file point.er. FILE * should be opened for writing. The example will be written in C4.5 format, and could later be read in using ExampleRead.
+.PP
+Note that you could pass stdout to the function to write an example to the console. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

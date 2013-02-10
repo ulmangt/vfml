@@ -1,0 +1,122 @@
+.TH "batchtest" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+batchtest \- 
+.SH "Detailed Description"
+.PP 
+Performs cross validation of a collection of learners on a collection of datasets. 
+
+\fBRequires\fP: \fBxvalidate\fP and \fBfolddata\fP be in your path.
+.PP
+You can use batchtest with large datasets, but you will need enough disk space to hold 'folds' copies of the largest dataset.  Of course, the learners you use with batchtest must also be able to work with the large datasets.
+.PP
+Batchtest expects to find two input files: one that contains descriptions of the datasets it should use, and one that contains descriptions of the learners it should run on them.  In these files blank lines are ignored and lines beginning with '#' as the first character on the line are ignored as comments; every other line contains a description of a learner or a dataset.  In the dataset file, the description lines have the following format:
+.PP
+\fC[path to the directory holding the dataset] :: [file stem of the dataset]\fP
+.PP
+In the learners file, the description lines should contain the command to run with the appropriate arguments.  When batchtest invokes a learner, it will run the exact line from the learners file with the \fC<filestem>\fP of the current cross-validation fold of the current dataset appended.  The learner should be prepared to look for input in in C4.5 format in \fC<filestem>.names\fP and \fC<filestem>.data\fP; it should test on the examples in \fC<filestem>.test\fP and print the following to standard out:
+.PP
+\fCerror-rate   size\fP
+.PP
+The learner's error rate on the test set, followed by some whitespace, followed by the size of the learned model (in whatever unit you want), followed by a newline. 
+.PP
+Batchtest will collect the output of the runs of the learners, average them and report:
+.PP
+\fCmean-error-rate (standard deviation of error rate) mean-size (standard deviation of size) average-utime (standard deviation of utime) average-stime (standard deviation of stime)\fP
+.PP
+for example:
+.PP
+\fC26.111 (5.500) 0.000 (0.000) 0.013 (0.005) 0.010 (0.008)\fP
+.PP
+The times are very accurate on UNIX. Under CYGNUS (windows) utime will be a good estimate, but not as accurate and stime will be zero.
+.PP
+\fBWish List\fP
+.RS 4
+I think the input format for batchtest is a little brittle and it could use some improvement 
+.RE
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-data <dataset file>
+.IP "  \(bu" 4
+Set the path to the file containing the dataset descriptions (default datasets)
+.PP
+
+.IP "\(bu" 2
+-learn <learner file>
+.IP "  \(bu" 4
+Set the path to the file containing the learner descriptions (default learners)
+.PP
+
+.IP "\(bu" 2
+-folds <n>
+.IP "  \(bu" 4
+Sets the number of train/test sets to create (default 10)
+.PP
+
+.IP "\(bu" 2
+-seed <n>
+.IP "  \(bu" 4
+Sets the random seed, multiple runs with the same seed will produce the same datasets (defaults to a random seed).  If you use a random seed, the value of the randomly selected seed will be printed at the start of the run.  You can later use that seed to repeat the experiment.  You can pass the same seed to \fCxvalidate\fP to focus on a particular learner/dataset combination for debugging.  If that doesn't help enough, you can pass the same seed to \fCfolddata\fP to recreate the exact test/training sets for closer inspection.
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+.PP
+.SS "Example"
+.PP
+Contents of datasets file:
+.PP
+.PP
+.nf
+
+  # Here are the datasets<br>
+  ../../datasets/mushroom/ :: mushroom
+
+  ../../datasets/voting/ :: voting
+.PP
+.PP
+Contents of the learners file: 
+.PP
+.PP
+.nf
+
+  <p># A simple learner to set a baseline
+  mostcommonclass -u -f
+  # My fancy learner with a couple different parameter sets
+  deep-thought -tc 4.7 -e 1.1 -u -f
+  deep-thought -tc 2 -e 5 -u -f
+.PP
+.PP
+\fCbatchtest -data datasets -learn learners -folds 15 -seed 100\fP 
+.PP
+Does 15-fold cross-validation of the learners in the learners file on the datasets in the datasets file.  It will use a seeded random number generator so the exact experiment could be reproduced.  The actual calls to the learners will look something like this:
+.PP
+.PP
+.nf
+
+  mostcommonclass -u -f mushroom0
+  mostcommonclass -u -f mushroom1
+  mostcommonclass -u -f mushroom2
+  ...
+  deep-thought -tc 4.7 -e 1.1 -u -f mushroom0
+  deep-thought -tc 4.7 -e 1.1 -u -f mushroom1
+  ...
+  etc...
+.PP
+.PP
+You should see the \fCusing-batchtest\fP example for a more detailed example complete with sample -data and -learn files.
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

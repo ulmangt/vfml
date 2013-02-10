@@ -1,0 +1,72 @@
+.TH "Debug.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Debug.h \- 
+.SH "Detailed Description"
+.PP 
+A set of functions that help your programs produce debugging output in a consistent way. 
+
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBDebugWarn\fP (int condition, char *str)"
+.br
+.RI "\fIOutputs string to the current target if condition is non-zero. \fP"
+.ti -1c
+.RI "void \fBDebugError\fP (int condidion, char *str)"
+.br
+.RI "\fIIf condition is non-zero outputs string to the current target and halts the program. \fP"
+.ti -1c
+.RI "void \fBDebugSetMessageLevel\fP (int level)"
+.br
+.RI "\fISets the level of message that will be reported by DebugMessage. \fP"
+.ti -1c
+.RI "int \fBDebugGetMessageLevel\fP (void)"
+.br
+.RI "\fIReturns the current message level. \fP"
+.ti -1c
+.RI "void \fBDebugMessage\fP (int condition, int level, char *str,...)"
+.br
+.RI "\fIFormats and prints a message if conditions are met. \fP"
+.ti -1c
+.RI "void \fBDebugSetTarget\fP (FILE *target)"
+.br
+.RI "\fISets the target for debugging output. \fP"
+.ti -1c
+.RI "FILE * \fBDebugGetTarget\fP (void)"
+.br
+.RI "\fIGets the current target for debugging output. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void DebugError (int condidion, char * str)"
+.PP
+If condition is non-zero outputs string to the current target and halts the program. 
+.SS "int DebugGetMessageLevel (void)"
+.PP
+Returns the current message level. 
+.SS "FILE* DebugGetTarget (void)"
+.PP
+Gets the current target for debugging output. 
+.SS "void DebugMessage (int condition, int level, char * str, ...)"
+.PP
+Formats and prints a message if conditions are met. If the condition is non-zero and the current message level is greater than level this calls printf with str as the format string, and any additional arguments as arguments. 
+.SS "void DebugSetMessageLevel (int level)"
+.PP
+Sets the level of message that will be reported by DebugMessage. Defaults to 0. 
+.SS "void DebugSetTarget (FILE * target)"
+.PP
+Sets the target for debugging output. Defaults to stdout. All future calls to the Debug functions will sent output to the specified file. 
+.SS "void DebugWarn (int condition, char * str)"
+.PP
+Outputs string to the current target if condition is non-zero. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

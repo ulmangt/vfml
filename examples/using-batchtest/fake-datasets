@@ -1,0 +1,6 @@
+# The datasets to compare
+
+# the format is:
+# path to the directory containing the dataset :: filestem for the dataset
+banana :: banana
+

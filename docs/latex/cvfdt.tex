@@ -1,0 +1,63 @@
+\section{cvfdt File Reference}
+\label{cvfdt}\index{cvfdt@{cvfdt}}
+
+
+\subsection{Detailed Description}
+Learns a Decision\-Tree from a high-speed time-changing data stream (or very large data set). 
+
+Learns a decision tree from a high-speed time-changing data stream or a very large data set as described in {\tt this paper}. cvfdt does not work with continuous attributes.
+
+CVFDT learns a tree as follows. It starts with a single leaf and starts collecting training examples from a data stream (with the -stdin argument) or from the file stem.data. When it has enough data to know, with high confidence that it knows which attribute is the best to partition the data with, it turns the leaf into an internal node splitting on that attribute and starts learning at the new leaves recursively. CVFDT maintains a window of training examples and keeps its learned tree up-to-date with this window by monitoring the quality of its old decisions as data moves into and out of the window. In particular, whenever a new example is read it is added to the statistics at all the nodes in the tree that it passes through, the last example in the window is forgotten from every node where it had previously had an effect, and the validity of all statistical tests are checked. If cvfdt detects a change it starts growing an alternate tree in parallel which is rooted at the newly-invalidated node. When the alternate is more accurate on new data than the original the original is replaced by the alternate and freed.
+
+cvfdt takes input and does output in {\tt c4.5 format}. It expects to find the files {\tt $<$stem$>$.names} and {\tt $<$stem$>$.data}.
+
+\begin{Desc}
+\item[{\bf Thanks}]to Laurie Spencer for doing the core development work for cvfdt. \end{Desc}
+
+
+\begin{Desc}
+\item[{\bf Wish List}]Modify this learner to work with continuous attributes. 
+
+An API to this learner like the one to learning Belief\-Net structure in beliefnet-engine.h \end{Desc}
+
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f 'filestem'\begin{itemize}
+\item Set the name of the dataset (default DF)\end{itemize}
+\item -source 'dir'\begin{itemize}
+\item Set the source data directory (default '.')\end{itemize}
+\item -u\begin{itemize}
+\item Test the learner's accuracy on data in 'stem'.test\end{itemize}
+\item -sc 'allowed chance of error in each decision'\begin{itemize}
+\item Default 0.01 that's 1 percent\end{itemize}
+\item -stdin\begin{itemize}
+\item Reads training examples from stdin instead of from 'stem'.data (default off) NOTE this disables the rescans switch\end{itemize}
+\item -tc 'tie error'\begin{itemize}
+\item Call a tie when hoeffding e $<$ this. (default 0.05)\end{itemize}
+\item -rescans 'count'\begin{itemize}
+\item Naievely consider each example 'count' times with no concern for using it once per level of the induced tree (default 1)\end{itemize}
+\item -chunk 'count'\begin{itemize}
+\item Wait until 'count' examples accumulate at a leaf before testing for a split (default 300)\end{itemize}
+\item -grow\-Megs 'count'\begin{itemize}
+\item Limit dynamic memory allocation to 'count' megabytes (default 1000)\end{itemize}
+\item -window 'count'\begin{itemize}
+\item Number of examples in the window (default 50000)\end{itemize}
+\item -cache 'count'\begin{itemize}
+\item Number of examples from the window to keep in memory (default 10000)\end{itemize}
+\item -schedule '\#'\begin{itemize}
+\item Run tests every \# examples (default 10000).\end{itemize}
+\item -alt\-Test '\#'\begin{itemize}
+\item Interval for building and testing alternate trees (default 10000).\end{itemize}
+\item -incremental\-Reporting\begin{itemize}
+\item As each example arrives test the current learned model with it and then learn on it (default off).\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging -output\end{itemize}
+\item -check\-Size 'count'\begin{itemize}
+\item Wait until 'count' examples accumulate before checking for questionable nodes(default 10000)\end{itemize}
+\item -h\begin{itemize}
+\item Run cvfdt -h for a list of the arguments and their meanings.\end{itemize}
+\end{itemize}
+
+

@@ -1,0 +1,89 @@
+.TH "sprint" 3 "16 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sprint \- 
+.SH "Detailed Description"
+.PP 
+Learn a decision tree from data sets that do not fit in RAM. 
+
+Learns a decision tree from a data set that is larger than RAM as described in \fCthis paper\fP. SPRINT learns by writing the training data to disk in sorted order and then making one pass reading and writing the data per level of the tree it learns. This mean that no data need be in RAM, but that there is additional overhead for all the disk access (but far less overhead than would be required if by a learner that makes random access to training data and relies on OS supported virtual memory to swap it to disk, as does C4.5). If your data set fits in RAM you are better off using C4.5 or \fBvfdt\fP with its -batch option. SPRINT is happiest when it has enough RAM to load all the values for a continuous attribute into RAM at once so that it can sort them. If it doesn't have that it will still work, by sorting the attribute in chunks, but it will be slower.
+.PP
+sprint takes input and does output in \fCc4.5 format\fP. It expects to find the files \fC<stem>.names\fP and \fC<stem>.data\fP.
+.PP
+\fBThanks\fP
+.RS 4
+to Chun-Hsiang Hung for doing the core development work for \fBsprint\fP. 
+.RE
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f 'filestem'
+.IP "  \(bu" 4
+Set the name of the dataset (default DF)
+.PP
+
+.IP "\(bu" 2
+-source 'dir'
+.IP "  \(bu" 4
+Set the source data directory (default '.')
+.PP
+
+.IP "\(bu" 2
+-growMegs 'count'
+.IP "  \(bu" 4
+Limit dynamic memory allocation to 'count' megabytes (default 1024)
+.PP
+
+.IP "\(bu" 2
+-minToSplit 'count'
+.IP "  \(bu" 4
+Do not split any node with fewer than count examples (default 5)
+.PP
+
+.IP "\(bu" 2
+-smoothClass 'count'
+.IP "  \(bu" 4
+Smooth leaf class prediction with count towards the most common class at the parent node (default 1)
+.PP
+
+.IP "\(bu" 2
+-noPrune
+.IP "  \(bu" 4
+Do not prune the learned tree (default do reduced error prune with the data in 'stem'.prune)
+.PP
+
+.IP "\(bu" 2
+-outputTree
+.IP "  \(bu" 4
+Save unpruned tree to 'stem'.unprunedtree and pruned tree to 'stem'.prunedtree (if pruning) (default do not)
+.PP
+
+.IP "\(bu" 2
+-u
+.IP "  \(bu" 4
+Test on data in 'filestem'.test (default do not test)
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Run sprint -h for a list of the arguments and their meanings.
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

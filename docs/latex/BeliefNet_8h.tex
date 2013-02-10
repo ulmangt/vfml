@@ -1,0 +1,616 @@
+\section{Belief\-Net.h File Reference}
+\label{BeliefNet_8h}\index{BeliefNet.h@{BeliefNet.h}}
+
+
+\subsection{Detailed Description}
+A Belief Net Structure with CPT local models. 
+
+This is the interface for creating, using, printing, \& serializing Belief Nets (aka Bayesian Networks). This document will first describe the properties of Belief\-Nets and then of Belief\-Net\-Nodes. A belief net is a compact representation of a joint probability distribution of all of the variables in a domain. For each variable there is a local model (represented by a Belief\-Net\-Node) that models the probability of the various values of that varable given the values of the variables that affect them. A Belief\-Net is an acyclic graph of the nodes, where an edge represets (loosely) that the variable at the source affects the varable at the target. The exact semantics of an edge are a bit more complex. For a more detailed discussion see {\tt David Heckerman's Tutorial}
+
+\begin{Desc}
+\item[{\bf Wish List}]A version of this that uses Decision\-Tree local models instead of full CPTs. This would also need a new structure learning tool (a modification of {\bf bnlearn}). \end{Desc}
+
+
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-Belief\-Net\_\-}
+\begin{CompactList}\small\item\em Belief network ADT. \item\end{CompactList}\item 
+struct {\bf \_\-Belief\-Net\-Node\_\-}
+\begin{CompactList}\small\item\em Belief net node with full CPTs for local models. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Belief\-Net\-Node}
+\begin{CompactItemize}
+\item 
+typedef {\bf \_\-Belief\-Net\-Node\_\-} {\bf Belief\-Net\-Node\-Struct}
+\begin{CompactList}\small\item\em Belief net node with full CPTs for local models. \item\end{CompactList}\item 
+typedef {\bf \_\-Belief\-Net\-Node\_\-} $\ast$ {\bf Belief\-Net\-Node}
+\begin{CompactList}\small\item\em Belief net node with full CPTs for local models. \item\end{CompactList}\item 
+void {\bf BNNode\-Add\-Parent} ({\bf Belief\-Net\-Node} bnn, {\bf Belief\-Net\-Node} parent)
+\begin{CompactList}\small\item\em Adds the specified node as a parent to bnn. \item\end{CompactList}\item 
+int {\bf BNNode\-Lookup\-Parent\-Index} ({\bf Belief\-Net\-Node} bnn, {\bf Belief\-Net\-Node} parent)
+\begin{CompactList}\small\item\em Returns the index of parent in bnn's parent list. \item\end{CompactList}\item 
+int {\bf BNNode\-Lookup\-Parent\-Index\-By\-ID} ({\bf Belief\-Net\-Node} bnn, int id)
+\begin{CompactList}\small\item\em Looks through the parent list of bnn for a node with node id of 'id'. \item\end{CompactList}\item 
+void {\bf BNNode\-Remove\-Parent} ({\bf Belief\-Net\-Node} bnn, int parent\-Index)
+\begin{CompactList}\small\item\em Removes the node with index 'parent\-Index' from bnn's parent list. \item\end{CompactList}\item 
+{\bf Belief\-Net\-Node} {\bf BNNode\-Get\-Parent} ({\bf Belief\-Net\-Node} bnn, int parent\-Index)
+\begin{CompactList}\small\item\em Returns the parent at position 'index' in the node's parent list. \item\end{CompactList}\item 
+int {\bf BNNode\-Get\-Parent\-ID} ({\bf Belief\-Net\-Node} bnn, int parent\-Index)
+\begin{CompactList}\small\item\em Returns the node id of the node at position 'index' in the node's parent list. \item\end{CompactList}\item 
+int {\bf BNNode\-Get\-Num\-Parents} ({\bf Belief\-Net\-Node} bnn)
+\begin{CompactList}\small\item\em Returns the number of nodes in the target node's parent list. \item\end{CompactList}\item 
+int {\bf BNNode\-Get\-Num\-Children} ({\bf Belief\-Net\-Node} bnn)
+\begin{CompactList}\small\item\em Returns the number of nodes in the target node's child list. \item\end{CompactList}\item 
+int {\bf BNNode\-Has\-Parent} ({\bf Belief\-Net\-Node} bnn, {\bf Belief\-Net\-Node} parent)
+\begin{CompactList}\small\item\em Returns 1 if and only if parent is in the node's parent list. \item\end{CompactList}\item 
+int {\bf BNNode\-Has\-Parent\-ID} ({\bf Belief\-Net\-Node} bnn, int parent\-ID)
+\begin{CompactList}\small\item\em Returns 1 if and only if one of the node's parents has the specified node id. \item\end{CompactList}\item 
+int {\bf BNNode\-Get\-Num\-Values} ({\bf Belief\-Net\-Node} bnn)
+\begin{CompactList}\small\item\em Returns the number of values that the variable represented by the node can take. \item\end{CompactList}\item 
+int {\bf BNNode\-Get\-Num\-Parameters} ({\bf Belief\-Net\-Node} bnn)
+\begin{CompactList}\small\item\em Returns the number of parameters in the node's CPT. \item\end{CompactList}\item 
+char $\ast$ {\bf BNNode\-Get\-Name} ({\bf Belief\-Net\-Node} bnn)
+\begin{CompactList}\small\item\em Returns the name of the node. \item\end{CompactList}\item 
+int {\bf BNNode\-Structure\-Equal} ({\bf Belief\-Net\-Node} bnn, {\bf Belief\-Net\-Node} other\-Node)
+\begin{CompactList}\small\item\em Returns 1 if and only if the two nodes have the same parents in the same order. \item\end{CompactList}\item 
+void {\bf BNNode\-Init\-CPT} ({\bf Belief\-Net\-Node} bnn)
+\begin{CompactList}\small\item\em Allocates memory for bnn's CPT and zeros the values. \item\end{CompactList}\item 
+void {\bf BNNode\-Zero\-CPT} ({\bf Belief\-Net\-Node} bnn)
+\begin{CompactList}\small\item\em Sets the value of all CPT entries to zero. \item\end{CompactList}\item 
+void {\bf BNNode\-Free\-CPT} ({\bf Belief\-Net\-Node} bnn)
+\begin{CompactList}\small\item\em Frees any memory being used by the node's CPTs. \item\end{CompactList}\item 
+void {\bf BNNode\-Add\-Sample} ({\bf Belief\-Net\-Node} bnn, {\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Increments the count of the appropriate CPT element by 1. \item\end{CompactList}\item 
+void {\bf BNNode\-Add\-Samples} ({\bf Belief\-Net\-Node} bnn, {\bf Void\-List\-Ptr} samples)
+\begin{CompactList}\small\item\em Calls BNNode\-Add\-Sample for each example in the list. \item\end{CompactList}\item 
+void {\bf BNNode\-Add\-Fractional\-Sample} ({\bf Belief\-Net\-Node} bnn, {\bf Example\-Ptr} e, float weight)
+\begin{CompactList}\small\item\em Increments the count of the appropriate CPT element by weight. \item\end{CompactList}\item 
+void {\bf BNNode\-Add\-Fractional\-Samples} ({\bf Belief\-Net\-Node} bnn, {\bf Void\-List\-Ptr} samples, float weight)
+\begin{CompactList}\small\item\em Calls BNNode\-Add\-Fractional\-Sample for each example in the list. \item\end{CompactList}\item 
+float {\bf BNNode\-Get\-CPTRow\-Count} ({\bf Belief\-Net\-Node} bnn, {\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Returns the number of samples that have been added to the node with the same parent combination as in e. \item\end{CompactList}\item 
+float {\bf BNNode\-Get\-P} ({\bf Belief\-Net\-Node} bnn, int value)
+\begin{CompactList}\small\item\em Returns the marginal probability of the appropriate value of the variable. \item\end{CompactList}\item 
+float {\bf BNNode\-Get\-CP} ({\bf Belief\-Net\-Node} bnn, {\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Get the probability of the value of the target variable given the values of the parent variables. \item\end{CompactList}\item 
+void {\bf BNNode\-Set\-CP} ({\bf Belief\-Net\-Node} bnn, {\bf Example\-Ptr} e, float probability)
+\begin{CompactList}\small\item\em Sets the probability without affecting the sum of the CPT row for the parent combination. \item\end{CompactList}\item 
+float {\bf BNNode\-Get\-Num\-Samples} ({\bf Belief\-Net\-Node} bnn)
+\begin{CompactList}\small\item\em Returns the number of samples that have been added to the belief net node. \item\end{CompactList}\item 
+int {\bf BNNode\-Get\-Num\-CPTRows} ({\bf Belief\-Net\-Node} bnn)
+\begin{CompactList}\small\item\em Returns the number rows in the node's CPT. This is the number of parent combinations. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Belief\-Net}
+\begin{CompactItemize}
+\item 
+\#define {\bf BNGet\-User\-Data}(bn)\ ((({\bf Belief\-Net})bn) $\rightarrow$ user\-Data)
+\begin{CompactList}\small\item\em Allows you to store an arbitrary pointer on the Belief\-Net. \item\end{CompactList}\item 
+typedef {\bf \_\-Belief\-Net\_\-} {\bf Belief\-Net\-Struct}
+\begin{CompactList}\small\item\em Belief network ADT. \item\end{CompactList}\item 
+typedef {\bf \_\-Belief\-Net\_\-} $\ast$ {\bf Belief\-Net}
+\begin{CompactList}\small\item\em Belief network ADT. \item\end{CompactList}\item 
+{\bf Belief\-Net} {\bf BNNew} (void)
+\begin{CompactList}\small\item\em Creates a new belief net with no nodes. \item\end{CompactList}\item 
+void {\bf BNFree} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Frees the memory associated with the belief net and all nodes. \item\end{CompactList}\item 
+{\bf Belief\-Net} {\bf BNClone} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Makes a copy of the belief net and all nodes. \item\end{CompactList}\item 
+{\bf Belief\-Net} {\bf BNClone\-No\-CPTs} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Makes a copy of the belief net and all nodes, but does not copy the local models at the nodes. \item\end{CompactList}\item 
+{\bf Belief\-Net} {\bf BNNew\-From\-Spec} ({\bf Example\-Spec\-Ptr} es)
+\begin{CompactList}\small\item\em Makes a new belief net from the example spec. \item\end{CompactList}\item 
+int {\bf BNGet\-Sim\-Structure\-Difference} ({\bf Belief\-Net} bn, {\bf Belief\-Net} other\-Net)
+\begin{CompactList}\small\item\em Returns the symetric difference in the structures. \item\end{CompactList}\item 
+void {\bf BNSet\-Name} ({\bf Belief\-Net} bn, char $\ast$name)
+\begin{CompactList}\small\item\em Set's the Belief net's name. \item\end{CompactList}\item 
+{\bf Example\-Spec} $\ast$ {\bf BNGet\-Example\-Spec} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Returns the Example\-Sepc that is associated with the belief net. \item\end{CompactList}\item 
+{\bf Belief\-Net\-Node} {\bf BNGet\-Node\-By\-ID} ({\bf Belief\-Net} bn, int id)
+\begin{CompactList}\small\item\em Gets the node with the associated index. \item\end{CompactList}\item 
+int {\bf BNGet\-Num\-Nodes} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Returns the number of nodes in the Belief Net. \item\end{CompactList}\item 
+{\bf Belief\-Net\-Node} {\bf BNGet\-Node\-By\-Elim\-Order} ({\bf Belief\-Net} bn, int index)
+\begin{CompactList}\small\item\em Returns nodes by their order in a topological sort. \item\end{CompactList}\item 
+int {\bf BNHas\-Cycle} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Returns 1 if and only if there is a cycle in the graphical structure of the belief net. \item\end{CompactList}\item 
+void {\bf BNFlush\-Structure\-Cache} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Needs to be called anytime you change network structure. \item\end{CompactList}\item 
+void {\bf BNAdd\-Sample} ({\bf Belief\-Net} bn, {\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Modifies all the CPTs in the network by adding a count to the approprite parameters. \item\end{CompactList}\item 
+void {\bf BNAdd\-Samples} ({\bf Belief\-Net} bn, {\bf Void\-List\-Ptr} samples)
+\begin{CompactList}\small\item\em Calls BNAdd\-Sample for every example in the list. \item\end{CompactList}\item 
+void {\bf BNAdd\-Fractional\-Sample} ({\bf Belief\-Net} bn, {\bf Example\-Ptr} e, float weight)
+\begin{CompactList}\small\item\em Modifies all the CPTs in the network by adding a weighted count to the approprite parameters. \item\end{CompactList}\item 
+void {\bf BNAdd\-Fractional\-Samples} ({\bf Belief\-Net} bn, {\bf Void\-List\-Ptr} samples, float weight)
+\begin{CompactList}\small\item\em Calls BNAdd\-Fractional\-Sample for every example in the list. \item\end{CompactList}\item 
+long {\bf BNGet\-Num\-Independent\-Parameters} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Returns the sum over all nodes of the number of independent parameters in the CPTs. \item\end{CompactList}\item 
+long {\bf BNGet\-Num\-Parameters} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Returns the sum over all nodes of the number of parameters in the CPTs. \item\end{CompactList}\item 
+long {\bf BNGet\-Max\-Node\-Parameters} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Returns the number of parameters in the node with the most parameters. \item\end{CompactList}\item 
+{\bf Example\-Ptr} {\bf BNGenerate\-Sample} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Samples from the distribution represented by bn. \item\end{CompactList}\item 
+void {\bf BNSet\-Prior\-Strength} ({\bf Belief\-Net} bn, double strength)
+\begin{CompactList}\small\item\em Sets prior parameter strength as if some examples have been seen. \item\end{CompactList}\item 
+void {\bf BNSmooth\-Probabilities} ({\bf Belief\-Net} bn, double strength)
+\begin{CompactList}\small\item\em Adds a number of samples equal to strength to each CPT entry in the network. \item\end{CompactList}\item 
+void {\bf BNSet\-User\-Data} ({\bf Belief\-Net} bn, void $\ast$data)
+\begin{CompactList}\small\item\em Allows you to store an arbitrary pointer on the Belief\-Net. \item\end{CompactList}\item 
+{\bf Belief\-Net} {\bf BNRead\-BIF} (char $\ast$file\-Name)
+\begin{CompactList}\small\item\em Reads a Belief net from the named file. \item\end{CompactList}\item 
+{\bf Belief\-Net} {\bf BNRead\-BIFFILEP} (FILE $\ast$file)
+\begin{CompactList}\small\item\em Reads a Belief net from a file pointer. \item\end{CompactList}\item 
+void {\bf BNWrite\-BIF} ({\bf Belief\-Net} bn, FILE $\ast$out)
+\begin{CompactList}\small\item\em Writes the belief net to the file. \item\end{CompactList}\item 
+void {\bf BNPrint\-Stats} ({\bf Belief\-Net} bn)
+\begin{CompactList}\small\item\em Prints some information about the net to stdout. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Inference with Likelihood Sampling}
+The idea of likelihood sampling is that you have a set of query variables (specified by an example with some of the values unknown) and the system randomly generates samples for the query variables given the values of the non-query variables. After 'enough' samples the distribution of the samples generated for the query variables will be a good match to the 'true' distribution according to the net. The number of samples required can be very large, especially when dealing with events that don't occur often. \begin{CompactItemize}
+\item 
+{\bf Belief\-Net} {\bf BNInit\-Likelihood\-Sampling} ({\bf Belief\-Net} bn, {\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Set up likelihood sampling and return place holder network. \item\end{CompactList}\item 
+void {\bf BNAdd\-Likelihood\-Samples} ({\bf Belief\-Net} bn, {\bf Belief\-Net} new\-Net, {\bf Example\-Ptr} e, int num\-Samples)
+\begin{CompactList}\small\item\em Adds the requested number of samples to new\-Net. \item\end{CompactList}\item 
+{\bf Belief\-Net} {\bf BNLikelihood\-Sample\-NTimes} ({\bf Belief\-Net} bn, {\bf Example\-Ptr} e, int num\-Samples)
+\begin{CompactList}\small\item\em Combines a call to BNIniti\-Likelihood\-Sampling with a call to BNAdd\-Likelihood\-Samples. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{BeliefNet.h@{Belief\-Net.h}!BNGetUserData@{BNGetUserData}}
+\index{BNGetUserData@{BNGetUserData}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define BNGet\-User\-Data(bn)\ ((({\bf Belief\-Net})bn) $\rightarrow$ user\-Data)}\label{BeliefNet_8h_a1}
+
+
+Allows you to store an arbitrary pointer on the Belief\-Net. 
+
+You are responsible for managing any memory that it points to. 
+
+\subsection{Typedef Documentation}
+\index{BeliefNet.h@{Belief\-Net.h}!BeliefNet@{BeliefNet}}
+\index{BeliefNet@{BeliefNet}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Belief\-Net\_\-} $\ast$ {\bf Belief\-Net}}\label{BeliefNet_8h_a5}
+
+
+Belief network ADT. 
+
+See {\bf Belief\-Net.h} for more detail. \index{BeliefNet.h@{Belief\-Net.h}!BeliefNetNode@{BeliefNetNode}}
+\index{BeliefNetNode@{BeliefNetNode}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Belief\-Net\-Node\_\-} $\ast$ {\bf Belief\-Net\-Node}}\label{BeliefNet_8h_a3}
+
+
+Belief net node with full CPTs for local models. 
+
+See {\bf Belief\-Net.h} for more detail. \index{BeliefNet.h@{Belief\-Net.h}!BeliefNetNodeStruct@{BeliefNetNodeStruct}}
+\index{BeliefNetNodeStruct@{BeliefNetNodeStruct}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Belief\-Net\-Node\_\-}  {\bf Belief\-Net\-Node\-Struct}}\label{BeliefNet_8h_a2}
+
+
+Belief net node with full CPTs for local models. 
+
+See {\bf Belief\-Net.h} for more detail. \index{BeliefNet.h@{Belief\-Net.h}!BeliefNetStruct@{BeliefNetStruct}}
+\index{BeliefNetStruct@{BeliefNetStruct}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Belief\-Net\_\-}  {\bf Belief\-Net\-Struct}}\label{BeliefNet_8h_a4}
+
+
+Belief network ADT. 
+
+See {\bf Belief\-Net.h} for more detail. 
+
+\subsection{Function Documentation}
+\index{BeliefNet.h@{Belief\-Net.h}!BNAddFractionalSample@{BNAddFractionalSample}}
+\index{BNAddFractionalSample@{BNAddFractionalSample}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNAdd\-Fractional\-Sample ({\bf Belief\-Net} {\em bn}, {\bf Example\-Ptr} {\em e}, float {\em weight})}\label{BeliefNet_8h_a64}
+
+
+Modifies all the CPTs in the network by adding a weighted count to the approprite parameters. 
+
+See the Belief\-Net\-Node functions for a more detailed description of how the CPTs are represented and handled. \index{BeliefNet.h@{Belief\-Net.h}!BNAddFractionalSamples@{BNAddFractionalSamples}}
+\index{BNAddFractionalSamples@{BNAddFractionalSamples}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNAdd\-Fractional\-Samples ({\bf Belief\-Net} {\em bn}, {\bf Void\-List\-Ptr} {\em samples}, float {\em weight})}\label{BeliefNet_8h_a65}
+
+
+Calls BNAdd\-Fractional\-Sample for every example in the list. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNAddLikelihoodSamples@{BNAddLikelihoodSamples}}
+\index{BNAddLikelihoodSamples@{BNAddLikelihoodSamples}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNAdd\-Likelihood\-Samples ({\bf Belief\-Net} {\em bn}, {\bf Belief\-Net} {\em new\-Net}, {\bf Example\-Ptr} {\em e}, int {\em num\-Samples})}\label{BeliefNet_8h_a91}
+
+
+Adds the requested number of samples to new\-Net. 
+
+new\-Net should have been created by a call to BNIniti\-Likelihood\-Sampling. Adds the requested number of samples for the unknown variables in e using the distributions in bn. \index{BeliefNet.h@{Belief\-Net.h}!BNAddSample@{BNAddSample}}
+\index{BNAddSample@{BNAddSample}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNAdd\-Sample ({\bf Belief\-Net} {\em bn}, {\bf Example\-Ptr} {\em e})}\label{BeliefNet_8h_a62}
+
+
+Modifies all the CPTs in the network by adding a count to the approprite parameters. 
+
+See the Belief\-Net\-Node functions for a more detailed description of how the CPTs are represented and handled. \index{BeliefNet.h@{Belief\-Net.h}!BNAddSamples@{BNAddSamples}}
+\index{BNAddSamples@{BNAddSamples}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNAdd\-Samples ({\bf Belief\-Net} {\em bn}, {\bf Void\-List\-Ptr} {\em samples})}\label{BeliefNet_8h_a63}
+
+
+Calls BNAdd\-Sample for every example in the list. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNClone@{BNClone}}
+\index{BNClone@{BNClone}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net} BNClone ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a47}
+
+
+Makes a copy of the belief net and all nodes. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNCloneNoCPTs@{BNCloneNoCPTs}}
+\index{BNCloneNoCPTs@{BNCloneNoCPTs}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net} BNClone\-No\-CPTs ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a48}
+
+
+Makes a copy of the belief net and all nodes, but does not copy the local models at the nodes. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNFlushStructureCache@{BNFlushStructureCache}}
+\index{BNFlushStructureCache@{BNFlushStructureCache}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNFlush\-Structure\-Cache ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a60}
+
+
+Needs to be called anytime you change network structure. 
+
+That is, any time you add nodes, add or remove edges after calling BNHas\-Cycle, or any Elim\-Order stuff. The reason is that these two classes of functions cache topological sorts of the network and changing the structure invalidates these caches. In prinicipal, all of the functions that modify structure could be modified to automatically call this. I think things were done this way for efficiency (but I am not sure it actually helps efficiency... \index{BeliefNet.h@{Belief\-Net.h}!BNFree@{BNFree}}
+\index{BNFree@{BNFree}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNFree ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a46}
+
+
+Frees the memory associated with the belief net and all nodes. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNGenerateSample@{BNGenerateSample}}
+\index{BNGenerateSample@{BNGenerateSample}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Example\-Ptr} BNGenerate\-Sample ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a70}
+
+
+Samples from the distribution represented by bn. 
+
+You are responsible for freeing the returned example (using Example\-Free when you are done with it. \index{BeliefNet.h@{Belief\-Net.h}!BNGetExampleSpec@{BNGetExampleSpec}}
+\index{BNGetExampleSpec@{BNGetExampleSpec}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Example\-Spec}$\ast$ BNGet\-Example\-Spec ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a53}
+
+
+Returns the Example\-Sepc that is associated with the belief net. 
+
+The spec will be automatically created when you read the network from disk or as you add nodes to the net and values to the nodes. \index{BeliefNet.h@{Belief\-Net.h}!BNGetMaxNodeParameters@{BNGetMaxNodeParameters}}
+\index{BNGetMaxNodeParameters@{BNGetMaxNodeParameters}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long BNGet\-Max\-Node\-Parameters ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a69}
+
+
+Returns the number of parameters in the node with the most parameters. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNGetNodeByElimOrder@{BNGetNodeByElimOrder}}
+\index{BNGetNodeByElimOrder@{BNGetNodeByElimOrder}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net\-Node} BNGet\-Node\-By\-Elim\-Order ({\bf Belief\-Net} {\em bn}, int {\em index})}\label{BeliefNet_8h_a58}
+
+
+Returns nodes by their order in a topological sort. 
+
+If the nodes can not be topologically sorted (perhaps because there is a cycle) this function returns 0.
+
+Note that this function caches (and uses a cache) of the topological sort and that you might want to call BNFlush\-Structure\-Cache before calling this if you've changed the structure of the net since the cache was filled. \index{BeliefNet.h@{Belief\-Net.h}!BNGetNodeByID@{BNGetNodeByID}}
+\index{BNGetNodeByID@{BNGetNodeByID}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net\-Node} BNGet\-Node\-By\-ID ({\bf Belief\-Net} {\em bn}, int {\em id})}\label{BeliefNet_8h_a56}
+
+
+Gets the node with the associated index. 
+
+This is 0 based (like a C array). \index{BeliefNet.h@{Belief\-Net.h}!BNGetNumIndependentParameters@{BNGetNumIndependentParameters}}
+\index{BNGetNumIndependentParameters@{BNGetNumIndependentParameters}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long BNGet\-Num\-Independent\-Parameters ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a67}
+
+
+Returns the sum over all nodes of the number of independent parameters in the CPTs. 
+
+This is different from the total number of parameters because one of the parameters in each row can be determined from the values of the others, and so is not independent. \index{BeliefNet.h@{Belief\-Net.h}!BNGetNumNodes@{BNGetNumNodes}}
+\index{BNGetNumNodes@{BNGetNumNodes}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNGet\-Num\-Nodes ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a57}
+
+
+Returns the number of nodes in the Belief Net. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNGetNumParameters@{BNGetNumParameters}}
+\index{BNGetNumParameters@{BNGetNumParameters}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long BNGet\-Num\-Parameters ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a68}
+
+
+Returns the sum over all nodes of the number of parameters in the CPTs. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNGetSimStructureDifference@{BNGetSimStructureDifference}}
+\index{BNGetSimStructureDifference@{BNGetSimStructureDifference}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNGet\-Sim\-Structure\-Difference ({\bf Belief\-Net} {\em bn}, {\bf Belief\-Net} {\em other\-Net})}\label{BeliefNet_8h_a51}
+
+
+Returns the symetric difference in the structures. 
+
+This is defined as the sum for i in nodes of the number of parents that node i of bn has but node i of other\-BN does not have plus the number of parents that node i of other\-BN has that node i of bn does not have. \index{BeliefNet.h@{Belief\-Net.h}!BNHasCycle@{BNHasCycle}}
+\index{BNHasCycle@{BNHasCycle}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNHas\-Cycle ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a59}
+
+
+Returns 1 if and only if there is a cycle in the graphical structure of the belief net. 
+
+Note that this function caches (and uses a cache) of the topological sort and that you might want to call BNFlush\-Structure\-Cache before calling this if you've changed the structure of the net since the cache was filled. \index{BeliefNet.h@{Belief\-Net.h}!BNInitLikelihoodSampling@{BNInitLikelihoodSampling}}
+\index{BNInitLikelihoodSampling@{BNInitLikelihoodSampling}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net} BNInit\-Likelihood\-Sampling ({\bf Belief\-Net} {\em bn}, {\bf Example\-Ptr} {\em e})}\label{BeliefNet_8h_a90}
+
+
+Set up likelihood sampling and return place holder network. 
+
+Returns a new belief net with CPT set to start to acumulate samples for the unknown variables in e, you should free this net when you are done with it. Once the net is created you should add as many samples to it as you like using BNAdd\-Likelihood\-Samples and then check the CPTs at the appropriate nodes for the generated distributions. \index{BeliefNet.h@{Belief\-Net.h}!BNLikelihoodSampleNTimes@{BNLikelihoodSampleNTimes}}
+\index{BNLikelihoodSampleNTimes@{BNLikelihoodSampleNTimes}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net} BNLikelihood\-Sample\-NTimes ({\bf Belief\-Net} {\em bn}, {\bf Example\-Ptr} {\em e}, int {\em num\-Samples})}\label{BeliefNet_8h_a92}
+
+
+Combines a call to BNIniti\-Likelihood\-Sampling with a call to BNAdd\-Likelihood\-Samples. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNew@{BNNew}}
+\index{BNNew@{BNNew}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net} BNNew (void)}\label{BeliefNet_8h_a45}
+
+
+Creates a new belief net with no nodes. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNewFromSpec@{BNNewFromSpec}}
+\index{BNNewFromSpec@{BNNewFromSpec}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net} BNNew\-From\-Spec ({\bf Example\-Spec\-Ptr} {\em es})}\label{BeliefNet_8h_a49}
+
+
+Makes a new belief net from the example spec. 
+
+All attributes in the spec should be discrete. This adds a node, with the appropriate values, to the net for each variable in the spec. The resulting network has no edges and zeroed CPTs \index{BeliefNet.h@{Belief\-Net.h}!BNNodeAddFractionalSample@{BNNodeAddFractionalSample}}
+\index{BNNodeAddFractionalSample@{BNNodeAddFractionalSample}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNNode\-Add\-Fractional\-Sample ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Example\-Ptr} {\em e}, float {\em weight})}\label{BeliefNet_8h_a32}
+
+
+Increments the count of the appropriate CPT element by weight. 
+
+Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. \index{BeliefNet.h@{Belief\-Net.h}!BNNodeAddFractionalSamples@{BNNodeAddFractionalSamples}}
+\index{BNNodeAddFractionalSamples@{BNNodeAddFractionalSamples}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNNode\-Add\-Fractional\-Samples ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Void\-List\-Ptr} {\em samples}, float {\em weight})}\label{BeliefNet_8h_a33}
+
+
+Calls BNNode\-Add\-Fractional\-Sample for each example in the list. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeAddParent@{BNNodeAddParent}}
+\index{BNNodeAddParent@{BNNodeAddParent}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNNode\-Add\-Parent ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Belief\-Net\-Node} {\em parent})}\label{BeliefNet_8h_a9}
+
+
+Adds the specified node as a parent to bnn. 
+
+Both nodes should be from the same Belief\-Net structure. \index{BeliefNet.h@{Belief\-Net.h}!BNNodeAddSample@{BNNodeAddSample}}
+\index{BNNodeAddSample@{BNNodeAddSample}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNNode\-Add\-Sample ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Example\-Ptr} {\em e})}\label{BeliefNet_8h_a30}
+
+
+Increments the count of the appropriate CPT element by 1. 
+
+Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. \index{BeliefNet.h@{Belief\-Net.h}!BNNodeAddSamples@{BNNodeAddSamples}}
+\index{BNNodeAddSamples@{BNNodeAddSamples}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNNode\-Add\-Samples ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Void\-List\-Ptr} {\em samples})}\label{BeliefNet_8h_a31}
+
+
+Calls BNNode\-Add\-Sample for each example in the list. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeFreeCPT@{BNNodeFreeCPT}}
+\index{BNNodeFreeCPT@{BNNodeFreeCPT}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNNode\-Free\-CPT ({\bf Belief\-Net\-Node} {\em bnn})}\label{BeliefNet_8h_a27}
+
+
+Frees any memory being used by the node's CPTs. 
+
+This should be called before changing the node's parents. After a call to this function, you should call BNNode\-Init\-CPT for the node before making any calls that might try to access the CPT (adding samples, doing inference, smoothing probability, comparin networks, etc). \index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetCP@{BNNodeGetCP}}
+\index{BNNodeGetCP@{BNNodeGetCP}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float BNNode\-Get\-CP ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Example\-Ptr} {\em e})}\label{BeliefNet_8h_a38}
+
+
+Get the probability of the value of the target variable given the values of the parent variables. 
+
+Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. \index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetCPTRowCount@{BNNodeGetCPTRowCount}}
+\index{BNNodeGetCPTRowCount@{BNNodeGetCPTRowCount}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float BNNode\-Get\-CPTRow\-Count ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Example\-Ptr} {\em e})}\label{BeliefNet_8h_a34}
+
+
+Returns the number of samples that have been added to the node with the same parent combination as in e. 
+
+Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. \index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetName@{BNNodeGetName}}
+\index{BNNodeGetName@{BNNodeGetName}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ BNNode\-Get\-Name ({\bf Belief\-Net\-Node} {\em bnn})}\label{BeliefNet_8h_a23}
+
+
+Returns the name of the node. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetNumChildren@{BNNodeGetNumChildren}}
+\index{BNNodeGetNumChildren@{BNNodeGetNumChildren}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Get\-Num\-Children ({\bf Belief\-Net\-Node} {\em bnn})}\label{BeliefNet_8h_a16}
+
+
+Returns the number of nodes in the target node's child list. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetNumCPTRows@{BNNodeGetNumCPTRows}}
+\index{BNNodeGetNumCPTRows@{BNNodeGetNumCPTRows}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Get\-Num\-CPTRows ({\bf Belief\-Net\-Node} {\em bnn})}\label{BeliefNet_8h_a44}
+
+
+Returns the number rows in the node's CPT. This is the number of parent combinations. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetNumParameters@{BNNodeGetNumParameters}}
+\index{BNNodeGetNumParameters@{BNNodeGetNumParameters}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Get\-Num\-Parameters ({\bf Belief\-Net\-Node} {\em bnn})}\label{BeliefNet_8h_a22}
+
+
+Returns the number of parameters in the node's CPT. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetNumParents@{BNNodeGetNumParents}}
+\index{BNNodeGetNumParents@{BNNodeGetNumParents}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Get\-Num\-Parents ({\bf Belief\-Net\-Node} {\em bnn})}\label{BeliefNet_8h_a15}
+
+
+Returns the number of nodes in the target node's parent list. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetNumSamples@{BNNodeGetNumSamples}}
+\index{BNNodeGetNumSamples@{BNNodeGetNumSamples}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float BNNode\-Get\-Num\-Samples ({\bf Belief\-Net\-Node} {\em bnn})}\label{BeliefNet_8h_a43}
+
+
+Returns the number of samples that have been added to the belief net node. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetNumValues@{BNNodeGetNumValues}}
+\index{BNNodeGetNumValues@{BNNodeGetNumValues}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Get\-Num\-Values ({\bf Belief\-Net\-Node} {\em bnn})}\label{BeliefNet_8h_a21}
+
+
+Returns the number of values that the variable represented by the node can take. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetP@{BNNodeGetP}}
+\index{BNNodeGetP@{BNNodeGetP}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float BNNode\-Get\-P ({\bf Belief\-Net\-Node} {\em bnn}, int {\em value})}\label{BeliefNet_8h_a35}
+
+
+Returns the marginal probability of the appropriate value of the variable. 
+
+That is, the sum over all rows of the number of counts for that value divided by the sum over all rows of the number of counts in the row.
+
+Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. \index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetParent@{BNNodeGetParent}}
+\index{BNNodeGetParent@{BNNodeGetParent}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net\-Node} BNNode\-Get\-Parent ({\bf Belief\-Net\-Node} {\em bnn}, int {\em parent\-Index})}\label{BeliefNet_8h_a13}
+
+
+Returns the parent at position 'index' in the node's parent list. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeGetParentID@{BNNodeGetParentID}}
+\index{BNNodeGetParentID@{BNNodeGetParentID}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Get\-Parent\-ID ({\bf Belief\-Net\-Node} {\em bnn}, int {\em parent\-Index})}\label{BeliefNet_8h_a14}
+
+
+Returns the node id of the node at position 'index' in the node's parent list. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeHasParent@{BNNodeHasParent}}
+\index{BNNodeHasParent@{BNNodeHasParent}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Has\-Parent ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Belief\-Net\-Node} {\em parent})}\label{BeliefNet_8h_a17}
+
+
+Returns 1 if and only if parent is in the node's parent list. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeHasParentID@{BNNodeHasParentID}}
+\index{BNNodeHasParentID@{BNNodeHasParentID}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Has\-Parent\-ID ({\bf Belief\-Net\-Node} {\em bnn}, int {\em parent\-ID})}\label{BeliefNet_8h_a18}
+
+
+Returns 1 if and only if one of the node's parents has the specified node id. 
+
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeInitCPT@{BNNodeInitCPT}}
+\index{BNNodeInitCPT@{BNNodeInitCPT}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNNode\-Init\-CPT ({\bf Belief\-Net\-Node} {\em bnn})}\label{BeliefNet_8h_a25}
+
+
+Allocates memory for bnn's CPT and zeros the values. 
+
+This allocates enough memory to hold one float for each value of the variable associated with the node for each parent combination (an amount of memory that is exponential in the number of parents). This should be called once all parents are in place. \index{BeliefNet.h@{Belief\-Net.h}!BNNodeLookupParentIndex@{BNNodeLookupParentIndex}}
+\index{BNNodeLookupParentIndex@{BNNodeLookupParentIndex}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Lookup\-Parent\-Index ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Belief\-Net\-Node} {\em parent})}\label{BeliefNet_8h_a10}
+
+
+Returns the index of parent in bnn's parent list. 
+
+Returns -1 if parent is not one of node's parents. \index{BeliefNet.h@{Belief\-Net.h}!BNNodeLookupParentIndexByID@{BNNodeLookupParentIndexByID}}
+\index{BNNodeLookupParentIndexByID@{BNNodeLookupParentIndexByID}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Lookup\-Parent\-Index\-By\-ID ({\bf Belief\-Net\-Node} {\em bnn}, int {\em id})}\label{BeliefNet_8h_a11}
+
+
+Looks through the parent list of bnn for a node with node id of 'id'. 
+
+See BNNode\-Get\-ID for more info. \index{BeliefNet.h@{Belief\-Net.h}!BNNodeRemoveParent@{BNNodeRemoveParent}}
+\index{BNNodeRemoveParent@{BNNodeRemoveParent}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNNode\-Remove\-Parent ({\bf Belief\-Net\-Node} {\em bnn}, int {\em parent\-Index})}\label{BeliefNet_8h_a12}
+
+
+Removes the node with index 'parent\-Index' from bnn's parent list. 
+
+To remove the node 'parent' call BNNode\-Remove\-Parent(bnn, BNNode\-Lookup\-Parent\-Index(bnn, parent)). \index{BeliefNet.h@{Belief\-Net.h}!BNNodeSetCP@{BNNodeSetCP}}
+\index{BNNodeSetCP@{BNNodeSetCP}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNNode\-Set\-CP ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Example\-Ptr} {\em e}, float {\em probability})}\label{BeliefNet_8h_a39}
+
+
+Sets the probability without affecting the sum of the CPT row for the parent combination. 
+
+This means that the probability has the same prior weight before and after a call to this. Put another way, the set probability is equivilant to having seen the same number of samples at the new probability as at the old.
+
+Looks in example to get the values for the parents and the value for the variable. If any of these are unknown changes nothing, prints a low priority warning message, and returns -1 where applicable. \index{BeliefNet.h@{Belief\-Net.h}!BNNodeStructureEqual@{BNNodeStructureEqual}}
+\index{BNNodeStructureEqual@{BNNodeStructureEqual}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int BNNode\-Structure\-Equal ({\bf Belief\-Net\-Node} {\em bnn}, {\bf Belief\-Net\-Node} {\em other\-Node})}\label{BeliefNet_8h_a24}
+
+
+Returns 1 if and only if the two nodes have the same parents in the same order. 
+
+\begin{Desc}
+\item[{\bf Bug}]Only returns 1 if the parents are in the same order, but the order probably shouldn't matter. \end{Desc}
+\index{BeliefNet.h@{Belief\-Net.h}!BNNodeZeroCPT@{BNNodeZeroCPT}}
+\index{BNNodeZeroCPT@{BNNodeZeroCPT}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNNode\-Zero\-CPT ({\bf Belief\-Net\-Node} {\em bnn})}\label{BeliefNet_8h_a26}
+
+
+Sets the value of all CPT entries to zero. 
+
+Can be called after Init\-CPT to reset all the table's values to 0. \index{BeliefNet.h@{Belief\-Net.h}!BNPrintStats@{BNPrintStats}}
+\index{BNPrintStats@{BNPrintStats}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNPrint\-Stats ({\bf Belief\-Net} {\em bn})}\label{BeliefNet_8h_a77}
+
+
+Prints some information about the net to stdout. 
+
+The information includes num nodes, min max avg num parents, etc. \index{BeliefNet.h@{Belief\-Net.h}!BNReadBIF@{BNReadBIF}}
+\index{BNReadBIF@{BNReadBIF}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net} BNRead\-BIF (char $\ast$ {\em file\-Name})}\label{BeliefNet_8h_a74}
+
+
+Reads a Belief net from the named file. 
+
+The file should contain a net in {\tt Bayesian Interchange Format} (BIF). \index{BeliefNet.h@{Belief\-Net.h}!BNReadBIFFILEP@{BNReadBIFFILEP}}
+\index{BNReadBIFFILEP@{BNReadBIFFILEP}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Belief\-Net} BNRead\-BIFFILEP (FILE $\ast$ {\em file})}\label{BeliefNet_8h_a75}
+
+
+Reads a Belief net from a file pointer. 
+
+The file pointer should be opened for reading and should contain a net in {\tt Bayesian Interchange Format} (BIF). \index{BeliefNet.h@{Belief\-Net.h}!BNSetName@{BNSetName}}
+\index{BNSetName@{BNSetName}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNSet\-Name ({\bf Belief\-Net} {\em bn}, char $\ast$ {\em name})}\label{BeliefNet_8h_a52}
+
+
+Set's the Belief net's name. 
+
+This doesn't really affect anything (except it is recorded if you write out the belief net), but using it may make you feel better. \index{BeliefNet.h@{Belief\-Net.h}!BNSetPriorStrength@{BNSetPriorStrength}}
+\index{BNSetPriorStrength@{BNSetPriorStrength}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNSet\-Prior\-Strength ({\bf Belief\-Net} {\em bn}, double {\em strength})}\label{BeliefNet_8h_a71}
+
+
+Sets prior parameter strength as if some examples have been seen. 
+
+Multiplies all the counts in all of the network's CPTs so that each parent combination has the equivilant of strength samples, divided acording to that combination's distribution in the network.
+
+Hrm, does that confuse you too? \index{BeliefNet.h@{Belief\-Net.h}!BNSetUserData@{BNSetUserData}}
+\index{BNSetUserData@{BNSetUserData}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNSet\-User\-Data ({\bf Belief\-Net} {\em bn}, void $\ast$ {\em data})}\label{BeliefNet_8h_a73}
+
+
+Allows you to store an arbitrary pointer on the Belief\-Net. 
+
+You are responsible for managing any memory that it points to. \index{BeliefNet.h@{Belief\-Net.h}!BNSmoothProbabilities@{BNSmoothProbabilities}}
+\index{BNSmoothProbabilities@{BNSmoothProbabilities}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNSmooth\-Probabilities ({\bf Belief\-Net} {\em bn}, double {\em strength})}\label{BeliefNet_8h_a72}
+
+
+Adds a number of samples equal to strength to each CPT entry in the network. 
+
+This effectivly smooths the probabilities towards uniform. \index{BeliefNet.h@{Belief\-Net.h}!BNWriteBIF@{BNWriteBIF}}
+\index{BNWriteBIF@{BNWriteBIF}!BeliefNet.h@{Belief\-Net.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNWrite\-BIF ({\bf Belief\-Net} {\em bn}, FILE $\ast$ {\em out})}\label{BeliefNet_8h_a76}
+
+
+Writes the belief net to the file. 
+
+Out should be a file open for writing, pass stdout to write to the console. The net it written in {\tt Bayesian Interchange Format} (BIF). 

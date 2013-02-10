@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<title>Getting Started with VFML</title>
+</head>
+
+<body>
+
+<h1>Getting Started with VFML</h1>
+
+<p>At its core, VFML contains a library that you will need to compile
+and link with your programs.&nbsp; VFML has a set of interfaces
+through which you access the functionality of the library.&nbsp; It
+also contains a few programs which should help you with your machine
+learning tasks.</p>
+
+<p>The best way to get the most recent version of VFML is to download
+it from our <a
+href="https://sourceforge.net/projects/vfml/">sourceforge.net project
+page</a>.
+
+You can also get the most recent code from the CVS server there.  For
+more information see <a
+href="https://sourceforge.net/cvs/?group_id=85301">https://sourceforge.net/cvs/?group_id=85301</a>.
+The module name is <code>vfml</code> so the following commands should
+work (simply press 'enter' if asked for a password):
+
+<pre>
+cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/vfml login 
+ 
+cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/vfml co vfml
+</pre>
+
+<p>Alternately you can download the code from our UW mirror in <a
+href="../downloads/vfml.tar.gz">tar.gz format</a>.  But these may not
+be as up-to-date as the version at sourceforge.
+
+<h2>Getting Started with UNIX</h2>
+
+<p>VFML was developed and tested with Linux.  It should compile easily
+under any UNIX.  If it doesn't work for you please send us a bug
+report.  Once you have the source take the following steps to compile it:
+
+
+<ol>
+  <li>change directory into the distribution directory</li>
+  <li>edit the makefile so that the correct arch is uncommented (try Unix if none of the others fit)</li>
+  <li>type make</li>
+  <li>add the <code>&lt;distribution&gt;/bin</code> directory to your path</li>
+</ol>
+
+<p>Once that is done, you might like to check out the <a
+href="../examples/implement-learner.htm">implement-learner</a>
+example, which contains a starter project and makefile.  It should
+help get you started.</p>
+
+<h2>Getting Started with Windows</h2>
+
+<p>If you have <a
+href="http://sourceware.cygnus.com/cygwin/mirrors.html">Cygnus</a>
+installed, follow the UNIX getting started instructions (if you don't
+have Cygnus installed you might consider it - it's free!)</p>
+
+<p>VFML was developed on Linux, but is written with standard C and
+should work in other environments.  For non-cygnus windows try the
+following:
+
+<p>The <a
+href="../examples/implement-learner.htm">implement-learner</a> example
+contains a VC++6.0 project which should help get you started.&nbsp;
+You might need to change some of the configurations and paths
+depending on where you installed the VFML distribution - the sample
+project file assumes you installed VFML as c:/proj/vfml. &nbsp; Here
+are the steps that were used to create this VC++ project: &nbsp;
+
+<ul>
+  <li>Create a new project, a win32 console application with a simple-app</li>
+  <li>Remove the starter file they gave you: <code>&lt;projectname&gt;.cpp </code>(select the file and press the DEL key)</li>
+  <li>Switch to <strong>File View</strong> on the left.&nbsp;&nbsp;
+  Add all the source and include files from the: include, src, src/core, src/util, and src/windows directories to the project</li>
+  <li>Turn off pre-compiled headers for all the source files by doing the following:</li>
+  <ul>
+    <li>From the <strong>Project</strong> menu, select <strong>Settings ...</strong>. </li>
+    <li>Make sure the <strong>Settings for</strong> selection reflects the project you are
+      building. By default, this will likely be &quot;Win32 Debug&quot;. </li>
+    <li>Expand the <strong>Source Files</strong> folder in the list on the left, and
+      control-click to select all the source files you just added to the project. </li>
+    <li>On the right, select the <strong>C/C++</strong> tab. </li>
+    <li>In the <strong>Category</strong> combo box, select <strong>Precompiled headers</strong>.
+    </li>
+    <li>Select the <strong>Not using precompiled headers</strong> option. </li>
+    <li>Click <strong>OK</strong> to close the project settings dialog. </li>
+  </ul>
+  <li>Now add additional include directories</li>
+  <ul>
+    <li>From the <strong>Project</strong> menu, select <strong>Settings ...</strong>. </li>
+    <li>Make sure the <strong>Settings for</strong> selection reflects the project you are
+      building. By default, this will likely be &quot;Win32 Debug&quot;. </li>
+    <li>Expand the <strong>Source Files</strong> folder in the list on the left, and
+      control-click to select all the source files you just added to the project. </li>
+    <li>On the right, select the <strong>C/C++</strong> tab. </li>
+    <li>In the <strong>Category</strong> combo box, select <strong>Preprocessor</strong>. </li>
+    <li>In the <strong>Additional Include Directories</strong> box, add in (separated by
+      commas):</li>
+    <ul>
+      <li><code>&lt;VFML-root&gt;/include</code></li>
+      <li><code>&lt;VFML-root&gt;/src</code></li>
+      <li><code>&lt;VFML-root&gt;/src/core</code></li>
+      <li><code>&lt;VFML-root&gt;/src/util</code></li>
+      <li><code>&lt;VFML-root&gt;/src/windows</code></li>
+    </ul>
+    <li>Click <strong>OK</strong> to close the project settings dialog.</li>
+  </ul>
+  <li>As you add new files to your project make sure you update their precompiled headers and include directory settings as described just above.</li>
+</ul>
+
+<h2>Getting Started with C++</h2>
+
+<p>VFML will work with C++, just remember that you need to let your
+compiler know that VFML is written in C.&nbsp; For example, you need
+to use the following statement to include vfml.h into a C++ files:</p>
+
+<code>
+<p>extern &quot;C&quot; {<br>
+&nbsp;&nbsp; #include &quot;vfml.h&quot;<br>
+}<br>
+</code></p>
+
+<h2>Getting Datasets</h2>
+
+<p>We have converted a bunch of the UCI-repository <a
+href="../appendixes/ucidatasets.htm">uci datasets</a> to <a
+href="../appendixes/c45.htm">C4.5 format</a> for use with VFML.&nbsp;
+You should download them, and put them in the same directory that
+contains the VFML distribution directory.</p> 
+</body>
+</html>

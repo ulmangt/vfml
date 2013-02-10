@@ -1,0 +1,36 @@
+\section{mostcommonclass File Reference}
+\label{mostcommonclass}\index{mostcommonclass@{mostcommonclass}}
+
+
+\subsection{Detailed Description}
+Predicts the most common class in the training data. 
+
+This is a very simple 'learner', but it may be useful as a baseline to compare your learner against; predicting with 99\% accuracy isn't impressive if 98\% of the examples have the same class.
+
+The mostcommonclass learner works in time proportional to the number of training examples and uses space proportional to the number of classes.\  It should be able to work on large datasets.
+
+The learner takes input and does output in {\tt c4.5 format}. \  It expects to find the files {\tt $<$stem$>$.names} and {\tt $<$stem$>$.data.} Depending on command line argument, it will either output the most common class or test its error rate on {\tt $<$stem$>$.test}.
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$ \begin{itemize}
+\item Set the stem name (default DF)\par
+\end{itemize}
+\item -source $<$dir$>$ \begin{itemize}
+\item Set the directory that contains the dataset (default '.')\par
+\end{itemize}
+\item -u \begin{itemize}
+\item Test on the examples in $<$stem$>$.test and output in a format appropriate for interface with xvalidate and batchtest\  (defaults to off)\par
+\end{itemize}
+\item -v \begin{itemize}
+\item Can be used multiple times to increase the debugging output \end{itemize}
+\end{itemize}
+
+
+\subsubsection*{Example}
+
+{\tt mostcommonclass -f banana -source datasets/banana}
+
+Looks for a dataset named 'banana' in the 'datasets/banana' directory.\  Outputs the name of the most common class in the dataset.
+

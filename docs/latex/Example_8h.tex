@@ -1,0 +1,252 @@
+\section{Example.h File Reference}
+\label{Example_8h}\index{Example.h@{Example.h}}
+
+
+\subsection{Detailed Description}
+ADT for training (and testing, etc.) data. 
+
+This is the interface for working with instances of the Example ADT. Note that all access to attributes is 0 based (just like C arrays).
+
+Note that all the Examples created with an Example\-Spec maintain a pointer to the Example\-Spec, so you shouldn't free it or modify the Example\-Spec until you are done with all the Examples referencing it.
+
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-Example\_\-}
+\begin{CompactList}\small\item\em ADT for working with examples. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf Example\-Is\-Attribute\-Unknown}(e, att\-Num)\ ( VALIndex(e $\rightarrow$ attributes, att\-Num) == 0 )
+\begin{CompactList}\small\item\em Returns 1 if the specified attribute is marked as unknown and 0 otherwise. \item\end{CompactList}\item 
+\#define {\bf Example\-Get\-Num\-Attributes}(e)\ (VALLength((({\bf Example\-Ptr})e) $\rightarrow$ attributes))
+\begin{CompactList}\small\item\em Returns the number of attributes that this example has. \item\end{CompactList}\item 
+\#define {\bf Example\-Get\-Class}(e)\ ((({\bf Example\-Ptr})e) $\rightarrow$ myclass)
+\begin{CompactList}\small\item\em Returns the value of the example's class. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef {\bf \_\-Example\_\-} {\bf Example}
+\begin{CompactList}\small\item\em ADT for working with examples. \item\end{CompactList}\item 
+typedef {\bf \_\-Example\_\-} $\ast$ {\bf Example\-Ptr}
+\begin{CompactList}\small\item\em ADT for working with examples. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Example\-Ptr} {\bf Example\-New} ({\bf Example\-Spec\-Ptr} es)
+\begin{CompactList}\small\item\em Programmatically creates a new example. \item\end{CompactList}\item 
+void {\bf Example\-Free} ({\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Frees all the memory being used by the passed example. \item\end{CompactList}\item 
+{\bf Example\-Ptr} {\bf Example\-Clone} ({\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Allocates memory and copies the example into it. \item\end{CompactList}\item 
+void {\bf Example\-Set\-Attribute\-Unknown} ({\bf Example\-Ptr} e, int att\-Num)
+\begin{CompactList}\small\item\em Marks the specified attribute value as unknown. \item\end{CompactList}\item 
+void {\bf Example\-Set\-Discrete\-Attribute\-Value} ({\bf Example\-Ptr} e, int att\-Num, int value)
+\begin{CompactList}\small\item\em Considers the specified attribute to be discrete and sets its value to the specified value. \item\end{CompactList}\item 
+void {\bf Example\-Set\-Continuous\-Attribute\-Value} ({\bf Example\-Ptr} e, int att\-Num, double value)
+\begin{CompactList}\small\item\em Considers the specified attribute to be continuous and sets its value to the specified value. \item\end{CompactList}\item 
+void {\bf Example\-Set\-Class} ({\bf Example\-Ptr} e, int the\-Class)
+\begin{CompactList}\small\item\em Sets the example's class to the specified class. \item\end{CompactList}\item 
+void {\bf Example\-Set\-Class\-Unknown} ({\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Marks the example's class as unknown. \item\end{CompactList}\item 
+void {\bf Example\-Add\-Noise} ({\bf Example\-Ptr} e, float p, int do\-Class, int attrib)
+\begin{CompactList}\small\item\em Randomly corrupts the attributes and class of the example. \item\end{CompactList}\item 
+{\bf Example\-Ptr} {\bf Example\-Read} (FILE $\ast$file, {\bf Example\-Spec\-Ptr} es)
+\begin{CompactList}\small\item\em Attempts to read an example from the passed file pointer. \item\end{CompactList}\item 
+{\bf Void\-List\-Ptr} {\bf Examples\-Read} (FILE $\ast$file, {\bf Example\-Spec\-Ptr} es)
+\begin{CompactList}\small\item\em Reads as many examples as possible from the file pointer. \item\end{CompactList}\item 
+int {\bf Example\-Is\-Attribute\-Discrete} ({\bf Example\-Ptr} e, int att\-Num)
+\begin{CompactList}\small\item\em Returns 1 if the specified attribute is discrete and 0 otherwise. \item\end{CompactList}\item 
+int {\bf Example\-Is\-Attribute\-Continuous} ({\bf Example\-Ptr} e, int att\-Num)
+\begin{CompactList}\small\item\em Returns 1 if the specified attribute is continuous and 0 otherwise. \item\end{CompactList}\item 
+int {\bf Example\-Get\-Discrete\-Attribute\-Value} ({\bf Example\-Ptr} e, int att\-Num)
+\begin{CompactList}\small\item\em Returns the value of the indicated discrete attribute. \item\end{CompactList}\item 
+double {\bf Example\-Get\-Continuous\-Attribute\-Value} ({\bf Example\-Ptr} e, int att\-Num)
+\begin{CompactList}\small\item\em Returns the value of the indicated continuous attribute. \item\end{CompactList}\item 
+int {\bf Example\-Is\-Class\-Unknown} ({\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Returns 1 if the value of the example's class is known, and 0 otherwise. \item\end{CompactList}\item 
+float {\bf Example\-Distance} ({\bf Example\-Ptr} e, {\bf Example\-Ptr} dst)
+\begin{CompactList}\small\item\em Returns the euclidian distance between the two examples. \item\end{CompactList}\item 
+void {\bf Example\-Write} ({\bf Example\-Ptr} e, FILE $\ast$out)
+\begin{CompactList}\small\item\em Writes the example to the passed file point.er. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{Example.h@{Example.h}!ExampleGetClass@{ExampleGetClass}}
+\index{ExampleGetClass@{ExampleGetClass}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Example\-Get\-Class(e)\ ((({\bf Example\-Ptr})e) $\rightarrow$ myclass)}\label{Example_8h_a3}
+
+
+Returns the value of the example's class. 
+
+If the value of the example's class is known this returns the value, otherwise this returns -1. \index{Example.h@{Example.h}!ExampleGetNumAttributes@{ExampleGetNumAttributes}}
+\index{ExampleGetNumAttributes@{ExampleGetNumAttributes}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Example\-Get\-Num\-Attributes(e)\ (VALLength((({\bf Example\-Ptr})e) $\rightarrow$ attributes))}\label{Example_8h_a1}
+
+
+Returns the number of attributes that this example has. 
+
+This will be equal to the number of attributes that were in the Example\-Spec used to construct the example. \index{Example.h@{Example.h}!ExampleIsAttributeUnknown@{ExampleIsAttributeUnknown}}
+\index{ExampleIsAttributeUnknown@{ExampleIsAttributeUnknown}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Example\-Is\-Attribute\-Unknown(e, att\-Num)\ ( VALIndex(e $\rightarrow$ attributes, att\-Num) == 0 )}\label{Example_8h_a0}
+
+
+Returns 1 if the specified attribute is marked as unknown and 0 otherwise. 
+
+Be sure not to ask for an att\-Num $>$= {\bf Example\-Get\-Num\-Attributes(e)}. 
+
+\subsection{Typedef Documentation}
+\index{Example.h@{Example.h}!Example@{Example}}
+\index{Example@{Example}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Example\_\-}  {\bf Example}}\label{Example_8h_a4}
+
+
+ADT for working with examples. 
+
+See {\bf Example.h} for more detail. \index{Example.h@{Example.h}!ExamplePtr@{ExamplePtr}}
+\index{ExamplePtr@{ExamplePtr}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Example\_\-} $\ast$ {\bf Example\-Ptr}}\label{Example_8h_a5}
+
+
+ADT for working with examples. 
+
+See {\bf Example.h} for more detail. 
+
+\subsection{Function Documentation}
+\index{Example.h@{Example.h}!ExampleAddNoise@{ExampleAddNoise}}
+\index{ExampleAddNoise@{ExampleAddNoise}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Add\-Noise ({\bf Example\-Ptr} {\em e}, float {\em p}, int {\em do\-Class}, int {\em attrib})}\label{Example_8h_a17}
+
+
+Randomly corrupts the attributes and class of the example. 
+
+p should be a number between 0-1, which is interpreted as a probability (e.g. a value of .732 would be interpreted as 73.2\%). class and attrib are flags which should be 1 if you want noise added to that part of the example and 0 otherwise. Then, for each discrete thing selected by the flags, this function will have the specified probability of changing it, without replacement, to a randomly selected value. This function changes the value of each continuous attribute by adding to it a value drawn from a normal distribution with mean 0 and with standard deviation p. \index{Example.h@{Example.h}!ExampleClone@{ExampleClone}}
+\index{ExampleClone@{ExampleClone}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Example\-Ptr} Example\-Clone ({\bf Example\-Ptr} {\em e})}\label{Example_8h_a11}
+
+
+Allocates memory and copies the example into it. 
+
+\index{Example.h@{Example.h}!ExampleDistance@{ExampleDistance}}
+\index{ExampleDistance@{ExampleDistance}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Example\-Distance ({\bf Example\-Ptr} {\em e}, {\bf Example\-Ptr} {\em dst})}\label{Example_8h_a25}
+
+
+Returns the euclidian distance between the two examples. 
+
+This ignores discrete attributes. \index{Example.h@{Example.h}!ExampleFree@{ExampleFree}}
+\index{ExampleFree@{ExampleFree}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Free ({\bf Example\-Ptr} {\em e})}\label{Example_8h_a10}
+
+
+Frees all the memory being used by the passed example. 
+
+\index{Example.h@{Example.h}!ExampleGetContinuousAttributeValue@{ExampleGetContinuousAttributeValue}}
+\index{ExampleGetContinuousAttributeValue@{ExampleGetContinuousAttributeValue}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Example\-Get\-Continuous\-Attribute\-Value ({\bf Example\-Ptr} {\em e}, int {\em att\-Num})}\label{Example_8h_a23}
+
+
+Returns the value of the indicated continuous attribute. 
+
+If the att\-Num is valid, and Example\-Get\-Attribute\-Unknown(e, att\-Num) returns 0, and Example\-Is\-Attribute\-Continuous(e, att\-Num) returns 1, this function will return the value of the attribute. If the conditions aren't met, there is a good chance that calling this will crash your program. \index{Example.h@{Example.h}!ExampleGetDiscreteAttributeValue@{ExampleGetDiscreteAttributeValue}}
+\index{ExampleGetDiscreteAttributeValue@{ExampleGetDiscreteAttributeValue}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Get\-Discrete\-Attribute\-Value ({\bf Example\-Ptr} {\em e}, int {\em att\-Num})}\label{Example_8h_a22}
+
+
+Returns the value of the indicated discrete attribute. 
+
+If the att\-Num is valid, and Example\-Get\-Attribute\-Unknown(e, att\-Num) returns 0, and Example\-Is\-Attribute\-Discrete(e, att\-Num) returns 1, this function will return the value of the attribute. If the conditions aren't met, there is a good chance that calling this will crash your program. \index{Example.h@{Example.h}!ExampleIsAttributeContinuous@{ExampleIsAttributeContinuous}}
+\index{ExampleIsAttributeContinuous@{ExampleIsAttributeContinuous}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Is\-Attribute\-Continuous ({\bf Example\-Ptr} {\em e}, int {\em att\-Num})}\label{Example_8h_a21}
+
+
+Returns 1 if the specified attribute is continuous and 0 otherwise. 
+
+Be sure not to ask for an att\-Num $>$= {\bf Example\-Get\-Num\-Attributes(e)}. \index{Example.h@{Example.h}!ExampleIsAttributeDiscrete@{ExampleIsAttributeDiscrete}}
+\index{ExampleIsAttributeDiscrete@{ExampleIsAttributeDiscrete}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Is\-Attribute\-Discrete ({\bf Example\-Ptr} {\em e}, int {\em att\-Num})}\label{Example_8h_a20}
+
+
+Returns 1 if the specified attribute is discrete and 0 otherwise. 
+
+Be sure not to ask for an att\-Num $>$= {\bf Example\-Get\-Num\-Attributes(e)}. \index{Example.h@{Example.h}!ExampleIsClassUnknown@{ExampleIsClassUnknown}}
+\index{ExampleIsClassUnknown@{ExampleIsClassUnknown}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Example\-Is\-Class\-Unknown ({\bf Example\-Ptr} {\em e})}\label{Example_8h_a24}
+
+
+Returns 1 if the value of the example's class is known, and 0 otherwise. 
+
+\index{Example.h@{Example.h}!ExampleNew@{ExampleNew}}
+\index{ExampleNew@{ExampleNew}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Example\-Ptr} Example\-New ({\bf Example\-Spec\-Ptr} {\em es})}\label{Example_8h_a8}
+
+
+Programmatically creates a new example. 
+
+Allocates enough memory to hold all the attributes mentioned in the Example\-Spec passed. Use the Example\-Set\-Foo functions (see below) to set the values of the attributes and class.
+
+This function allocates memory which should be freed by calling Example\-Free. \index{Example.h@{Example.h}!ExampleRead@{ExampleRead}}
+\index{ExampleRead@{ExampleRead}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Example\-Ptr} Example\-Read (FILE $\ast$ {\em file}, {\bf Example\-Spec\-Ptr} {\em es})}\label{Example_8h_a18}
+
+
+Attempts to read an example from the passed file pointer. 
+
+FILE $\ast$ should be opened for reading. The file should contain examples in C4.5 format. Uses the Example\-Spec to determine how many, what types, and how to interpret the attributes it needs to read.
+
+This function will return 0 (NULL) if it is unable to read an example from the file (bad input or EOF). If the input is badly formed, the function will also output an error to the console.
+
+Note that you could pass STDIN to the function to read an example from the console.
+
+This function allocates memory which should be freed by calling Example\-Free. \index{Example.h@{Example.h}!ExampleSetAttributeUnknown@{ExampleSetAttributeUnknown}}
+\index{ExampleSetAttributeUnknown@{ExampleSetAttributeUnknown}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Set\-Attribute\-Unknown ({\bf Example\-Ptr} {\em e}, int {\em att\-Num})}\label{Example_8h_a12}
+
+
+Marks the specified attribute value as unknown. 
+
+Future calls to Example\-Get\-Attribute\-Unknown for that attribute will return 1. \index{Example.h@{Example.h}!ExampleSetClass@{ExampleSetClass}}
+\index{ExampleSetClass@{ExampleSetClass}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Set\-Class ({\bf Example\-Ptr} {\em e}, int {\em the\-Class})}\label{Example_8h_a15}
+
+
+Sets the example's class to the specified class. 
+
+The function doesn't do much error checking so be sure that you call it consistent with Example\-Spec\-Get\-Num\-Classes. If you don't, there is a chance the example could cause your program to crash. \index{Example.h@{Example.h}!ExampleSetClassUnknown@{ExampleSetClassUnknown}}
+\index{ExampleSetClassUnknown@{ExampleSetClassUnknown}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Set\-Class\-Unknown ({\bf Example\-Ptr} {\em e})}\label{Example_8h_a16}
+
+
+Marks the example's class as unknown. 
+
+\index{Example.h@{Example.h}!ExampleSetContinuousAttributeValue@{ExampleSetContinuousAttributeValue}}
+\index{ExampleSetContinuousAttributeValue@{ExampleSetContinuousAttributeValue}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Set\-Continuous\-Attribute\-Value ({\bf Example\-Ptr} {\em e}, int {\em att\-Num}, double {\em value})}\label{Example_8h_a14}
+
+
+Considers the specified attribute to be continuous and sets its value to the specified value. 
+
+This function doesn't do much error checking so be sure that you call it consistent with Example\-Is\-Attribute\-Discrete, and Example\-Is\-Attribute\-Continuous. If you don't, there is a chance the example could cause your program to crash. \index{Example.h@{Example.h}!ExampleSetDiscreteAttributeValue@{ExampleSetDiscreteAttributeValue}}
+\index{ExampleSetDiscreteAttributeValue@{ExampleSetDiscreteAttributeValue}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Set\-Discrete\-Attribute\-Value ({\bf Example\-Ptr} {\em e}, int {\em att\-Num}, int {\em value})}\label{Example_8h_a13}
+
+
+Considers the specified attribute to be discrete and sets its value to the specified value. 
+
+This function doesn't do much error checking so be sure that you call it consistent with Example\-Is\-Attribute\-Discrete, Example\-Is\-Attribute\-Continuous and Example\-Spec\-Get\-Attribute\-Value\-Count. If you don't, there is a chance the example could cause your program to crash. \index{Example.h@{Example.h}!ExamplesRead@{ExamplesRead}}
+\index{ExamplesRead@{ExamplesRead}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Void\-List\-Ptr} Examples\-Read (FILE $\ast$ {\em file}, {\bf Example\-Spec\-Ptr} {\em es})}\label{Example_8h_a19}
+
+
+Reads as many examples as possible from the file pointer. 
+
+Calls Example\-Read until it gets a 0, allocates a list and adds each example to it. You are responsible for freeing the examples and the list. \index{Example.h@{Example.h}!ExampleWrite@{ExampleWrite}}
+\index{ExampleWrite@{ExampleWrite}!Example.h@{Example.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Write ({\bf Example\-Ptr} {\em e}, FILE $\ast$ {\em out})}\label{Example_8h_a26}
+
+
+Writes the example to the passed file point.er. 
+
+FILE $\ast$ should be opened for writing. The example will be written in C4.5 format, and could later be read in using Example\-Read.
+
+Note that you could pass stdout to the function to write an example to the console. 

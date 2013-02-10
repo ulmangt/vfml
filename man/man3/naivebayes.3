@@ -1,0 +1,53 @@
+.TH "naivebayes" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+naivebayes \- 
+.SH "Detailed Description"
+.PP 
+A Naive Bayes learner. 
+
+An implementation of Naive Bayes that works with categorical attributes. This learner works in time proportional to the number of training examples. It also requires memory that is proportional to the number of classes * number attributes * number of values.
+.PP
+The learner takes input and does output in \fCc4.5 format\fP.   It expects to find the files \fC<stem>.names\fP and \fC<stem>.data.\fP Depending on command line argument, it will either output the model if you use the -v argument enough or test its error rate on \fC<stem>.test\fP.
+.PP
+\fBWish List\fP
+.RS 4
+Modify this learner to work with continuous attributes. 
+.RE
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem>
+.IP "  \(bu" 4
+Set the stem name (default DF)
+.PP
+
+.IP "\(bu" 2
+-source <dir>
+.IP "  \(bu" 4
+Set the directory that contains the dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-u
+.IP "  \(bu" 4
+Test on the examples in <stem>.test and output in a format appropriate for interface with xvalidate and batchtest  (defaults to off)
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

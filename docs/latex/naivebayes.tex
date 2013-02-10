@@ -1,0 +1,27 @@
+\section{naivebayes File Reference}
+\label{naivebayes}\index{naivebayes@{naivebayes}}
+
+
+\subsection{Detailed Description}
+A Naive Bayes learner. 
+
+An implementation of Naive Bayes that works with categorical attributes. This learner works in time proportional to the number of training examples. It also requires memory that is proportional to the number of classes $\ast$ number attributes $\ast$ number of values.
+
+The learner takes input and does output in {\tt c4.5 format}. \  It expects to find the files {\tt $<$stem$>$.names} and {\tt $<$stem$>$.data.} Depending on command line argument, it will either output the model if you use the -v argument enough or test its error rate on {\tt $<$stem$>$.test}.
+
+\begin{Desc}
+\item[{\bf Wish List}]Modify this learner to work with continuous attributes. \end{Desc}
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$\begin{itemize}
+\item Set the stem name (default DF)\end{itemize}
+\item -source $<$dir$>$\begin{itemize}
+\item Set the directory that contains the dataset (default '.')\end{itemize}
+\item -u\begin{itemize}
+\item Test on the examples in $<$stem$>$.test and output in a format appropriate for interface with xvalidate and batchtest\  (defaults to off)\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+

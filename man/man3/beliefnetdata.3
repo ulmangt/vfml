@@ -1,0 +1,95 @@
+.TH "beliefnetdata" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+beliefnetdata \- 
+.SH "Detailed Description"
+.PP 
+Creates a data set by sampling from a Bayesian Network. 
+
+>This program creates a synthetic data set by loading an existing belief network (in \fCBIF format\fP) and sampling from it, possibly introducing noise. This program will also create a .names file for the resulting data set. More specifically, belifnetdata reads the network, generates samples from it with \fBBNGenerateSample\fP, and adds noise to them (if requested) with \fBExampleAddNoise\fP.
+.PP
+Multiple runs with the same seed parameter produce the same results. Also note that running this command with one level of -v will output some statistics about the belif net which you might find useful.
+.PP
+VFML comes with a collection of benchmark belief nets, and you may want \fCmore information on these\fP.
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f 'stem name for output'
+.IP "  \(bu" 4
+(default DF)
+.PP
+
+.IP "\(bu" 2
+-bnf 'file containing belief net'
+.IP "  \(bu" 4
+(default DF.bif)
+.PP
+
+.IP "\(bu" 2
+-train 'size of training set'
+.IP "  \(bu" 4
+(default 10000)
+.PP
+
+.IP "\(bu" 2
+-infinite
+.IP "  \(bu" 4
+Generate an infinite stream of training examples, overrides -train flags, only makes sense with -stdout (default off)
+.PP
+
+.IP "\(bu" 2
+-stdout
+.IP "  \(bu" 4
+Output the trainset to stdout (default to 'stem>'data)
+.PP
+
+.IP "\(bu" 2
+-seed 'random seed'
+.IP "  \(bu" 4
+(default to random)
+.PP
+
+.IP "\(bu" 2
+-noise 'noise level'
+.IP "  \(bu" 4
+10 means change 10% of values, including classes (default to 0)
+.PP
+
+.IP "\(bu" 2
+-target 'dir'
+.IP "  \(bu" 4
+Set the output directory (default '.')
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Increase the message level
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Run with this argument to get a list of arguments and their meanings.
+.br
+
+.PP
+
+.PP
+.PP
+.SS "Example"
+.PP
+\fC\fP
+.PP
+\fCbeliefnetdata -f train -bnf alarm.bif -train 1000 -seed 111 -noise 5\fP
+.PP
+Creates 1000 samples from the alarm network, randomly corrupts 5% of their values, write the resulting samples to train.data (and create a file train.names) and reproduce the same data set everytime the same arguments are used (thanks to the seed parameter)
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

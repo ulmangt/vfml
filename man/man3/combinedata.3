@@ -1,0 +1,71 @@
+.TH "combinedata" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+combinedata \- 
+.SH "Detailed Description"
+.PP 
+Combines a series of data sets into a single large one. 
+
+Sometimes you may need to combine a collection of small data files into one large one. Usually this could be accomplished with the unix cat utility, but sometimes it will not be available and sometimes it may not perfrom as needed (for example, when the source files do not end with newlines). combinedata was created for those situations.
+.PP
+combinedata reads a collection of files as specified by the required -dataFiles argument and writes them to the name specified by the -fout argument.
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-names <filename>
+.IP "  \(bu" 4
+Set the names file (default DF.names)
+.PP
+
+.IP "\(bu" 2
+-fout <filename>
+.IP "  \(bu" 4
+Set the name of the output dataset (default DF-out)
+.PP
+
+.IP "\(bu" 2
+-target <dir>
+.IP "  \(bu" 4
+Set the output directory (default '.')
+.PP
+
+.IP "\(bu" 2
+-source <dir>
+.IP "  \(bu" 4
+Set the directory that contains the dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Display usage information and exit
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.IP "\(bu" 2
+-dataFiles <list of files>
+.IP "  \(bu" 4
+till the end of the line list the files to combine (REQUIRED)
+.PP
+
+.PP
+.PP
+.SS "Example"
+.PP
+\fCcombinedata -names test -fout big-data -dataFiles small-data0 small-data1 small-data2\fP
+.PP
+Will create a file called big-data.data which contains the examples from the three specified files. All data files had better share the format specified in test.names.
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

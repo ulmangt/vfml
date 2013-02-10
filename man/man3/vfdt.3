@@ -1,0 +1,170 @@
+.TH "vfdt" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+vfdt \- 
+.SH "Detailed Description"
+.PP 
+Learns a decision tree from a high-speed data stream or very large data set. 
+
+vfdt is described in \fCthis paper\fP. (This version of VFDT has many extensions since that paper was written, including the ability to learn from domains with continuous attributes, we hope to have a more up-to-date paper to cite here soon).
+.PP
+VFDT learns a decision tree as follows. It starts with a single leaf and starts collecting training examples from a data stream (with the -stdin argument) or from the file stem.data. When it has enough data to know, with high confidence (see the -sc parameter below) that it knows which attribute is the best to partition the data with, it turns the leaf into an internal node splitting on the selected attribute and starts learning at the new leaves recursively. VFDT is an incremental online algoriithm in that it has a model available at any time during its run and refines the model over time as it is presented with additional training data (see the \fBvfdt-engine::h\fP interface, for an API to the learning engine if you want to incrementially learn decision trees in your own programs). VFDT will cache training examples in RAM if it has enough memory available (see the -growMegs parameter below) or it will just use them to update the statistics in the leaf where they belong and then free them. VFDT will also disable growing at unpromising leaves (and free the associated sufficient statistics) to save additional RAM when needed.
+.PP
+VFDT will be most effective when learning from very large data sets, in the millions or billions, where there is plenty of data for it to make good statistical decisions. For smaller data sets you may consider the -batch parameter which makes it load all data into RAM and learn as a traditional decision tree learner. If you suspect that there is concept drift in the data set you may like to use the \fBcvfdt\fP tool instead.
+.PP
+For a more detailed example of vfdt in action see the \fCmining data streams\fP walkthrough.
+.PP
+vfdt takes input and does output in \fCc4.5 format\fP. It expects to find the files \fC<stem>.names\fP and \fC<stem>.data\fP.
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f 'filestem'
+.IP "  \(bu" 4
+Set the name of the dataset (default DF)
+.PP
+
+.IP "\(bu" 2
+-source 'dir'
+.IP "  \(bu" 4
+Set the source data directory (default '.')
+.PP
+
+.IP "\(bu" 2
+-u
+.IP "  \(bu" 4
+Test the learner's accuracy on data in 'stem'.test
+.PP
+
+.IP "\(bu" 2
+-sc 'prob'
+.IP "  \(bu" 4
+Allowed chance of error in each decision (default 0.0000001 that's .00001 percent)
+.PP
+
+.IP "\(bu" 2
+-tc 'tie error' Call a tie when hoeffding e less than this. (default 0.05)
+.IP "\(bu" 2
+-gini
+.IP "  \(bu" 4
+Use gini gain instead of information gain (default information gain) (DOESN'T WORK FOR CONTINUOUS ATTRIBUTES)
+.PP
+
+.IP "\(bu" 2
+-rescans '#'
+.IP "  \(bu" 4
+Naievely consider each example '#' times with no concern for using it once per level of the induced tree (default 1)
+.PP
+
+.IP "\(bu" 2
+-chunk 'count'
+.IP "  \(bu" 4
+Wait until 'count' examples accumulate at a leaf before testing for a split (default 300)
+.PP
+
+.IP "\(bu" 2
+-growMegs 'count'
+.IP "  \(bu" 4
+Limit dynamic memory allocation to 'count' megabytes (default 1000)
+.PP
+
+.IP "\(bu" 2
+-stdin
+.IP "  \(bu" 4
+Reads training examples from stdin instead of from 'stem'.data (default off) NOTE this disables the rescans switch
+.PP
+
+.IP "\(bu" 2
+-schedule 'mult'
+.IP "  \(bu" 4
+Run tests after 10k examples. Then sets the next test point to the current num examples * mult.
+.PP
+
+.IP "\(bu" 2
+-outputTree
+.IP "  \(bu" 4
+Output the binary tree at each test point.
+.PP
+
+.IP "\(bu" 2
+-noCacheTestSet
+.IP "  \(bu" 4
+By default vfdt reads test set from disk once and keeps in memory. Use this option to conserve some memory.
+.PP
+
+.IP "\(bu" 2
+-prune
+.IP "  \(bu" 4
+Do reduced error pruning on the resulting tree, reserving 5% of data up to 2 million samples for pruning (default do not).
+.PP
+
+.IP "\(bu" 2
+-noRestartLeaves
+.IP "  \(bu" 4
+Do not attempt to restart leaves that were deactivated for memory reasons (default do).
+.PP
+
+.IP "\(bu" 2
+-noCacheTrainingExamples
+.IP "  \(bu" 4
+Do not use extra RAM to cache training examples (default do).
+.PP
+
+.IP "\(bu" 2
+-cachePruneExamples
+.IP "  \(bu" 4
+Use extra RAM to cache pruning examples only makes sense if you use -prune (default store prune data in 'stem'.prunedata)
+.PP
+
+.IP "\(bu" 2
+-batch
+.IP "  \(bu" 4
+Run in batch mode, read all examples into RAM, don't do hoeffding bounds (default off).
+.PP
+
+.IP "\(bu" 2
+-laplace 'count'
+.IP "  \(bu" 4
+When starting a new node use the laplace correction with the parent's class and 'count' examples (defult 5)
+.PP
+
+.IP "\(bu" 2
+-prePruneTau 'ppTau'
+.IP "  \(bu" 4
+Will not call tie while delta from null to best attrib 'ppTau', preprune if epsilon less than 'ppTau' makes sense that this be less than or equal to 'tc' (default 0, no preprune)
+.PP
+
+.IP "\(bu" 2
+-initialPause
+.IP "  \(bu" 4
+Pause five seconds before reading the names file, sometimes needed if the file is being generated and then data is being piped to VFDT
+.PP
+
+.IP "\(bu" 2
+-incrementalReporting
+.IP "  \(bu" 4
+As each example arrives test the learned model with it and then learn on it (default off).
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output.
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Run vfdt -h for a list of the arguments and their meanings.
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

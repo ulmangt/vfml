@@ -1,0 +1,72 @@
+\section{Hash\-Table.h File Reference}
+\label{HashTable_8h}\index{HashTable.h@{HashTable.h}}
+
+
+\subsection{Detailed Description}
+A hash table. 
+
+\begin{Desc}
+\item[{\bf Thanks}]to Chun-Hsiang Hung for implementing the {\bf Hash\-Table} ADT. \end{Desc}
+
+
+\begin{Desc}
+\item[{\bf Wish List}]A cleaner hash table interface (without the compare function). I think that the sprint learner is the only thing that uses this currently so there isn't much to change to fix this. \end{Desc}
+
+
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct {\bf Hash\-Table}
+\begin{CompactList}\small\item\em A hash table ADT. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Hash\-Table} $\ast$ {\bf Hash\-Table\-New} (int size)
+\begin{CompactList}\small\item\em Creates a new hash table with the specified number of entries. \item\end{CompactList}\item 
+void {\bf Hash\-Table\-Insert} ({\bf Hash\-Table} $\ast$table, int index, void $\ast$element)
+\begin{CompactList}\small\item\em Inserts the element into the has table at the appropriate place. \item\end{CompactList}\item 
+void $\ast$ {\bf Hash\-Table\-Find} ({\bf Hash\-Table} $\ast$table, int index, int($\ast$cmp)(const void $\ast$, const int))
+\begin{CompactList}\small\item\em Looks up index in the hash table. \item\end{CompactList}\item 
+void {\bf Hash\-Table\-Free} ({\bf Hash\-Table} $\ast$table)
+\begin{CompactList}\small\item\em Frees the memory being used by the hash table. \item\end{CompactList}\item 
+void $\ast$ {\bf Hash\-Table\-Remove} ({\bf Hash\-Table} $\ast$table, int index, int($\ast$cmp)(const void $\ast$, const int))
+\begin{CompactList}\small\item\em Removes the element from the hash table. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{HashTable.h@{Hash\-Table.h}!HashTableFind@{HashTableFind}}
+\index{HashTableFind@{HashTableFind}!HashTable.h@{Hash\-Table.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ Hash\-Table\-Find ({\bf Hash\-Table} $\ast$ {\em table}, int {\em index}, int($\ast$ {\em cmp})(const void $\ast$, const int))}\label{HashTable_8h_a3}
+
+
+Looks up index in the hash table. 
+
+Not only must you use the same index, but you must also supply a function that returns non-zero when passed the element you want to find and the index (which you passed to the function in the first place...) \index{HashTable.h@{Hash\-Table.h}!HashTableFree@{HashTableFree}}
+\index{HashTableFree@{HashTableFree}!HashTable.h@{Hash\-Table.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Hash\-Table\-Free ({\bf Hash\-Table} $\ast$ {\em table})}\label{HashTable_8h_a4}
+
+
+Frees the memory being used by the hash table. 
+
+But doesn't touch the memory being used by the elements in the table. It is your responsibility to free these if you like. \index{HashTable.h@{Hash\-Table.h}!HashTableInsert@{HashTableInsert}}
+\index{HashTableInsert@{HashTableInsert}!HashTable.h@{Hash\-Table.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Hash\-Table\-Insert ({\bf Hash\-Table} $\ast$ {\em table}, int {\em index}, void $\ast$ {\em element})}\label{HashTable_8h_a2}
+
+
+Inserts the element into the has table at the appropriate place. 
+
+\index{HashTable.h@{Hash\-Table.h}!HashTableNew@{HashTableNew}}
+\index{HashTableNew@{HashTableNew}!HashTable.h@{Hash\-Table.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Hash\-Table}$\ast$ Hash\-Table\-New (int {\em size})}\label{HashTable_8h_a1}
+
+
+Creates a new hash table with the specified number of entries. 
+
+\index{HashTable.h@{Hash\-Table.h}!HashTableRemove@{HashTableRemove}}
+\index{HashTableRemove@{HashTableRemove}!HashTable.h@{Hash\-Table.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ Hash\-Table\-Remove ({\bf Hash\-Table} $\ast$ {\em table}, int {\em index}, int($\ast$ {\em cmp})(const void $\ast$, const int))}\label{HashTable_8h_a5}
+
+
+Removes the element from the hash table. 
+
+Not only must you use the same index, but you must also supply a function that returns non-zero when passed the element you want to find and the index (which you passed to the function in the first place...) 

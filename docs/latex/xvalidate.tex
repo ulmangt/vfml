@@ -1,0 +1,57 @@
+\section{xvalidate File Reference}
+\label{xvalidate}\index{xvalidate@{xvalidate}}
+
+
+\subsection{Detailed Description}
+Performs cross validation of a learner on a data set. 
+
+You will probably want to use the {\bf batchtest} tool for large experiments; xvalidate will help you to quickly test things, perhaps as a debugging aid.
+
+You can use xvalidate with large datasets, but you will need enough disk space to hold 'folds' copies of the data.\  The learner you use with xvalidate must also be able to work with large datasets.
+
+Xvalidate takes input in {\tt C4.5 format} and uses {\bf folddata}, which must be in your path. You use the -c option to tell xvalidate how to run the learner. Xvalidate will append the names of the folds of the datasets to the end of the -c string, the learner must accept the name and read input appropriately.
+
+Xvalidate expects the learner to output results in the following format: 
+
+{\tt error-rate size} 
+
+The learner's error rate on the test set, followed by some whitespace, followed by the size of the learned model (in whatever unit you want), followed by a newline. 
+
+Xvalidate will collect the output of the runs of the learner, average them, and report:
+
+{\tt mean-error-rate (standard deviation of error rate) mean-size (standard deviation of size) average-utime (standard deviation of utime) average-stime (standard deviation of stime)}
+
+for example:
+
+{\tt 26.111 (5.500) 0.000 (0.000) 0.013 (0.005) 0.010 (0.008)}
+
+The times are very accurate on UNIX. Under CYGNUS (windows) utime will be slightly overestimated and stime will be zero.
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$\begin{itemize}
+\item Set the name of the dataset (default DF)\end{itemize}
+\item -source $<$dir$>$\begin{itemize}
+\item Set the source data directory (default '.')\end{itemize}
+\item -c $<$command$>$\begin{itemize}
+\item Set the learner command. The name of the dataset will be appended to the end of this string and used to invoke the learner ({\bf This is a required argument})\end{itemize}
+\item -folds $<$n$>$\begin{itemize}
+\item Sets the number of train/test sets to create (default 10)\end{itemize}
+\item -seed $<$n$>$\begin{itemize}
+\item Sets the random seed, multiple runs with the same seed will produce the same datasets (defaults to a random seed).\  If you use a random seed, the value of the randomly selected seed will be printed at the start of the run.\  You can later use that seed to repeat the experiment.\  You can also pass the same seed to {\bf folddata} to recreate the exact test/training sets for closer inspection.\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+
+\subsubsection*{Example}
+
+{\tt }
+
+{\tt }
+
+{\tt xvalidate -source datasets/mushroom -f mushroom -folds 15 -seed 100 -c ''mostcommonclass -u -f''} 
+
+Does 15-fold cross-validation of the 'mostcommonclass' learner on the dataset called 'mushroom' in the 'datasets/mushroom' directory.\  The mostcommonclass learner will be invoked as: {\tt mostcommonclass -u -f $<$constructed-dataset-name$>$ }for each of the 15 constructed datasets.\  It will use a seeded random number generator so the exact experiment could be reproduced. 
+

@@ -1,0 +1,103 @@
+\section{memory.h File Reference}
+\label{memory_8h}\index{memory.h@{memory.h}}
+
+
+\subsection{Detailed Description}
+Tracks the size of allocations made. 
+
+A wrapper for the standard memory manager that tracks the size of the allocations made using it. This requires an extra 8 bytes per allocation. You can turn this off by editing the {\bf memory.h} file and commenting out the definition of DEBUGMEMORY, but this will cause some of the features of some of the research learners to fail in unpredictable ways.
+
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf MMem\-Move}(dst, src, bytes)\ \_\-\_\-System\-Move\-Memory(dst, src, bytes)
+\begin{CompactList}\small\item\em Wrapper for memmove that works with pointers allocated by this memory module. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void $\ast$ {\bf MNew\-Ptr} (int size)
+\begin{CompactList}\small\item\em A wrapper around Malloc that tracks the size of the allocation. \item\end{CompactList}\item 
+void {\bf MFree\-Ptr} (void $\ast$ptr)
+\begin{CompactList}\small\item\em Frees the memory held by the pointer and tracks the change in the module's records. \item\end{CompactList}\item 
+void {\bf MSet\-Alloc\-Fail\-Function} (void($\ast$Alloc\-Fail)(int allocation\-Size))
+\begin{CompactList}\small\item\em Sets a function that is called if an allocation fails. \item\end{CompactList}\item 
+long {\bf MGet\-Total\-Allocation} (void)
+\begin{CompactList}\small\item\em Returns the number of bytes that are currently allocated by the module. \item\end{CompactList}\item 
+void {\bf MSet\-Active\-Pool} (int pool\-ID)
+\begin{CompactList}\small\item\em Set the pool to track future memory allocations. \item\end{CompactList}\item 
+int {\bf MGet\-Active\-Pool} (void)
+\begin{CompactList}\small\item\em Find which pool is being used to track memory. \item\end{CompactList}\item 
+long {\bf MGet\-Pool\-Allocation} (int pool\-ID)
+\begin{CompactList}\small\item\em Returns the number of bytes that are currently allocated in the specified pool. \item\end{CompactList}\item 
+void {\bf MMove\-Ptr\-To\-Pool} (void $\ast$ptr, int pool\-ID)
+\begin{CompactList}\small\item\em Moves the memory from one pool to another. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{memory.h@{memory.h}!MMemMove@{MMemMove}}
+\index{MMemMove@{MMemMove}!memory.h@{memory.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define MMem\-Move(dst, src, bytes)\ \_\-\_\-System\-Move\-Memory(dst, src, bytes)}\label{memory_8h_a7}
+
+
+Wrapper for memmove that works with pointers allocated by this memory module. 
+
+
+
+\subsection{Function Documentation}
+\index{memory.h@{memory.h}!MFreePtr@{MFreePtr}}
+\index{MFreePtr@{MFreePtr}!memory.h@{memory.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void MFree\-Ptr (void $\ast$ {\em ptr})}\label{memory_8h_a9}
+
+
+Frees the memory held by the pointer and tracks the change in the module's records. 
+
+\index{memory.h@{memory.h}!MGetActivePool@{MGetActivePool}}
+\index{MGetActivePool@{MGetActivePool}!memory.h@{memory.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int MGet\-Active\-Pool (void)}\label{memory_8h_a21}
+
+
+Find which pool is being used to track memory. 
+
+The module supports up to 9 pools of memory, with id 1-9. You can get more fine grained tracking by setting the pool and using MGet\-Pool\-Allocation. There is also a special pool, with id 0, and any allocations made when that pool are set are tracked in the pool but will not show up in MGet\-Total\-Allocation. The default pool id is 1. \index{memory.h@{memory.h}!MGetPoolAllocation@{MGetPoolAllocation}}
+\index{MGetPoolAllocation@{MGetPoolAllocation}!memory.h@{memory.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long MGet\-Pool\-Allocation (int {\em pool\-ID})}\label{memory_8h_a22}
+
+
+Returns the number of bytes that are currently allocated in the specified pool. 
+
+The module supports up to 9 pools of memory, with id 1-9. You can get more fine grained tracking by setting the pool and using MGet\-Pool\-Allocation. There is also a special pool, with id 0, and any allocations made when that pool are set are tracked in the pool but will not show up in MGet\-Total\-Allocation. The default pool id is 1. \index{memory.h@{memory.h}!MGetTotalAllocation@{MGetTotalAllocation}}
+\index{MGetTotalAllocation@{MGetTotalAllocation}!memory.h@{memory.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long MGet\-Total\-Allocation (void)}\label{memory_8h_a19}
+
+
+Returns the number of bytes that are currently allocated by the module. 
+
+\index{memory.h@{memory.h}!MMovePtrToPool@{MMovePtrToPool}}
+\index{MMovePtrToPool@{MMovePtrToPool}!memory.h@{memory.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void MMove\-Ptr\-To\-Pool (void $\ast$ {\em ptr}, int {\em pool\-ID})}\label{memory_8h_a23}
+
+
+Moves the memory from one pool to another. 
+
+Changes (if needed) the tracking of the ptr so that it is now counted against the new pool instead of the pool it was allocated into. \index{memory.h@{memory.h}!MNewPtr@{MNewPtr}}
+\index{MNewPtr@{MNewPtr}!memory.h@{memory.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ MNew\-Ptr (int {\em size})}\label{memory_8h_a8}
+
+
+A wrapper around Malloc that tracks the size of the allocation. 
+
+Make sure you use MFree\-Ptr to free any memory allocated by this call or your program will probably crash. \index{memory.h@{memory.h}!MSetActivePool@{MSetActivePool}}
+\index{MSetActivePool@{MSetActivePool}!memory.h@{memory.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void MSet\-Active\-Pool (int {\em pool\-ID})}\label{memory_8h_a20}
+
+
+Set the pool to track future memory allocations. 
+
+The module supports up to 9 pools of memory, with id 1-9. You can get more fine grained tracking by setting the pool and using MGet\-Pool\-Allocation. There is also a special pool, with id 0, and any allocations made when that pool are set are tracked in the pool but will not show up in MGet\-Total\-Allocation. The default pool id is 1. \index{memory.h@{memory.h}!MSetAllocFailFunction@{MSetAllocFailFunction}}
+\index{MSetAllocFailFunction@{MSetAllocFailFunction}!memory.h@{memory.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void MSet\-Alloc\-Fail\-Function (void($\ast$ {\em Alloc\-Fail})(int allocation\-Size))}\label{memory_8h_a10}
+
+
+Sets a function that is called if an allocation fails. 
+
+If you call this, then your Alloc\-Fail function will be called if an allocation fails. After your function returns the memory module will try the allocation agian, if the allocation fails again, the memory module returns a NULL pointer. You could use Alloc\-Fail to flush caches, or clean up the program and quit. 

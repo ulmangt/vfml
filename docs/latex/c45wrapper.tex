@@ -1,0 +1,29 @@
+\section{c45wrapper File Reference}
+\label{c45wrapper}\index{c45wrapper@{c45wrapper}}
+
+
+\subsection{Detailed Description}
+Calls C4.5 and tests the learned tree. 
+
+A wrapper that calls C4.5 to learn a decision tree, times its execution, and extracts the important bits from its output. C4.5 must be in your path for this learner to work, you can get it from Professor Quinlan's homepage at {\tt http://www.cse.unsw.edu.au/$\sim$quinlan/}.
+
+This wrapper runs C4.5, tests the learned tree on the test data (if appropriate) and outputs: {\tt test set error rate $<$whitespace$>$ size of tree $<$whitespace$>$ seconds}.
+
+You might also be interested in the {\bf Decision\-Tree\-Read\-C45} function.
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$\begin{itemize}
+\item Set the stem name (default DF)\end{itemize}
+\item -args $<$string$>$\begin{itemize}
+\item Passes these additional arguments to C4.5 (default none)\end{itemize}
+\item -no\-Prune\begin{itemize}
+\item Reports the results from c4.5's unpurned tree (default reports from pruned tree)\end{itemize}
+\item -no\-Test\begin{itemize}
+\item Suppress the -u argument, which makes C4.5 output accuracy on the training set (default test accuracy on the $<$filestem$>$.test file)\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+

@@ -1,0 +1,106 @@
+.TH "wish" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+wish \- Wish List
+ 
+.IP "\fBpage \fBVFML\fP \fP" 1c
+The windows distribution needs to be brought up to date. 
+.PP
+.PP
+ 
+.IP "\fBFile \fBbatchtest\fP \fP" 1c
+I think the input format for batchtest is a little brittle and it could use some improvement 
+.PP
+.PP
+ 
+.IP "\fBFile \fBBeliefNet.h\fP \fP" 1c
+A version of this that uses DecisionTree local models instead of full CPTs. This would also need a new structure learning tool (a modification of \fBbnlearn\fP). 
+.PP
+.PP
+ 
+.IP "\fBFile \fBbeliefnetcorrupt\fP \fP" 1c
+This tool does not do anything smart with parameters when it changes the structure, and it should. 
+.PP
+.PP
+ 
+.IP "\fBFile \fBbeliefnetscore\fP \fP" 1c
+Move the comparision mode from this tool into a new tool, beliefnetcompare, and have that tool do more interesting comparisions (e.g. measure the KL-distance between the distriutions encoded in the networks). 
+.PP
+.PP
+ 
+.IP "\fBFile \fBbindata\fP \fP" 1c
+that this tool would have more methods for selecting bin boundaries, for example to reduce entropy. 
+.PP
+.PP
+ 
+.IP "\fBFile \fBbnlearn\fP \fP" 1c
+A version of this program that is intelligent about dealing with unobserved (or partially observed) variables. 
+.PP
+.PP
+ 
+.IP "\fBFile \fBcvfdt\fP \fP" 1c
+Modify this learner to work with continuous attributes. 
+.PP
+An API to this learner like the one to learning BeliefNet structure in beliefnet-engine.h 
+.PP
+.PP
+ 
+.IP "\fBFile \fBDecisionTree.h\fP \fP" 1c
+A standard in memory decision tree induction algorithm. Maybe the best starting point would be the \fBdecisionstump\fP learner. 
+.PP
+This isn't the right place for this wish, but it would be nice to have a RuleSet structure similar to this DecisionTree structure 
+.PP
+.PP
+ 
+.IP "\fBFile \fBHashTable.h\fP \fP" 1c
+A cleaner hash table interface (without the compare function). I think that the sprint learner is the only thing that uses this currently so there isn't much to change to fix this. 
+.PP
+.PP
+ 
+.IP "\fBFile \fBkmeans\fP \fP" 1c
+Modify this learner to work with discrete attributes. 
+.PP
+Move the features from \fBvfkm\fP into this learner because this learner will be much easier to modify than that one for new users. 
+.PP
+.PP
+ 
+.IP "\fBFile \fBnaivebayes\fP \fP" 1c
+Modify this learner to work with continuous attributes. 
+.PP
+.PP
+ 
+.IP "\fBFile \fBREPrune.h\fP \fP" 1c
+More pruning methods, and more sophisticated REPruning (for example, all the leaves to prune could be selected in a single pass over the tree). 
+.PP
+.PP
+ 
+.IP "\fBFile \fBshuffledata\fP \fP" 1c
+for a version of this tool that works on disk and does not need to load data into RAM. 
+.PP
+.PP
+ 
+.IP "\fBFile \fBstats.h\fP \fP" 1c
+The StatTracker would track more interesting things. 
+.PP
+.PP
+ 
+.IP "\fBFile \fBvfbn1\fP \fP" 1c
+An API to this learner like the one to learning BeliefNet structure in beliefnet-engine.h 
+.PP
+.PP
+ 
+.IP "\fBFile \fBvfbn2\fP \fP" 1c
+An API to this learner like the one to learning BeliefNet structure in beliefnet-engine.h 
+.PP
+.PP
+ 
+.IP "\fBFile \fBvfdt-engine.h\fP \fP" 1c
+A function that checkpoints the learning procedure to disk so that it can be restored at a later time. I think the hard part of this would be checkpointing the ExampleGroupStats structure. 
+.PP
+.PP
+ 
+.IP "\fBFile \fBvfem\fP \fP" 1c
+Modify this learner to also learn the variances of the Gaussians. 
+.PP
+

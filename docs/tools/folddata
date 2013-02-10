@@ -1,0 +1,58 @@
+/** \ingroup Tools
+*/
+
+/** \file
+
+\brief Randomly splits a data set into a collection of train/test pairs.
+
+<h1>The folddata tool</h1>
+
+<p>This tool is used by the \ref xvalidate tool; you may find it
+useful. &nbsp; For example, your algorithm might perform very poorly
+on a specific cross validation run, you could use this tool to
+reproduce the datasets and try to track down the problem.</p>
+
+<p>Folddata splits a dataset into a number of testing and training
+sets as needed for doing cross-validation.&nbsp; It takes each example
+in the original dataset and randomly assigns it to one of the 'folds'
+is it creating (note that this randomness means that the folds won't
+be exactly evenly sized).&nbsp; Folddata then outputs one dataset for
+each fold with the examples from the fold as the test set and the
+examples in all the other folds as the training set.</p>
+
+<p>Folddata works efficiently on large datasets, but will require
+enough disk space to hold 'folds' copies of the dataset.</p>
+
+<p>Folddata takes input and does output in <a
+href="appendixes/c45.htm">c4.5 format</a>.  &nbsp; It expects to
+find the files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data</code> and outputs <code>&lt;stem&gt;[0 -
+n].[names, data, test]</code>.</p>
+
+<h2>Arguments</h2>
+
+- -f &lt;filestem&gt; 
+  - Set the stem name (default DF)
+- -target &lt;dir&gt; 
+  - Set the output directory (default '.')
+- -source &lt;dir&gt; 
+  - Set the directory that contains the dataset (default '.')
+- -folds &lt;n&gt; 
+  - Sets the number of train/test sets to create (default 10)
+- -seed &lt;n&gt; 
+  - Sets the random seed, multiple runs with the same seed will produce the same datasets (defaults to a random seed)
+- -h 
+  - Display usage information and exit
+- -v 
+  - Can be used multiple times to increase the debugging output 
+
+<h2>Example</h2>
+
+<p><code>folddata -f test -target output -folds 15 -seed 10</code></p>
+
+<p>Will create 15 folds from test.names and test.data and put them in
+the directory named output as test[0-14].names, test[0-14].data, and
+test[0-14].test.&nbsp; It will use a seeded random generator, so that
+the exact same dataset could be reproduced.</p>
+
+*/

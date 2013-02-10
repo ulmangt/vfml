@@ -1,0 +1,93 @@
+.TH "random.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+random.h \- 
+.SH "Detailed Description"
+.PP 
+Generates random numbers in a number of ways, and has support for saving and restoring the state of the random number generator. 
+
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBRandomInit\fP (void)"
+.br
+.RI "\fIShould be called before calling other random functions. \fP"
+.ti -1c
+.RI "int \fBRandomRange\fP (int min, int max)"
+.br
+.RI "\fIReturns a number between the min and max (inclusive). \fP"
+.ti -1c
+.RI "long \fBRandomLong\fP (void)"
+.br
+.RI "\fIReturns a random long integer. \fP"
+.ti -1c
+.RI "double \fBRandomDouble\fP (void)"
+.br
+.RI "\fIReturns a random double from 0 - 1. \fP"
+.ti -1c
+.RI "double \fBRandomGaussian\fP (double mean, double stdev)"
+.br
+.RI "\fISamples from a Gaussian with the specified parameters. \fP"
+.ti -1c
+.RI "double \fBRandomStandardNormal\fP (void)"
+.br
+.RI "\fISamples from the standard normal distribution. \fP"
+.ti -1c
+.RI "void \fBRandomSeed\fP (unsigned int seed)"
+.br
+.RI "\fISeeds the random number generator. \fP"
+.ti -1c
+.RI "void * \fBRandomNewState\fP (unsigned int seed)"
+.br
+.RI "\fICreates a new random state to use with RandomSetState. \fP"
+.ti -1c
+.RI "void * \fBRandomSetState\fP (void *state)"
+.br
+.RI "\fISets the current random state. \fP"
+.ti -1c
+.RI "void \fBRandomFreeState\fP (void *state)"
+.br
+.RI "\fIUse this to free any state made with RandomNewState. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "double RandomDouble (void)"
+.PP
+Returns a random double from 0 - 1. 
+.SS "void RandomFreeState (void * state)"
+.PP
+Use this to free any state made with RandomNewState. 
+.SS "double RandomGaussian (double mean, double stdev)"
+.PP
+Samples from a Gaussian with the specified parameters. 
+.SS "void RandomInit (void)"
+.PP
+Should be called before calling other random functions. 
+.SS "long RandomLong (void)"
+.PP
+Returns a random long integer. 
+.SS "void* RandomNewState (unsigned int seed)"
+.PP
+Creates a new random state to use with RandomSetState. Each state represents a separate stream of repeatable random numbers. This is implemented with initstate and setstate on Unix and is currently not supported on windows. 
+.SS "int RandomRange (int min, int max)"
+.PP
+Returns a number between the min and max (inclusive). 
+.SS "void RandomSeed (unsigned int seed)"
+.PP
+Seeds the random number generator. 
+.SS "void* RandomSetState (void * state)"
+.PP
+Sets the current random state. The state parameter should have been made by RandomNewState. This allows you to have multiple repeatable random number sequences at once. Returns the previous state. 
+.SS "double RandomStandardNormal (void)"
+.PP
+Samples from the standard normal distribution. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

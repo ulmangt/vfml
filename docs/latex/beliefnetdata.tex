@@ -1,0 +1,48 @@
+\section{beliefnetdata File Reference}
+\label{beliefnetdata}\index{beliefnetdata@{beliefnetdata}}
+
+
+\subsection{Detailed Description}
+Creates a data set by sampling from a Bayesian Network. 
+
+$>$This program creates a synthetic data set by loading an existing belief network (in {\tt BIF format}) and sampling from it, possibly introducing noise. This program will also create a .names file for the resulting data set. More specifically, belifnetdata reads the network, generates samples from it with {\bf BNGenerate\-Sample}, and adds noise to them (if requested) with {\bf Example\-Add\-Noise}.
+
+Multiple runs with the same seed parameter produce the same results. Also note that running this command with one level of -v will output some statistics about the belif net which you might find useful.
+
+VFML comes with a collection of benchmark belief nets, and you may want {\tt more information on these}.
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f 'stem name for output'\begin{itemize}
+\item (default DF)\end{itemize}
+\item -bnf 'file containing belief net'\begin{itemize}
+\item (default DF.bif)\end{itemize}
+\item -train 'size of training set'\begin{itemize}
+\item (default 10000)\end{itemize}
+\item -infinite\begin{itemize}
+\item Generate an infinite stream of training examples, overrides -train flags, only makes sense with -stdout (default off)\end{itemize}
+\item -stdout\begin{itemize}
+\item Output the trainset to stdout (default to 'stem$>$'data)\end{itemize}
+\item -seed 'random seed'\begin{itemize}
+\item (default to random)\end{itemize}
+\item -noise 'noise level'\begin{itemize}
+\item 10 means change 10\% of values, including classes (default to 0)\end{itemize}
+\item -target 'dir'\begin{itemize}
+\item Set the output directory (default '.')\end{itemize}
+\item -v\begin{itemize}
+\item Increase the message level\end{itemize}
+\item -h\begin{itemize}
+\item Run with this argument to get a list of arguments and their meanings.\par
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection*{Example}
+
+{\tt }
+
+{\tt beliefnetdata -f train -bnf alarm.bif -train 1000 -seed 111 -noise 5}
+
+Creates 1000 samples from the alarm network, randomly corrupts 5\% of their values, write the resulting samples to train.data (and create a file train.names) and reproduce the same data set everytime the same arguments are used (thanks to the seed parameter)
+

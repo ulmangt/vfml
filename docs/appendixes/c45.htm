@@ -1,0 +1,92 @@
+<html>
+
+<head>
+<title>C4.5 Format</title>
+
+</head>
+
+<body>
+<h1 align="center">C4.5 Format</h1>
+
+<p>This information is from the C4.5 distribution. </p>
+
+<p>FILE FORMATS</p>
+
+<p>For a dataset named &quot;foo&quot;, you will have three files:
+foo.data, foo.test, and foo.names (many datasets don't come with .test
+files, you should use <a href="../batchtest.html">batchtest</a>
+to perform cross-validation on such datasets).  &nbsp; The .names file
+describes the dataset, while the .data and .test files contain the
+examples which make up the dataset.</p>
+
+<p>The files contain series of identifiers and numbers with some
+surrounding syntax.  &nbsp; A | (vertical bar) means that the
+remainder of the line should be ignored as a comment.&nbsp; Each
+identifier consists of a string of characters that does not include
+comma, question mark or colon (unless escaped by a backslash).&nbsp;
+Periods may be embedded provided they are not followed by a
+space. Embedded whitespce is also permitted but multiple whitespace is
+replaced by a single space.</p>
+
+<p>The .names file contains a series of entries that describe the
+classes, attributes and values of the dataset.&nbsp; Each entry is
+terminated with a period, but the period can be omited if it would
+have been the last thing on a line.&nbsp; The first entry in the file
+lists the names of the classes, separated by commas (and terminated by
+a period). &nbsp; Each successive line then defines an attribute, in
+the order in which they will appear in the .data and .test files, with
+the following format:</p>
+
+<p><code>attribute-name : attribute-type .</code></p>
+
+<p>The attribute-name is an identifier as above, followed by a colon, then the attribute
+type which must be one of: 
+
+<dl>
+  <dt>continuous </dt>
+  <dd>If the attribute has a continuous value.</dd>
+  <dt>discrete &lt;n&gt;</dt>
+  <dd>The word 'discrete' followed by an integer which indicates how many values the attribute
+    can take. </dd>
+  <dt>&lt;list of identifiers&gt;</dt>
+  <dd>This is a discrete attribute with the values enumerated (this is the prefered method for
+    discrete attributes).&nbsp; The identifiers should be separated by commas.</dd>
+  <dt>ignore </dt>
+  <dd>means the attribute should be ignored - it won't be used.</dd>
+</dl>
+
+<p>Here is an example .names file:</p>
+
+<blockquote>
+  <p><code>good, bad. <br>
+  dur: continuous. <br>
+  wage1: continuous. <br>
+  wage2: continuous. <br>
+  wage3: continuous. <br>
+  cola: tc, none, tcf. <br>
+  hours: continuous. <br>
+  pension: empl_contr, ret_allw, none. <br>
+  stby_pay: continuous. <br>
+  shift_diff: continuous. <br>
+  educ_allw: yes, no. <br>
+  holidays: continuous. <br>
+  vacation: average, generous, below_average. <br>
+  lngtrm_disabil: yes, no. <br>
+  dntl_ins: half, none, full. <br>
+  bereavement: yes, no. <br>
+  empl_hplan: half, full, none.</code></p>
+</blockquote>
+
+<p>Foo.data contains the training examples and foo.test contains the test examples, in the
+following format: one example per line, attribute values separated by commas, class last,
+missing values represented by &quot;?&quot;. For example: </p>
+
+<blockquote>
+  <p><code>2,5.0,4.0,?,none,37,?,?,5,no,11,below_average,yes,full,yes,full,good <br>
+  3,2.0,2.5,?,?,35,none,?,?,?,10,average,?,?,yes,full,bad <br>
+  3,4.5,4.5,5.0,none,40,?,?,?,no,11,average,?,half,?,?,good <br>
+  3,3.0,2.0,2.5,tc,40,none,?,5,no,10,below_average,yes,half,yes,full,bad <br>
+  ... </code></p>
+</blockquote>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<html>
+
+<head>
+<title>Comparing Learners</title>
+</head>
+
+<body>
+
+<h1>Comparing Learners</h1>
+
+<p>After implementing a new learner or gathering a data set you will
+probably start to explore their properties.  One common way that an
+algorithm's performance on data sets is measured is by performing
+cross-validation - randomly splitting the data set into N collections,
+performing N runs training on N - 1 of the collections and testing on
+the remaining one, and averaging the performance over all the
+runs.</p>
+
+<p>VFML provides three tools to help do this.  The highest-level one
+is <a href="../batchtest.html">batchtest</a>--with one command you can
+compare a collection of learners on a collection of datasets.&nbsp;
+Next is <a href="../xvalidate.html">xvalidate</a> which evaluates a
+single learner on a single dataset. Finally <a
+href="../folddata.html">folddata</a> can be used to create the
+training/testing sets that were used by the higher level tools.&nbsp;
+All three tools can use seeded random number generators to exactly
+reproduce every experiment they perform.</p>
+
+<p>This collection of tools was designed to be convenient while still
+allowing low level access for debugging. For example, you might be
+running batchtest to compare a large number of learners and
+datasets. You notice that the learner you are working on has unusually
+bad performance on a specific dataset, so you use folddata and the
+seed from batchtest to recreate the exact dataset that was giving you
+trouble and do whatever debugging you need. Then you can use xvalidate
+to run the updated learner on the dataset to make sure you've
+corrected the problem before you need to spend the time to re-run the
+complete batchtest.</p>
+
+<p>We have converted a collection of real world <a
+href="../appendixes/ucidatasets.htm">datasets</a> for use with
+VFML.</p>
+
+<h1>Using batchtest</h1>
+
+<p><strong>Example for</strong>: using <a
+href="../batchtest.html">batchtest</a> to perform cross-validation</p>
+
+<p><strong>Requires</strong>: the <code>&lt;VFML-root&gt;/bin</code>
+directory be in your path.&nbsp; </p>
+
+<p>This is an example that demonstrates the execution of the batchtest
+tool for cross-validation.&nbsp; In order for it to work, you'll need
+to make sure the <code>&lt;VFML-root&gt;/bin</code> directory is in
+your path.</p>
+
+<p>Change to the <code>&lt;VFML-root&gt;/examples/using-batchtest/
+</code>directory.  &nbsp; This directory contains a fake dataset and a
+number of input files for batchtest.  &nbsp; Use your favorite text
+editor to open the learners file:</p> <code>
+
+<p>mostcommonclass -u -f<br>
+naivebayes -u -f<br>
+<br>
+#c50wrapper -f<br>
+#c45wrapper -args &quot;-g&quot; -f<br>
+#c45wrapper -f<br>
+#vfdt -u -batch -prune -f</code> </p>
+
+<p>This file is set up to run the mostcommonclass learner and
+naivebayes (the lines that begin with # are comments but show how you
+could use some of the other VFML learners with batchtest).&nbsp; When
+you develop a learner you can use this file as a starting point as you
+might want to compare with these learners to get a sense of how well
+you are doing.</p>
+
+<p>The -u flag tells mostcommonclass to test itself on data in
+&lt;filestem&gt;.test and output the error-rate and size (which is
+always 0 for mostcommonclass). The -f flag tells mostcommonclass
+that the next argument it sees will be the filestem it should use for
+the run. Batchtest will call the learners by appending the
+filestem to the end of the lines in the learners file, so the executed
+command lines will be something like:</p>
+
+<p><code>mostcommonclass -u -f &lt;filestem&gt;</code></p>
+
+<p>Now look at the fake-dataset file:</p>
+
+<p><code>banana :: banana</code></p>
+
+<p>This line describes a dataset.&nbsp; The section of the line before
+the '::' is the path to the directory that contains the dataset.
+The section after the '::' is the file stem for the dataset.</p>
+
+<p>Now run:</p>
+
+<p><code>batchtest -data fake-datasets -learn learners -folds 3</code></p>
+
+<p>to do 3-fold cross-validation of two mostcommonclass learners on the banana dataset.
+&nbsp; You will see output something like this:</p>
+
+<p><code>Running with seed: 5315<br>
+'mostcommonclass -u -f' :<br>
+24.524 (2.030) 0.000 (0.000) 0.003 (0.003) 0.000 (0.000)<br>
+'naivebayes -u -f' :<br>
+24.524 (2.030) 0.000 (0.000) 0.003 (0.003) 0.003 (0.003)</p>
+</code>
+
+<p>The first line of the output tells you that batchtest used the seed
+5315 to create the datasets for cross-validation, if you later run the
+command:</p>
+
+<p><code>batchtest -data fake-datasets -learn learners -folds 3 -seed 5315</code></p>
+
+<p>you would reproduce the exact same datasets.&nbsp; The next part of
+the output says that, on average, on the banana dataset, the
+mostcommonclass learner has a 24.524% error rate with a standard
+deviation of 2.03%, produced a model of size 0, ran in about 0.003
+seconds of user time and 0.000 seconds of system time.&nbsp;
+Naivebayes's performance is similar on this dataset, but you can
+expect niavebayes to do substantially better than mostcommonclass on
+almost any real-world dataset.</p>
+
+<p>The
+<code>&lt;VFML-root&gt;/examples/using-batchtest/</code>directory
+contains three other files which you might find very useful: uci-all,
+uci-allknown and uci-discrete.&nbsp; These files contain descriptions
+of the <a href="../appendixes/ucidatasets.htm">uci-datasets</a> which
+we distribute with VFML.&nbsp; If you've downloaded those datasets,
+you can use these files to easily test your learners on those
+datasets.&nbsp; The uci-discrete file lists every dataset that
+contains only discrete attributes, the uci-all datasets lists every
+single dataset in our distribution, the uci-allknown dataset lists
+every dataset that has no unknown attributes.&nbsp; To test your
+learner on the largest possible collection of datasets update the
+learners file and run:</p>
+
+<p><code>batchtest -data uci-all -learn learners</code></p>
+
+<p>In this directory you will also find a file called sig.awk.&nbsp;
+It is a very simple script that will summarize the performance of two
+learners; execute it by running:</p> <code>
+
+<p>batchtest -data uci-discrete -learn learners &gt; test.out<br>
+awk -f sig.awk test.out</code> </p>
+
+<p>The output will be something like:</p>
+<code>
+
+<p>second won big on audiology:<br>
+second won big on breast-cancer-wisconsin:<br>
+second won big on car:<br>
+second won big on house:<br>
+second won big on monks:<br>
+second won big on mushroom:<br>
+second won big on nursery:<br>
+second won big on promoter:<br>
+second won big on splice-jxn:<br>
+second won big on tic-tac-toe:<br>
+second won big on voting:<br>
+second won big on zoo:<br>
+First won 0 -- 0 by the sum of the stdevs<br>
+Second won 12 -- 12 by the sum of the stdevs</code></p>
+
+<p>This means that the second learn in the learners file, naivebayes
+in this case, won on all 12 datasets, and that it won by more than the
+sum of the standard deviations on all of the datasets.</p> 
+</body>
+</html>

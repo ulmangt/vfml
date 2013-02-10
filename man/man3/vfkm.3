@@ -1,0 +1,158 @@
+.TH "vfkm" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+vfkm \- 
+.SH "Detailed Description"
+.PP 
+Performs k-means clustering accelerated with sampling. 
+
+Performs k-mean clustering accelerated with sampling as described in \fCthis paper\fP. This learner ignores categorical attributes. vfkm performs several iterations of clustering on progressively larger samples until it determines with high confidence (see -delta below) that the clustering it achieves is within -epsilon of the one that would be achieved using infinite data for each decision. vfkm can use a fancy optimization to select the number of samples to use in each iteration of the next round, or it can use straight progressive sampling. You can use the -batch argument to turn off the sampling and do traditional k-means clustering. vfkm evaluates the learned centers by comparing to the centers found in <stem>.test as follows. Learned centers are greedily matched to the closest of the test centers until each center has a match, and then the evaluation is the sum of the squared distance between each test center and its matched learned center.
+.PP
+The learner takes input and does output in \fCc4.5 format\fP. It expects to find the files \fC<stem>.names\fP and \fC<stem>.data.\fP and outputs the learned centers to a file called \fC<stem>.centers\fP.
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f 'filestem'
+.IP "  \(bu" 4
+Set the name of the dataset (default DF)
+.PP
+
+.IP "\(bu" 2
+-source 'dir'
+.IP "  \(bu" 4
+Set the source data directory (default '.')
+.PP
+
+.IP "\(bu" 2
+-clusters 'numClusters'
+.IP "  \(bu" 4
+Set the num clusters to find (REQUIRED)
+.PP
+
+.IP "\(bu" 2
+-dbSize 'examples'
+.IP "  \(bu" 4
+How many examples are in the datafile (REQUIRED)
+.PP
+
+.IP "\(bu" 2
+-assignErrorScale 'scale'
+.IP "  \(bu" 4
+Loosen bound by scaling the assignment part of it by the scale factor (default 1.0)
+.PP
+
+.IP "\(bu" 2
+-delta 'delta'
+.IP "  \(bu" 4
+Find final solution with confidence (1 - 'delta') (default 5%)
+.PP
+
+.IP "\(bu" 2
+-epsilon 'epsilon'
+.IP "  \(bu" 4
+The maximum distance between a learned centroid and the coresponding infinite data centroid (default .05)
+.PP
+
+.IP "\(bu" 2
+-converge 'distance'
+.IP "  \(bu" 4
+Stop when distance centroids move between iterations squared is less than 'distance' (default .001)
+.PP
+
+.IP "\(bu" 2
+-batch
+.IP "  \(bu" 4
+Do a traditional kmeans run on the whole input file. Doesn't make sense to combine with -stdin (default off)
+.PP
+
+.IP "\(bu" 2
+-init 'num'
+.IP "  \(bu" 4
+Use the 'num'th valid assignment of initial centroids (default 1)
+.PP
+
+.IP "\(bu" 2
+-maxPerIteration 'num'
+.IP "  \(bu" 4
+Use no more than num examples per iteration (default 1,000,000,000) -l 'number'
+.IP "  \(bu" 4
+The estimated # of iterations to converge if you guess wrong and aren't using batch VFKM will fix it for you and do an extra round (default 10)
+.PP
+
+.IP "\(bu" 2
+-seed 's'
+.IP "  \(bu" 4
+Seed to use picking initial centers (default random)
+.PP
+
+.IP "\(bu" 2
+-progressive
+.IP "  \(bu" 4
+Don't use our fancy Lagrange based optimization pick the # of samples at each iteration of the next round (default use the optimization)
+.PP
+
+.IP "\(bu" 2
+-allowBadConverge
+.IP "  \(bu" 4
+Allows VFKM to converge at a time when km would not (default off).
+.PP
+
+.IP "\(bu" 2
+-normalApprox
+.IP "  \(bu" 4
+Use a normal approximation instead of the hoeffding bound (default hoeffding).
+.PP
+
+.IP "\(bu" 2
+-r 'range'
+.IP "  \(bu" 4
+The maximum range between pairs of examples (default assume the range of each dimension is 0 - 1.0 and calculate it from that)
+.PP
+
+.IP "\(bu" 2
+-stdin
+.IP "  \(bu" 4
+Reads training examples as a stream from stdin instead of from 'stem'.data (default off)
+.PP
+
+.IP "\(bu" 2
+-testOnTrain
+.IP "  \(bu" 4
+Loss is the sum of the square of the distances from all training examples to their assigned centroid (default compare learned centroids to centroids in 'stem'.test)
+.PP
+
+.IP "\(bu" 2
+-loadCenters
+.IP "  \(bu" 4
+Load initial centroids from 'stem'.centers (default use random based on -init and -seed)
+.PP
+
+.IP "\(bu" 2
+-u
+.IP "  \(bu" 4
+Output results after each iteration
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Run vfkm -h for a list of the arguments and their meanings.
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

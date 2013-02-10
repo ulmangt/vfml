@@ -1,0 +1,89 @@
+\section{bitfield.h File Reference}
+\label{bitfield_8h}\index{bitfield.h@{bitfield.h}}
+
+
+\subsection{Detailed Description}
+Compactly represent a bit field. 
+
+
+
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-BITFIELD\_\-}
+\begin{CompactList}\small\item\em ADT for compactly representing a bit field. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef {\bf \_\-BITFIELD\_\-} {\bf Bit\-Field\-Struct}
+\begin{CompactList}\small\item\em ADT for compactly representing a bit field. \item\end{CompactList}\item 
+typedef {\bf \_\-BITFIELD\_\-} $\ast$ {\bf Bit\-Field\-Ptr}
+\begin{CompactList}\small\item\em ADT for compactly representing a bit field. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+Bit\-Field {\bf Bit\-Field\-New} (int byte\-Size)
+\begin{CompactList}\small\item\em Create a new Bit\-Field with the specified number of bits. \item\end{CompactList}\item 
+void {\bf Bit\-Field\-Free} (Bit\-Field b)
+\begin{CompactList}\small\item\em Frees the memory associated with the Bit\-Field. \item\end{CompactList}\item 
+int {\bf Bit\-Field\-Get\-Num\-Bytes} (Bit\-Field b)
+\begin{CompactList}\small\item\em Returns the number of bytes being used to represent the Bit\-Field. \item\end{CompactList}\item 
+int {\bf Bit\-Field\-Get\-Bit} (Bit\-Field b, long offset)
+\begin{CompactList}\small\item\em Returns the value of the specifed bit. \item\end{CompactList}\item 
+void {\bf Bit\-Field\-Set\-Bit} (Bit\-Field b, long offset, int val)
+\begin{CompactList}\small\item\em Sets the value of the specified bit. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{bitfield.h@{bitfield.h}!BitFieldPtr@{BitFieldPtr}}
+\index{BitFieldPtr@{BitFieldPtr}!bitfield.h@{bitfield.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-BITFIELD\_\-} $\ast$ {\bf Bit\-Field\-Ptr}}\label{bitfield_8h_a1}
+
+
+ADT for compactly representing a bit field. 
+
+See {\bf bitfield.h} for more detail. \index{bitfield.h@{bitfield.h}!BitFieldStruct@{BitFieldStruct}}
+\index{BitFieldStruct@{BitFieldStruct}!bitfield.h@{bitfield.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-BITFIELD\_\-}  {\bf Bit\-Field\-Struct}}\label{bitfield_8h_a0}
+
+
+ADT for compactly representing a bit field. 
+
+See {\bf bitfield.h} for more detail. 
+
+\subsection{Function Documentation}
+\index{bitfield.h@{bitfield.h}!BitFieldFree@{BitFieldFree}}
+\index{BitFieldFree@{BitFieldFree}!bitfield.h@{bitfield.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Bit\-Field\-Free (Bit\-Field {\em b})}\label{bitfield_8h_a5}
+
+
+Frees the memory associated with the Bit\-Field. 
+
+\index{bitfield.h@{bitfield.h}!BitFieldGetBit@{BitFieldGetBit}}
+\index{BitFieldGetBit@{BitFieldGetBit}!bitfield.h@{bitfield.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Bit\-Field\-Get\-Bit (Bit\-Field {\em b}, long {\em offset})}\label{bitfield_8h_a8}
+
+
+Returns the value of the specifed bit. 
+
+\index{bitfield.h@{bitfield.h}!BitFieldGetNumBytes@{BitFieldGetNumBytes}}
+\index{BitFieldGetNumBytes@{BitFieldGetNumBytes}!bitfield.h@{bitfield.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Bit\-Field\-Get\-Num\-Bytes (Bit\-Field {\em b})}\label{bitfield_8h_a7}
+
+
+Returns the number of bytes being used to represent the Bit\-Field. 
+
+\index{bitfield.h@{bitfield.h}!BitFieldNew@{BitFieldNew}}
+\index{BitFieldNew@{BitFieldNew}!bitfield.h@{bitfield.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Bit\-Field Bit\-Field\-New (int {\em byte\-Size})}\label{bitfield_8h_a3}
+
+
+Create a new Bit\-Field with the specified number of bits. 
+
+\index{bitfield.h@{bitfield.h}!BitFieldSetBit@{BitFieldSetBit}}
+\index{BitFieldSetBit@{BitFieldSetBit}!bitfield.h@{bitfield.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Bit\-Field\-Set\-Bit (Bit\-Field {\em b}, long {\em offset}, int {\em val})}\label{bitfield_8h_a9}
+
+
+Sets the value of the specified bit. 
+

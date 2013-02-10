@@ -1,0 +1,95 @@
+.TH "bindata" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bindata \- 
+.SH "Detailed Description"
+.PP 
+Converts continuous attributes into discrete ones. 
+
+Converts all continuous attributes in a data set to categorical ones. Uses two passes over data, one to gather the stats needed to pick bin boundaries, and one to do the conversion (although the first pass can be done on a sample with the -samples argument below).
+.PP
+bindata uses one of two methods to select bin boundaries. The first is to find the range of each attribute (by identifing its highest and lowest value) and then dividing the range into even with bins. This is the default method. The other method assumes that the attribute was generated from a Gaussian, estimates the mean and variance of the Gaussian from data, and sets bin boundaries so that each bin holds an even amount of the Gaussian's probability mass.
+.PP
+\fBThanks\fP
+.RS 4
+to Chun-Hsiang Hung for doing the core development work for this tool. 
+.RE
+.PP
+.PP
+\fBWish List\fP
+.RS 4
+that this tool would have more methods for selecting bin boundaries, for example to reduce entropy. 
+.RE
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem>
+.IP "  \(bu" 4
+Set the stem name (default DF)
+.PP
+
+.IP "\(bu" 2
+-fout <filestem>
+.IP "  \(bu" 4
+Set the name of the output dataset (default DF-out)
+.PP
+
+.IP "\(bu" 2
+-source <dir>
+.IP "  \(bu" 4
+Set the directory that contains the dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-target <dir>
+.IP "  \(bu" 4
+Set the directory to contain the output dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-test
+.IP "  \(bu" 4
+Also converts the test set (but does not use the test set to pick boundaries)
+.PP
+
+.IP "\(bu" 2
+-samples <n>
+.IP "  \(bu" 4
+Use the first n examples to pick bin boundaries (default use the whole train set)
+.PP
+
+.IP "\(bu" 2
+-bins <n>
+.IP "  \(bu" 4
+Sets the number of bins (default 10)
+.PP
+
+.IP "\(bu" 2
+-gaussian
+.IP "  \(bu" 4
+Pick bin boundaries by fitting a Gaussian and making even probability bins
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Display usage information and exit.
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

@@ -1,0 +1,31 @@
+/** \ingroup Learners Clustering
+*/
+
+
+/** \file
+
+\brief Performs EM clustering.
+
+<p>Performs EM clustering for sphirical gaussians accelerated with
+sampling as described in <a
+href="http://citeseer.nj.nec.com/541935.html">this paper</a>.  This
+learner ignores categorical attributes.
+
+<p>VFEM takes input and does output in <a
+href="../appendixes/c45.htm">c4.5 format</a>. It expects to find the
+files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data.</code> and outputs the learned centers to a
+file called <code>&lt;stem&gt;.centers</code>.
+
+<p>It evaluates the learned centers by comparing to the centers found in
+&lt;stem&gt;.test as follows.  Learned centers are greedily matched to
+the closest of the test centers until each center has a match, and
+then the evaluation is the sum of the squared distance between each
+test center and its matched learned center.
+
+<h2>Arguments</h2>
+
+- -h
+  - Run vfem -h for a list of the arguments and their meanings.
+
+*/

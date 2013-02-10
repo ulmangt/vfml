@@ -1,0 +1,82 @@
+.TH "sampledata" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+sampledata \- 
+.SH "Detailed Description"
+.PP 
+Draws a sample from a data set. 
+
+sampledata does a scan over a data set and draws a sample from it by including each example in the sample with a user specified probability.
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem>
+.IP "  \(bu" 4
+Set the stem name (default DF)
+.PP
+
+.IP "\(bu" 2
+-fout <filestem>
+.IP "  \(bu" 4
+Set the name of the output dataset (default DF-out)
+.PP
+
+.IP "\(bu" 2
+-source <dir>
+.IP "  \(bu" 4
+Set the directory that contains the dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-target <dir>
+.IP "  \(bu" 4
+Set the directory to contain the output dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-seed <seed>
+.IP "  \(bu" 4
+Sets the random seed, multiple runs with the same seed will produce the same datasets (defaults to a random seed)
+.PP
+
+.IP "\(bu" 2
+-sample <n>
+.IP "  \(bu" 4
+Sets the percentage of the data to sample (default .8 -- that's 80%)
+.PP
+
+.IP "\(bu" 2
+-stdin
+.IP "  \(bu" 4
+Read examples from standard in (default read file)
+.PP
+
+.IP "\(bu" 2
+-stdout
+.IP "  \(bu" 4
+Writes examples to standard out (default write to file)
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Display usage information and exit.
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

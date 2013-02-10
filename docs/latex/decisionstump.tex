@@ -1,0 +1,41 @@
+\section{decisionstump File Reference}
+\label{decisionstump}\index{decisionstump@{decisionstump}}
+
+
+\subsection{Detailed Description}
+Learns a decision stump (a Decision\-Tree with only one split). 
+
+This is a very simple learner, but it may be useful as a baseline to compare your learner against.
+
+The decisionstump learner works in time proportional to the number of training examples. It also requires memory that is proportional to the number of classes $\ast$ number attributes $\ast$ number of values. Note that this can be very large for continuous attributes (which, in the worst case, have a separate value for each training example). The max\-Thresholds argument can be used to control this.
+
+The learner takes input and does output in {\tt c4.5 format}. \  It expects to find the files {\tt $<$stem$>$.names} and {\tt $<$stem$>$.data.} Depending on command line argument, it will either output the decision stump or test its error rate on {\tt $<$stem$>$.test}.
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$\begin{itemize}
+\item Set the stem name (default DF)\end{itemize}
+\item -source $<$dir$>$\begin{itemize}
+\item Set the directory that contains the dataset (default '.')\end{itemize}
+\item -u\begin{itemize}
+\item Test on the examples in $<$stem$>$.test and output in a format appropriate for interface with xvalidate and batchtest\  (defaults to off)\end{itemize}
+\item -a\begin{itemize}
+\item Outputs the name of the selected attribute\end{itemize}
+\item -output\-Gains\begin{itemize}
+\item Outputs the information gain (and best threshold) for each attribute\end{itemize}
+\item -output\-Stump\begin{itemize}
+\item Prints the learned stump. Defaults to output without the -u flag and not output with it\end{itemize}
+\item -max\-Thresholds $<$num$>$\begin{itemize}
+\item Use the first num values from the training set as thresholds for continuous attributes, allows this program to be run on very large data sets (default use all values)\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+
+\subsubsection*{Example}
+
+{\tt decisionstump -f banana -source datasets/banana}
+
+Looks for a dataset named 'banana' in the 'datasets/banana' directory.\  Outputs the decision stump learned from the data set.
+

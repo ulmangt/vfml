@@ -1,0 +1,985 @@
+\begin{theindex}
+
+  \item {\_\-BITFIELD\_\-}, 25
+  \item {\_\-BeliefNetNode\_\-}, 24
+  \item {\_\-BeliefNet\_\-}, 23
+  \item {\_\-DecisionTree\_\-}, 26
+  \item {\_\-ExampleGenerator\_\-}, 28
+  \item {\_\-ExampleGroupStats\_\-}, 29
+  \item {\_\-ExampleSpec\_\-}, 30
+  \item {\_\-Example\_\-}, 27
+  \item {\_\-StatTracker\_\-}, 31
+  \item {\_\-VFDT\_\-}, 32
+
+  \indexspace
+
+  \item {AttributeTracker.h}, 37
+  \item {Attribute\-Tracker.h}
+    \subitem {AttributeTrackerAreAllInactive}, 38
+    \subitem {AttributeTrackerClone}, 38
+    \subitem {AttributeTrackerFree}, 38
+    \subitem {AttributeTrackerInitial}, 38
+    \subitem {AttributeTrackerIsActive}, 38
+    \subitem {AttributeTrackerMarkActive}, 38
+    \subitem {AttributeTrackerMarkInactive}, 38
+    \subitem {AttributeTrackerNew}, 38
+    \subitem {AttributeTrackerNumActive}, 38
+  \item {AttributeTrackerAreAllInactive}
+    \subitem {Attribute\-Tracker.h}, 38
+  \item {AttributeTrackerClone}
+    \subitem {Attribute\-Tracker.h}, 38
+  \item {AttributeTrackerFree}
+    \subitem {Attribute\-Tracker.h}, 38
+  \item {AttributeTrackerInitial}
+    \subitem {Attribute\-Tracker.h}, 38
+  \item {AttributeTrackerIsActive}
+    \subitem {Attribute\-Tracker.h}, 38
+  \item {AttributeTrackerMarkActive}
+    \subitem {Attribute\-Tracker.h}, 38
+  \item {AttributeTrackerMarkInactive}
+    \subitem {Attribute\-Tracker.h}, 38
+  \item {AttributeTrackerNew}
+    \subitem {Attribute\-Tracker.h}, 38
+  \item {AttributeTrackerNumActive}
+    \subitem {Attribute\-Tracker.h}, 38
+
+  \indexspace
+
+  \item {batchtest}, 40
+  \item {Belief Net Section}, 18
+  \item {BeliefNet}
+    \subitem {Belief\-Net.h}, 46
+  \item {BeliefNet.h}, 42
+  \item {Belief\-Net.h}
+    \subitem {BeliefNet}, 46
+    \subitem {BeliefNetNode}, 47
+    \subitem {BeliefNetNodeStruct}, 47
+    \subitem {BeliefNetStruct}, 47
+    \subitem {BNAddFractionalSample}, 47
+    \subitem {BNAddFractionalSamples}, 47
+    \subitem {BNAddLikelihoodSamples}, 47
+    \subitem {BNAddSample}, 47
+    \subitem {BNAddSamples}, 47
+    \subitem {BNClone}, 47
+    \subitem {BNCloneNoCPTs}, 48
+    \subitem {BNFlushStructureCache}, 48
+    \subitem {BNFree}, 48
+    \subitem {BNGenerateSample}, 48
+    \subitem {BNGetExampleSpec}, 48
+    \subitem {BNGetMaxNodeParameters}, 48
+    \subitem {BNGetNodeByElimOrder}, 48
+    \subitem {BNGetNodeByID}, 48
+    \subitem {BNGetNumIndependentParameters}, 49
+    \subitem {BNGetNumNodes}, 49
+    \subitem {BNGetNumParameters}, 49
+    \subitem {BNGetSimStructureDifference}, 49
+    \subitem {BNGetUserData}, 46
+    \subitem {BNHasCycle}, 49
+    \subitem {BNInitLikelihoodSampling}, 49
+    \subitem {BNLikelihoodSampleNTimes}, 49
+    \subitem {BNNew}, 49
+    \subitem {BNNewFromSpec}, 50
+    \subitem {BNNodeAddFractionalSample}, 50
+    \subitem {BNNodeAddFractionalSamples}, 50
+    \subitem {BNNodeAddParent}, 50
+    \subitem {BNNodeAddSample}, 50
+    \subitem {BNNodeAddSamples}, 50
+    \subitem {BNNodeFreeCPT}, 50
+    \subitem {BNNodeGetCP}, 50
+    \subitem {BNNodeGetCPTRowCount}, 51
+    \subitem {BNNodeGetName}, 51
+    \subitem {BNNodeGetNumChildren}, 51
+    \subitem {BNNodeGetNumCPTRows}, 51
+    \subitem {BNNodeGetNumParameters}, 51
+    \subitem {BNNodeGetNumParents}, 51
+    \subitem {BNNodeGetNumSamples}, 51
+    \subitem {BNNodeGetNumValues}, 51
+    \subitem {BNNodeGetP}, 51
+    \subitem {BNNodeGetParent}, 52
+    \subitem {BNNodeGetParentID}, 52
+    \subitem {BNNodeHasParent}, 52
+    \subitem {BNNodeHasParentID}, 52
+    \subitem {BNNodeInitCPT}, 52
+    \subitem {BNNodeLookupParentIndex}, 52
+    \subitem {BNNodeLookupParentIndexByID}, 52
+    \subitem {BNNodeRemoveParent}, 52
+    \subitem {BNNodeSetCP}, 52
+    \subitem {BNNodeStructureEqual}, 53
+    \subitem {BNNodeZeroCPT}, 53
+    \subitem {BNPrintStats}, 53
+    \subitem {BNReadBIF}, 53
+    \subitem {BNReadBIFFILEP}, 53
+    \subitem {BNSetName}, 53
+    \subitem {BNSetPriorStrength}, 53
+    \subitem {BNSetUserData}, 54
+    \subitem {BNSmoothProbabilities}, 54
+    \subitem {BNWriteBIF}, 54
+  \item {beliefnetcorrupt}, 55
+  \item {beliefnetdata}, 57
+  \item {BeliefNetNode}
+    \subitem {Belief\-Net.h}, 47
+  \item {BeliefNetNodeStruct}
+    \subitem {Belief\-Net.h}, 47
+  \item {beliefnetscore}, 59
+  \item {BeliefNetStruct}
+    \subitem {Belief\-Net.h}, 47
+  \item {bindata}, 60
+  \item {bitfield.h}, 62
+    \subitem {BitFieldFree}, 63
+    \subitem {BitFieldGetBit}, 63
+    \subitem {BitFieldGetNumBytes}, 63
+    \subitem {BitFieldNew}, 63
+    \subitem {BitFieldPtr}, 62
+    \subitem {BitFieldSetBit}, 63
+    \subitem {BitFieldStruct}, 62
+  \item {BitFieldFree}
+    \subitem {bitfield.h}, 63
+  \item {BitFieldGetBit}
+    \subitem {bitfield.h}, 63
+  \item {BitFieldGetNumBytes}
+    \subitem {bitfield.h}, 63
+  \item {BitFieldNew}
+    \subitem {bitfield.h}, 63
+  \item {BitFieldPtr}
+    \subitem {bitfield.h}, 62
+  \item {BitFieldSetBit}
+    \subitem {bitfield.h}, 63
+  \item {BitFieldStruct}
+    \subitem {bitfield.h}, 62
+  \item {BNAddFractionalSample}
+    \subitem {Belief\-Net.h}, 47
+  \item {BNAddFractionalSamples}
+    \subitem {Belief\-Net.h}, 47
+  \item {BNAddLikelihoodSamples}
+    \subitem {Belief\-Net.h}, 47
+  \item {BNAddSample}
+    \subitem {Belief\-Net.h}, 47
+  \item {BNAddSamples}
+    \subitem {Belief\-Net.h}, 47
+  \item {BNClone}
+    \subitem {Belief\-Net.h}, 47
+  \item {BNCloneNoCPTs}
+    \subitem {Belief\-Net.h}, 48
+  \item {BNFlushStructureCache}
+    \subitem {Belief\-Net.h}, 48
+  \item {BNFree}
+    \subitem {Belief\-Net.h}, 48
+  \item {BNGenerateSample}
+    \subitem {Belief\-Net.h}, 48
+  \item {BNGetExampleSpec}
+    \subitem {Belief\-Net.h}, 48
+  \item {BNGetMaxNodeParameters}
+    \subitem {Belief\-Net.h}, 48
+  \item {BNGetNodeByElimOrder}
+    \subitem {Belief\-Net.h}, 48
+  \item {BNGetNodeByID}
+    \subitem {Belief\-Net.h}, 48
+  \item {BNGetNumIndependentParameters}
+    \subitem {Belief\-Net.h}, 49
+  \item {BNGetNumNodes}
+    \subitem {Belief\-Net.h}, 49
+  \item {BNGetNumParameters}
+    \subitem {Belief\-Net.h}, 49
+  \item {BNGetSimStructureDifference}
+    \subitem {Belief\-Net.h}, 49
+  \item {BNGetUserData}
+    \subitem {Belief\-Net.h}, 46
+  \item {BNHasCycle}
+    \subitem {Belief\-Net.h}, 49
+  \item {BNInitLikelihoodSampling}
+    \subitem {Belief\-Net.h}, 49
+  \item {BNLearn}
+    \subitem {bnlearn-engine.h}, 66
+  \item {bnlearn}, 64
+  \item {bnlearn-engine.h}, 66
+    \subitem {BNLearn}, 66
+    \subitem {BNLearn\_\-FreeParams}, 66
+    \subitem {BNLearn\_\-NewParams}, 66
+  \item {BNLearn\_\-FreeParams}
+    \subitem {bnlearn-engine.h}, 66
+  \item {BNLearn\_\-NewParams}
+    \subitem {bnlearn-engine.h}, 66
+  \item {BNLikelihoodSampleNTimes}
+    \subitem {Belief\-Net.h}, 49
+  \item {BNNew}
+    \subitem {Belief\-Net.h}, 49
+  \item {BNNewFromSpec}
+    \subitem {Belief\-Net.h}, 50
+  \item {BNNodeAddFractionalSample}
+    \subitem {Belief\-Net.h}, 50
+  \item {BNNodeAddFractionalSamples}
+    \subitem {Belief\-Net.h}, 50
+  \item {BNNodeAddParent}
+    \subitem {Belief\-Net.h}, 50
+  \item {BNNodeAddSample}
+    \subitem {Belief\-Net.h}, 50
+  \item {BNNodeAddSamples}
+    \subitem {Belief\-Net.h}, 50
+  \item {BNNodeFreeCPT}
+    \subitem {Belief\-Net.h}, 50
+  \item {BNNodeGetCP}
+    \subitem {Belief\-Net.h}, 50
+  \item {BNNodeGetCPTRowCount}
+    \subitem {Belief\-Net.h}, 51
+  \item {BNNodeGetName}
+    \subitem {Belief\-Net.h}, 51
+  \item {BNNodeGetNumChildren}
+    \subitem {Belief\-Net.h}, 51
+  \item {BNNodeGetNumCPTRows}
+    \subitem {Belief\-Net.h}, 51
+  \item {BNNodeGetNumParameters}
+    \subitem {Belief\-Net.h}, 51
+  \item {BNNodeGetNumParents}
+    \subitem {Belief\-Net.h}, 51
+  \item {BNNodeGetNumSamples}
+    \subitem {Belief\-Net.h}, 51
+  \item {BNNodeGetNumValues}
+    \subitem {Belief\-Net.h}, 51
+  \item {BNNodeGetP}
+    \subitem {Belief\-Net.h}, 51
+  \item {BNNodeGetParent}
+    \subitem {Belief\-Net.h}, 52
+  \item {BNNodeGetParentID}
+    \subitem {Belief\-Net.h}, 52
+  \item {BNNodeHasParent}
+    \subitem {Belief\-Net.h}, 52
+  \item {BNNodeHasParentID}
+    \subitem {Belief\-Net.h}, 52
+  \item {BNNodeInitCPT}
+    \subitem {Belief\-Net.h}, 52
+  \item {BNNodeLookupParentIndex}
+    \subitem {Belief\-Net.h}, 52
+  \item {BNNodeLookupParentIndexByID}
+    \subitem {Belief\-Net.h}, 52
+  \item {BNNodeRemoveParent}
+    \subitem {Belief\-Net.h}, 52
+  \item {BNNodeSetCP}
+    \subitem {Belief\-Net.h}, 52
+  \item {BNNodeStructureEqual}
+    \subitem {Belief\-Net.h}, 53
+  \item {BNNodeZeroCPT}
+    \subitem {Belief\-Net.h}, 53
+  \item {BNPrintStats}
+    \subitem {Belief\-Net.h}, 53
+  \item {BNReadBIF}
+    \subitem {Belief\-Net.h}, 53
+  \item {BNReadBIFFILEP}
+    \subitem {Belief\-Net.h}, 53
+  \item {BNSetName}
+    \subitem {Belief\-Net.h}, 53
+  \item {BNSetPriorStrength}
+    \subitem {Belief\-Net.h}, 53
+  \item {BNSetUserData}
+    \subitem {Belief\-Net.h}, 54
+  \item {BNSmoothProbabilities}
+    \subitem {Belief\-Net.h}, 54
+  \item {BNWriteBIF}
+    \subitem {Belief\-Net.h}, 54
+
+  \indexspace
+
+  \item {C45interface.h}, 67
+    \subitem {C45Learn}, 67
+  \item {C45Learn}
+    \subitem {C45interface.h}, 67
+  \item {c45wrapper}, 68
+  \item {c50wrapper}, 69
+  \item {cleandata}, 70
+  \item {clusterdata}, 71
+  \item {Clustering Section}, 19
+  \item {combinedata}, 73
+  \item {Core APIs}, 13
+  \item {cvfdt}, 74
+
+  \indexspace
+
+  \item {Debug.h}, 76
+    \subitem {DebugError}, 76
+    \subitem {DebugGetMessageLevel}, 76
+    \subitem {DebugGetTarget}, 76
+    \subitem {DebugMessage}, 76
+    \subitem {DebugSetMessageLevel}, 76
+    \subitem {DebugSetTarget}, 77
+    \subitem {DebugWarn}, 77
+  \item {DebugError}
+    \subitem {Debug.h}, 76
+  \item {DebugGetMessageLevel}
+    \subitem {Debug.h}, 76
+  \item {DebugGetTarget}
+    \subitem {Debug.h}, 76
+  \item {DebugMessage}
+    \subitem {Debug.h}, 76
+  \item {DebugSetMessageLevel}
+    \subitem {Debug.h}, 76
+  \item {DebugSetTarget}
+    \subitem {Debug.h}, 77
+  \item {DebugWarn}
+    \subitem {Debug.h}, 77
+  \item {Decision Tree Section}, 16
+  \item {decisionstump}, 78
+  \item {DecisionTree}
+    \subitem {Decision\-Tree.h}, 81
+  \item {DecisionTree.h}, 79
+  \item {Decision\-Tree.h}
+    \subitem {DecisionTree}, 81
+    \subitem {DecisionTreeAddToClassDistribution}, 82
+    \subitem {DecisionTreeClassify}, 82
+    \subitem {DecisionTreeClone}, 82
+    \subitem {DecisionTreeCountNodes}, 82
+    \subitem {DecisionTreeFree}, 82
+    \subitem {DecisionTreeGatherGrowingNodes}, 82
+    \subitem {DecisionTreeGatherLeaves}, 82
+    \subitem {DecisionTreeGetChild}, 82
+    \subitem {DecisionTreeGetChildCount}, 82
+    \subitem {DecisionTreeGetClass}, 83
+    \subitem {DecisionTreeGetClassDistributionSampleCount}, 83
+    \subitem {DecisionTreeGetClassProb}, 83
+    \subitem {DecisionTreeGetGrowingData}, 83
+    \subitem {DecisionTreeGetMostCommonClass}, 83
+    \subitem {DecisionTreeIsLeaf}, 83
+    \subitem {DecisionTreeIsNodeGrowing}, 83
+    \subitem {DecisionTreeIsTreeGrowing}, 83
+    \subitem {DecisionTreeNew}, 83
+    \subitem {DecisionTreeOneStepClassify}, 84
+    \subitem {DecisionTreePrint}, 84
+    \subitem {DecisionTreePrintStats}, 84
+    \subitem {DecisionTreePtr}, 81
+    \subitem {DecisionTreeRead}, 84
+    \subitem {DecisionTreeReadC45}, 84
+    \subitem {DecisionTreeSetClass}, 84
+    \subitem {DecisionTreeSetClassProb}, 85
+    \subitem {DecisionTreeSetGrowingData}, 85
+    \subitem {DecisionTreeSetTypeGrowing}, 85
+    \subitem {DecisionTreeSetTypeLeaf}, 85
+    \subitem {DecisionTreeSplitOnContinuousAttribute}, 85
+    \subitem {DecisionTreeSplitOnDiscreteAttribute}, 85
+    \subitem {DecisionTreeWrite}, 85
+    \subitem {DecisionTreeZeroClassDistribution}, 86
+  \item {DecisionTreeAddToClassDistribution}
+    \subitem {Decision\-Tree.h}, 82
+  \item {DecisionTreeClassify}
+    \subitem {Decision\-Tree.h}, 82
+  \item {DecisionTreeClone}
+    \subitem {Decision\-Tree.h}, 82
+  \item {DecisionTreeCountNodes}
+    \subitem {Decision\-Tree.h}, 82
+  \item {DecisionTreeFree}
+    \subitem {Decision\-Tree.h}, 82
+  \item {DecisionTreeGatherGrowingNodes}
+    \subitem {Decision\-Tree.h}, 82
+  \item {DecisionTreeGatherLeaves}
+    \subitem {Decision\-Tree.h}, 82
+  \item {DecisionTreeGetChild}
+    \subitem {Decision\-Tree.h}, 82
+  \item {DecisionTreeGetChildCount}
+    \subitem {Decision\-Tree.h}, 82
+  \item {DecisionTreeGetClass}
+    \subitem {Decision\-Tree.h}, 83
+  \item {DecisionTreeGetClassDistributionSampleCount}
+    \subitem {Decision\-Tree.h}, 83
+  \item {DecisionTreeGetClassProb}
+    \subitem {Decision\-Tree.h}, 83
+  \item {DecisionTreeGetGrowingData}
+    \subitem {Decision\-Tree.h}, 83
+  \item {DecisionTreeGetMostCommonClass}
+    \subitem {Decision\-Tree.h}, 83
+  \item {DecisionTreeIsLeaf}
+    \subitem {Decision\-Tree.h}, 83
+  \item {DecisionTreeIsNodeGrowing}
+    \subitem {Decision\-Tree.h}, 83
+  \item {DecisionTreeIsTreeGrowing}
+    \subitem {Decision\-Tree.h}, 83
+  \item {DecisionTreeNew}
+    \subitem {Decision\-Tree.h}, 83
+  \item {DecisionTreeOneStepClassify}
+    \subitem {Decision\-Tree.h}, 84
+  \item {DecisionTreePrint}
+    \subitem {Decision\-Tree.h}, 84
+  \item {DecisionTreePrintStats}
+    \subitem {Decision\-Tree.h}, 84
+  \item {DecisionTreePtr}
+    \subitem {Decision\-Tree.h}, 81
+  \item {DecisionTreeRead}
+    \subitem {Decision\-Tree.h}, 84
+  \item {DecisionTreeReadC45}
+    \subitem {Decision\-Tree.h}, 84
+  \item {DecisionTreeSetClass}
+    \subitem {Decision\-Tree.h}, 84
+  \item {DecisionTreeSetClassProb}
+    \subitem {Decision\-Tree.h}, 85
+  \item {DecisionTreeSetGrowingData}
+    \subitem {Decision\-Tree.h}, 85
+  \item {DecisionTreeSetTypeGrowing}
+    \subitem {Decision\-Tree.h}, 85
+  \item {DecisionTreeSetTypeLeaf}
+    \subitem {Decision\-Tree.h}, 85
+  \item {DecisionTreeSplitOnContinuousAttribute}
+    \subitem {Decision\-Tree.h}, 85
+  \item {DecisionTreeSplitOnDiscreteAttribute}
+    \subitem {Decision\-Tree.h}, 85
+  \item {DecisionTreeWrite}
+    \subitem {Decision\-Tree.h}, 85
+  \item {DecisionTreeZeroClassDistribution}
+    \subitem {Decision\-Tree.h}, 86
+  \item {doxygen.h}, 87
+
+  \indexspace
+
+  \item {Example}
+    \subitem {Example.h}, 90
+  \item {Example.h}, 88
+    \subitem {Example}, 90
+    \subitem {ExampleAddNoise}, 90
+    \subitem {ExampleClone}, 90
+    \subitem {ExampleDistance}, 90
+    \subitem {ExampleFree}, 91
+    \subitem {ExampleGetClass}, 90
+    \subitem {ExampleGetContinuousAttributeValue}, 91
+    \subitem {ExampleGetDiscreteAttributeValue}, 91
+    \subitem {ExampleGetNumAttributes}, 90
+    \subitem {ExampleIsAttributeContinuous}, 91
+    \subitem {ExampleIsAttributeDiscrete}, 91
+    \subitem {ExampleIsAttributeUnknown}, 90
+    \subitem {ExampleIsClassUnknown}, 91
+    \subitem {ExampleNew}, 91
+    \subitem {ExamplePtr}, 90
+    \subitem {ExampleRead}, 91
+    \subitem {ExampleSetAttributeUnknown}, 92
+    \subitem {ExampleSetClass}, 92
+    \subitem {ExampleSetClassUnknown}, 92
+    \subitem {ExampleSetContinuousAttributeValue}, 92
+    \subitem {ExampleSetDiscreteAttributeValue}, 92
+    \subitem {ExamplesRead}, 92
+    \subitem {ExampleWrite}, 93
+  \item {ExampleAddNoise}
+    \subitem {Example.h}, 90
+  \item {ExampleClone}
+    \subitem {Example.h}, 90
+  \item {ExampleDistance}
+    \subitem {Example.h}, 90
+  \item {ExampleFree}
+    \subitem {Example.h}, 91
+  \item {ExampleGenerator}
+    \subitem {Example\-Generator.h}, 94
+  \item {ExampleGenerator.h}, 94
+  \item {Example\-Generator.h}
+    \subitem {ExampleGenerator}, 94
+    \subitem {ExampleGeneratorFree}, 95
+    \subitem {ExampleGeneratorGenerate}, 95
+    \subitem {ExampleGeneratorNew}, 95
+    \subitem {ExampleGeneratorPtr}, 94
+  \item {ExampleGeneratorFree}
+    \subitem {Example\-Generator.h}, 95
+  \item {ExampleGeneratorGenerate}
+    \subitem {Example\-Generator.h}, 95
+  \item {ExampleGeneratorNew}
+    \subitem {Example\-Generator.h}, 95
+  \item {ExampleGeneratorPtr}
+    \subitem {Example\-Generator.h}, 94
+  \item {ExampleGetClass}
+    \subitem {Example.h}, 90
+  \item {ExampleGetContinuousAttributeValue}
+    \subitem {Example.h}, 91
+  \item {ExampleGetDiscreteAttributeValue}
+    \subitem {Example.h}, 91
+  \item {ExampleGetNumAttributes}
+    \subitem {Example.h}, 90
+  \item {ExampleGroupStats}
+    \subitem {Example\-Group\-Stats.h}, 99
+  \item {ExampleGroupStats.h}, 96
+  \item {Example\-Group\-Stats.h}
+    \subitem {ExampleGroupStats}, 99
+    \subitem {ExampleGroupStatsAddExample}, 99
+    \subitem {ExampleGroupStatsDeactivate}, 99
+    \subitem {ExampleGroupStatsEntropyContinuousAttributeSplit}, 99
+    \subitem {ExampleGroupStatsEntropyDiscreteAttributeSplit}, 99
+    \subitem {ExampleGroupStatsEntropyTotal}, 100
+    \subitem {ExampleGroupStatsFree}, 100
+    \subitem {ExampleGroupStatsGetAttributeTracker}, 100
+    \subitem {ExampleGroupStatsGetClassLogP}, 100
+    \subitem {ExampleGroupStatsGetClassPercent}, 100
+    \subitem {ExampleGroupStatsGetMostCommonClass}, 100
+    \subitem {ExampleGroupStatsGetMostCommonClassAboveThreshold}, 100
+    \subitem {ExampleGroupStatsGetMostCommonClassBelowThreshold}, 100
+    \subitem {ExampleGroupStatsGetMostCommonClassCount}, 100
+    \subitem {ExampleGroupStatsGetMostCommonClassForAttVal}, 101
+    \subitem {ExampleGroupStatsGetMostCommonClassLaplace}, 101
+    \subitem {ExampleGroupStatsGetPercentBelowThreshold}, 101
+    \subitem {ExampleGroupStatsGetValueGivenClassMEstimate}, 101
+    \subitem {ExampleGroupStatsGetValueGivenClassMEstimateLogP}, 101
+    \subitem {ExampleGroupStatsGetValuePercent}, 101
+    \subitem {ExampleGroupStatsGiniContinuousAttributeSplit}, 102
+    \subitem {ExampleGroupStatsGiniDiscreteAttributeSplit}, 102
+    \subitem {ExampleGroupStatsGiniTotal}, 102
+    \subitem {ExampleGroupStatsIgnoreAttribute}, 102
+    \subitem {ExampleGroupStatsIgnoreSplitsWorseThanEntropy}, 102
+    \subitem {ExampleGroupStatsIgnoreSplitsWorseThanGini}, 102
+    \subitem {ExampleGroupStatsIsAttributeActive}, 103
+    \subitem {ExampleGroupStatsIsPure}, 103
+    \subitem {ExampleGroupStatsLimitSplitsEntropy}, 103
+    \subitem {ExampleGroupStatsNew}, 103
+    \subitem {ExampleGroupStatsNumExamplesSeen}, 103
+    \subitem {ExampleGroupStatsNumSplitThresholds}, 104
+    \subitem {ExampleGroupStatsPtr}, 99
+    \subitem {ExampleGroupStatsReactivate}, 104
+    \subitem {ExampleGroupStatsStopAddingSplits}, 104
+    \subitem {ExampleGroupStatsWrite}, 104
+  \item {ExampleGroupStatsAddExample}
+    \subitem {Example\-Group\-Stats.h}, 99
+  \item {ExampleGroupStatsDeactivate}
+    \subitem {Example\-Group\-Stats.h}, 99
+  \item {ExampleGroupStatsEntropyContinuousAttributeSplit}
+    \subitem {Example\-Group\-Stats.h}, 99
+  \item {ExampleGroupStatsEntropyDiscreteAttributeSplit}
+    \subitem {Example\-Group\-Stats.h}, 99
+  \item {ExampleGroupStatsEntropyTotal}
+    \subitem {Example\-Group\-Stats.h}, 100
+  \item {ExampleGroupStatsFree}
+    \subitem {Example\-Group\-Stats.h}, 100
+  \item {ExampleGroupStatsGetAttributeTracker}
+    \subitem {Example\-Group\-Stats.h}, 100
+  \item {ExampleGroupStatsGetClassLogP}
+    \subitem {Example\-Group\-Stats.h}, 100
+  \item {ExampleGroupStatsGetClassPercent}
+    \subitem {Example\-Group\-Stats.h}, 100
+  \item {ExampleGroupStatsGetMostCommonClass}
+    \subitem {Example\-Group\-Stats.h}, 100
+  \item {ExampleGroupStatsGetMostCommonClassAboveThreshold}
+    \subitem {Example\-Group\-Stats.h}, 100
+  \item {ExampleGroupStatsGetMostCommonClassBelowThreshold}
+    \subitem {Example\-Group\-Stats.h}, 100
+  \item {ExampleGroupStatsGetMostCommonClassCount}
+    \subitem {Example\-Group\-Stats.h}, 100
+  \item {ExampleGroupStatsGetMostCommonClassForAttVal}
+    \subitem {Example\-Group\-Stats.h}, 101
+  \item {ExampleGroupStatsGetMostCommonClassLaplace}
+    \subitem {Example\-Group\-Stats.h}, 101
+  \item {ExampleGroupStatsGetPercentBelowThreshold}
+    \subitem {Example\-Group\-Stats.h}, 101
+  \item {ExampleGroupStatsGetValueGivenClassMEstimate}
+    \subitem {Example\-Group\-Stats.h}, 101
+  \item {ExampleGroupStatsGetValueGivenClassMEstimateLogP}
+    \subitem {Example\-Group\-Stats.h}, 101
+  \item {ExampleGroupStatsGetValuePercent}
+    \subitem {Example\-Group\-Stats.h}, 101
+  \item {ExampleGroupStatsGiniContinuousAttributeSplit}
+    \subitem {Example\-Group\-Stats.h}, 102
+  \item {ExampleGroupStatsGiniDiscreteAttributeSplit}
+    \subitem {Example\-Group\-Stats.h}, 102
+  \item {ExampleGroupStatsGiniTotal}
+    \subitem {Example\-Group\-Stats.h}, 102
+  \item {ExampleGroupStatsIgnoreAttribute}
+    \subitem {Example\-Group\-Stats.h}, 102
+  \item {ExampleGroupStatsIgnoreSplitsWorseThanEntropy}
+    \subitem {Example\-Group\-Stats.h}, 102
+  \item {ExampleGroupStatsIgnoreSplitsWorseThanGini}
+    \subitem {Example\-Group\-Stats.h}, 102
+  \item {ExampleGroupStatsIsAttributeActive}
+    \subitem {Example\-Group\-Stats.h}, 103
+  \item {ExampleGroupStatsIsPure}
+    \subitem {Example\-Group\-Stats.h}, 103
+  \item {ExampleGroupStatsLimitSplitsEntropy}
+    \subitem {Example\-Group\-Stats.h}, 103
+  \item {ExampleGroupStatsNew}
+    \subitem {Example\-Group\-Stats.h}, 103
+  \item {ExampleGroupStatsNumExamplesSeen}
+    \subitem {Example\-Group\-Stats.h}, 103
+  \item {ExampleGroupStatsNumSplitThresholds}
+    \subitem {Example\-Group\-Stats.h}, 104
+  \item {ExampleGroupStatsPtr}
+    \subitem {Example\-Group\-Stats.h}, 99
+  \item {ExampleGroupStatsReactivate}
+    \subitem {Example\-Group\-Stats.h}, 104
+  \item {ExampleGroupStatsStopAddingSplits}
+    \subitem {Example\-Group\-Stats.h}, 104
+  \item {ExampleGroupStatsWrite}
+    \subitem {Example\-Group\-Stats.h}, 104
+  \item {ExampleIsAttributeContinuous}
+    \subitem {Example.h}, 91
+  \item {ExampleIsAttributeDiscrete}
+    \subitem {Example.h}, 91
+  \item {ExampleIsAttributeUnknown}
+    \subitem {Example.h}, 90
+  \item {ExampleIsClassUnknown}
+    \subitem {Example.h}, 91
+  \item {ExampleNew}
+    \subitem {Example.h}, 91
+  \item {ExamplePtr}
+    \subitem {Example.h}, 90
+  \item {ExampleRead}
+    \subitem {Example.h}, 91
+  \item {ExampleSetAttributeUnknown}
+    \subitem {Example.h}, 92
+  \item {ExampleSetClass}
+    \subitem {Example.h}, 92
+  \item {ExampleSetClassUnknown}
+    \subitem {Example.h}, 92
+  \item {ExampleSetContinuousAttributeValue}
+    \subitem {Example.h}, 92
+  \item {ExampleSetDiscreteAttributeValue}
+    \subitem {Example.h}, 92
+  \item {ExampleSpec}
+    \subitem {Example\-Spec.h}, 107
+  \item {ExampleSpec.h}, 105
+  \item {Example\-Spec.h}
+    \subitem {ExampleSpec}, 107
+    \subitem {ExampleSpecAddAttributeValue}, 108
+    \subitem {ExampleSpecAddClass}, 108
+    \subitem {ExampleSpecAddContinuousAttribute}, 108
+    \subitem {ExampleSpecAddDiscreteAttribute}, 108
+    \subitem {ExampleSpecFree}, 108
+    \subitem {ExampleSpecGetAttributeName}, 109
+    \subitem {ExampleSpecGetAttributeType}, 107
+    \subitem {ExampleSpecGetAttributeValueCount}, 107
+    \subitem {ExampleSpecGetAttributeValueName}, 107
+    \subitem {ExampleSpecGetClassValueName}, 109
+    \subitem {ExampleSpecGetNumAttributes}, 109
+    \subitem {ExampleSpecGetNumClasses}, 109
+    \subitem {ExampleSpecIsAttributeContinuous}, 109
+    \subitem {ExampleSpecIsAttributeDiscrete}, 109
+    \subitem {ExampleSpecIsAttributeIgnored}, 109
+    \subitem {ExampleSpecLookupAttributeName}, 109
+    \subitem {ExampleSpecLookupAttributeValueName}, 109
+    \subitem {ExampleSpecLookupClassName}, 110
+    \subitem {ExampleSpecNew}, 110
+    \subitem {ExampleSpecPtr}, 107
+    \subitem {ExampleSpecRead}, 110
+    \subitem {ExampleSpecWrite}, 110
+  \item {ExampleSpecAddAttributeValue}
+    \subitem {Example\-Spec.h}, 108
+  \item {ExampleSpecAddClass}
+    \subitem {Example\-Spec.h}, 108
+  \item {ExampleSpecAddContinuousAttribute}
+    \subitem {Example\-Spec.h}, 108
+  \item {ExampleSpecAddDiscreteAttribute}
+    \subitem {Example\-Spec.h}, 108
+  \item {ExampleSpecFree}
+    \subitem {Example\-Spec.h}, 108
+  \item {ExampleSpecGetAttributeName}
+    \subitem {Example\-Spec.h}, 109
+  \item {ExampleSpecGetAttributeType}
+    \subitem {Example\-Spec.h}, 107
+  \item {ExampleSpecGetAttributeValueCount}
+    \subitem {Example\-Spec.h}, 107
+  \item {ExampleSpecGetAttributeValueName}
+    \subitem {Example\-Spec.h}, 107
+  \item {ExampleSpecGetClassValueName}
+    \subitem {Example\-Spec.h}, 109
+  \item {ExampleSpecGetNumAttributes}
+    \subitem {Example\-Spec.h}, 109
+  \item {ExampleSpecGetNumClasses}
+    \subitem {Example\-Spec.h}, 109
+  \item {ExampleSpecIsAttributeContinuous}
+    \subitem {Example\-Spec.h}, 109
+  \item {ExampleSpecIsAttributeDiscrete}
+    \subitem {Example\-Spec.h}, 109
+  \item {ExampleSpecIsAttributeIgnored}
+    \subitem {Example\-Spec.h}, 109
+  \item {ExampleSpecLookupAttributeName}
+    \subitem {Example\-Spec.h}, 109
+  \item {ExampleSpecLookupAttributeValueName}
+    \subitem {Example\-Spec.h}, 109
+  \item {ExampleSpecLookupClassName}
+    \subitem {Example\-Spec.h}, 110
+  \item {ExampleSpecNew}
+    \subitem {Example\-Spec.h}, 110
+  \item {ExampleSpecPtr}
+    \subitem {Example\-Spec.h}, 107
+  \item {ExampleSpecRead}
+    \subitem {Example\-Spec.h}, 110
+  \item {ExampleSpecWrite}
+    \subitem {Example\-Spec.h}, 110
+  \item {ExamplesRead}
+    \subitem {Example.h}, 92
+  \item {ExampleWrite}
+    \subitem {Example.h}, 93
+
+  \indexspace
+
+  \item {FloatListPtr}, 33
+  \item {folddata}, 111
+
+  \indexspace
+
+  \item {HashTable}, 34
+  \item {HashTable.h}, 113
+  \item {Hash\-Table.h}
+    \subitem {HashTableFind}, 113
+    \subitem {HashTableFree}, 113
+    \subitem {HashTableInsert}, 114
+    \subitem {HashTableNew}, 114
+    \subitem {HashTableRemove}, 114
+  \item {HashTableFind}
+    \subitem {Hash\-Table.h}, 113
+  \item {HashTableFree}
+    \subitem {Hash\-Table.h}, 113
+  \item {HashTableInsert}
+    \subitem {Hash\-Table.h}, 114
+  \item {HashTableNew}
+    \subitem {Hash\-Table.h}, 114
+  \item {HashTableRemove}
+    \subitem {Hash\-Table.h}, 114
+
+  \indexspace
+
+  \item {IntListPtr}, 35
+
+  \indexspace
+
+  \item {kmeans}, 115
+
+  \indexspace
+
+  \item {Learning Programs}, 20
+  \item {lists.h}, 116
+    \subitem {VALAppend}, 117
+    \subitem {VALFree}, 117
+    \subitem {VALIndex}, 117
+    \subitem {VALInsert}, 117
+    \subitem {VALLength}, 117
+    \subitem {VALNew}, 118
+    \subitem {VALPush}, 118
+    \subitem {VALRemove}, 118
+    \subitem {VALSet}, 118
+    \subitem {VALSort}, 118
+
+  \indexspace
+
+  \item {memory.h}, 119
+    \subitem {MFreePtr}, 120
+    \subitem {MGetActivePool}, 120
+    \subitem {MGetPoolAllocation}, 120
+    \subitem {MGetTotalAllocation}, 120
+    \subitem {MMemMove}, 119
+    \subitem {MMovePtrToPool}, 120
+    \subitem {MNewPtr}, 120
+    \subitem {MSetActivePool}, 120
+    \subitem {MSetAllocFailFunction}, 120
+  \item {MFreePtr}
+    \subitem {memory.h}, 120
+  \item {MGetActivePool}
+    \subitem {memory.h}, 120
+  \item {MGetPoolAllocation}
+    \subitem {memory.h}, 120
+  \item {MGetTotalAllocation}
+    \subitem {memory.h}, 120
+  \item {MMemMove}
+    \subitem {memory.h}, 119
+  \item {MMovePtrToPool}
+    \subitem {memory.h}, 120
+  \item {MNewPtr}
+    \subitem {memory.h}, 120
+  \item {mostcommonclass}, 122
+  \item {MSetActivePool}
+    \subitem {memory.h}, 120
+  \item {MSetAllocFailFunction}
+    \subitem {memory.h}, 120
+
+  \indexspace
+
+  \item {naivebayes}, 123
+
+  \indexspace
+
+  \item {Other Tools}, 21
+
+  \indexspace
+
+  \item {random.h}, 124
+    \subitem {RandomDouble}, 124
+    \subitem {RandomFreeState}, 124
+    \subitem {RandomGaussian}, 124
+    \subitem {RandomInit}, 125
+    \subitem {RandomLong}, 125
+    \subitem {RandomNewState}, 125
+    \subitem {RandomRange}, 125
+    \subitem {RandomSeed}, 125
+    \subitem {RandomSetState}, 125
+    \subitem {RandomStandardNormal}, 125
+  \item {RandomDouble}
+    \subitem {random.h}, 124
+  \item {RandomFreeState}
+    \subitem {random.h}, 124
+  \item {RandomGaussian}
+    \subitem {random.h}, 124
+  \item {RandomInit}
+    \subitem {random.h}, 125
+  \item {RandomLong}
+    \subitem {random.h}, 125
+  \item {RandomNewState}
+    \subitem {random.h}, 125
+  \item {RandomRange}
+    \subitem {random.h}, 125
+  \item {RandomSeed}
+    \subitem {random.h}, 125
+  \item {RandomSetState}
+    \subitem {random.h}, 125
+  \item {RandomStandardNormal}
+    \subitem {random.h}, 125
+  \item {REPrune.h}, 126
+    \subitem {REPruneBatch}, 126
+    \subitem {REPruneBatchFile}, 126
+  \item {REPruneBatch}
+    \subitem {REPrune.h}, 126
+  \item {REPruneBatchFile}
+    \subitem {REPrune.h}, 126
+
+  \indexspace
+
+  \item {sampledata}, 127
+  \item {shuffledata}, 128
+  \item {sprint}, 129
+  \item {StatGetNormalBound}
+    \subitem {stats.h}, 132
+  \item {StatHoeffdingBoundOne}
+    \subitem {stats.h}, 132
+  \item {StatHoeffdingBoundTwo}
+    \subitem {stats.h}, 132
+  \item {StatLogGamma}
+    \subitem {stats.h}, 133
+  \item {stats.h}, 131
+    \subitem {StatGetNormalBound}, 132
+    \subitem {StatHoeffdingBoundOne}, 132
+    \subitem {StatHoeffdingBoundTwo}, 132
+    \subitem {StatLogGamma}, 133
+    \subitem {StatTracker}, 132
+    \subitem {StatTrackerAddSample}, 133
+    \subitem {StatTrackerFree}, 133
+    \subitem {StatTrackerGetMean}, 133
+    \subitem {StatTrackerGetNormalBound}, 133
+    \subitem {StatTrackerGetNumSamples}, 133
+    \subitem {StatTrackerGetStdev}, 133
+    \subitem {StatTrackerGetVariance}, 133
+    \subitem {StatTrackerNew}, 133
+    \subitem {StatTrackerStruct}, 132
+  \item {StatTracker}
+    \subitem {stats.h}, 132
+  \item {StatTrackerAddSample}
+    \subitem {stats.h}, 133
+  \item {StatTrackerFree}
+    \subitem {stats.h}, 133
+  \item {StatTrackerGetMean}
+    \subitem {stats.h}, 133
+  \item {StatTrackerGetNormalBound}
+    \subitem {stats.h}, 133
+  \item {StatTrackerGetNumSamples}
+    \subitem {stats.h}, 133
+  \item {StatTrackerGetStdev}
+    \subitem {stats.h}, 133
+  \item {StatTrackerGetVariance}
+    \subitem {stats.h}, 133
+  \item {StatTrackerNew}
+    \subitem {stats.h}, 133
+  \item {StatTrackerStruct}
+    \subitem {stats.h}, 132
+
+  \indexspace
+
+  \item {treedata}, 135
+
+  \indexspace
+
+  \item {uRunner}, 137
+  \item {Utility APIs}, 15
+
+  \indexspace
+
+  \item {VALAppend}
+    \subitem {lists.h}, 117
+  \item {VALFree}
+    \subitem {lists.h}, 117
+  \item {VALIndex}
+    \subitem {lists.h}, 117
+  \item {VALInsert}
+    \subitem {lists.h}, 117
+  \item {VALLength}
+    \subitem {lists.h}, 117
+  \item {VALNew}
+    \subitem {lists.h}, 118
+  \item {VALPush}
+    \subitem {lists.h}, 118
+  \item {VALRemove}
+    \subitem {lists.h}, 118
+  \item {VALSet}
+    \subitem {lists.h}, 118
+  \item {VALSort}
+    \subitem {lists.h}, 118
+  \item {vfbn1}, 139
+  \item {vfbn2}, 141
+  \item {VFDT}
+    \subitem {vfdt-engine.h}, 148
+  \item {vfdt}, 143
+  \item {vfdt-engine.h}, 146
+    \subitem {VFDT}, 148
+    \subitem {VFDTBatchExamplesDone}, 148
+    \subitem {VFDTFree}, 148
+    \subitem {VFDTGetLearnedTree}, 148
+    \subitem {VFDTGetNumBoundsUsed}, 148
+    \subitem {VFDTGetNumGrowing}, 148
+    \subitem {VFDTIsDoneLearning}, 148
+    \subitem {VFDTNew}, 148
+    \subitem {VFDTPrintStats}, 149
+    \subitem {VFDTProcessExample}, 149
+    \subitem {VFDTProcessExampleBatch}, 149
+    \subitem {VFDTProcessExamples}, 149
+    \subitem {VFDTProcessExamplesBatch}, 149
+    \subitem {VFDTPtr}, 148
+    \subitem {VFDTSetCacheTrainingExamples}, 149
+    \subitem {VFDTSetLaplace}, 149
+    \subitem {VFDTSetMaxAllocationMegs}, 149
+    \subitem {VFDTSetMessageLevel}, 150
+    \subitem {VFDTSetPrePruneTau}, 150
+    \subitem {VFDTSetProcessChunkSize}, 150
+    \subitem {VFDTSetRestartLeaves}, 150
+    \subitem {VFDTSetUseGini}, 150
+  \item {VFDTBatchExamplesDone}
+    \subitem {vfdt-engine.h}, 148
+  \item {VFDTFree}
+    \subitem {vfdt-engine.h}, 148
+  \item {VFDTGetLearnedTree}
+    \subitem {vfdt-engine.h}, 148
+  \item {VFDTGetNumBoundsUsed}
+    \subitem {vfdt-engine.h}, 148
+  \item {VFDTGetNumGrowing}
+    \subitem {vfdt-engine.h}, 148
+  \item {VFDTIsDoneLearning}
+    \subitem {vfdt-engine.h}, 148
+  \item {VFDTNew}
+    \subitem {vfdt-engine.h}, 148
+  \item {VFDTPrintStats}
+    \subitem {vfdt-engine.h}, 149
+  \item {VFDTProcessExample}
+    \subitem {vfdt-engine.h}, 149
+  \item {VFDTProcessExampleBatch}
+    \subitem {vfdt-engine.h}, 149
+  \item {VFDTProcessExamples}
+    \subitem {vfdt-engine.h}, 149
+  \item {VFDTProcessExamplesBatch}
+    \subitem {vfdt-engine.h}, 149
+  \item {VFDTPtr}
+    \subitem {vfdt-engine.h}, 148
+  \item {VFDTSetCacheTrainingExamples}
+    \subitem {vfdt-engine.h}, 149
+  \item {VFDTSetLaplace}
+    \subitem {vfdt-engine.h}, 149
+  \item {VFDTSetMaxAllocationMegs}
+    \subitem {vfdt-engine.h}, 149
+  \item {VFDTSetMessageLevel}
+    \subitem {vfdt-engine.h}, 150
+  \item {VFDTSetPrePruneTau}
+    \subitem {vfdt-engine.h}, 150
+  \item {VFDTSetProcessChunkSize}
+    \subitem {vfdt-engine.h}, 150
+  \item {VFDTSetRestartLeaves}
+    \subitem {vfdt-engine.h}, 150
+  \item {VFDTSetUseGini}
+    \subitem {vfdt-engine.h}, 150
+  \item {vfem}, 151
+  \item {vfkm}, 154
+  \item {VoidListPtr}, 36
+
+  \indexspace
+
+  \item {xvalidate}, 156
+
+\end{theindex}

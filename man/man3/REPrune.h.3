@@ -1,0 +1,46 @@
+.TH "REPrune.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+REPrune.h \- 
+.SH "Detailed Description"
+.PP 
+Peforms reduced error pruning on a decision tree. 
+
+Takes a decision tree and a collection of examples and prunes every portion of the tree that does not contribute to an increase of accuracy on the data set. This requires a single pass over the prune set, and then on order of one pass over the tree for each node that is pruned.
+.PP
+REPrune uses the growing data fields of the decision tree, so it will overwrite anything that you may have there. If you want to trying pruning a tree and then continue growing it you should make a clone of the tree and pass the clone to this interface so that the origional will remain untouched.
+.PP
+\fBWish List\fP
+.RS 4
+More pruning methods, and more sophisticated REPruning (for example, all the leaves to prune could be selected in a single pass over the tree). 
+.RE
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBREPruneBatch\fP (\fBDecisionTreePtr\fP dt, VoidAListPtr examples)"
+.br
+.RI "\fIGet the prune set from the in-memory list. \fP"
+.ti -1c
+.RI "void \fBREPruneBatchFile\fP (\fBDecisionTreePtr\fP dt, FILE *exampleIn, long pruneMax)"
+.br
+.RI "\fIGet the prune set from the file. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void REPruneBatch (\fBDecisionTreePtr\fP dt, VoidAListPtr examples)"
+.PP
+Get the prune set from the in-memory list. 
+.SS "void REPruneBatchFile (\fBDecisionTreePtr\fP dt, FILE * exampleIn, long pruneMax)"
+.PP
+Get the prune set from the file. Do not use more than pruneMax of the examples from the file for pruning; setting pruneMax to 0 means 'no max' (and uses all examples from the file for pruning). 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

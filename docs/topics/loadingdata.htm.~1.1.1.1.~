@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<title>Loading Data</title>
+
+</head>
+
+<body>
+
+<h2>Loading Data</h2>
+
+<p>One of the first steps in any machine learning project is getting
+data into your program in a format it can work with. VFML is set up to
+get data from files that are in <a href="../appendixes/c45.htm">C4.5
+format</a>. there are two abstract data types you will need to learn
+about to do input, the example spec and the example types. </p>
+
+<p>Instances of the ExampleSpec ADT contain a blueprint for the
+attributes and classes that make up the examples in your learning
+problem. You can create an ExampleSpec programmatically or by loading
+a C4.5 names file. Once created you can query it to get the
+information you need to work with the examples in your problem.</p>
+
+<p>Instances of the Example ADT contain the information you will learn
+from. You create instances programmatically or by loading a C4.5 data
+or test file. Once created, you can query it for the values of its
+class and attributes.</p>
+
+<p>Here is a code snippet that shows how easy it is to use VFML to
+load and work with examples.</p> <code>
+
+<p>#include &quot;uwml.h&quot;<br>
+#include &lt;stdio.h&gt;</p>
+
+<p>ExampleSpecPtr es = ExampleSpecRead(&quot;test.names&quot;);<br>
+ExamplePtr e;<br>
+FILE *exampleIn = fopen(&quot;test.data&quot;, &quot;r&quot;);<br>
+<br>
+e = ExampleRead(exampleIn, es);<br>
+while(e != 0) { /* ExampleRead returns 0 when EOF */<br>
+&nbsp;&nbsp; /* process example */<br>
+&nbsp;&nbsp; e = ExampleRead(exampleIn, es);<br>
+}</p>
+</code>
+
+<p>This code loads an ExampleSpec from <i>test.names</i>, then
+iterates over each example in the file <i>test.data</i>, 'processing'
+them in turn. A construct similar to this will appear in most every
+program you write using VFML (although in some programs it may be
+hidden in library code).</p>
+
+<p>For a complete listing of the things you can do with Examples and
+ExampleSpecs, see their interfaces in the reference documentation.
+
+<p>For a more detailed walkthrough you should look at the <a href="../examples/scan-dataset.htm">Scan-Dataset</a> example.</p>
+</body>
+</html>

@@ -1,0 +1,74 @@
+\section{Example\-Generator.h File Reference}
+\label{ExampleGenerator_8h}\index{ExampleGenerator.h@{ExampleGenerator.h}}
+
+
+\subsection{Detailed Description}
+Generate a random (but reproducible) data set. 
+
+Randomly, but reproducably, create a series of examples. These examples could then be classified with some known model and used as a synthetic dataset to test a learner. This uses the {\bf Random\-Set\-State()} functions so that it will produce the same series of examples for the same seed no matter what the rest of your program does with the random number generators.
+
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-Example\-Generator\_\-}
+\begin{CompactList}\small\item\em Holds the information needed to reproducibly make a random data set. See {\bf Example\-Generator.h} for more detail. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef {\bf \_\-Example\-Generator\_\-} {\bf Example\-Generator}
+\begin{CompactList}\small\item\em Holds the information needed to reproducibly make a random data set. See {\bf Example\-Generator.h} for more detail. \item\end{CompactList}\item 
+typedef {\bf \_\-Example\-Generator\_\-} $\ast$ {\bf Example\-Generator\-Ptr}
+\begin{CompactList}\small\item\em Holds the information needed to reproducibly make a random data set. See {\bf Example\-Generator.h} for more detail. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Example\-Generator\-Ptr} {\bf Example\-Generator\-New} ({\bf Example\-Spec\-Ptr} es, int seed)
+\begin{CompactList}\small\item\em Creates a new example generator. \item\end{CompactList}\item 
+void {\bf Example\-Generator\-Free} ({\bf Example\-Generator\-Ptr} eg)
+\begin{CompactList}\small\item\em Frees the memory associated with the example generator. \item\end{CompactList}\item 
+{\bf Example\-Ptr} {\bf Example\-Generator\-Generate} ({\bf Example\-Generator\-Ptr} eg)
+\begin{CompactList}\small\item\em Makes a random example. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{ExampleGenerator.h@{Example\-Generator.h}!ExampleGenerator@{ExampleGenerator}}
+\index{ExampleGenerator@{ExampleGenerator}!ExampleGenerator.h@{Example\-Generator.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Example\-Generator\_\-}  {\bf Example\-Generator}}\label{ExampleGenerator_8h_a0}
+
+
+Holds the information needed to reproducibly make a random data set. See {\bf Example\-Generator.h} for more detail. 
+
+\index{ExampleGenerator.h@{Example\-Generator.h}!ExampleGeneratorPtr@{ExampleGeneratorPtr}}
+\index{ExampleGeneratorPtr@{ExampleGeneratorPtr}!ExampleGenerator.h@{Example\-Generator.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Example\-Generator\_\-} $\ast$ {\bf Example\-Generator\-Ptr}}\label{ExampleGenerator_8h_a1}
+
+
+Holds the information needed to reproducibly make a random data set. See {\bf Example\-Generator.h} for more detail. 
+
+
+
+\subsection{Function Documentation}
+\index{ExampleGenerator.h@{Example\-Generator.h}!ExampleGeneratorFree@{ExampleGeneratorFree}}
+\index{ExampleGeneratorFree@{ExampleGeneratorFree}!ExampleGenerator.h@{Example\-Generator.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Example\-Generator\-Free ({\bf Example\-Generator\-Ptr} {\em eg})}\label{ExampleGenerator_8h_a3}
+
+
+Frees the memory associated with the example generator. 
+
+\index{ExampleGenerator.h@{Example\-Generator.h}!ExampleGeneratorGenerate@{ExampleGeneratorGenerate}}
+\index{ExampleGeneratorGenerate@{ExampleGeneratorGenerate}!ExampleGenerator.h@{Example\-Generator.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Example\-Ptr} Example\-Generator\-Generate ({\bf Example\-Generator\-Ptr} {\em eg})}\label{ExampleGenerator_8h_a4}
+
+
+Makes a random example. 
+
+Allocates an example, randomly sets the values of its attributes, and returns it. Uses uniform distributions for all of its decisions. For continuous attributes it uniformly generates a value between 0 and 1.0; you might like to scale this value to fit your needs.
+
+You are must free the Example\-Ptr when you are finished with it by calling Example\-Free. \index{ExampleGenerator.h@{Example\-Generator.h}!ExampleGeneratorNew@{ExampleGeneratorNew}}
+\index{ExampleGeneratorNew@{ExampleGeneratorNew}!ExampleGenerator.h@{Example\-Generator.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Example\-Generator\-Ptr} Example\-Generator\-New ({\bf Example\-Spec\-Ptr} {\em es}, int {\em seed})}\label{ExampleGenerator_8h_a2}
+
+
+Creates a new example generator. 
+
+The generator will generate examples conforming to es using a seeded random number generator. If the value of seed is -1 this will select a random initial seed (But you'll need to initialize the random number generator on your system for this to work; The function {\bf Random\-Init()} will do the job). 

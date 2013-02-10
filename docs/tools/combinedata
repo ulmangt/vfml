@@ -1,0 +1,44 @@
+/** \ingroup Tools
+*/
+
+/** \file
+
+\brief Combines a series of data sets into a single large one.
+
+<p>Sometimes you may need to combine a collection of small data files
+into one large one.  Usually this could be accomplished with the unix
+cat utility, but sometimes it will not be available and sometimes it
+may not perfrom as needed (for example, when the source files do not
+end with newlines).  combinedata was created for those situations.
+
+<p>combinedata reads a collection of files as specified by the
+required -dataFiles argument and writes them to the name specified by
+the -fout argument.
+
+<h2>Arguments</h2>
+
+- -names &lt;filename&gt; 
+  - Set the names file (default DF.names)
+- -fout &lt;filename&gt; 
+  - Set the name of the output dataset (default DF-out)
+- -target &lt;dir&gt; 
+  - Set the output directory (default '.')
+- -source &lt;dir&gt; 
+  - Set the directory that contains the dataset (default '.')
+- -h 
+  - Display usage information and exit
+- -v 
+  - Can be used multiple times to increase the debugging output 
+- -dataFiles  &lt;list of files&gt; 
+  - till the end of the line list the files to combine (REQUIRED)
+
+<h2>Example</h2>
+
+<p><code>combinedata -names test -fout big-data -dataFiles small-data0
+small-data1 small-data2</code></p>
+
+<p>Will create a file called big-data.data which contains the examples
+from the three specified files.  All data files had better share the
+format specified in test.names.</p>
+
+*/

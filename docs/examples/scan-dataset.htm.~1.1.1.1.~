@@ -1,0 +1,188 @@
+<html>
+
+<head>
+<title>Scan Dataset Example </title>
+</head>
+
+<body>
+
+<h1>Scan Dataset Example</h1>
+
+<p><strong>Example for</strong>: basic functions of <a href="../interfaces/Example.htm">Example</a>
+and <a href="../interfaces/ExampleSpec.htm">ExampleSpec</a>.</p>
+
+<p>This is a simple example that introduces everything you'll need to load a dataset and
+extract the information you will need to execute a learning algorithm.&nbsp; It includes a
+made-up data set, a sample makefile, and a program which it loads, collects statistics
+from, and frees the data set.&nbsp; The example's file are in the <code>&lt;VFML-root&gt;/examples/scan-dataset/</code>
+directory. &nbsp; This document presents the code with a detailed commentary and some
+suggestions for modifications.</p>
+
+<p>You might like to go to the <code>&lt;VFML-root&gt;/examples/scan-dataset/</code>
+directory and get your favorite code/text editor ready.</p>
+
+<h2>The Dataset</h2>
+
+<p>The dataset used for the scan-dataset example is made-up. Each example represents a
+banana sitting on a kitchen counter. The attributes tell how long each banana has been
+sitting on the counter and how many black spots each has.&nbsp; From this information, you
+would like to predict if the banana is edible or spoiled.&nbsp; Unfortunately people are
+always forgetting how long ago they got their bananas, so the attribute containing that
+information is sometimes unknown.</p>
+
+<p>Look at the <code>test.names</code> file for the C4.5-name description of the dataset.
+The <code>test.data</code> file contains the examples, notice the '?'s indicating that
+some of the attribute values are unknown.&nbsp; The first line of the .data file
+represents a banana that has been on the counter for 1 day, has a few spots, and is still
+edible.</p>
+
+<h2>The Makefile</h2>
+
+<p>Glance at the makefile; the top couple lines contain information you would need to
+update if you want to use the file with another project.</p>
+
+<p>The makefile is set up to work as is for the scan-dataset example.&nbsp; Make sure
+you've properly installed the VFML library (see the <a href="../topics/gettingstarted.htm">Getting
+Started</a> section if you haven't done this yet), and changed to the <code>&lt;VFML-root&gt;/examples/scan-dataset/</code>
+directory.&nbsp; Type 'make' to build the example program.&nbsp; Run it by typing <code>scan-dataset</code>,
+and look at the output.</p>
+
+<h2>The Code</h2>
+
+<p>Now let's take a look at the code, load scan-dataset.c into your editor.</p>
+
+<h3>Setup</h3>
+
+<p><code>#include &quot;uwml.h&quot;<br>
+#include &lt;stdio.h&gt;</code></p>
+
+<p>These two include files will appear in just about every project build with VFML. &nbsp;
+The first includes all the VFML interfaces, the second is needed to work with files,
+something you will do in most of your VFML project.</p>
+
+<p>The next couple lines declare some global variables which we'll use to keep statistics
+about the data.&nbsp; We used globals to highlight the separation between this
+less-interesting code from the code that does the real work of the example.</p>
+<code>
+
+<p>int main(void) {<br>
+&nbsp;&nbsp; ExampleSpecPtr es = ExampleSpecRead(&quot;test.names&quot;);<br>
+&nbsp;&nbsp; ExamplePtr e;<br>
+&nbsp;&nbsp; FILE *exampleIn = fopen(&quot;test.data&quot;, &quot;r&quot;);</p>
+</code>
+
+<p>These lines load the example spec, declare an example pointer, and open the example
+data file.&nbsp; The example spec is very important, it contains a complete description of
+the dataset including attributes, their types and values, and the classes.&nbsp; Your
+program will query the example spec to determine how to go about working with a particular
+dataset, what values to expect, and how to iterate over them.&nbsp; You will also need to
+pass the spec to various VFML interfaces; it might be a good thing to make global in your
+projects.</p>
+
+<p>exampleIn is initialized to contain a file handle to the data which is configured for
+reading.&nbsp; The program will read examples from this file, one at a time, until there
+are no more left to read.</p>
+
+<p>Note that the file names are hard coded as <code>test.&lt;names, data&gt;</code>.
+&nbsp; <code>test</code> is called the <em>filestem</em>.&nbsp; Your programs will need to
+accept a command line argument which allows the filestem to be set at runtime.</p>
+
+<h3>Query the Example Spec</h3>
+
+<p>The next couple lines make calls to the ExampleSpec interface to figure out some
+properties of the test dataset.&nbsp; First we figure out how many attributes and classes
+there are.</p>
+<code>
+
+<p>&nbsp;&nbsp; printf(&quot;There are %d attributes.\n&quot;,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ExampleSpecGetNumAttributes(es));<br>
+&nbsp;&nbsp; printf(&quot;There are %d classes.\n&quot;,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ExampleSpecGetNumClasses(es));<br>
+</p>
+</code>
+
+<p>Then we figure out some more information about the attributes.&nbsp; In the example, we
+hard code the attribute indexes; a real learner would have to be more sophisticated.
+&nbsp; Notice that attribute indexing (and all other indexing in VFML) is zero-based, just
+like C arrays.</p>
+
+<p><code><br>
+&nbsp;&nbsp; if(ExampleSpecIsAttributeContinuous(es, 0)) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot; Attribute with index 0 is
+continuous.\n&quot;);<br>
+&nbsp;&nbsp; }<br>
+<br>
+&nbsp;&nbsp; if(ExampleSpecIsAttributeDiscrete(es, 1)) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot; Attribute with index 1 is discrete \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+and has %d values.\n&quot;,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ExampleSpecGetAttributeValueCount(es, 1));<br>
+&nbsp;&nbsp; }</code></p>
+
+<h3>Scan the Data</h3>
+
+<p>The Scan-Dataset program loads, examines, and frees the examples
+from the data set in turn.&nbsp; Most learners will need to load the
+entire dataset into RAM and do some significant processing.&nbsp;
+Finding the right data structure can be a bit problematic.  &nbsp;
+Arrays have quick random access but are a bit inconvenient when you
+don't know the size of the data set ahead of time.&nbsp; Linked lists
+are easy to build but are slow to access
+
+<p>After reading an example, the program tests the values of its
+attributes and record some statistics.&nbsp; As above, the example
+program hard codes indexes to attributes and values.</p> <code>
+
+<p>&nbsp;&nbsp; e = ExampleRead(exampleIn, es);<br>
+&nbsp;&nbsp; while(e != 0) { /* ExampleRead returns 0 when EOF */<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* keep a count of the examples */<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gNumExamples++;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* keep a count of how many of them are spoiled */<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(!ExampleIsClassUnknown(e)) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(ExampleGetClass(e) == 1) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gNumSpoiled++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+</code></p>
+
+<p>Scan-dataset always checks each value to make sure it isn't 'unknown' before attempting
+to use it.&nbsp; The result of accessing an unknown value is undefined.</p>
+
+<p><code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* keep a sum of the number of days */<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(!ExampleIsAttributeUnknown(e, 0)) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gSumDays += <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ExampleGetContinuousAttributeValue(e, 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gNumDaysUnknown++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* keep a total of the number of bananas <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+that have a few spots */<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(!ExampleIsAttributeUnknown(e, 1)) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(ExampleGetDiscreteAttributeValue(e, 1)
+== 1) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; gNumFewSpots++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+</code></p>
+
+<p>VFML allows you to access any attribute as either continuous or
+discrete, but accessing with the wrong type will return a garbage
+value at best.&nbsp; You should always use the ExampleSpec interface
+to check an attribute's type before you access it.</p>
+
+<p><code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* now move on to the next example */<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ExampleFree(e);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e = ExampleRead(exampleIn, es);<br>
+&nbsp;&nbsp; }</code></p>
+
+<p>Scan-dataset prints out some statistics when it's done scanning the data.</p>
+</body>
+</html>

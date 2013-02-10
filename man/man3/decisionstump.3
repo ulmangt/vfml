@@ -1,0 +1,79 @@
+.TH "decisionstump" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+decisionstump \- 
+.SH "Detailed Description"
+.PP 
+Learns a decision stump (a DecisionTree with only one split). 
+
+This is a very simple learner, but it may be useful as a baseline to compare your learner against.
+.PP
+The decisionstump learner works in time proportional to the number of training examples. It also requires memory that is proportional to the number of classes * number attributes * number of values. Note that this can be very large for continuous attributes (which, in the worst case, have a separate value for each training example). The maxThresholds argument can be used to control this.
+.PP
+The learner takes input and does output in \fCc4.5 format\fP.   It expects to find the files \fC<stem>.names\fP and \fC<stem>.data.\fP Depending on command line argument, it will either output the decision stump or test its error rate on \fC<stem>.test\fP.
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem>
+.IP "  \(bu" 4
+Set the stem name (default DF)
+.PP
+
+.IP "\(bu" 2
+-source <dir>
+.IP "  \(bu" 4
+Set the directory that contains the dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-u
+.IP "  \(bu" 4
+Test on the examples in <stem>.test and output in a format appropriate for interface with xvalidate and batchtest  (defaults to off)
+.PP
+
+.IP "\(bu" 2
+-a
+.IP "  \(bu" 4
+Outputs the name of the selected attribute
+.PP
+
+.IP "\(bu" 2
+-outputGains
+.IP "  \(bu" 4
+Outputs the information gain (and best threshold) for each attribute
+.PP
+
+.IP "\(bu" 2
+-outputStump
+.IP "  \(bu" 4
+Prints the learned stump. Defaults to output without the -u flag and not output with it
+.PP
+
+.IP "\(bu" 2
+-maxThresholds <num>
+.IP "  \(bu" 4
+Use the first num values from the training set as thresholds for continuous attributes, allows this program to be run on very large data sets (default use all values)
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+.PP
+.SS "Example"
+.PP
+\fCdecisionstump -f banana -source datasets/banana\fP
+.PP
+Looks for a dataset named 'banana' in the 'datasets/banana' directory.  Outputs the decision stump learned from the data set.
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

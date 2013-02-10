@@ -1,0 +1,167 @@
+.TH "vfbn1" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+vfbn1 \- 
+.SH "Detailed Description"
+.PP 
+Learns the structure of a BeliefNet from a very large data set using sampling. 
+
+Learns the structure and parameters of a Bayesian network, accelerated with sampling as described in \fCthis paper\fP. All variables must be categorical. vfbn1, like other Bayesian network learning programs, searches for high scoring Bayesian network structures by considering adding, removing, and reversing every possible edge, making the one that has highest score on training data, and repeating until no change improves the score. Unlike other learners, vfbn1 uses statistical tests and only uses enough data to be sure that it knows which change is best with high confidence (see the -delta parameter below). This allows vfbn1 to be much faster than traditional methods when there is enough data to make good decisions. It also allows it to learn from data streams (see the -stdin flag below). VFML also includes the \fBvfbn2\fP algorithm which changes the search procedure used so that it can be faster and more scalable.
+.PP
+vfbn1 takes input and does output in \fCc4.5 format\fP. It expects to find the files \fC<stem>.names\fP and \fC<stem>.data\fP.
+.PP
+\fBWish List\fP
+.RS 4
+An API to this learner like the one to learning BeliefNet structure in beliefnet-engine.h 
+.RE
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f 'filestem'
+.IP "  \(bu" 4
+Set the name of the dataset (default DF)
+.PP
+
+.IP "\(bu" 2
+-source 'dir'
+.IP "  \(bu" 4
+Set the source data directory (default '.')
+.PP
+
+.IP "\(bu" 2
+-startFrom 'filename'
+.IP "  \(bu" 4
+Use net in 'filename' as starting point, must be BIF file (default start from empty net)
+.PP
+
+.IP "\(bu" 2
+-outputTo 'filename'
+.IP "  \(bu" 4
+Output the learned net to 'filename' in BIF format
+.PP
+
+.IP "\(bu" 2
+-delta 'prob'
+.IP "  \(bu" 4
+Allowed chance of error in each decision (default 0.00001 that's .001 percent)
+.PP
+
+.IP "\(bu" 2
+-tau 'tie error'
+.IP "  \(bu" 4
+Call a tie when score might change less than tau percent. (default 0.001)
+.PP
+
+.IP "\(bu" 2
+-chunk 'count'
+.IP "  \(bu" 4
+Accumulate 'count' examples before testing for a winning search step(default 10000)
+.PP
+
+.IP "\(bu" 2
+-limitMegs 'count'
+.IP "  \(bu" 4
+Limit dynamic memory allocation to 'count' megabytes, don't consider networks that take too much space (default no limit)
+.PP
+
+.IP "\(bu" 2
+-limitMinutes 'count'
+.IP "  \(bu" 4
+Limit the run to 'count' minutes then return current model (default no limit)
+.PP
+
+.IP "\(bu" 2
+-normal
+.IP "  \(bu" 4
+Use normal bound (default Hoeffding)
+.PP
+
+.IP "\(bu" 2
+-stdin
+.IP "  \(bu" 4
+Reads training examples from stdin instead of from 'stem'.data causes a 2 second delay to help give input time to setup (default off)
+.PP
+
+.IP "\(bu" 2
+-noReverse
+.IP "  \(bu" 4
+Doesn't reverse links to make nets for next search step (default reverse links)
+.PP
+
+.IP "\(bu" 2
+-parametersOnly
+.IP "  \(bu" 4
+Only estimate parameters for current structure, no other learning
+.PP
+
+.IP "\(bu" 2
+-seed 's'
+.IP "  \(bu" 4
+Seed for random numbers (default random)
+.PP
+
+.IP "\(bu" 2
+-maxSearchSteps 'num'
+.IP "  \(bu" 4
+Limit to 'num' search steps (default no max).
+.PP
+
+.IP "\(bu" 2
+-maxParentsPerNode 'num'
+.IP "  \(bu" 4
+Limit each node to 'num' parents (default no max).
+.PP
+
+.IP "\(bu" 2
+-maxParameterGrowthMult 'mult'
+.IP "  \(bu" 4
+Limit net to 'mult' times starting # of parameters (default no max).
+.PP
+
+.IP "\(bu" 2
+-maxParameterCount 'count'
+.IP "  \(bu" 4
+Limit net to 'count' parameters (default no max).
+.PP
+
+.IP "\(bu" 2
+-kappa 'kappa'
+.IP "  \(bu" 4
+The structure prior penalty for batch (0 - 1), 1 is no penalty (default 0.5)
+.PP
+
+.IP "\(bu" 2
+-structureTie
+.IP "  \(bu" 4
+Use the structural prior penalty in ties (default don't)
+.PP
+
+.IP "\(bu" 2
+-batch
+.IP "  \(bu" 4
+Run in batch mode, repeatedly scan disk, don't do hoeffding bounds (default off).
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output.
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Run vfbn1 -h for a list of the arguments and their meanings. 
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

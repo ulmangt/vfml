@@ -1,0 +1,51 @@
+<html>
+
+<head>
+<title>Mining Data Streams</title>
+</head>
+
+<body>
+
+<h1>Mining Data Streams</h1>
+
+This document describes the methods available for interfacing the
+learners in VFML with data streams.  Some of the learners in VFML are
+not scalable and can not easily be used with data streams.  To
+determine which are you should check the documentation of individual
+learners, but in general any learner that is prefaced with 'VF' is
+scalable.
+
+<p>
+
+The simplest, and most widely available, interface method is to pipe
+the training examples to the learner via standard in.  The general
+procedure for this is as follows.  You must write a program that
+connects to the data stream, does any aggregations needed, produces a
+.names file describing the data format, perhaps produces a testing set
+using the names format, and prints examples using the format to
+standard out indefinitely.  Then pipe this output to one of the
+scalable learners with the -stdin argument.  For example, if you output
+the .names and test file as stream.names and stream.test respectively:
+
+<p>
+
+<code>MakeData | vfdt -f stream -stdin -u</code>
+
+<p>
+
+would read (and learn from) examples from standard in until there were
+no more, test the accuracy of the resulting model on the data in
+stream.test, and report some results.
+
+<p>
+
+Another interface method, which is currently only available with the
+vfdt learner, is to write a program that calls the learning engine
+directly.  This allows you to have much more fine grained control of
+the learning process, to get access to the partially learned model for
+performance tasks, and to continue refining the model indefinitely.
+See the <a href = "../vfdt-engine_8h.html">vfdt-engine.h</a>
+documentation for more details on this process.
+
+</body>
+</html>

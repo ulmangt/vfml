@@ -1,0 +1,77 @@
+.TH "HashTable.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HashTable.h \- 
+.SH "Detailed Description"
+.PP 
+A hash table. 
+
+\fBThanks\fP
+.RS 4
+to Chun-Hsiang Hung for implementing the \fBHashTable\fP ADT. 
+.RE
+.PP
+.PP
+\fBWish List\fP
+.RS 4
+A cleaner hash table interface (without the compare function). I think that the sprint learner is the only thing that uses this currently so there isn't much to change to fix this. 
+.RE
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBHashTable\fP"
+.br
+.RI "\fIA hash table ADT. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBHashTable\fP * \fBHashTableNew\fP (int size)"
+.br
+.RI "\fICreates a new hash table with the specified number of entries. \fP"
+.ti -1c
+.RI "void \fBHashTableInsert\fP (\fBHashTable\fP *table, int index, void *element)"
+.br
+.RI "\fIInserts the element into the has table at the appropriate place. \fP"
+.ti -1c
+.RI "void * \fBHashTableFind\fP (\fBHashTable\fP *table, int index, int(*cmp)(const void *, const int))"
+.br
+.RI "\fILooks up index in the hash table. \fP"
+.ti -1c
+.RI "void \fBHashTableFree\fP (\fBHashTable\fP *table)"
+.br
+.RI "\fIFrees the memory being used by the hash table. \fP"
+.ti -1c
+.RI "void * \fBHashTableRemove\fP (\fBHashTable\fP *table, int index, int(*cmp)(const void *, const int))"
+.br
+.RI "\fIRemoves the element from the hash table. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void* HashTableFind (\fBHashTable\fP * table, int index, int(* cmp)(const void *, const int))"
+.PP
+Looks up index in the hash table. Not only must you use the same index, but you must also supply a function that returns non-zero when passed the element you want to find and the index (which you passed to the function in the first place...) 
+.SS "void HashTableFree (\fBHashTable\fP * table)"
+.PP
+Frees the memory being used by the hash table. But doesn't touch the memory being used by the elements in the table. It is your responsibility to free these if you like. 
+.SS "void HashTableInsert (\fBHashTable\fP * table, int index, void * element)"
+.PP
+Inserts the element into the has table at the appropriate place. 
+.SS "\fBHashTable\fP* HashTableNew (int size)"
+.PP
+Creates a new hash table with the specified number of entries. 
+.SS "void* HashTableRemove (\fBHashTable\fP * table, int index, int(* cmp)(const void *, const int))"
+.PP
+Removes the element from the hash table. Not only must you use the same index, but you must also supply a function that returns non-zero when passed the element you want to find and the index (which you passed to the function in the first place...) 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

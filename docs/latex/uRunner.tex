@@ -1,0 +1,75 @@
+\section{u\-Runner File Reference}
+\label{uRunner}\index{uRunner@{uRunner}}
+
+
+\subsection{Detailed Description}
+Distribute a collection of jobs across a cluster of computers. 
+
+This tool is used to take a collection of jobs and easily execute them across a cluster of computers. The tool is actually two programs: the server program, u\-Runner and the client program, u\-Runner\-Client. You provide a config file and a job queue, then execute the server. The server starts the clients on the selected hosts and they begin taking and executing jobs from the queue (using a safe locking mechanism).
+
+\subsubsection*{The Config File}
+
+
+
+\footnotesize\begin{verbatim}
+[GLOBAL]
+
+experimentname = cluster-runs
+
+scratchdir = /scratch/%(experimentname)s/%(host)s/
+jobsdir    = . 
+lockdir    = %(jobsdir)s/
+queuefile  = %(jobsdir)s/queue
+resultdir  = %(jobsdir)s/results/
+
+clients    = calypso poseidon helios rhea apollo
+\end{verbatim}\normalsize
+
+
+The {\tt [GLOBAL]} statement is required but has no semantics (it comes from the python config parser that u\-Runner uses). Other than that, the required fields are {\tt scratchdir}, {\tt lockdir}, {\tt queuefile}, {\tt resultdir}, and {\tt clients}. Each of these may contain text and substitutions of previous variables. The syntax for a substitution is (variablename)s (the s let it know you want to sub in a string, another artifact of the python config parser). You can also use the {\tt host} variable which is set to the host that the client is running on (different for each client).
+
+\paragraph*{Scratch Directory}
+
+The u\-Runner\-Client makes the directory {\tt scratchdir} (and any directories it needs to leading up to it) and frees it (and them) after each job. This means that if you specify a scratch dir that doesn't exist the u\-Runner cleans it after each run, if it does exist u\-Runner doesn't change it (or its contents). u\-Runner changes directory to this scratch directory before running any jobs. You might want to make the scratch directory on local disk so your program will have faster access to it. One common idiom is to copy (or generate) a dataset to a localy mounted disk and run several similar algorithms on the data in a single job. It might also be convienient because multiple copies of the same program won't have conflicts with temporary files.
+
+\paragraph*{Lock Directory}
+
+This must be a network mounted directory and all the clients must be able to access it. During the run clients create lockfiles in this directory so they don't corrupt the queuefile by accessing it simultaneously.
+
+\paragraph*{Result Directory}
+
+This directory must be a network mounted directory and all the clients must be able to access it. If it doesn't exist it will be created. Jobs should copy the results of the programs they execute to this directory so the results won't be lost when the Scratch Directory is cleaned up.
+
+\paragraph*{List of Clients}
+
+A copy of u\-Runner\-Client will be executed on each of these clients via a call to rsh.
+
+\subsubsection*{The Queue File}
+
+
+
+\footnotesize\begin{verbatim}
+---
+Experiment12-18-0.0300
+nice -5 $rundir/clusterdata -continuous 12 -clusters 18 -stdev 0.0300 -train 10000000 -seed 9177 -conceptSeed 18354
+nice -5 $rundir/vfkm -progressive -allowBadConverge -clusters 18 -dbSize 10000000 -converge 0.021600 -seed 9178 > output
+echo "d12	k18	0.0300	" "`cat output`" >> $resultdir/results-vfkm
+rm output
+nice -5 $rundir/vfkm -progressive -allowBadConverge -clusters 18 -dbSize 10000000 -normalApprox -converge 0.021600 -seed 9178 > output
+echo "d12	k18	0.0300	" "`cat output`" >> $resultdir/results-pvfkm
+rm output
+nice -5 $rundir/vfkm -batch -clusters 18 -dbSize 10000000 -normalApprox -converge 0.021600 -seed 9178 > output
+echo "d12	k18	0.0300	" "`cat output`" >> $resultdir/results-km
+rm output
+---
+\end{verbatim}\normalsize
+
+
+The queue file is a series of jobs, see the example above. First note that each job is surrounded by {\tt ---} (which means {\tt ---} will appear twice between jobs). The first line of each job is the job's name, which can be accessed via the \$jobname environment variable. The \$rundir environment variable is also available, and points to the directory from which u\-Runner was executed. The other available environment variables are \$resultdir, \$scratchdir, and \$host. Note, additional variables you declare in the config file are not available.
+
+The example above shows several useful idioms. First, before starting the run, copies of the binaries involved are made in \$rundir. This allows development to continue while the experiment is executing. The example first runs 'clusterdata' to create a very large dataset (remember this will be in the scratch directory). It then calls a learning algorithm 'vfkm' with three different but related parameter settings. It concatinates the output of each learner onto a file in the result directory, and cleans up after itself. Notice that the scratch directory mechinism will clean up after the entire run is complete, but within the run some cleaning is needed as well (removing the output file). Also notice that there are some kinda odd constructs which have to do with the shell that python executes, I think you need to make sure your commands are in sh (check this).
+
+\subsubsection*{Notes}
+
+On the UW computers you need some kind of kerberos tickits to rsh. I'm not 100\% sure how this works, but you seem to get a bunch of tickets when you first log in, so if you get errors about permission denied try logging out and back in or run the kinit command to get some more.
+

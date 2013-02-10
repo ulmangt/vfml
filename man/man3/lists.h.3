@@ -1,0 +1,134 @@
+.TH "lists.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lists.h \- 
+.SH "Detailed Description"
+.PP 
+Generic list functions. 
+
+Void lists store untyped objects (void pointers) and Int and Float lists are special cased to work with appropriately typed data. The interfaces for the three are the same except all functions for VoidLists are prefaced with 'VL', IntList with 'IL', and FloatList with 'FL'. \fBImportant\fP The documentation says 'VAL' instead of just 'VL' as a prefix to all functions, macros do the expansion to the array version of lists by default so these are the same in practice.
+.PP
+And since these list data structures are basically arrays that are dynamically sized, inserting or removing elements is O(N) but accessing elements is O(1).
+.PP
+This module also has linked lists which are used very very rarely in VFML. You can access them by adding an additional L to the name, for example \fBVLNew()\fP -> \fBVLLNew()\fP
+.PP
+.PP
+.PP
+\fBExamples\fP 
+.PP
+To iterate over the values in a VoidList:
+.PP
+.PP
+.nf
+VoidListPtr list = (some existing list); 
+void *e;
+int i;
+
+for(i = 0 ; i < VLLength(list) ; i++) {
+   e = VLIndex(list, i);
+}
+.PP
+.PP
+The same thing with a FloatList:
+.PP
+.PP
+.nf
+FloatListPtr list = (some existing list); 
+float f;
+int i;
+
+for(i = 0 ; i < FLLength(list) ; i++) {
+   f = FLIndex(list, i);
+}
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Defines"
+
+.in +1c
+.ti -1c
+.RI "#define \fBVALLength\fP(list)   (((VoidAListPtr)(list))->size)"
+.br
+.RI "\fIReturns the number of elements in the list. \fP"
+.ti -1c
+.RI "#define \fBVALIndex\fP(list, index)   ( (index < ((VoidAListPtr)list)->size) ? (((VoidAListPtr)list)->array[index]) : (0) )"
+.br
+.RI "\fIReturns the element at the index (zero based). \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "VoidAListPtr \fBVALNew\fP (void)"
+.br
+.RI "\fICreates a new list of the specified type. \fP"
+.ti -1c
+.RI "void \fBVALAppend\fP (VoidAListPtr list, void *element)"
+.br
+.RI "\fIAppend the element to the end of the list. \fP"
+.ti -1c
+.RI "void \fBVALPush\fP (VoidAListPtr list, void *element)"
+.br
+.RI "\fIPush element on the head of the list. \fP"
+.ti -1c
+.RI "void \fBVALSort\fP (VoidAListPtr list, int(*cmp)(const void *, const void *))"
+.br
+.RI "\fIUses quick sort to sort the list in place with the passed comparision function. \fP"
+.ti -1c
+.RI "void * \fBVALRemove\fP (VoidAListPtr list, long index)"
+.br
+.RI "\fIRemoves the item at the specified index and returns it. \fP"
+.ti -1c
+.RI "void \fBVALInsert\fP (VoidAListPtr list, void *element, long index)"
+.br
+.RI "\fIInserts the element at the specified index. \fP"
+.ti -1c
+.RI "void \fBVALSet\fP (VoidAListPtr list, long index, void *newVal)"
+.br
+.RI "\fISets the value at the specified index. \fP"
+.ti -1c
+.RI "void \fBVALFree\fP (VoidAListPtr list)"
+.br
+.RI "\fIFrees the memory associated with the list. \fP"
+.in -1c
+.SH "Define Documentation"
+.PP 
+.SS "#define VALIndex(list, index)   ( (index < ((VoidAListPtr)list)->size) ? (((VoidAListPtr)list)->array[index]) : (0) )"
+.PP
+Returns the element at the index (zero based). Note that the indexing is 0 based (like a C array). 
+.SS "#define VALLength(list)   (((VoidAListPtr)(list))->size)"
+.PP
+Returns the number of elements in the list. 
+.SH "Function Documentation"
+.PP 
+.SS "void VALAppend (VoidAListPtr list, void * element)"
+.PP
+Append the element to the end of the list. 
+.SS "void VALFree (VoidAListPtr list)"
+.PP
+Frees the memory associated with the list. You are responsible for any memory used by the elements of the list. 
+.SS "void VALInsert (VoidAListPtr list, void * element, long index)"
+.PP
+Inserts the element at the specified index. The element that used to have that index will have an index one higher (that is, it shifts later elements over). Note that the indexing is 0 based (like a C array). 
+.SS "VoidAListPtr VALNew (void)"
+.PP
+Creates a new list of the specified type. 
+.SS "void VALPush (VoidAListPtr list, void * element)"
+.PP
+Push element on the head of the list. 
+.SS "void* VALRemove (VoidAListPtr list, long index)"
+.PP
+Removes the item at the specified index and returns it. Shifts later elements over. Note that the indexing is 0 based (like a C array). 
+.SS "void VALSet (VoidAListPtr list, long index, void * newVal)"
+.PP
+Sets the value at the specified index. The previous value at the index is overwritten. Note that the indexing is 0 based (like a C array). 
+.SS "void VALSort (VoidAListPtr list, int(* cmp)(const void *, const void *))"
+.PP
+Uses quick sort to sort the list in place with the passed comparision function. Note this is not implemented for FloatLists. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

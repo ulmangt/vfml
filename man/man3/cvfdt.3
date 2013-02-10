@@ -1,0 +1,142 @@
+.TH "cvfdt" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+cvfdt \- 
+.SH "Detailed Description"
+.PP 
+Learns a DecisionTree from a high-speed time-changing data stream (or very large data set). 
+
+Learns a decision tree from a high-speed time-changing data stream or a very large data set as described in \fCthis paper\fP. cvfdt does not work with continuous attributes.
+.PP
+CVFDT learns a tree as follows. It starts with a single leaf and starts collecting training examples from a data stream (with the -stdin argument) or from the file stem.data. When it has enough data to know, with high confidence that it knows which attribute is the best to partition the data with, it turns the leaf into an internal node splitting on that attribute and starts learning at the new leaves recursively. CVFDT maintains a window of training examples and keeps its learned tree up-to-date with this window by monitoring the quality of its old decisions as data moves into and out of the window. In particular, whenever a new example is read it is added to the statistics at all the nodes in the tree that it passes through, the last example in the window is forgotten from every node where it had previously had an effect, and the validity of all statistical tests are checked. If cvfdt detects a change it starts growing an alternate tree in parallel which is rooted at the newly-invalidated node. When the alternate is more accurate on new data than the original the original is replaced by the alternate and freed.
+.PP
+cvfdt takes input and does output in \fCc4.5 format\fP. It expects to find the files \fC<stem>.names\fP and \fC<stem>.data\fP.
+.PP
+\fBThanks\fP
+.RS 4
+to Laurie Spencer for doing the core development work for cvfdt. 
+.RE
+.PP
+.PP
+\fBWish List\fP
+.RS 4
+Modify this learner to work with continuous attributes. 
+.PP
+An API to this learner like the one to learning BeliefNet structure in beliefnet-engine.h 
+.RE
+.PP
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f 'filestem'
+.IP "  \(bu" 4
+Set the name of the dataset (default DF)
+.PP
+
+.IP "\(bu" 2
+-source 'dir'
+.IP "  \(bu" 4
+Set the source data directory (default '.')
+.PP
+
+.IP "\(bu" 2
+-u
+.IP "  \(bu" 4
+Test the learner's accuracy on data in 'stem'.test
+.PP
+
+.IP "\(bu" 2
+-sc 'allowed chance of error in each decision'
+.IP "  \(bu" 4
+Default 0.01 that's 1 percent
+.PP
+
+.IP "\(bu" 2
+-stdin
+.IP "  \(bu" 4
+Reads training examples from stdin instead of from 'stem'.data (default off) NOTE this disables the rescans switch
+.PP
+
+.IP "\(bu" 2
+-tc 'tie error'
+.IP "  \(bu" 4
+Call a tie when hoeffding e < this. (default 0.05)
+.PP
+
+.IP "\(bu" 2
+-rescans 'count'
+.IP "  \(bu" 4
+Naievely consider each example 'count' times with no concern for using it once per level of the induced tree (default 1)
+.PP
+
+.IP "\(bu" 2
+-chunk 'count'
+.IP "  \(bu" 4
+Wait until 'count' examples accumulate at a leaf before testing for a split (default 300)
+.PP
+
+.IP "\(bu" 2
+-growMegs 'count'
+.IP "  \(bu" 4
+Limit dynamic memory allocation to 'count' megabytes (default 1000)
+.PP
+
+.IP "\(bu" 2
+-window 'count'
+.IP "  \(bu" 4
+Number of examples in the window (default 50000)
+.PP
+
+.IP "\(bu" 2
+-cache 'count'
+.IP "  \(bu" 4
+Number of examples from the window to keep in memory (default 10000)
+.PP
+
+.IP "\(bu" 2
+-schedule '#'
+.IP "  \(bu" 4
+Run tests every # examples (default 10000).
+.PP
+
+.IP "\(bu" 2
+-altTest '#'
+.IP "  \(bu" 4
+Interval for building and testing alternate trees (default 10000).
+.PP
+
+.IP "\(bu" 2
+-incrementalReporting
+.IP "  \(bu" 4
+As each example arrives test the current learned model with it and then learn on it (default off).
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging -output
+.PP
+
+.IP "\(bu" 2
+-checkSize 'count'
+.IP "  \(bu" 4
+Wait until 'count' examples accumulate before checking for questionable nodes(default 10000)
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Run cvfdt -h for a list of the arguments and their meanings.
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

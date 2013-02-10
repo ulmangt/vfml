@@ -1,0 +1,232 @@
+\section{vfdt-engine.h File Reference}
+\label{vfdt-engine_8h}\index{vfdt-engine.h@{vfdt-engine.h}}
+
+
+\subsection{Detailed Description}
+An API which lets your program learn a Decision\-Tree from a high-speed data stream. 
+
+An API to VFML's engine for learning decision trees from high-speed data streams. The {\bf vfdt} program is basically a wrapper around this interface. You can use this interface to learn decision trees from a stream of data as it arrives, and use the tree in a parallel to make predictions.
+
+To use this interface you generate a VFDTPtr using the VFDTNew function, set any parameters you want to use to control the learning using the functions that are described below, and then repeatedly feed examples to the VFDTPtr using the VFDTProcess\-Example function. You can call VFDTGet\-Learned\-Tree at anytime to get a copy of the current learned tree. Note that vfdt-engine will take over the memory of any examples feed to it, and you should not free them or your program will crash.
+
+\begin{Desc}
+\item[{\bf Wish List}]A function that checkpoints the learning procedure to disk so that it can be restored at a later time. I think the hard part of this would be checkpointing the Example\-Group\-Stats structure. \end{Desc}
+
+
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-VFDT\_\-}
+\begin{CompactList}\small\item\em Holds the information needed to learn decision trees from data streams. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef {\bf \_\-VFDT\_\-} {\bf VFDT}
+\begin{CompactList}\small\item\em Holds the information needed to learn decision trees from data streams. \item\end{CompactList}\item 
+typedef {\bf \_\-VFDT\_\-} $\ast$ {\bf VFDTPtr}
+\begin{CompactList}\small\item\em Holds the information needed to learn decision trees from data streams. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf VFDTPtr} {\bf VFDTNew} ({\bf Example\-Spec\-Ptr} spec, float split\-Confidence, float tie\-Confidence)
+\begin{CompactList}\small\item\em Allocate memory to learn a decision tree from a data stream. \item\end{CompactList}\item 
+void {\bf VFDTFree} ({\bf VFDTPtr} vfdt)
+\begin{CompactList}\small\item\em frees all the memory being used by the learning process. \item\end{CompactList}\item 
+void {\bf VFDTSet\-Message\-Level} ({\bf VFDTPtr} vfdt, int value)
+\begin{CompactList}\small\item\em Higher message levels print more output to the console. \item\end{CompactList}\item 
+void {\bf VFDTSet\-Max\-Allocation\-Megs} ({\bf VFDTPtr} vfdt, int value)
+\begin{CompactList}\small\item\em Put a limit on the dynamic memory used by the program. \item\end{CompactList}\item 
+void {\bf VFDTSet\-Process\-Chunk\-Size} ({\bf VFDTPtr} vfdt, int value)
+\begin{CompactList}\small\item\em Sets the number of examples before checks for tree growth. \item\end{CompactList}\item 
+void {\bf VFDTSet\-Use\-Gini} ({\bf VFDTPtr} vfdt, int value)
+\begin{CompactList}\small\item\em Set the evaluation function to Gini (default is Entropy). \item\end{CompactList}\item 
+void {\bf VFDTSet\-Restart\-Leaves} ({\bf VFDTPtr} vfdt, int value)
+\begin{CompactList}\small\item\em Consider reactivating leaves where growing was stopped to save RAM. \item\end{CompactList}\item 
+void {\bf VFDTSet\-Cache\-Training\-Examples} ({\bf VFDTPtr} vfdt, int value)
+\begin{CompactList}\small\item\em Use extra RAM to cache training examples. \item\end{CompactList}\item 
+void {\bf VFDTSet\-Pre\-Prune\-Tau} ({\bf VFDTPtr} vfdt, float value)
+\begin{CompactList}\small\item\em Set the pre-prune parameter. \item\end{CompactList}\item 
+void {\bf VFDTSet\-Laplace} ({\bf VFDTPtr} vfdt, int value)
+\begin{CompactList}\small\item\em Set how many examples worth of smoothing to do in class probability estimates. \item\end{CompactList}\item 
+void {\bf VFDTProcess\-Examples} ({\bf VFDTPtr} vfdt, FILE $\ast$input)
+\begin{CompactList}\small\item\em Read as many examples as possible from the file and learn from them. \item\end{CompactList}\item 
+void {\bf VFDTProcess\-Examples\-Batch} ({\bf VFDTPtr} vfdt, FILE $\ast$input)
+\begin{CompactList}\small\item\em Learn from the examples in batch mode. \item\end{CompactList}\item 
+void {\bf VFDTProcess\-Example\-Batch} ({\bf VFDTPtr} vfdt, {\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Add the example to the learner without checking for splits. \item\end{CompactList}\item 
+void {\bf VFDTBatch\-Examples\-Done} ({\bf VFDTPtr} vfdt)
+\begin{CompactList}\small\item\em Forces vfdt-engine to make as many splits as possible using traditional methods. \item\end{CompactList}\item 
+void {\bf VFDTProcess\-Example} ({\bf VFDTPtr} vfdt, {\bf Example\-Ptr} e)
+\begin{CompactList}\small\item\em Adds another example to the learning process. \item\end{CompactList}\item 
+int {\bf VFDTIs\-Done\-Learning} ({\bf VFDTPtr} vfdt)
+\begin{CompactList}\small\item\em Returns 1 if no nodes in the tree are still active. \item\end{CompactList}\item 
+long {\bf VFDTGet\-Num\-Growing} ({\bf VFDTPtr} vfdt)
+\begin{CompactList}\small\item\em Returns the number of nodes that are growing. \item\end{CompactList}\item 
+long {\bf VFDTGet\-Num\-Bounds\-Used} ({\bf VFDTPtr} vfdt)
+\begin{CompactList}\small\item\em Returns the number of statistical tests made. \item\end{CompactList}\item 
+void {\bf VFDTPrint\-Stats} ({\bf VFDTPtr} vfdt, FILE $\ast$out)
+\begin{CompactList}\small\item\em Prints some information about the growing nodes to the file. \item\end{CompactList}\item 
+{\bf Decision\-Tree\-Ptr} {\bf VFDTGet\-Learned\-Tree} ({\bf VFDTPtr} vfdt)
+\begin{CompactList}\small\item\em Returns the current tree. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{vfdt-engine.h@{vfdt-engine.h}!VFDT@{VFDT}}
+\index{VFDT@{VFDT}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-VFDT\_\-}  {\bf VFDT}}\label{vfdt-engine_8h_a2}
+
+
+Holds the information needed to learn decision trees from data streams. 
+
+\index{vfdt-engine.h@{vfdt-engine.h}!VFDTPtr@{VFDTPtr}}
+\index{VFDTPtr@{VFDTPtr}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-VFDT\_\-} $\ast$ {\bf VFDTPtr}}\label{vfdt-engine_8h_a3}
+
+
+Holds the information needed to learn decision trees from data streams. 
+
+
+
+\subsection{Function Documentation}
+\index{vfdt-engine.h@{vfdt-engine.h}!VFDTBatchExamplesDone@{VFDTBatchExamplesDone}}
+\index{VFDTBatchExamplesDone@{VFDTBatchExamplesDone}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTBatch\-Examples\-Done ({\bf VFDTPtr} {\em vfdt})}\label{vfdt-engine_8h_a18}
+
+
+Forces vfdt-engine to make as many splits as possible using traditional methods. 
+
+\index{vfdt-engine.h@{vfdt-engine.h}!VFDTFree@{VFDTFree}}
+\index{VFDTFree@{VFDTFree}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTFree ({\bf VFDTPtr} {\em vfdt})}\label{vfdt-engine_8h_a5}
+
+
+frees all the memory being used by the learning process. 
+
+\index{vfdt-engine.h@{vfdt-engine.h}!VFDTGetLearnedTree@{VFDTGetLearnedTree}}
+\index{VFDTGetLearnedTree@{VFDTGetLearnedTree}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Decision\-Tree\-Ptr} VFDTGet\-Learned\-Tree ({\bf VFDTPtr} {\em vfdt})}\label{vfdt-engine_8h_a24}
+
+
+Returns the current tree. 
+
+This will guess on which class to predict at the growing leaves (smoothing with strength of the lapace paramterer towards the distribution seen at the parent). Returns a copy of the internally growing decision tree, and so vfdt-engine can continue to learn on the internal tree unaffected. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTGetNumBoundsUsed@{VFDTGetNumBoundsUsed}}
+\index{VFDTGetNumBoundsUsed@{VFDTGetNumBoundsUsed}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long VFDTGet\-Num\-Bounds\-Used ({\bf VFDTPtr} {\em vfdt})}\label{vfdt-engine_8h_a22}
+
+
+Returns the number of statistical tests made. 
+
+\index{vfdt-engine.h@{vfdt-engine.h}!VFDTGetNumGrowing@{VFDTGetNumGrowing}}
+\index{VFDTGetNumGrowing@{VFDTGetNumGrowing}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long VFDTGet\-Num\-Growing ({\bf VFDTPtr} {\em vfdt})}\label{vfdt-engine_8h_a21}
+
+
+Returns the number of nodes that are growing. 
+
+\index{vfdt-engine.h@{vfdt-engine.h}!VFDTIsDoneLearning@{VFDTIsDoneLearning}}
+\index{VFDTIsDoneLearning@{VFDTIsDoneLearning}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int VFDTIs\-Done\-Learning ({\bf VFDTPtr} {\em vfdt})}\label{vfdt-engine_8h_a20}
+
+
+Returns 1 if no nodes in the tree are still active. 
+
+This may happen because RAM runs out, or because everything was pre-pruned. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTNew@{VFDTNew}}
+\index{VFDTNew@{VFDTNew}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf VFDTPtr} VFDTNew ({\bf Example\-Spec\-Ptr} {\em spec}, float {\em split\-Confidence}, float {\em tie\-Confidence})}\label{vfdt-engine_8h_a4}
+
+
+Allocate memory to learn a decision tree from a data stream. 
+
+Sets up the learning, makes an initial tree with a single node. split\-Confidence is the delta parameter from our paper (the probability of making a mistake with the sampling we use) and the tie\-Confidence is tau (the minimum difference in gain that you care about). split\-Confidence should be a small non-zero number, maybe 10$^\wedge$-7. And tie\-Confidence should be something in the range of 0 - .1 (although slightly bigger values may be useful). \index{vfdt-engine.h@{vfdt-engine.h}!VFDTPrintStats@{VFDTPrintStats}}
+\index{VFDTPrintStats@{VFDTPrintStats}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTPrint\-Stats ({\bf VFDTPtr} {\em vfdt}, FILE $\ast$ {\em out})}\label{vfdt-engine_8h_a23}
+
+
+Prints some information about the growing nodes to the file. 
+
+\index{vfdt-engine.h@{vfdt-engine.h}!VFDTProcessExample@{VFDTProcessExample}}
+\index{VFDTProcessExample@{VFDTProcessExample}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTProcess\-Example ({\bf VFDTPtr} {\em vfdt}, {\bf Example\-Ptr} {\em e})}\label{vfdt-engine_8h_a19}
+
+
+Adds another example to the learning process. 
+
+Check for splits as needed (according to the chunk size). \index{vfdt-engine.h@{vfdt-engine.h}!VFDTProcessExampleBatch@{VFDTProcessExampleBatch}}
+\index{VFDTProcessExampleBatch@{VFDTProcessExampleBatch}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTProcess\-Example\-Batch ({\bf VFDTPtr} {\em vfdt}, {\bf Example\-Ptr} {\em e})}\label{vfdt-engine_8h_a17}
+
+
+Add the example to the learner without checking for splits. 
+
+When you have added all the examples you want call VFDTBatch\-Examples\-Done to tell vfdt-engine it is time to make splits. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTProcessExamples@{VFDTProcessExamples}}
+\index{VFDTProcessExamples@{VFDTProcessExamples}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTProcess\-Examples ({\bf VFDTPtr} {\em vfdt}, FILE $\ast$ {\em input})}\label{vfdt-engine_8h_a15}
+
+
+Read as many examples as possible from the file and learn from them. 
+
+This will repeatedly read and learn from examples in the file until it can not read any more. Note that this function will block until that time. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTProcessExamplesBatch@{VFDTProcessExamplesBatch}}
+\index{VFDTProcessExamplesBatch@{VFDTProcessExamplesBatch}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTProcess\-Examples\-Batch ({\bf VFDTPtr} {\em vfdt}, FILE $\ast$ {\em input})}\label{vfdt-engine_8h_a16}
+
+
+Learn from the examples in batch mode. 
+
+That is, read them all into RAM and use every example to make every learning decision. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTSetCacheTrainingExamples@{VFDTSetCacheTrainingExamples}}
+\index{VFDTSetCacheTrainingExamples@{VFDTSetCacheTrainingExamples}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTSet\-Cache\-Training\-Examples ({\bf VFDTPtr} {\em vfdt}, int {\em value})}\label{vfdt-engine_8h_a11}
+
+
+Use extra RAM to cache training examples. 
+
+Default is to cache. This keeps examples in memory to possibly use them to help make several decisions, speeding up the induction. When RAM is full vfdt-engine starts deactivating example caches at the least promising leaves. All caches will be deactivated before any leaves are deactived. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTSetLaplace@{VFDTSetLaplace}}
+\index{VFDTSetLaplace@{VFDTSetLaplace}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTSet\-Laplace ({\bf VFDTPtr} {\em vfdt}, int {\em value})}\label{vfdt-engine_8h_a13}
+
+
+Set how many examples worth of smoothing to do in class probability estimates. 
+
+\index{vfdt-engine.h@{vfdt-engine.h}!VFDTSetMaxAllocationMegs@{VFDTSetMaxAllocationMegs}}
+\index{VFDTSetMaxAllocationMegs@{VFDTSetMaxAllocationMegs}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTSet\-Max\-Allocation\-Megs ({\bf VFDTPtr} {\em vfdt}, int {\em value})}\label{vfdt-engine_8h_a7}
+
+
+Put a limit on the dynamic memory used by the program. 
+
+This requires that DEBUGMEMORY is defined in {\bf memory.h} (which is the default). By setting this you limit the amount of memory allocated with calls to Mem\-New\-Ptr by either your program and by vfdt-engine. This means any other calls you make to VFML functions (e.g. reading examples from disk) will be counted against vfdt's total. (you can use MSet\-Active\-Pool with pool id 0 to get around this).
+
+If this memory threshold is crossed vfdt-engine starts purging its allocations by first throwing away cahed examples and then disabling learning at the least promising leaves. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTSetMessageLevel@{VFDTSetMessageLevel}}
+\index{VFDTSetMessageLevel@{VFDTSetMessageLevel}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTSet\-Message\-Level ({\bf VFDTPtr} {\em vfdt}, int {\em value})}\label{vfdt-engine_8h_a6}
+
+
+Higher message levels print more output to the console. 
+
+Levels above 2 print a lot of output. More than you want. I promise. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTSetPrePruneTau@{VFDTSetPrePruneTau}}
+\index{VFDTSetPrePruneTau@{VFDTSetPrePruneTau}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTSet\-Pre\-Prune\-Tau ({\bf VFDTPtr} {\em vfdt}, float {\em value})}\label{vfdt-engine_8h_a12}
+
+
+Set the pre-prune parameter. 
+
+The default is 0.0, which means no pre-pruning. If the gain of all attributes is less than this value then pre-prune. Also, do not call a tie unless an attribute beats another by at least this much. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTSetProcessChunkSize@{VFDTSetProcessChunkSize}}
+\index{VFDTSetProcessChunkSize@{VFDTSetProcessChunkSize}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTSet\-Process\-Chunk\-Size ({\bf VFDTPtr} {\em vfdt}, int {\em value})}\label{vfdt-engine_8h_a8}
+
+
+Sets the number of examples before checks for tree growth. 
+
+Check for growth at a leaf once every time it accumulates this many examples. Default is 300. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTSetRestartLeaves@{VFDTSetRestartLeaves}}
+\index{VFDTSetRestartLeaves@{VFDTSetRestartLeaves}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTSet\-Restart\-Leaves ({\bf VFDTPtr} {\em vfdt}, int {\em value})}\label{vfdt-engine_8h_a10}
+
+
+Consider reactivating leaves where growing was stopped to save RAM. 
+
+The default value for this is true, so periodically vfdt-engine looks at all the deactivated leaves to see if any of them are more promising than any of the currently active ones, and makes adjustments. If set to false any leaf that is deactivated is effectively pre-pruned. \index{vfdt-engine.h@{vfdt-engine.h}!VFDTSetUseGini@{VFDTSetUseGini}}
+\index{VFDTSetUseGini@{VFDTSetUseGini}!vfdt-engine.h@{vfdt-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VFDTSet\-Use\-Gini ({\bf VFDTPtr} {\em vfdt}, int {\em value})}\label{vfdt-engine_8h_a9}
+
+
+Set the evaluation function to Gini (default is Entropy). 
+

@@ -1,0 +1,105 @@
+\section{random.h File Reference}
+\label{random_8h}\index{random.h@{random.h}}
+
+
+\subsection{Detailed Description}
+Generates random numbers in a number of ways, and has support for saving and restoring the state of the random number generator. 
+
+
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void {\bf Random\-Init} (void)
+\begin{CompactList}\small\item\em Should be called before calling other random functions. \item\end{CompactList}\item 
+int {\bf Random\-Range} (int min, int max)
+\begin{CompactList}\small\item\em Returns a number between the min and max (inclusive). \item\end{CompactList}\item 
+long {\bf Random\-Long} (void)
+\begin{CompactList}\small\item\em Returns a random long integer. \item\end{CompactList}\item 
+double {\bf Random\-Double} (void)
+\begin{CompactList}\small\item\em Returns a random double from 0 - 1. \item\end{CompactList}\item 
+double {\bf Random\-Gaussian} (double mean, double stdev)
+\begin{CompactList}\small\item\em Samples from a Gaussian with the specified parameters. \item\end{CompactList}\item 
+double {\bf Random\-Standard\-Normal} (void)
+\begin{CompactList}\small\item\em Samples from the standard normal distribution. \item\end{CompactList}\item 
+void {\bf Random\-Seed} (unsigned int seed)
+\begin{CompactList}\small\item\em Seeds the random number generator. \item\end{CompactList}\item 
+void $\ast$ {\bf Random\-New\-State} (unsigned int seed)
+\begin{CompactList}\small\item\em Creates a new random state to use with Random\-Set\-State. \item\end{CompactList}\item 
+void $\ast$ {\bf Random\-Set\-State} (void $\ast$state)
+\begin{CompactList}\small\item\em Sets the current random state. \item\end{CompactList}\item 
+void {\bf Random\-Free\-State} (void $\ast$state)
+\begin{CompactList}\small\item\em Use this to free any state made with Random\-New\-State. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{random.h@{random.h}!RandomDouble@{RandomDouble}}
+\index{RandomDouble@{RandomDouble}!random.h@{random.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Random\-Double (void)}\label{random_8h_a3}
+
+
+Returns a random double from 0 - 1. 
+
+\index{random.h@{random.h}!RandomFreeState@{RandomFreeState}}
+\index{RandomFreeState@{RandomFreeState}!random.h@{random.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Random\-Free\-State (void $\ast$ {\em state})}\label{random_8h_a9}
+
+
+Use this to free any state made with Random\-New\-State. 
+
+\index{random.h@{random.h}!RandomGaussian@{RandomGaussian}}
+\index{RandomGaussian@{RandomGaussian}!random.h@{random.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Random\-Gaussian (double {\em mean}, double {\em stdev})}\label{random_8h_a4}
+
+
+Samples from a Gaussian with the specified parameters. 
+
+\index{random.h@{random.h}!RandomInit@{RandomInit}}
+\index{RandomInit@{RandomInit}!random.h@{random.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Random\-Init (void)}\label{random_8h_a0}
+
+
+Should be called before calling other random functions. 
+
+\index{random.h@{random.h}!RandomLong@{RandomLong}}
+\index{RandomLong@{RandomLong}!random.h@{random.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Random\-Long (void)}\label{random_8h_a2}
+
+
+Returns a random long integer. 
+
+\index{random.h@{random.h}!RandomNewState@{RandomNewState}}
+\index{RandomNewState@{RandomNewState}!random.h@{random.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ Random\-New\-State (unsigned int {\em seed})}\label{random_8h_a7}
+
+
+Creates a new random state to use with Random\-Set\-State. 
+
+Each state represents a separate stream of repeatable random numbers. This is implemented with initstate and setstate on Unix and is currently not supported on windows. \index{random.h@{random.h}!RandomRange@{RandomRange}}
+\index{RandomRange@{RandomRange}!random.h@{random.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Random\-Range (int {\em min}, int {\em max})}\label{random_8h_a1}
+
+
+Returns a number between the min and max (inclusive). 
+
+\index{random.h@{random.h}!RandomSeed@{RandomSeed}}
+\index{RandomSeed@{RandomSeed}!random.h@{random.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Random\-Seed (unsigned int {\em seed})}\label{random_8h_a6}
+
+
+Seeds the random number generator. 
+
+\index{random.h@{random.h}!RandomSetState@{RandomSetState}}
+\index{RandomSetState@{RandomSetState}!random.h@{random.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ Random\-Set\-State (void $\ast$ {\em state})}\label{random_8h_a8}
+
+
+Sets the current random state. 
+
+The state parameter should have been made by Random\-New\-State. This allows you to have multiple repeatable random number sequences at once. Returns the previous state. \index{random.h@{random.h}!RandomStandardNormal@{RandomStandardNormal}}
+\index{RandomStandardNormal@{RandomStandardNormal}!random.h@{random.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Random\-Standard\-Normal (void)}\label{random_8h_a5}
+
+
+Samples from the standard normal distribution. 
+

@@ -1,0 +1,55 @@
+.TH "bnlearn-engine.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bnlearn-engine.h \- 
+.SH "Detailed Description"
+.PP 
+Learn the structure of a BeliefNet from data. 
+
+An API to VFML's Belief Net structure learning engine. The \fBbnlearn\fP program is basically a wrapper around this interface. You can use this interface to avoid making system calls to learn belief nets, or the callbacks in this interface may allow you to modify the learner's behavior enough so that you don't have to edit any code.
+.PP
+Learns the structure and parameters of a Bayesian network using the standard method. The structural prior is set by using P(S) = kappa ^ (symetric difference between the net and the prior net). The parameter prior is K2.
+.PP
+To use this interface you generate a parameters structure using the BNLearn_NewParams method, fill in any parameters you want (to identify prior networks, callbacks, training data, etc), then call the BN_Learn method, extract what you want from the parameters structure, and then free the structure with BNLearn_FreeParams. See the header file for the details of the available parameters.
+.PP
+\fBThanks\fP
+.RS 4
+to Matthew Richardson for extracting this interface from the bnlearn learner. 
+.RE
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "BNLearnParams * \fBBNLearn_NewParams\fP ()"
+.br
+.RI "\fIMakes a new parameters structure with some default values. \fP"
+.ti -1c
+.RI "void \fBBNLearn_FreeParams\fP (BNLearnParams *params)"
+.br
+.RI "\fIFrees the parameters structure. \fP"
+.ti -1c
+.RI "void \fBBNLearn\fP (BNLearnParams *params)"
+.br
+.RI "\fIDo the learning. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void BNLearn (BNLearnParams * params)"
+.PP
+Do the learning. 
+.SS "void BNLearn_FreeParams (BNLearnParams * params)"
+.PP
+Frees the parameters structure. You are responsible for freeing any additonal memory that may have been allocated by the run (for example any learned BeliefNet). 
+.SS "BNLearnParams* BNLearn_NewParams ()"
+.PP
+Makes a new parameters structure with some default values. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

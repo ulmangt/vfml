@@ -1,0 +1,50 @@
+\section{bnlearn-engine.h File Reference}
+\label{bnlearn-engine_8h}\index{bnlearn-engine.h@{bnlearn-engine.h}}
+
+
+\subsection{Detailed Description}
+Learn the structure of a Belief\-Net from data. 
+
+An API to VFML's Belief Net structure learning engine. The {\bf bnlearn} program is basically a wrapper around this interface. You can use this interface to avoid making system calls to learn belief nets, or the callbacks in this interface may allow you to modify the learner's behavior enough so that you don't have to edit any code.
+
+Learns the structure and parameters of a Bayesian network using the standard method. The structural prior is set by using P(S) = kappa $^\wedge$ (symetric difference between the net and the prior net). The parameter prior is K2.
+
+To use this interface you generate a parameters structure using the BNLearn\_\-New\-Params method, fill in any parameters you want (to identify prior networks, callbacks, training data, etc), then call the BN\_\-Learn method, extract what you want from the parameters structure, and then free the structure with BNLearn\_\-Free\-Params. See the header file for the details of the available parameters.
+
+\begin{Desc}
+\item[{\bf Thanks}]to Matthew Richardson for extracting this interface from the bnlearn learner. \end{Desc}
+
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+BNLearn\-Params $\ast$ {\bf BNLearn\_\-New\-Params} ()
+\begin{CompactList}\small\item\em Makes a new parameters structure with some default values. \item\end{CompactList}\item 
+void {\bf BNLearn\_\-Free\-Params} (BNLearn\-Params $\ast$params)
+\begin{CompactList}\small\item\em Frees the parameters structure. \item\end{CompactList}\item 
+void {\bf BNLearn} (BNLearn\-Params $\ast$params)
+\begin{CompactList}\small\item\em Do the learning. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{bnlearn-engine.h@{bnlearn-engine.h}!BNLearn@{BNLearn}}
+\index{BNLearn@{BNLearn}!bnlearn-engine.h@{bnlearn-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNLearn (BNLearn\-Params $\ast$ {\em params})}\label{bnlearn-engine_8h_a9}
+
+
+Do the learning. 
+
+\index{bnlearn-engine.h@{bnlearn-engine.h}!BNLearn_FreeParams@{BNLearn\_\-FreeParams}}
+\index{BNLearn_FreeParams@{BNLearn\_\-FreeParams}!bnlearn-engine.h@{bnlearn-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void BNLearn\_\-Free\-Params (BNLearn\-Params $\ast$ {\em params})}\label{bnlearn-engine_8h_a8}
+
+
+Frees the parameters structure. 
+
+You are responsible for freeing any additonal memory that may have been allocated by the run (for example any learned Belief\-Net). \index{bnlearn-engine.h@{bnlearn-engine.h}!BNLearn_NewParams@{BNLearn\_\-NewParams}}
+\index{BNLearn_NewParams@{BNLearn\_\-NewParams}!bnlearn-engine.h@{bnlearn-engine.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}BNLearn\-Params$\ast$ BNLearn\_\-New\-Params ()}\label{bnlearn-engine_8h_a7}
+
+
+Makes a new parameters structure with some default values. 
+

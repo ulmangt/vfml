@@ -1,0 +1,24 @@
+\section{C45interface.h File Reference}
+\label{C45interface_8h}\index{C45interface.h@{C45interface.h}}
+
+
+\subsection{Detailed Description}
+Calls the C4.5 decision tree learning system and returns the learned tree. 
+
+An interface that writes the examples to a file, calls C4.5 on them, and returns the tree that C4.5 learns. See the {\tt example program} for more information on how to use this interface. C4.5 must be in your path for this to work, you can grab it from Professor Quinlan's homepage at {\tt http://www.cse.unsw.edu.au/$\sim$quinlan/.}
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Decision\-Tree\-Ptr} {\bf C45Learn} ({\bf Example\-Spec\-Ptr} es, {\bf Void\-List\-Ptr} examples)
+\begin{CompactList}\small\item\em Makes the call and returns the tree. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{C45interface.h@{C45interface.h}!C45Learn@{C45Learn}}
+\index{C45Learn@{C45Learn}!C45interface.h@{C45interface.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Decision\-Tree\-Ptr} C45Learn ({\bf Example\-Spec\-Ptr} {\em es}, {\bf Void\-List\-Ptr} {\em examples})}\label{C45interface_8h_a0}
+
+
+Makes the call and returns the tree. 
+

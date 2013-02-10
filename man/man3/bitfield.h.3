@@ -1,0 +1,86 @@
+.TH "bitfield.h" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bitfield.h \- 
+.SH "Detailed Description"
+.PP 
+Compactly represent a bit field. 
+
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_BITFIELD_\fP"
+.br
+.RI "\fIADT for compactly representing a bit field. \fP"
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fB_BITFIELD_\fP \fBBitFieldStruct\fP"
+.br
+.RI "\fIADT for compactly representing a bit field. \fP"
+.ti -1c
+.RI "typedef \fB_BITFIELD_\fP * \fBBitFieldPtr\fP"
+.br
+.RI "\fIADT for compactly representing a bit field. \fP"
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "BitField \fBBitFieldNew\fP (int byteSize)"
+.br
+.RI "\fICreate a new BitField with the specified number of bits. \fP"
+.ti -1c
+.RI "void \fBBitFieldFree\fP (BitField b)"
+.br
+.RI "\fIFrees the memory associated with the BitField. \fP"
+.ti -1c
+.RI "int \fBBitFieldGetNumBytes\fP (BitField b)"
+.br
+.RI "\fIReturns the number of bytes being used to represent the BitField. \fP"
+.ti -1c
+.RI "int \fBBitFieldGetBit\fP (BitField b, long offset)"
+.br
+.RI "\fIReturns the value of the specifed bit. \fP"
+.ti -1c
+.RI "void \fBBitFieldSetBit\fP (BitField b, long offset, int val)"
+.br
+.RI "\fISets the value of the specified bit. \fP"
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_BITFIELD_\fP * \fBBitFieldPtr\fP"
+.PP
+ADT for compactly representing a bit field. See \fBbitfield.h\fP for more detail. 
+.SS "typedef struct \fB_BITFIELD_\fP  \fBBitFieldStruct\fP"
+.PP
+ADT for compactly representing a bit field. See \fBbitfield.h\fP for more detail. 
+.SH "Function Documentation"
+.PP 
+.SS "void BitFieldFree (BitField b)"
+.PP
+Frees the memory associated with the BitField. 
+.SS "int BitFieldGetBit (BitField b, long offset)"
+.PP
+Returns the value of the specifed bit. 
+.SS "int BitFieldGetNumBytes (BitField b)"
+.PP
+Returns the number of bytes being used to represent the BitField. 
+.SS "BitField BitFieldNew (int byteSize)"
+.PP
+Create a new BitField with the specified number of bits. 
+.SS "void BitFieldSetBit (BitField b, long offset, int val)"
+.PP
+Sets the value of the specified bit. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

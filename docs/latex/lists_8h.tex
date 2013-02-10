@@ -1,0 +1,150 @@
+\section{lists.h File Reference}
+\label{lists_8h}\index{lists.h@{lists.h}}
+
+
+\subsection{Detailed Description}
+Generic list functions. 
+
+Void lists store untyped objects (void pointers) and Int and Float lists are special cased to work with appropriately typed data. The interfaces for the three are the same except all functions for Void\-Lists are prefaced with 'VL', Int\-List with 'IL', and Float\-List with 'FL'. {\bf Important} The documentation says 'VAL' instead of just 'VL' as a prefix to all functions, macros do the expansion to the array version of lists by default so these are the same in practice.
+
+And since these list data structures are basically arrays that are dynamically sized, inserting or removing elements is O(N) but accessing elements is O(1).
+
+This module also has linked lists which are used very very rarely in VFML. You can access them by adding an additional L to the name, for example {\bf VLNew()} -$>$ {\bf VLLNew()}
+
+
+
+
+
+{\bf Examples} 
+
+To iterate over the values in a Void\-List:
+
+
+
+\footnotesize\begin{verbatim}VoidListPtr list = (some existing list); 
+void *e;
+int i;
+
+for(i = 0 ; i < VLLength(list) ; i++) {
+   e = VLIndex(list, i);
+}
+\end{verbatim}\normalsize
+
+
+The same thing with a Float\-List:
+
+
+
+\footnotesize\begin{verbatim}FloatListPtr list = (some existing list); 
+float f;
+int i;
+
+for(i = 0 ; i < FLLength(list) ; i++) {
+   f = FLIndex(list, i);
+}
+\end{verbatim}\normalsize
+
+
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf VALLength}(list)\ (((Void\-AList\-Ptr)(list)) $\rightarrow$ size)
+\begin{CompactList}\small\item\em Returns the number of elements in the list. \item\end{CompactList}\item 
+\#define {\bf VALIndex}(list, index)\ ( (index $<$ ((Void\-AList\-Ptr)list) $\rightarrow$ size) ? (((Void\-AList\-Ptr)list) $\rightarrow$ array[index]) : (0) )
+\begin{CompactList}\small\item\em Returns the element at the index (zero based). \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+Void\-AList\-Ptr {\bf VALNew} (void)
+\begin{CompactList}\small\item\em Creates a new list of the specified type. \item\end{CompactList}\item 
+void {\bf VALAppend} (Void\-AList\-Ptr list, void $\ast$element)
+\begin{CompactList}\small\item\em Append the element to the end of the list. \item\end{CompactList}\item 
+void {\bf VALPush} (Void\-AList\-Ptr list, void $\ast$element)
+\begin{CompactList}\small\item\em Push element on the head of the list. \item\end{CompactList}\item 
+void {\bf VALSort} (Void\-AList\-Ptr list, int($\ast$cmp)(const void $\ast$, const void $\ast$))
+\begin{CompactList}\small\item\em Uses quick sort to sort the list in place with the passed comparision function. \item\end{CompactList}\item 
+void $\ast$ {\bf VALRemove} (Void\-AList\-Ptr list, long index)
+\begin{CompactList}\small\item\em Removes the item at the specified index and returns it. \item\end{CompactList}\item 
+void {\bf VALInsert} (Void\-AList\-Ptr list, void $\ast$element, long index)
+\begin{CompactList}\small\item\em Inserts the element at the specified index. \item\end{CompactList}\item 
+void {\bf VALSet} (Void\-AList\-Ptr list, long index, void $\ast$new\-Val)
+\begin{CompactList}\small\item\em Sets the value at the specified index. \item\end{CompactList}\item 
+void {\bf VALFree} (Void\-AList\-Ptr list)
+\begin{CompactList}\small\item\em Frees the memory associated with the list. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{lists.h@{lists.h}!VALIndex@{VALIndex}}
+\index{VALIndex@{VALIndex}!lists.h@{lists.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define VALIndex(list, index)\ ( (index $<$ ((Void\-AList\-Ptr)list) $\rightarrow$ size) ? (((Void\-AList\-Ptr)list) $\rightarrow$ array[index]) : (0) )}\label{lists_8h_a14}
+
+
+Returns the element at the index (zero based). 
+
+Note that the indexing is 0 based (like a C array). \index{lists.h@{lists.h}!VALLength@{VALLength}}
+\index{VALLength@{VALLength}!lists.h@{lists.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define VALLength(list)\ (((Void\-AList\-Ptr)(list)) $\rightarrow$ size)}\label{lists_8h_a13}
+
+
+Returns the number of elements in the list. 
+
+
+
+\subsection{Function Documentation}
+\index{lists.h@{lists.h}!VALAppend@{VALAppend}}
+\index{VALAppend@{VALAppend}!lists.h@{lists.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VALAppend (Void\-AList\-Ptr {\em list}, void $\ast$ {\em element})}\label{lists_8h_a48}
+
+
+Append the element to the end of the list. 
+
+\index{lists.h@{lists.h}!VALFree@{VALFree}}
+\index{VALFree@{VALFree}!lists.h@{lists.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VALFree (Void\-AList\-Ptr {\em list})}\label{lists_8h_a54}
+
+
+Frees the memory associated with the list. 
+
+You are responsible for any memory used by the elements of the list. \index{lists.h@{lists.h}!VALInsert@{VALInsert}}
+\index{VALInsert@{VALInsert}!lists.h@{lists.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VALInsert (Void\-AList\-Ptr {\em list}, void $\ast$ {\em element}, long {\em index})}\label{lists_8h_a52}
+
+
+Inserts the element at the specified index. 
+
+The element that used to have that index will have an index one higher (that is, it shifts later elements over). Note that the indexing is 0 based (like a C array). \index{lists.h@{lists.h}!VALNew@{VALNew}}
+\index{VALNew@{VALNew}!lists.h@{lists.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Void\-AList\-Ptr VALNew (void)}\label{lists_8h_a47}
+
+
+Creates a new list of the specified type. 
+
+\index{lists.h@{lists.h}!VALPush@{VALPush}}
+\index{VALPush@{VALPush}!lists.h@{lists.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VALPush (Void\-AList\-Ptr {\em list}, void $\ast$ {\em element})}\label{lists_8h_a49}
+
+
+Push element on the head of the list. 
+
+\index{lists.h@{lists.h}!VALRemove@{VALRemove}}
+\index{VALRemove@{VALRemove}!lists.h@{lists.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ VALRemove (Void\-AList\-Ptr {\em list}, long {\em index})}\label{lists_8h_a51}
+
+
+Removes the item at the specified index and returns it. 
+
+Shifts later elements over. Note that the indexing is 0 based (like a C array). \index{lists.h@{lists.h}!VALSet@{VALSet}}
+\index{VALSet@{VALSet}!lists.h@{lists.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VALSet (Void\-AList\-Ptr {\em list}, long {\em index}, void $\ast$ {\em new\-Val})}\label{lists_8h_a53}
+
+
+Sets the value at the specified index. 
+
+The previous value at the index is overwritten. Note that the indexing is 0 based (like a C array). \index{lists.h@{lists.h}!VALSort@{VALSort}}
+\index{VALSort@{VALSort}!lists.h@{lists.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void VALSort (Void\-AList\-Ptr {\em list}, int($\ast$ {\em cmp})(const void $\ast$, const void $\ast$))}\label{lists_8h_a50}
+
+
+Uses quick sort to sort the list in place with the passed comparision function. 
+
+Note this is not implemented for Float\-Lists. 

@@ -1,0 +1,43 @@
+\section{folddata File Reference}
+\label{folddata}\index{folddata@{folddata}}
+
+
+\subsection{Detailed Description}
+Randomly splits a data set into a collection of train/test pairs. 
+
+\subsection*{The folddata tool}
+
+This tool is used by the {\bf xvalidate} tool; you may find it useful. \  For example, your algorithm might perform very poorly on a specific cross validation run, you could use this tool to reproduce the datasets and try to track down the problem.
+
+Folddata splits a dataset into a number of testing and training sets as needed for doing cross-validation.\  It takes each example in the original dataset and randomly assigns it to one of the 'folds' is it creating (note that this randomness means that the folds won't be exactly evenly sized).\  Folddata then outputs one dataset for each fold with the examples from the fold as the test set and the examples in all the other folds as the training set.
+
+Folddata works efficiently on large datasets, but will require enough disk space to hold 'folds' copies of the dataset.
+
+Folddata takes input and does output in {\tt c4.5 format}. \  It expects to find the files {\tt $<$stem$>$.names} and {\tt $<$stem$>$.data} and outputs {\tt $<$stem$>$[0 - n].[names, data, test]}.
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$\begin{itemize}
+\item Set the stem name (default DF)\end{itemize}
+\item -target $<$dir$>$\begin{itemize}
+\item Set the output directory (default '.')\end{itemize}
+\item -source $<$dir$>$\begin{itemize}
+\item Set the directory that contains the dataset (default '.')\end{itemize}
+\item -folds $<$n$>$\begin{itemize}
+\item Sets the number of train/test sets to create (default 10)\end{itemize}
+\item -seed $<$n$>$\begin{itemize}
+\item Sets the random seed, multiple runs with the same seed will produce the same datasets (defaults to a random seed)\end{itemize}
+\item -h\begin{itemize}
+\item Display usage information and exit\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+
+\subsubsection*{Example}
+
+{\tt folddata -f test -target output -folds 15 -seed 10}
+
+Will create 15 folds from test.names and test.data and put them in the directory named output as test[0-14].names, test[0-14].data, and test[0-14].test.\  It will use a seeded random generator, so that the exact same dataset could be reproduced.
+

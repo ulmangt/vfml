@@ -1,0 +1,39 @@
+\section{kmeans File Reference}
+\label{kmeans}\index{kmeans@{kmeans}}
+
+
+\subsection{Detailed Description}
+Performs k-means clustering. 
+
+Performs k-mean clustering on the continuous attributes in a data set (ignoring any discrete attributes).
+
+The learner takes input and does output in {\tt c4.5 format}. It expects to find the files {\tt $<$stem$>$.names} and {\tt $<$stem$>$.data.} and outputs the learned centers to a file called {\tt $<$stem$>$.centers}.
+
+Evaluates the learned centers by comparing to the centers found in $<$stem$>$.test as follows. Learned centers are greedily matched to the closest of the test centers until each center has a match, and then the evaluation is the sum of the squared distance between each test center and its matched learned center.
+
+You can find a more full-featured kmeans clustering algorithm by running {\bf vfkm} with the -batch argument (for example you can set initial centroid locations, etc.
+
+\begin{Desc}
+\item[{\bf Wish List}]Modify this learner to work with discrete attributes. 
+
+Move the features from {\bf vfkm} into this learner because this learner will be much easier to modify than that one for new users. \end{Desc}
+
+
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f $<$filestem$>$\begin{itemize}
+\item Set the stem name (default DF)\end{itemize}
+\item -source $<$dir$>$\begin{itemize}
+\item Set the directory that contains the dataset (default '.')\end{itemize}
+\item -clusters $<$dir$>$\begin{itemize}
+\item Sets the number of clusters to look for, this argument is required.\end{itemize}
+\item -threshold $<$threshold$>$\begin{itemize}
+\item Iterate until every centroid moves less than this threshold.\end{itemize}
+\item -u\begin{itemize}
+\item Test by comparing to the centroids in $<$threshold$>$.test\end{itemize}
+\item -v\begin{itemize}
+\item Can be used multiple times to increase the debugging output\end{itemize}
+\end{itemize}
+
+

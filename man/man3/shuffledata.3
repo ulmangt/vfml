@@ -1,0 +1,69 @@
+.TH "shuffledata" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+shuffledata \- 
+.SH "Detailed Description"
+.PP 
+Randomizes the order of a data set and rewrites it. 
+
+shuffledata reads a data set into RAM and outputs it in random order. Data sets that do not fit in RAM are difficult to randomize and VFML does not have a tool to deal with such data sets.
+.PP
+\fBWish List\fP
+.RS 4
+for a version of this tool that works on disk and does not need to load data into RAM. 
+.RE
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem>
+.IP "  \(bu" 4
+Set the stem name (default DF)
+.PP
+
+.IP "\(bu" 2
+-fout <filestem>
+.IP "  \(bu" 4
+Set the name of the output dataset (default shuffled)
+.PP
+
+.IP "\(bu" 2
+-source <dir>
+.IP "  \(bu" 4
+Set the directory that contains the dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-target <dir>
+.IP "  \(bu" 4
+Set the directory to contain the output dataset (default '.')
+.PP
+
+.IP "\(bu" 2
+-seed <seed>
+.IP "  \(bu" 4
+Sets the random seed, multiple runs with the same seed will produce the same datasets (defaults to a random seed)
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Display usage information and exit.
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

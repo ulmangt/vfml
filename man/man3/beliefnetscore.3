@@ -1,0 +1,75 @@
+.TH "beliefnetscore" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+beliefnetscore \- 
+.SH "Detailed Description"
+.PP 
+Tests a BeliefNet in several ways. 
+
+This program determines the log-likelihood of a data set given a belief net. It can also compare the structure of two networks. In log-likelihood mode it loads the belief net, and then scans the data set, accumulating the likelihood of each example in the data set given the network.
+.PP
+beliefnetscore can smooth the parameters in the network before computing this likelihood. (Run beliefnetscore -h for the precice parameters to use.) This smoothing works as follows. Each parameter in the network is multiplied by the desired strength, and then 1 is added to each local model is renormalized. If you do not use this argument, and there is a 0 probability in the network, but that even occurs in the data set, beliefnetscore will crash.
+.PP
+In comparison mode it loads both networks and the outputs the structural difference between the two networks. This is sometimes known as the symetric difference and is measured by iterating over the nodes in each network and counting the number of times that the node has a parent that the coresponding node in the other network does not have.
+.PP
+\fBWish List\fP
+.RS 4
+Move the comparision mode from this tool into a new tool, beliefnetcompare, and have that tool do more interesting comparisions (e.g. measure the KL-distance between the distriutions encoded in the networks). 
+.RE
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f 'test set file'
+.IP "  \(bu" 4
+(default DF.data)
+.PP
+
+.IP "\(bu" 2
+-bnf 'file containing belief net'
+.IP "  \(bu" 4
+(default DF.bif)
+.PP
+
+.IP "\(bu" 2
+-compareWith 'file containing belief net'
+.IP "  \(bu" 4
+(default get ll of BN from -bnf on stem.data)
+.PP
+
+.IP "\(bu" 2
+-stdin
+.IP "  \(bu" 4
+Get test set from stdin (default to -f's file)
+.PP
+
+.IP "\(bu" 2
+-smooth 'prior-str'
+.IP "  \(bu" 4
+Counts net at 'prior-str' samples and adds one additional sample to each CPT entry before testing
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Increase the message level
+.PP
+
+.IP "\(bu" 2
+-h
+.IP "  \(bu" 4
+Run with this argument to get a list of arguments and their meanings.
+.br
+
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

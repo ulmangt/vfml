@@ -1,0 +1,156 @@
+\section{stats.h File Reference}
+\label{stats_8h}\index{stats.h@{stats.h}}
+
+
+\subsection{Detailed Description}
+Some statistical functions. 
+
+The stat module has some basic statistical functions and the Stat\-Tracker type, which watches a series of samples, keeps some simple summary statistics (sum and sum\-Square in the current implementation), and can report on the mean, variance, stdev, etc. of the sample.
+
+\begin{Desc}
+\item[{\bf Wish List}]The Stat\-Tracker would track more interesting things. \end{Desc}
+
+
+\subsection*{Data Structures}
+\begin{CompactItemize}
+\item 
+struct {\bf \_\-Stat\-Tracker\_\-}
+\begin{CompactList}\small\item\em Holds simple summary statistics of a sample. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef {\bf \_\-Stat\-Tracker\_\-} {\bf Stat\-Tracker\-Struct}
+\begin{CompactList}\small\item\em Holds simple summary statistics of a sample. \item\end{CompactList}\item 
+typedef {\bf \_\-Stat\-Tracker\_\-} $\ast$ {\bf Stat\-Tracker}
+\begin{CompactList}\small\item\em Holds simple summary statistics of a sample. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Stat\-Tracker} {\bf Stat\-Tracker\-New} (void)
+\begin{CompactList}\small\item\em Creates a new stat tracker that is ready to have samples added to it. \item\end{CompactList}\item 
+void {\bf Stat\-Tracker\-Free} ({\bf Stat\-Tracker} st)
+\begin{CompactList}\small\item\em Frees the memory associated with the Stat\-Tracker. \item\end{CompactList}\item 
+void {\bf Stat\-Tracker\-Add\-Sample} ({\bf Stat\-Tracker} st, double x)
+\begin{CompactList}\small\item\em Records the sample in the tracker. \item\end{CompactList}\item 
+double {\bf Stat\-Tracker\-Get\-Mean} ({\bf Stat\-Tracker} st)
+\begin{CompactList}\small\item\em Returns the mean of the samples that have been shown to the tracker. \item\end{CompactList}\item 
+double {\bf Stat\-Tracker\-Get\-Variance} ({\bf Stat\-Tracker} st)
+\begin{CompactList}\small\item\em Returns the variance of the samples that have been shown to the tracker. \item\end{CompactList}\item 
+double {\bf Stat\-Tracker\-Get\-Stdev} ({\bf Stat\-Tracker} st)
+\begin{CompactList}\small\item\em Returns the standard deviation of the samples that have been shown to the tracker. \item\end{CompactList}\item 
+long {\bf Stat\-Tracker\-Get\-Num\-Samples} ({\bf Stat\-Tracker} st)
+\begin{CompactList}\small\item\em Returns the number of samples shown to the stat tracker. \item\end{CompactList}\item 
+double {\bf Stat\-Tracker\-Get\-Normal\-Bound} ({\bf Stat\-Tracker} st, double delta)
+\begin{CompactList}\small\item\em Assume Gaussian and return a high confidence bound of the sample . \item\end{CompactList}\item 
+double {\bf Stat\-Get\-Normal\-Bound} (double variance, long n, double delta)
+\begin{CompactList}\small\item\em Return a high confidence bound from the normal distribution. \item\end{CompactList}\item 
+double {\bf Stat\-Hoeffding\-Bound\-One} (double range, double delta, long n)
+\begin{CompactList}\small\item\em Returns the one sided Hoeffding bound. \item\end{CompactList}\item 
+double {\bf Stat\-Hoeffding\-Bound\-Two} (double range, double delta, long n)
+\begin{CompactList}\small\item\em Returns the two sided Hoeffding bound. \item\end{CompactList}\item 
+float {\bf Stat\-Log\-Gamma} (float xx)
+\begin{CompactList}\small\item\em Returns the log of the gamma function of xx. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Typedef Documentation}
+\index{stats.h@{stats.h}!StatTracker@{StatTracker}}
+\index{StatTracker@{StatTracker}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Stat\-Tracker\_\-} $\ast$ {\bf Stat\-Tracker}}\label{stats_8h_a1}
+
+
+Holds simple summary statistics of a sample. 
+
+See {\bf stats.h} for more detail. \index{stats.h@{stats.h}!StatTrackerStruct@{StatTrackerStruct}}
+\index{StatTrackerStruct@{StatTrackerStruct}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \_\-Stat\-Tracker\_\-}  {\bf Stat\-Tracker\-Struct}}\label{stats_8h_a0}
+
+
+Holds simple summary statistics of a sample. 
+
+See {\bf stats.h} for more detail. 
+
+\subsection{Function Documentation}
+\index{stats.h@{stats.h}!StatGetNormalBound@{StatGetNormalBound}}
+\index{StatGetNormalBound@{StatGetNormalBound}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Stat\-Get\-Normal\-Bound (double {\em variance}, long {\em n}, double {\em delta})}\label{stats_8h_a10}
+
+
+Return a high confidence bound from the normal distribution. 
+
+Assumes a Gaussian distribution and returns the distance from the mean within which 1 - delta  of the mass lies (esentially the same function as Stat\-Tracker\-Get\-Normal\-Bound). \index{stats.h@{stats.h}!StatHoeffdingBoundOne@{StatHoeffdingBoundOne}}
+\index{StatHoeffdingBoundOne@{StatHoeffdingBoundOne}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Stat\-Hoeffding\-Bound\-One (double {\em range}, double {\em delta}, long {\em n})}\label{stats_8h_a11}
+
+
+Returns the one sided Hoeffding bound. 
+
+With n observations of a variable with the specified range. That is, the true value is less than the observed mean + this function's result with probability 1 - delta. \index{stats.h@{stats.h}!StatHoeffdingBoundTwo@{StatHoeffdingBoundTwo}}
+\index{StatHoeffdingBoundTwo@{StatHoeffdingBoundTwo}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Stat\-Hoeffding\-Bound\-Two (double {\em range}, double {\em delta}, long {\em n})}\label{stats_8h_a12}
+
+
+Returns the two sided Hoeffding bound. 
+
+With n observations of a variable with the specified range. That is, the true value is within this function's result of the obseved mean with probability 1 - delta. \index{stats.h@{stats.h}!StatLogGamma@{StatLogGamma}}
+\index{StatLogGamma@{StatLogGamma}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Stat\-Log\-Gamma (float {\em xx})}\label{stats_8h_a13}
+
+
+Returns the log of the gamma function of xx. 
+
+This function is lifted from Numerical Recipes in C. \index{stats.h@{stats.h}!StatTrackerAddSample@{StatTrackerAddSample}}
+\index{StatTrackerAddSample@{StatTrackerAddSample}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Stat\-Tracker\-Add\-Sample ({\bf Stat\-Tracker} {\em st}, double {\em x})}\label{stats_8h_a4}
+
+
+Records the sample in the tracker. 
+
+\index{stats.h@{stats.h}!StatTrackerFree@{StatTrackerFree}}
+\index{StatTrackerFree@{StatTrackerFree}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Stat\-Tracker\-Free ({\bf Stat\-Tracker} {\em st})}\label{stats_8h_a3}
+
+
+Frees the memory associated with the Stat\-Tracker. 
+
+\index{stats.h@{stats.h}!StatTrackerGetMean@{StatTrackerGetMean}}
+\index{StatTrackerGetMean@{StatTrackerGetMean}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Stat\-Tracker\-Get\-Mean ({\bf Stat\-Tracker} {\em st})}\label{stats_8h_a5}
+
+
+Returns the mean of the samples that have been shown to the tracker. 
+
+If you have not shown the tracker any samples this will probably crash. \index{stats.h@{stats.h}!StatTrackerGetNormalBound@{StatTrackerGetNormalBound}}
+\index{StatTrackerGetNormalBound@{StatTrackerGetNormalBound}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Stat\-Tracker\-Get\-Normal\-Bound ({\bf Stat\-Tracker} {\em st}, double {\em delta})}\label{stats_8h_a9}
+
+
+Assume Gaussian and return a high confidence bound of the sample . 
+
+Assumes a Gaussian distribution and returns the distance from the mean within which 1 - delta  of the mass lies. This calls the Get\-Stdev function internally and will crash if that crashes. \index{stats.h@{stats.h}!StatTrackerGetNumSamples@{StatTrackerGetNumSamples}}
+\index{StatTrackerGetNumSamples@{StatTrackerGetNumSamples}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Stat\-Tracker\-Get\-Num\-Samples ({\bf Stat\-Tracker} {\em st})}\label{stats_8h_a8}
+
+
+Returns the number of samples shown to the stat tracker. 
+
+\index{stats.h@{stats.h}!StatTrackerGetStdev@{StatTrackerGetStdev}}
+\index{StatTrackerGetStdev@{StatTrackerGetStdev}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Stat\-Tracker\-Get\-Stdev ({\bf Stat\-Tracker} {\em st})}\label{stats_8h_a7}
+
+
+Returns the standard deviation of the samples that have been shown to the tracker. 
+
+If you have not shown the tracker at least two samples this will probably crash. \index{stats.h@{stats.h}!StatTrackerGetVariance@{StatTrackerGetVariance}}
+\index{StatTrackerGetVariance@{StatTrackerGetVariance}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Stat\-Tracker\-Get\-Variance ({\bf Stat\-Tracker} {\em st})}\label{stats_8h_a6}
+
+
+Returns the variance of the samples that have been shown to the tracker. 
+
+If you have not shown the tracker at least two samples this will probably crash. \index{stats.h@{stats.h}!StatTrackerNew@{StatTrackerNew}}
+\index{StatTrackerNew@{StatTrackerNew}!stats.h@{stats.h}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Stat\-Tracker} Stat\-Tracker\-New (void)}\label{stats_8h_a2}
+
+
+Creates a new stat tracker that is ready to have samples added to it. 
+

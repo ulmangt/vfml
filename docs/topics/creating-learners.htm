@@ -1,0 +1,153 @@
+<html>
+
+<head>
+<title>Create Your Own Learners </title>
+</head>
+
+<body>
+
+<h1>Create Your Own Learner</h1>
+
+<p>When you implement a learner you need to worry about more than the
+learning; you need to interface with your environment, deal with
+command line arguments, locate and load files, interface with other
+tools.&nbsp; All these things are important, but aren't particularly
+interesting.&nbsp; This page describes the main issues to consider
+when working in the VFML environment.&nbsp; The <a
+href="../examples/implement-learner.htm">implement-learner</a> example
+will present a framework that implements solutions for these issues.
+
+<dl>
+  <dt><strong>Locating datafiles</strong> </dt>
+
+  <dd>VFML currently support <a href="../appendixes/c45.htm">C4.5
+    format</a>.for datafiles; your learners will need to accept the
+    filestem name as an argument, locate and open .names, .data, and
+    perhaps .test files.&nbsp; We suggest you accept the command line
+    argument, -f &lt;filestem&gt; as this will allow you to easily
+    interface with VFML's <a href="../xvalidate.html">xvalidate</a>
+    and <a href="../batchtest.html">batchtest</a> tools.</dd>
+
+  <dt><strong>Testing &amp; reporting error rate</strong> </dt>
+  <dd>You will probably also want to accept a command line flag (we
+  suggest -u) to tell your learner to test its accuracy on the
+  examples in &lt;filestem&gt;.test and report the results.&nbsp; To
+  completely integrate with VFML's <a
+  href="../xvalidate.html">xvalidate</a> and <a
+  href="../batchtest.html">batchtest</a>, you should also accept
+  a flag that causes your learner to limit its output to:
+  &lt;error-rate on test set&gt; &lt;size of learned model&gt;.&nbsp;
+  VFML generally overloads the -u flag to perform both functions.</dd>
+
+  <dt><strong>Other command line arguments</strong> </dt>
+  <dd>You will probably want to accept other command line arguments to
+    configure the execution of your learner.&nbsp; The <a
+    href="../examples/implement-learner.htm">implement-learner</a>
+    example accepts a few dummy arguments to help get you
+    started.</dd>
+
+ <dt><strong>Building and linking with VFML</strong></dt>
+
+  <dd>Any learner build with VFML should include uwml.h and link with
+    the VFML library. &nbsp; The implement learner example program,
+    descirbed in the next section, provides a makefile that shows you
+    how to do this under UNIX as well as a VC++6.0 project that helps
+    get you started under Windows.</dd> </dl>
+
+
+<h1>The Implement Learner Example Program</h1>
+
+<p><strong>Example For</strong>: The framework that every learner will
+need</p>
+
+<p>This is a simple example that presents the simplest possible
+learning algorithm - one that always predicts the most-common-class in
+the training set.&nbsp; This code is very similar to the
+implementation of VFML's mostcommonclass learner.&nbsp; It includes a
+makefile and a source file which are located in the
+<code>&lt;VFML-root&gt;/examples/implement-learner/</code>
+directory. &nbsp; This document presents an overview of the code which
+should be sufficient to get you started modifying it for your own
+needs.</p>
+
+<p>You might like to go to the
+<code>&lt;VFML-root&gt;/examples/implement-learner/</code> directory
+and get your favorite code/text editor ready.&nbsp; You might also
+like to copy the directory somewhere and begin modifying the example
+for your own needs.</p>
+
+<h2>The Makefile</h2>
+
+<p>This makefile will be a good starting point for your VFML
+projects.&nbsp; Glance at the makefile; the top couple lines contain
+information you would need to update if you want to use the file with
+another project.</p>
+
+<p>Make sure you've properly installed the VFML library (see the <a
+href="../topics/gettingstarted.htm">Getting Started</a> section if you
+haven't done this yet), then type 'make' to build the example
+program.&nbsp; Run it by typing <code>implement-learner -h</code>, and
+look at the output.</p>
+
+<h2>The VC++ 6.0 Project</h2>
+
+<p>We've provided a starter project for windows using VC++ 6.0.&nbsp;
+It is configured to work if you've installed the VFML library into
+c:/proj/uwml/, if not see the <a
+href="../topics/gettingstarted.htm">Getting Started</a> section for
+more information on how to update the configuration.</p>
+
+<p>The windows version also uses a different source file,
+implement-learner-windows.c.  &nbsp; The only difference between this
+file and implement-learner.c is that it doesn't do any timing.&nbsp;
+</p>
+
+<h2>The Code</h2>
+
+<p>This will be a high-level overview of the code from the example; it
+should be enough to get you started. &nbsp; For a more detailed
+description of a VFML project see the <a
+href="../topics/loadingdata.htm">loading data</a> documentation.
+
+<dl>
+  <dt><strong>Command Line Arguments</strong> </dt>
+
+  <dd><code>_printUsage</code> and <code>_processArgs</code> work
+    together to get a valid command line and set a collection of
+    globals from it.&nbsp; The example shows you how to accept flags,
+    strings, ints, and doubles from the command line.&nbsp; One note
+    is that you should be careful not to have any arguments that are
+    sub-strings of other arguments - if you don't get the ordering
+    correct the strcmp might accept the longer argument as an instance
+    of the shorter one.</dd>
+
+  <dt><strong>Datasets</strong></dt>
+
+  <dd>The example will take <code>-souce &lt;directory&gt;</code> and
+    <code>-f &lt;file-stem&gt;</code> arguments and use them to find a
+    dataset.&nbsp; It then reads the names file into a global,
+    <code>gEs</code>, and iterates over the examples from the .data
+    file.</dd>
+
+  <dt><strong>Testing</strong></dt>
+
+  <dd>If you pass the <code>-u</code> argument to the program, it will
+    test its 'model' on the examples in the .test file and output the
+    results in a format appropriate for interfacing with xvalidate and
+    batchtest.</dd>
+
+  <dt><strong>Debugging Output</strong></dt>
+
+  <dd>By default, the program is pretty quiet.&nbsp; If you pass the
+    <code>-v</code> argument, the program will output more information
+    about its progress.&nbsp; In your learner, you might want to
+    implement higher message levels (in response to multiple -v flags
+    on the command line) to print out more detailed information about
+    your learner's progress.  See VFML's <a
+    href="../Debug_8h.html">Debugging API</a> for some code that may
+    help with this.</dd>
+
+</dl>
+
+</body>
+</html>

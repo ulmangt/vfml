@@ -1,0 +1,52 @@
+# If you download the UCI-C45-format distribution that we've put together for
+#  UWML, you can use this file to test on all the datasets.
+#  Just update the paths (use something like search/replace to do it quickly)
+
+../../../datasets/UCI/adult :: adult
+#../../../datasets/UCI/animals :: animals -- animals is a data generator
+../../../datasets/UCI/anneal :: anneal
+../../../datasets/UCI/audiology :: audiology
+../../../datasets/UCI/auto-mpg :: auto-mpg
+../../../datasets/UCI/breast-cancer-wisconsin :: breast-cancer-wisconsin
+
+# brest-cancer is a restricted dataset
+#../../../datasets/UCI/breast-cancer :: breast-cancer
+
+../../../datasets/UCI/bupa :: bupa
+../../../datasets/UCI/car :: car
+../../../datasets/UCI/connect-4 :: connect-4
+../../../datasets/UCI/crx :: crx
+../../../datasets/UCI/glass :: glass
+../../../datasets/UCI/house :: house
+../../../datasets/UCI/ionosphere :: ionosphere
+../../../datasets/UCI/iris :: iris
+../../../datasets/UCI/letter :: letter
+../../../datasets/UCI/monks :: monks
+../../../datasets/UCI/mushroom :: mushroom
+../../../datasets/UCI/musk :: clean1
+../../../datasets/UCI/nursery :: nursery
+../../../datasets/UCI/pima-indians-diabetes :: pima-indians-diabetes
+../../../datasets/UCI/post-operative :: post-operative
+../../../datasets/UCI/promoter :: promoter
+../../../datasets/UCI/shuttle :: shuttle_test
+../../../datasets/UCI/shuttle :: shuttle_trn
+../../../datasets/UCI/sick :: sick
+../../../datasets/UCI/spambase :: spambase
+../../../datasets/UCI/splice-jxn :: splice-jxn
+
+# many of the thyroid datasets have test sets, which are being ignored
+../../../datasets/UCI/thyroid-disease :: allbp
+../../../datasets/UCI/thyroid-disease :: allhyper
+../../../datasets/UCI/thyroid-disease :: allhypo
+../../../datasets/UCI/thyroid-disease :: allrep
+../../../datasets/UCI/thyroid-disease :: dis
+# looks like hypothyroid has the class in the wrong place in the examples
+#../../../datasets/UCI/thyroid :: hypothyroid
+
+
+../../../datasets/UCI/tic-tac-toe :: tic-tac-toe
+../../../datasets/UCI/voting :: voting
+../../../datasets/UCI/waveform :: waveform
+../../../datasets/UCI/wdbc :: wdbc
+../../../datasets/UCI/yeast :: yeast
+../../../datasets/UCI/zoo :: zoo

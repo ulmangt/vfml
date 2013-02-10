@@ -1,0 +1,28 @@
+/** \ingroup Learners BeliefNet
+*/
+
+
+/** \file
+
+\brief Learns the structure of a BeliefNet from a very large data set
+using sampling
+
+Learns the structure and parameters of a Bayesian network, accelerated
+with sampling as described in <a
+href="http://citeseer.nj.nec.com/572760.html">this paper</a>.  All
+variables must be categorical.
+
+vfbn1 takes input and does output in <a
+href="../appendixes/c45.htm">c4.5 format</a>. It expects to find the
+files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data</code>.
+
+\wish An API to this learner like the one to learning BeliefNet
+structure in beliefnet-engine.h
+
+<h2>Arguments</h2>
+
+- -h 
+  - Run vfbn1 -h for a list of the arguments and their meanings. </dd>
+
+*/

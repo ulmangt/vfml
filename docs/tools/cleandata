@@ -1,0 +1,53 @@
+/** \ingroup Tools
+*/
+
+
+/** \file
+
+\brief Cleans up a data set in several ways.
+
+<p>This tool cleans a data set in several ways, and outputs the
+cleaned data.  It will scan the training data and gather some
+simple stats about it (if needed, see below).  It then does a pass
+over training and testing data, filling in missing categorical
+attribute values with the most common value given the class, and
+filling in missing continuous attribute values with the average value
+given the class.
+
+<p>The tool can also add a new attribute value to each categorical
+attribe, called 'u' (short for unknown) and rewrite the data set as
+appropriate.
+
+<p>The tool can also remove every attribute in the data set that is
+marked ignored.
+
+<P>cleandata accepts an input stem and expects to find a file
+<i>stem</i>.data and <i>stem</i>.names and optionally one called
+<i>stem</i>.test.  cleandata outputs a file named
+<i>stem</i>-clean.data, <i>stem</i>-clean.names, and optionally
+<i>stem</i>-clan.test.
+
+<p>cleandata will work with a single pass over the data set if and
+only if you use -addValue and there are no continuous attributes.
+Otherwise it usues an additional pass.
+
+\thanks to Chun-Hsiang Hung for doing the core development work for
+this tool.
+
+<h2>Arguments</h2>
+
+- -f &lt;filestem&gt; 
+  - Set the stem name (default DF)
+- -source &lt;dir&gt; 
+  - Set the directory that contains the dataset (default '.')
+- -addValue 
+  - Adds a 'u' for unknown value to all categorical attributes
+  (default fill in the most common value)
+- -removeIgnore 
+  - removes every attribute marked 'ignored' in names from the data set (default leave them in)
+- -h 
+  - Display usage information and exit.
+- -v 
+  - Can be used multiple times to increase the debugging output 
+
+*/

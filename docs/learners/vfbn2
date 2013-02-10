@@ -1,0 +1,75 @@
+/** \ingroup Learners BeliefNet
+*/
+
+
+/** \file
+
+\brief Learns the structure of a BeliefNet from a very large data set
+using sampling and a new search proceedure.
+
+Learns the structure and parameters of a Bayesian network, accelerated
+with sampling as described in <a
+href="http://citeseer.nj.nec.com/572760.html">this paper</a>.  All
+variables must be categorical.  vfbn2 searches for high scoring
+Bayesian network structures by considering adding and removing every
+possible edge (but not reversing as traditional methods do), making
+the one that has highest score on training data, and repeating until
+no change improves the score.  Unlike other learners, vfbn2 uses
+statistical tests and only uses enough data to be sure that it knows
+which change is best with high confidence (see the -delta parameter
+below).  This allows vfbn2 to be much faster than traditional methods
+when there is enough data to make good decisions.  It also allows it
+to learn from data streams (see the -stdin flag below).  vfbn2 also
+differs from traditional Bayesian network learners by running the
+search for the model at each variable in parallel.  Whenever the
+statistical tests at one node indicate that a change should be made it
+is made, and this fact is broadcast to the searches at the other nodes
+which immediately stop considering any changes that would add a cycle
+to the network given the change just made.
+
+vfbn2 takes input and does output in <a
+href="../appendixes/c45.htm">c4.5 format</a>. It expects to find the
+files <code>&lt;stem&gt;.names</code> and
+<code>&lt;stem&gt;.data</code>.
+
+\wish An API to this learner like the one to learning BeliefNet
+structure in beliefnet-engine.h
+
+<h2>Arguments</h2>
+
+- -f 'filestem'
+  - Set the name of the dataset (default DF)
+- -source 'dir'
+  - Set the source data directory (default '.')
+- -startFrom 'filename'
+  - Use net in 'filename' as starting point, must be BIF file (default start from empty net)
+- -outputTo 'filename'
+  - Output the learned net to 'filename' in BIF format.
+- -delta 'prob'
+  - Allowed chance of error in each decision (default 0.0000000001 that's .00000001 percent)
+- -tau 'tie error'
+  - Call a tie when score might change less than tau percent (default 0.001)
+- -chunk 'count'
+  - Accumulate 'count' examples before testing for a winning search step(default 10000)
+- -noRemove
+  - VFBN2 won't consider removing links (default remove)
+- -inStep
+  - VFBN2 won't let any search make a second step before everyone makes a step (default no restriction)
+- -limitMegs 'count'
+  - Limit dynamic memory allocation to 'count' megabytes networks that are too large will not be considered (default no limit)
+- -limitMinutes 'count'
+  - Limit the run to 'count' minutes then return current model (default no limit)
+- -stdin
+  - Reads training examples from stdin instead of from 'stem'.data causes a 2 second delay to help give data generation time to setup (default off)
+-seed 's'
+  - Seed for random numbers (default random)
+- -maxParentsPerNode 'num'
+  - Limit each node to 'num' parents (default no max).
+- -maxParameterCount 'count'
+  - Limit net to 'count' parameters (default no max).
+- -v
+  - Can be used multiple times to increase the debugging output
+- -h
+  - Run vfbn2 -h for a list of the arguments and their meanings.
+
+*/

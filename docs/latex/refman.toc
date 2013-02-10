@@ -1,0 +1,473 @@
+\contentsline {chapter}{\numberline {1}VFML }{1}
+\contentsline {section}{\numberline {1.1}Downloads}{1}
+\contentsline {section}{\numberline {1.2}User Documentation}{2}
+\contentsline {section}{\numberline {1.3}Developer and Reference Documentation}{2}
+\contentsline {section}{\numberline {1.4}Appendixes}{2}
+\contentsline {section}{\numberline {1.5}Contact Us}{3}
+\contentsline {section}{\numberline {1.6}Terms Of Use}{3}
+\contentsline {chapter}{\numberline {2}VFML Module Index}{5}
+\contentsline {section}{\numberline {2.1}VFML Modules}{5}
+\contentsline {chapter}{\numberline {3}VFML Data Structure Index}{7}
+\contentsline {section}{\numberline {3.1}VFML Data Structures}{7}
+\contentsline {chapter}{\numberline {4}VFML File Index}{9}
+\contentsline {section}{\numberline {4.1}VFML File List}{9}
+\contentsline {chapter}{\numberline {5}VFML Page Index}{11}
+\contentsline {section}{\numberline {5.1}VFML Related Pages}{11}
+\contentsline {chapter}{\numberline {6}VFML Module Documentation}{13}
+\contentsline {section}{\numberline {6.1}Core APIs}{13}
+\contentsline {subsection}{\numberline {6.1.1}Detailed Description}{13}
+\contentsline {section}{\numberline {6.2}Utility APIs}{15}
+\contentsline {subsection}{\numberline {6.2.1}Detailed Description}{15}
+\contentsline {section}{\numberline {6.3}Decision Tree Section}{16}
+\contentsline {subsection}{\numberline {6.3.1}Detailed Description}{16}
+\contentsline {section}{\numberline {6.4}Belief Net Section}{18}
+\contentsline {subsection}{\numberline {6.4.1}Detailed Description}{18}
+\contentsline {section}{\numberline {6.5}Clustering Section}{19}
+\contentsline {subsection}{\numberline {6.5.1}Detailed Description}{19}
+\contentsline {section}{\numberline {6.6}Learning Programs}{20}
+\contentsline {subsection}{\numberline {6.6.1}Detailed Description}{20}
+\contentsline {section}{\numberline {6.7}Other Tools}{21}
+\contentsline {subsection}{\numberline {6.7.1}Detailed Description}{21}
+\contentsline {chapter}{\numberline {7}VFML Data Structure Documentation}{23}
+\contentsline {section}{\numberline {7.1}\_\discretionary {-}{}{}Belief\discretionary {-}{}{}Net\_\discretionary {-}{}{} Struct Reference}{23}
+\contentsline {subsection}{\numberline {7.1.1}Detailed Description}{23}
+\contentsline {section}{\numberline {7.2}\_\discretionary {-}{}{}Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node\_\discretionary {-}{}{} Struct Reference}{24}
+\contentsline {subsection}{\numberline {7.2.1}Detailed Description}{24}
+\contentsline {section}{\numberline {7.3}\_\discretionary {-}{}{}BITFIELD\_\discretionary {-}{}{} Struct Reference}{25}
+\contentsline {subsection}{\numberline {7.3.1}Detailed Description}{25}
+\contentsline {section}{\numberline {7.4}\_\discretionary {-}{}{}Decision\discretionary {-}{}{}Tree\_\discretionary {-}{}{} Struct Reference}{26}
+\contentsline {subsection}{\numberline {7.4.1}Detailed Description}{26}
+\contentsline {section}{\numberline {7.5}\_\discretionary {-}{}{}Example\_\discretionary {-}{}{} Struct Reference}{27}
+\contentsline {subsection}{\numberline {7.5.1}Detailed Description}{27}
+\contentsline {section}{\numberline {7.6}\_\discretionary {-}{}{}Example\discretionary {-}{}{}Generator\_\discretionary {-}{}{} Struct Reference}{28}
+\contentsline {subsection}{\numberline {7.6.1}Detailed Description}{28}
+\contentsline {section}{\numberline {7.7}\_\discretionary {-}{}{}Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\_\discretionary {-}{}{} Struct Reference}{29}
+\contentsline {subsection}{\numberline {7.7.1}Detailed Description}{29}
+\contentsline {section}{\numberline {7.8}\_\discretionary {-}{}{}Example\discretionary {-}{}{}Spec\_\discretionary {-}{}{} Struct Reference}{30}
+\contentsline {subsection}{\numberline {7.8.1}Detailed Description}{30}
+\contentsline {section}{\numberline {7.9}\_\discretionary {-}{}{}Stat\discretionary {-}{}{}Tracker\_\discretionary {-}{}{} Struct Reference}{31}
+\contentsline {subsection}{\numberline {7.9.1}Detailed Description}{31}
+\contentsline {section}{\numberline {7.10}\_\discretionary {-}{}{}VFDT\_\discretionary {-}{}{} Struct Reference}{32}
+\contentsline {subsection}{\numberline {7.10.1}Detailed Description}{32}
+\contentsline {section}{\numberline {7.11}Float\discretionary {-}{}{}List\discretionary {-}{}{}Ptr Struct Reference}{33}
+\contentsline {subsection}{\numberline {7.11.1}Detailed Description}{33}
+\contentsline {section}{\numberline {7.12}Hash\discretionary {-}{}{}Table Struct Reference}{34}
+\contentsline {subsection}{\numberline {7.12.1}Detailed Description}{34}
+\contentsline {section}{\numberline {7.13}Int\discretionary {-}{}{}List\discretionary {-}{}{}Ptr Struct Reference}{35}
+\contentsline {subsection}{\numberline {7.13.1}Detailed Description}{35}
+\contentsline {section}{\numberline {7.14}Void\discretionary {-}{}{}List\discretionary {-}{}{}Ptr Struct Reference}{36}
+\contentsline {subsection}{\numberline {7.14.1}Detailed Description}{36}
+\contentsline {chapter}{\numberline {8}VFML File Documentation}{37}
+\contentsline {section}{\numberline {8.1}Attribute\discretionary {-}{}{}Tracker.h File Reference}{37}
+\contentsline {subsection}{\numberline {8.1.1}Detailed Description}{37}
+\contentsline {subsection}{\numberline {8.1.2}Function Documentation}{38}
+\contentsline {subsubsection}{\numberline {8.1.2.1}\setlength {\rightskip }{0pt plus 5cm}int Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Are\discretionary {-}{}{}All\discretionary {-}{}{}Inactive (Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr {\em at})}{38}
+\contentsline {subsubsection}{\numberline {8.1.2.2}\setlength {\rightskip }{0pt plus 5cm}Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Clone (Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr {\em at})}{38}
+\contentsline {subsubsection}{\numberline {8.1.2.3}\setlength {\rightskip }{0pt plus 5cm}void Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Free (Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr {\em at})}{38}
+\contentsline {subsubsection}{\numberline {8.1.2.4}\setlength {\rightskip }{0pt plus 5cm}Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Initial ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es})}{38}
+\contentsline {subsubsection}{\numberline {8.1.2.5}\setlength {\rightskip }{0pt plus 5cm}int Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Is\discretionary {-}{}{}Active (Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr {\em at}, int {\em att\discretionary {-}{}{}Num})}{38}
+\contentsline {subsubsection}{\numberline {8.1.2.6}\setlength {\rightskip }{0pt plus 5cm}void Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Mark\discretionary {-}{}{}Active (Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr {\em at}, int {\em att\discretionary {-}{}{}Num})}{38}
+\contentsline {subsubsection}{\numberline {8.1.2.7}\setlength {\rightskip }{0pt plus 5cm}void Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Mark\discretionary {-}{}{}Inactive (Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr {\em at}, int {\em att\discretionary {-}{}{}Num})}{38}
+\contentsline {subsubsection}{\numberline {8.1.2.8}\setlength {\rightskip }{0pt plus 5cm}Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}New (int {\em num\discretionary {-}{}{}Attributes})}{38}
+\contentsline {subsubsection}{\numberline {8.1.2.9}\setlength {\rightskip }{0pt plus 5cm}int Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Num\discretionary {-}{}{}Active (Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr {\em at})}{39}
+\contentsline {section}{\numberline {8.2}batchtest File Reference}{40}
+\contentsline {subsection}{\numberline {8.2.1}Detailed Description}{40}
+\contentsline {section}{\numberline {8.3}Belief\discretionary {-}{}{}Net.h File Reference}{42}
+\contentsline {subsection}{\numberline {8.3.1}Detailed Description}{42}
+\contentsline {subsection}{\numberline {8.3.2}Define Documentation}{46}
+\contentsline {subsubsection}{\numberline {8.3.2.1}\setlength {\rightskip }{0pt plus 5cm}\#define BNGet\discretionary {-}{}{}User\discretionary {-}{}{}Data(bn)\ ((({\bf Belief\discretionary {-}{}{}Net})bn) $\rightarrow $ user\discretionary {-}{}{}Data)}{46}
+\contentsline {subsection}{\numberline {8.3.3}Typedef Documentation}{46}
+\contentsline {subsubsection}{\numberline {8.3.3.1}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Belief\discretionary {-}{}{}Net\_\discretionary {-}{}{}} $\ast $ {\bf Belief\discretionary {-}{}{}Net}}{46}
+\contentsline {subsubsection}{\numberline {8.3.3.2}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node\_\discretionary {-}{}{}} $\ast $ {\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node}}{47}
+\contentsline {subsubsection}{\numberline {8.3.3.3}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node\_\discretionary {-}{}{}} {\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node\discretionary {-}{}{}Struct}}{47}
+\contentsline {subsubsection}{\numberline {8.3.3.4}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Belief\discretionary {-}{}{}Net\_\discretionary {-}{}{}} {\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Struct}}{47}
+\contentsline {subsection}{\numberline {8.3.4}Function Documentation}{47}
+\contentsline {subsubsection}{\numberline {8.3.4.1}\setlength {\rightskip }{0pt plus 5cm}void BNAdd\discretionary {-}{}{}Fractional\discretionary {-}{}{}Sample ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, {\bf Example\discretionary {-}{}{}Ptr} {\em e}, float {\em weight})}{47}
+\contentsline {subsubsection}{\numberline {8.3.4.2}\setlength {\rightskip }{0pt plus 5cm}void BNAdd\discretionary {-}{}{}Fractional\discretionary {-}{}{}Samples ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, {\bf Void\discretionary {-}{}{}List\discretionary {-}{}{}Ptr} {\em samples}, float {\em weight})}{47}
+\contentsline {subsubsection}{\numberline {8.3.4.3}\setlength {\rightskip }{0pt plus 5cm}void BNAdd\discretionary {-}{}{}Likelihood\discretionary {-}{}{}Samples ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, {\bf Belief\discretionary {-}{}{}Net} {\em new\discretionary {-}{}{}Net}, {\bf Example\discretionary {-}{}{}Ptr} {\em e}, int {\em num\discretionary {-}{}{}Samples})}{47}
+\contentsline {subsubsection}{\numberline {8.3.4.4}\setlength {\rightskip }{0pt plus 5cm}void BNAdd\discretionary {-}{}{}Sample ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{47}
+\contentsline {subsubsection}{\numberline {8.3.4.5}\setlength {\rightskip }{0pt plus 5cm}void BNAdd\discretionary {-}{}{}Samples ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, {\bf Void\discretionary {-}{}{}List\discretionary {-}{}{}Ptr} {\em samples})}{47}
+\contentsline {subsubsection}{\numberline {8.3.4.6}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net} BNClone ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{48}
+\contentsline {subsubsection}{\numberline {8.3.4.7}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net} BNClone\discretionary {-}{}{}No\discretionary {-}{}{}CPTs ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{48}
+\contentsline {subsubsection}{\numberline {8.3.4.8}\setlength {\rightskip }{0pt plus 5cm}void BNFlush\discretionary {-}{}{}Structure\discretionary {-}{}{}Cache ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{48}
+\contentsline {subsubsection}{\numberline {8.3.4.9}\setlength {\rightskip }{0pt plus 5cm}void BNFree ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{48}
+\contentsline {subsubsection}{\numberline {8.3.4.10}\setlength {\rightskip }{0pt plus 5cm}{\bf Example\discretionary {-}{}{}Ptr} BNGenerate\discretionary {-}{}{}Sample ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{48}
+\contentsline {subsubsection}{\numberline {8.3.4.11}\setlength {\rightskip }{0pt plus 5cm}{\bf Example\discretionary {-}{}{}Spec}$\ast $ BNGet\discretionary {-}{}{}Example\discretionary {-}{}{}Spec ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{48}
+\contentsline {subsubsection}{\numberline {8.3.4.12}\setlength {\rightskip }{0pt plus 5cm}long BNGet\discretionary {-}{}{}Max\discretionary {-}{}{}Node\discretionary {-}{}{}Parameters ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{48}
+\contentsline {subsubsection}{\numberline {8.3.4.13}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} BNGet\discretionary {-}{}{}Node\discretionary {-}{}{}By\discretionary {-}{}{}Elim\discretionary {-}{}{}Order ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, int {\em index})}{48}
+\contentsline {subsubsection}{\numberline {8.3.4.14}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} BNGet\discretionary {-}{}{}Node\discretionary {-}{}{}By\discretionary {-}{}{}ID ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, int {\em id})}{49}
+\contentsline {subsubsection}{\numberline {8.3.4.15}\setlength {\rightskip }{0pt plus 5cm}long BNGet\discretionary {-}{}{}Num\discretionary {-}{}{}Independent\discretionary {-}{}{}Parameters ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{49}
+\contentsline {subsubsection}{\numberline {8.3.4.16}\setlength {\rightskip }{0pt plus 5cm}int BNGet\discretionary {-}{}{}Num\discretionary {-}{}{}Nodes ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{49}
+\contentsline {subsubsection}{\numberline {8.3.4.17}\setlength {\rightskip }{0pt plus 5cm}long BNGet\discretionary {-}{}{}Num\discretionary {-}{}{}Parameters ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{49}
+\contentsline {subsubsection}{\numberline {8.3.4.18}\setlength {\rightskip }{0pt plus 5cm}int BNGet\discretionary {-}{}{}Sim\discretionary {-}{}{}Structure\discretionary {-}{}{}Difference ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, {\bf Belief\discretionary {-}{}{}Net} {\em other\discretionary {-}{}{}Net})}{49}
+\contentsline {subsubsection}{\numberline {8.3.4.19}\setlength {\rightskip }{0pt plus 5cm}int BNHas\discretionary {-}{}{}Cycle ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{49}
+\contentsline {subsubsection}{\numberline {8.3.4.20}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net} BNInit\discretionary {-}{}{}Likelihood\discretionary {-}{}{}Sampling ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{49}
+\contentsline {subsubsection}{\numberline {8.3.4.21}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net} BNLikelihood\discretionary {-}{}{}Sample\discretionary {-}{}{}NTimes ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, {\bf Example\discretionary {-}{}{}Ptr} {\em e}, int {\em num\discretionary {-}{}{}Samples})}{49}
+\contentsline {subsubsection}{\numberline {8.3.4.22}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net} BNNew (void)}{50}
+\contentsline {subsubsection}{\numberline {8.3.4.23}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net} BNNew\discretionary {-}{}{}From\discretionary {-}{}{}Spec ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es})}{50}
+\contentsline {subsubsection}{\numberline {8.3.4.24}\setlength {\rightskip }{0pt plus 5cm}void BNNode\discretionary {-}{}{}Add\discretionary {-}{}{}Fractional\discretionary {-}{}{}Sample ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Example\discretionary {-}{}{}Ptr} {\em e}, float {\em weight})}{50}
+\contentsline {subsubsection}{\numberline {8.3.4.25}\setlength {\rightskip }{0pt plus 5cm}void BNNode\discretionary {-}{}{}Add\discretionary {-}{}{}Fractional\discretionary {-}{}{}Samples ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Void\discretionary {-}{}{}List\discretionary {-}{}{}Ptr} {\em samples}, float {\em weight})}{50}
+\contentsline {subsubsection}{\numberline {8.3.4.26}\setlength {\rightskip }{0pt plus 5cm}void BNNode\discretionary {-}{}{}Add\discretionary {-}{}{}Parent ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em parent})}{50}
+\contentsline {subsubsection}{\numberline {8.3.4.27}\setlength {\rightskip }{0pt plus 5cm}void BNNode\discretionary {-}{}{}Add\discretionary {-}{}{}Sample ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{50}
+\contentsline {subsubsection}{\numberline {8.3.4.28}\setlength {\rightskip }{0pt plus 5cm}void BNNode\discretionary {-}{}{}Add\discretionary {-}{}{}Samples ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Void\discretionary {-}{}{}List\discretionary {-}{}{}Ptr} {\em samples})}{50}
+\contentsline {subsubsection}{\numberline {8.3.4.29}\setlength {\rightskip }{0pt plus 5cm}void BNNode\discretionary {-}{}{}Free\discretionary {-}{}{}CPT ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn})}{50}
+\contentsline {subsubsection}{\numberline {8.3.4.30}\setlength {\rightskip }{0pt plus 5cm}float BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}CP ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{51}
+\contentsline {subsubsection}{\numberline {8.3.4.31}\setlength {\rightskip }{0pt plus 5cm}float BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}CPTRow\discretionary {-}{}{}Count ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{51}
+\contentsline {subsubsection}{\numberline {8.3.4.32}\setlength {\rightskip }{0pt plus 5cm}char$\ast $ BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}Name ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn})}{51}
+\contentsline {subsubsection}{\numberline {8.3.4.33}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Children ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn})}{51}
+\contentsline {subsubsection}{\numberline {8.3.4.34}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}CPTRows ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn})}{51}
+\contentsline {subsubsection}{\numberline {8.3.4.35}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Parameters ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn})}{51}
+\contentsline {subsubsection}{\numberline {8.3.4.36}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Parents ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn})}{51}
+\contentsline {subsubsection}{\numberline {8.3.4.37}\setlength {\rightskip }{0pt plus 5cm}float BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Samples ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn})}{51}
+\contentsline {subsubsection}{\numberline {8.3.4.38}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Values ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn})}{51}
+\contentsline {subsubsection}{\numberline {8.3.4.39}\setlength {\rightskip }{0pt plus 5cm}float BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}P ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, int {\em value})}{51}
+\contentsline {subsubsection}{\numberline {8.3.4.40}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}Parent ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, int {\em parent\discretionary {-}{}{}Index})}{52}
+\contentsline {subsubsection}{\numberline {8.3.4.41}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Get\discretionary {-}{}{}Parent\discretionary {-}{}{}ID ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, int {\em parent\discretionary {-}{}{}Index})}{52}
+\contentsline {subsubsection}{\numberline {8.3.4.42}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Has\discretionary {-}{}{}Parent ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em parent})}{52}
+\contentsline {subsubsection}{\numberline {8.3.4.43}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Has\discretionary {-}{}{}Parent\discretionary {-}{}{}ID ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, int {\em parent\discretionary {-}{}{}ID})}{52}
+\contentsline {subsubsection}{\numberline {8.3.4.44}\setlength {\rightskip }{0pt plus 5cm}void BNNode\discretionary {-}{}{}Init\discretionary {-}{}{}CPT ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn})}{52}
+\contentsline {subsubsection}{\numberline {8.3.4.45}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Lookup\discretionary {-}{}{}Parent\discretionary {-}{}{}Index ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em parent})}{52}
+\contentsline {subsubsection}{\numberline {8.3.4.46}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Lookup\discretionary {-}{}{}Parent\discretionary {-}{}{}Index\discretionary {-}{}{}By\discretionary {-}{}{}ID ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, int {\em id})}{52}
+\contentsline {subsubsection}{\numberline {8.3.4.47}\setlength {\rightskip }{0pt plus 5cm}void BNNode\discretionary {-}{}{}Remove\discretionary {-}{}{}Parent ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, int {\em parent\discretionary {-}{}{}Index})}{52}
+\contentsline {subsubsection}{\numberline {8.3.4.48}\setlength {\rightskip }{0pt plus 5cm}void BNNode\discretionary {-}{}{}Set\discretionary {-}{}{}CP ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Example\discretionary {-}{}{}Ptr} {\em e}, float {\em probability})}{53}
+\contentsline {subsubsection}{\numberline {8.3.4.49}\setlength {\rightskip }{0pt plus 5cm}int BNNode\discretionary {-}{}{}Structure\discretionary {-}{}{}Equal ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn}, {\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em other\discretionary {-}{}{}Node})}{53}
+\contentsline {subsubsection}{\numberline {8.3.4.50}\setlength {\rightskip }{0pt plus 5cm}void BNNode\discretionary {-}{}{}Zero\discretionary {-}{}{}CPT ({\bf Belief\discretionary {-}{}{}Net\discretionary {-}{}{}Node} {\em bnn})}{53}
+\contentsline {subsubsection}{\numberline {8.3.4.51}\setlength {\rightskip }{0pt plus 5cm}void BNPrint\discretionary {-}{}{}Stats ({\bf Belief\discretionary {-}{}{}Net} {\em bn})}{53}
+\contentsline {subsubsection}{\numberline {8.3.4.52}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net} BNRead\discretionary {-}{}{}BIF (char $\ast $ {\em file\discretionary {-}{}{}Name})}{53}
+\contentsline {subsubsection}{\numberline {8.3.4.53}\setlength {\rightskip }{0pt plus 5cm}{\bf Belief\discretionary {-}{}{}Net} BNRead\discretionary {-}{}{}BIFFILEP (FILE $\ast $ {\em file})}{53}
+\contentsline {subsubsection}{\numberline {8.3.4.54}\setlength {\rightskip }{0pt plus 5cm}void BNSet\discretionary {-}{}{}Name ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, char $\ast $ {\em name})}{53}
+\contentsline {subsubsection}{\numberline {8.3.4.55}\setlength {\rightskip }{0pt plus 5cm}void BNSet\discretionary {-}{}{}Prior\discretionary {-}{}{}Strength ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, double {\em strength})}{54}
+\contentsline {subsubsection}{\numberline {8.3.4.56}\setlength {\rightskip }{0pt plus 5cm}void BNSet\discretionary {-}{}{}User\discretionary {-}{}{}Data ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, void $\ast $ {\em data})}{54}
+\contentsline {subsubsection}{\numberline {8.3.4.57}\setlength {\rightskip }{0pt plus 5cm}void BNSmooth\discretionary {-}{}{}Probabilities ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, double {\em strength})}{54}
+\contentsline {subsubsection}{\numberline {8.3.4.58}\setlength {\rightskip }{0pt plus 5cm}void BNWrite\discretionary {-}{}{}BIF ({\bf Belief\discretionary {-}{}{}Net} {\em bn}, FILE $\ast $ {\em out})}{54}
+\contentsline {section}{\numberline {8.4}beliefnetcorrupt File Reference}{55}
+\contentsline {subsection}{\numberline {8.4.1}Detailed Description}{55}
+\contentsline {section}{\numberline {8.5}beliefnetdata File Reference}{57}
+\contentsline {subsection}{\numberline {8.5.1}Detailed Description}{57}
+\contentsline {section}{\numberline {8.6}beliefnetscore File Reference}{59}
+\contentsline {subsection}{\numberline {8.6.1}Detailed Description}{59}
+\contentsline {section}{\numberline {8.7}bindata File Reference}{60}
+\contentsline {subsection}{\numberline {8.7.1}Detailed Description}{60}
+\contentsline {section}{\numberline {8.8}bitfield.h File Reference}{62}
+\contentsline {subsection}{\numberline {8.8.1}Detailed Description}{62}
+\contentsline {subsection}{\numberline {8.8.2}Typedef Documentation}{62}
+\contentsline {subsubsection}{\numberline {8.8.2.1}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}BITFIELD\_\discretionary {-}{}{}} $\ast $ {\bf Bit\discretionary {-}{}{}Field\discretionary {-}{}{}Ptr}}{62}
+\contentsline {subsubsection}{\numberline {8.8.2.2}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}BITFIELD\_\discretionary {-}{}{}} {\bf Bit\discretionary {-}{}{}Field\discretionary {-}{}{}Struct}}{63}
+\contentsline {subsection}{\numberline {8.8.3}Function Documentation}{63}
+\contentsline {subsubsection}{\numberline {8.8.3.1}\setlength {\rightskip }{0pt plus 5cm}void Bit\discretionary {-}{}{}Field\discretionary {-}{}{}Free (Bit\discretionary {-}{}{}Field {\em b})}{63}
+\contentsline {subsubsection}{\numberline {8.8.3.2}\setlength {\rightskip }{0pt plus 5cm}int Bit\discretionary {-}{}{}Field\discretionary {-}{}{}Get\discretionary {-}{}{}Bit (Bit\discretionary {-}{}{}Field {\em b}, long {\em offset})}{63}
+\contentsline {subsubsection}{\numberline {8.8.3.3}\setlength {\rightskip }{0pt plus 5cm}int Bit\discretionary {-}{}{}Field\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Bytes (Bit\discretionary {-}{}{}Field {\em b})}{63}
+\contentsline {subsubsection}{\numberline {8.8.3.4}\setlength {\rightskip }{0pt plus 5cm}Bit\discretionary {-}{}{}Field Bit\discretionary {-}{}{}Field\discretionary {-}{}{}New (int {\em byte\discretionary {-}{}{}Size})}{63}
+\contentsline {subsubsection}{\numberline {8.8.3.5}\setlength {\rightskip }{0pt plus 5cm}void Bit\discretionary {-}{}{}Field\discretionary {-}{}{}Set\discretionary {-}{}{}Bit (Bit\discretionary {-}{}{}Field {\em b}, long {\em offset}, int {\em val})}{63}
+\contentsline {section}{\numberline {8.9}bnlearn File Reference}{64}
+\contentsline {subsection}{\numberline {8.9.1}Detailed Description}{64}
+\contentsline {section}{\numberline {8.10}bnlearn-engine.h File Reference}{66}
+\contentsline {subsection}{\numberline {8.10.1}Detailed Description}{66}
+\contentsline {subsection}{\numberline {8.10.2}Function Documentation}{66}
+\contentsline {subsubsection}{\numberline {8.10.2.1}\setlength {\rightskip }{0pt plus 5cm}void BNLearn (BNLearn\discretionary {-}{}{}Params $\ast $ {\em params})}{66}
+\contentsline {subsubsection}{\numberline {8.10.2.2}\setlength {\rightskip }{0pt plus 5cm}void BNLearn\_\discretionary {-}{}{}Free\discretionary {-}{}{}Params (BNLearn\discretionary {-}{}{}Params $\ast $ {\em params})}{66}
+\contentsline {subsubsection}{\numberline {8.10.2.3}\setlength {\rightskip }{0pt plus 5cm}BNLearn\discretionary {-}{}{}Params$\ast $ BNLearn\_\discretionary {-}{}{}New\discretionary {-}{}{}Params ()}{66}
+\contentsline {section}{\numberline {8.11}C45interface.h File Reference}{67}
+\contentsline {subsection}{\numberline {8.11.1}Detailed Description}{67}
+\contentsline {subsection}{\numberline {8.11.2}Function Documentation}{67}
+\contentsline {subsubsection}{\numberline {8.11.2.1}\setlength {\rightskip }{0pt plus 5cm}{\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} C45Learn ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, {\bf Void\discretionary {-}{}{}List\discretionary {-}{}{}Ptr} {\em examples})}{67}
+\contentsline {section}{\numberline {8.12}c45wrapper File Reference}{68}
+\contentsline {subsection}{\numberline {8.12.1}Detailed Description}{68}
+\contentsline {section}{\numberline {8.13}c50wrapper File Reference}{69}
+\contentsline {subsection}{\numberline {8.13.1}Detailed Description}{69}
+\contentsline {section}{\numberline {8.14}cleandata File Reference}{70}
+\contentsline {subsection}{\numberline {8.14.1}Detailed Description}{70}
+\contentsline {section}{\numberline {8.15}clusterdata File Reference}{71}
+\contentsline {subsection}{\numberline {8.15.1}Detailed Description}{71}
+\contentsline {section}{\numberline {8.16}combinedata File Reference}{73}
+\contentsline {subsection}{\numberline {8.16.1}Detailed Description}{73}
+\contentsline {section}{\numberline {8.17}cvfdt File Reference}{74}
+\contentsline {subsection}{\numberline {8.17.1}Detailed Description}{74}
+\contentsline {section}{\numberline {8.18}Debug.h File Reference}{76}
+\contentsline {subsection}{\numberline {8.18.1}Detailed Description}{76}
+\contentsline {subsection}{\numberline {8.18.2}Function Documentation}{76}
+\contentsline {subsubsection}{\numberline {8.18.2.1}\setlength {\rightskip }{0pt plus 5cm}void Debug\discretionary {-}{}{}Error (int {\em condidion}, char $\ast $ {\em str})}{76}
+\contentsline {subsubsection}{\numberline {8.18.2.2}\setlength {\rightskip }{0pt plus 5cm}int Debug\discretionary {-}{}{}Get\discretionary {-}{}{}Message\discretionary {-}{}{}Level (void)}{76}
+\contentsline {subsubsection}{\numberline {8.18.2.3}\setlength {\rightskip }{0pt plus 5cm}FILE$\ast $ Debug\discretionary {-}{}{}Get\discretionary {-}{}{}Target (void)}{76}
+\contentsline {subsubsection}{\numberline {8.18.2.4}\setlength {\rightskip }{0pt plus 5cm}void Debug\discretionary {-}{}{}Message (int {\em condition}, int {\em level}, char $\ast $ {\em str}, ...)}{76}
+\contentsline {subsubsection}{\numberline {8.18.2.5}\setlength {\rightskip }{0pt plus 5cm}void Debug\discretionary {-}{}{}Set\discretionary {-}{}{}Message\discretionary {-}{}{}Level (int {\em level})}{77}
+\contentsline {subsubsection}{\numberline {8.18.2.6}\setlength {\rightskip }{0pt plus 5cm}void Debug\discretionary {-}{}{}Set\discretionary {-}{}{}Target (FILE $\ast $ {\em target})}{77}
+\contentsline {subsubsection}{\numberline {8.18.2.7}\setlength {\rightskip }{0pt plus 5cm}void Debug\discretionary {-}{}{}Warn (int {\em condition}, char $\ast $ {\em str})}{77}
+\contentsline {section}{\numberline {8.19}decisionstump File Reference}{78}
+\contentsline {subsection}{\numberline {8.19.1}Detailed Description}{78}
+\contentsline {section}{\numberline {8.20}Decision\discretionary {-}{}{}Tree.h File Reference}{79}
+\contentsline {subsection}{\numberline {8.20.1}Detailed Description}{79}
+\contentsline {subsection}{\numberline {8.20.2}Typedef Documentation}{81}
+\contentsline {subsubsection}{\numberline {8.20.2.1}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Decision\discretionary {-}{}{}Tree\_\discretionary {-}{}{}} {\bf Decision\discretionary {-}{}{}Tree}}{81}
+\contentsline {subsubsection}{\numberline {8.20.2.2}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Decision\discretionary {-}{}{}Tree\_\discretionary {-}{}{}} $\ast $ {\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr}}{81}
+\contentsline {subsection}{\numberline {8.20.3}Function Documentation}{82}
+\contentsline {subsubsection}{\numberline {8.20.3.1}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Add\discretionary {-}{}{}To\discretionary {-}{}{}Class\discretionary {-}{}{}Distribution ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{82}
+\contentsline {subsubsection}{\numberline {8.20.3.2}\setlength {\rightskip }{0pt plus 5cm}int Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Classify ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{82}
+\contentsline {subsubsection}{\numberline {8.20.3.3}\setlength {\rightskip }{0pt plus 5cm}{\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Clone ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{82}
+\contentsline {subsubsection}{\numberline {8.20.3.4}\setlength {\rightskip }{0pt plus 5cm}int Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Count\discretionary {-}{}{}Nodes ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{82}
+\contentsline {subsubsection}{\numberline {8.20.3.5}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Free ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{82}
+\contentsline {subsubsection}{\numberline {8.20.3.6}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Gather\discretionary {-}{}{}Growing\discretionary {-}{}{}Nodes ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr {\em list})}{82}
+\contentsline {subsubsection}{\numberline {8.20.3.7}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Gather\discretionary {-}{}{}Leaves ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr {\em list})}{82}
+\contentsline {subsubsection}{\numberline {8.20.3.8}\setlength {\rightskip }{0pt plus 5cm}{\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Get\discretionary {-}{}{}Child ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, int {\em index})}{82}
+\contentsline {subsubsection}{\numberline {8.20.3.9}\setlength {\rightskip }{0pt plus 5cm}int Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Get\discretionary {-}{}{}Child\discretionary {-}{}{}Count ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{83}
+\contentsline {subsubsection}{\numberline {8.20.3.10}\setlength {\rightskip }{0pt plus 5cm}int Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Get\discretionary {-}{}{}Class ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{83}
+\contentsline {subsubsection}{\numberline {8.20.3.11}\setlength {\rightskip }{0pt plus 5cm}float Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Get\discretionary {-}{}{}Class\discretionary {-}{}{}Distribution\discretionary {-}{}{}Sample\discretionary {-}{}{}Count ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{83}
+\contentsline {subsubsection}{\numberline {8.20.3.12}\setlength {\rightskip }{0pt plus 5cm}float Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Get\discretionary {-}{}{}Class\discretionary {-}{}{}Prob ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, int {\em the\discretionary {-}{}{}Class})}{83}
+\contentsline {subsubsection}{\numberline {8.20.3.13}\setlength {\rightskip }{0pt plus 5cm}void$\ast $ Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Get\discretionary {-}{}{}Growing\discretionary {-}{}{}Data ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{83}
+\contentsline {subsubsection}{\numberline {8.20.3.14}\setlength {\rightskip }{0pt plus 5cm}int Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Get\discretionary {-}{}{}Most\discretionary {-}{}{}Common\discretionary {-}{}{}Class ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{83}
+\contentsline {subsubsection}{\numberline {8.20.3.15}\setlength {\rightskip }{0pt plus 5cm}int Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Is\discretionary {-}{}{}Leaf ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{83}
+\contentsline {subsubsection}{\numberline {8.20.3.16}\setlength {\rightskip }{0pt plus 5cm}int Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Is\discretionary {-}{}{}Node\discretionary {-}{}{}Growing ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{83}
+\contentsline {subsubsection}{\numberline {8.20.3.17}\setlength {\rightskip }{0pt plus 5cm}int Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Is\discretionary {-}{}{}Tree\discretionary {-}{}{}Growing ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{83}
+\contentsline {subsubsection}{\numberline {8.20.3.18}\setlength {\rightskip }{0pt plus 5cm}{\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}New ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em spec})}{84}
+\contentsline {subsubsection}{\numberline {8.20.3.19}\setlength {\rightskip }{0pt plus 5cm}{\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}One\discretionary {-}{}{}Step\discretionary {-}{}{}Classify ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{84}
+\contentsline {subsubsection}{\numberline {8.20.3.20}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Print ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, FILE $\ast $ {\em out})}{84}
+\contentsline {subsubsection}{\numberline {8.20.3.21}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Print\discretionary {-}{}{}Stats ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, FILE $\ast $ {\em out})}{84}
+\contentsline {subsubsection}{\numberline {8.20.3.22}\setlength {\rightskip }{0pt plus 5cm}{\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Read (FILE $\ast $ {\em in}, {\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em spec})}{84}
+\contentsline {subsubsection}{\numberline {8.20.3.23}\setlength {\rightskip }{0pt plus 5cm}{\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Read\discretionary {-}{}{}C45 (FILE $\ast $ {\em in}, {\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em spec})}{84}
+\contentsline {subsubsection}{\numberline {8.20.3.24}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Set\discretionary {-}{}{}Class ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, int {\em the\discretionary {-}{}{}Class})}{84}
+\contentsline {subsubsection}{\numberline {8.20.3.25}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Set\discretionary {-}{}{}Class\discretionary {-}{}{}Prob ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, int {\em the\discretionary {-}{}{}Class}, float {\em prob})}{85}
+\contentsline {subsubsection}{\numberline {8.20.3.26}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Set\discretionary {-}{}{}Growing\discretionary {-}{}{}Data ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, void $\ast $ {\em data})}{85}
+\contentsline {subsubsection}{\numberline {8.20.3.27}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Set\discretionary {-}{}{}Type\discretionary {-}{}{}Growing ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{85}
+\contentsline {subsubsection}{\numberline {8.20.3.28}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Set\discretionary {-}{}{}Type\discretionary {-}{}{}Leaf ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{85}
+\contentsline {subsubsection}{\numberline {8.20.3.29}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Split\discretionary {-}{}{}On\discretionary {-}{}{}Continuous\discretionary {-}{}{}Attribute ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, int {\em att\discretionary {-}{}{}Num}, float {\em threshold})}{85}
+\contentsline {subsubsection}{\numberline {8.20.3.30}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Split\discretionary {-}{}{}On\discretionary {-}{}{}Discrete\discretionary {-}{}{}Attribute ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, int {\em att\discretionary {-}{}{}Num})}{85}
+\contentsline {subsubsection}{\numberline {8.20.3.31}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Write ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, FILE $\ast $ {\em out})}{85}
+\contentsline {subsubsection}{\numberline {8.20.3.32}\setlength {\rightskip }{0pt plus 5cm}void Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Zero\discretionary {-}{}{}Class\discretionary {-}{}{}Distribution ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt})}{86}
+\contentsline {section}{\numberline {8.21}doxygen.h File Reference}{87}
+\contentsline {subsection}{\numberline {8.21.1}Detailed Description}{87}
+\contentsline {section}{\numberline {8.22}Example.h File Reference}{88}
+\contentsline {subsection}{\numberline {8.22.1}Detailed Description}{88}
+\contentsline {subsection}{\numberline {8.22.2}Define Documentation}{90}
+\contentsline {subsubsection}{\numberline {8.22.2.1}\setlength {\rightskip }{0pt plus 5cm}\#define Example\discretionary {-}{}{}Get\discretionary {-}{}{}Class(e)\ ((({\bf Example\discretionary {-}{}{}Ptr})e) $\rightarrow $ myclass)}{90}
+\contentsline {subsubsection}{\numberline {8.22.2.2}\setlength {\rightskip }{0pt plus 5cm}\#define Example\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Attributes(e)\ (VALLength((({\bf Example\discretionary {-}{}{}Ptr})e) $\rightarrow $ attributes))}{90}
+\contentsline {subsubsection}{\numberline {8.22.2.3}\setlength {\rightskip }{0pt plus 5cm}\#define Example\discretionary {-}{}{}Is\discretionary {-}{}{}Attribute\discretionary {-}{}{}Unknown(e, att\discretionary {-}{}{}Num)\ ( VALIndex(e $\rightarrow $ attributes, att\discretionary {-}{}{}Num) == 0 )}{90}
+\contentsline {subsection}{\numberline {8.22.3}Typedef Documentation}{90}
+\contentsline {subsubsection}{\numberline {8.22.3.1}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Example\_\discretionary {-}{}{}} {\bf Example}}{90}
+\contentsline {subsubsection}{\numberline {8.22.3.2}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Example\_\discretionary {-}{}{}} $\ast $ {\bf Example\discretionary {-}{}{}Ptr}}{90}
+\contentsline {subsection}{\numberline {8.22.4}Function Documentation}{90}
+\contentsline {subsubsection}{\numberline {8.22.4.1}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Add\discretionary {-}{}{}Noise ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, float {\em p}, int {\em do\discretionary {-}{}{}Class}, int {\em attrib})}{90}
+\contentsline {subsubsection}{\numberline {8.22.4.2}\setlength {\rightskip }{0pt plus 5cm}{\bf Example\discretionary {-}{}{}Ptr} Example\discretionary {-}{}{}Clone ({\bf Example\discretionary {-}{}{}Ptr} {\em e})}{90}
+\contentsline {subsubsection}{\numberline {8.22.4.3}\setlength {\rightskip }{0pt plus 5cm}float Example\discretionary {-}{}{}Distance ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, {\bf Example\discretionary {-}{}{}Ptr} {\em dst})}{91}
+\contentsline {subsubsection}{\numberline {8.22.4.4}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Free ({\bf Example\discretionary {-}{}{}Ptr} {\em e})}{91}
+\contentsline {subsubsection}{\numberline {8.22.4.5}\setlength {\rightskip }{0pt plus 5cm}double Example\discretionary {-}{}{}Get\discretionary {-}{}{}Continuous\discretionary {-}{}{}Attribute\discretionary {-}{}{}Value ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, int {\em att\discretionary {-}{}{}Num})}{91}
+\contentsline {subsubsection}{\numberline {8.22.4.6}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Get\discretionary {-}{}{}Discrete\discretionary {-}{}{}Attribute\discretionary {-}{}{}Value ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, int {\em att\discretionary {-}{}{}Num})}{91}
+\contentsline {subsubsection}{\numberline {8.22.4.7}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Is\discretionary {-}{}{}Attribute\discretionary {-}{}{}Continuous ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, int {\em att\discretionary {-}{}{}Num})}{91}
+\contentsline {subsubsection}{\numberline {8.22.4.8}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Is\discretionary {-}{}{}Attribute\discretionary {-}{}{}Discrete ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, int {\em att\discretionary {-}{}{}Num})}{91}
+\contentsline {subsubsection}{\numberline {8.22.4.9}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Is\discretionary {-}{}{}Class\discretionary {-}{}{}Unknown ({\bf Example\discretionary {-}{}{}Ptr} {\em e})}{91}
+\contentsline {subsubsection}{\numberline {8.22.4.10}\setlength {\rightskip }{0pt plus 5cm}{\bf Example\discretionary {-}{}{}Ptr} Example\discretionary {-}{}{}New ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es})}{91}
+\contentsline {subsubsection}{\numberline {8.22.4.11}\setlength {\rightskip }{0pt plus 5cm}{\bf Example\discretionary {-}{}{}Ptr} Example\discretionary {-}{}{}Read (FILE $\ast $ {\em file}, {\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es})}{92}
+\contentsline {subsubsection}{\numberline {8.22.4.12}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Set\discretionary {-}{}{}Attribute\discretionary {-}{}{}Unknown ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, int {\em att\discretionary {-}{}{}Num})}{92}
+\contentsline {subsubsection}{\numberline {8.22.4.13}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Set\discretionary {-}{}{}Class ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, int {\em the\discretionary {-}{}{}Class})}{92}
+\contentsline {subsubsection}{\numberline {8.22.4.14}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Set\discretionary {-}{}{}Class\discretionary {-}{}{}Unknown ({\bf Example\discretionary {-}{}{}Ptr} {\em e})}{92}
+\contentsline {subsubsection}{\numberline {8.22.4.15}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Set\discretionary {-}{}{}Continuous\discretionary {-}{}{}Attribute\discretionary {-}{}{}Value ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, int {\em att\discretionary {-}{}{}Num}, double {\em value})}{92}
+\contentsline {subsubsection}{\numberline {8.22.4.16}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Set\discretionary {-}{}{}Discrete\discretionary {-}{}{}Attribute\discretionary {-}{}{}Value ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, int {\em att\discretionary {-}{}{}Num}, int {\em value})}{92}
+\contentsline {subsubsection}{\numberline {8.22.4.17}\setlength {\rightskip }{0pt plus 5cm}{\bf Void\discretionary {-}{}{}List\discretionary {-}{}{}Ptr} Examples\discretionary {-}{}{}Read (FILE $\ast $ {\em file}, {\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es})}{92}
+\contentsline {subsubsection}{\numberline {8.22.4.18}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Write ({\bf Example\discretionary {-}{}{}Ptr} {\em e}, FILE $\ast $ {\em out})}{93}
+\contentsline {section}{\numberline {8.23}Example\discretionary {-}{}{}Generator.h File Reference}{94}
+\contentsline {subsection}{\numberline {8.23.1}Detailed Description}{94}
+\contentsline {subsection}{\numberline {8.23.2}Typedef Documentation}{94}
+\contentsline {subsubsection}{\numberline {8.23.2.1}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Example\discretionary {-}{}{}Generator\_\discretionary {-}{}{}} {\bf Example\discretionary {-}{}{}Generator}}{94}
+\contentsline {subsubsection}{\numberline {8.23.2.2}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Example\discretionary {-}{}{}Generator\_\discretionary {-}{}{}} $\ast $ {\bf Example\discretionary {-}{}{}Generator\discretionary {-}{}{}Ptr}}{95}
+\contentsline {subsection}{\numberline {8.23.3}Function Documentation}{95}
+\contentsline {subsubsection}{\numberline {8.23.3.1}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Generator\discretionary {-}{}{}Free ({\bf Example\discretionary {-}{}{}Generator\discretionary {-}{}{}Ptr} {\em eg})}{95}
+\contentsline {subsubsection}{\numberline {8.23.3.2}\setlength {\rightskip }{0pt plus 5cm}{\bf Example\discretionary {-}{}{}Ptr} Example\discretionary {-}{}{}Generator\discretionary {-}{}{}Generate ({\bf Example\discretionary {-}{}{}Generator\discretionary {-}{}{}Ptr} {\em eg})}{95}
+\contentsline {subsubsection}{\numberline {8.23.3.3}\setlength {\rightskip }{0pt plus 5cm}{\bf Example\discretionary {-}{}{}Generator\discretionary {-}{}{}Ptr} Example\discretionary {-}{}{}Generator\discretionary {-}{}{}New ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, int {\em seed})}{95}
+\contentsline {section}{\numberline {8.24}Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats.h File Reference}{96}
+\contentsline {subsection}{\numberline {8.24.1}Detailed Description}{96}
+\contentsline {subsection}{\numberline {8.24.2}Typedef Documentation}{99}
+\contentsline {subsubsection}{\numberline {8.24.2.1}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\_\discretionary {-}{}{}} {\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats}}{99}
+\contentsline {subsubsection}{\numberline {8.24.2.2}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\_\discretionary {-}{}{}} $\ast $ {\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr}}{99}
+\contentsline {subsection}{\numberline {8.24.3}Function Documentation}{99}
+\contentsline {subsubsection}{\numberline {8.24.3.1}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Add\discretionary {-}{}{}Example ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{99}
+\contentsline {subsubsection}{\numberline {8.24.3.2}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Deactivate ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs})}{99}
+\contentsline {subsubsection}{\numberline {8.24.3.3}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Entropy\discretionary {-}{}{}Continuous\discretionary {-}{}{}Attribute\discretionary {-}{}{}Split ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, float $\ast $ {\em first\discretionary {-}{}{}Index}, float $\ast $ {\em first\discretionary {-}{}{}Thresh}, float $\ast $ {\em second\discretionary {-}{}{}Index}, float $\ast $ {\em second\discretionary {-}{}{}Thresh})}{99}
+\contentsline {subsubsection}{\numberline {8.24.3.4}\setlength {\rightskip }{0pt plus 5cm}float Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Entropy\discretionary {-}{}{}Discrete\discretionary {-}{}{}Attribute\discretionary {-}{}{}Split ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num})}{100}
+\contentsline {subsubsection}{\numberline {8.24.3.5}\setlength {\rightskip }{0pt plus 5cm}float Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Entropy\discretionary {-}{}{}Total ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs})}{100}
+\contentsline {subsubsection}{\numberline {8.24.3.6}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Free ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs})}{100}
+\contentsline {subsubsection}{\numberline {8.24.3.7}\setlength {\rightskip }{0pt plus 5cm}Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Attribute\discretionary {-}{}{}Tracker ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs})}{100}
+\contentsline {subsubsection}{\numberline {8.24.3.8}\setlength {\rightskip }{0pt plus 5cm}double Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Class\discretionary {-}{}{}Log\discretionary {-}{}{}P ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em class\discretionary {-}{}{}Num})}{100}
+\contentsline {subsubsection}{\numberline {8.24.3.9}\setlength {\rightskip }{0pt plus 5cm}float Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Class\discretionary {-}{}{}Percent ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em class\discretionary {-}{}{}Num})}{100}
+\contentsline {subsubsection}{\numberline {8.24.3.10}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Most\discretionary {-}{}{}Common\discretionary {-}{}{}Class ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs})}{100}
+\contentsline {subsubsection}{\numberline {8.24.3.11}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Most\discretionary {-}{}{}Common\discretionary {-}{}{}Class\discretionary {-}{}{}Above\discretionary {-}{}{}Threshold ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, float {\em threshold})}{100}
+\contentsline {subsubsection}{\numberline {8.24.3.12}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Most\discretionary {-}{}{}Common\discretionary {-}{}{}Class\discretionary {-}{}{}Below\discretionary {-}{}{}Threshold ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, float {\em threshold})}{100}
+\contentsline {subsubsection}{\numberline {8.24.3.13}\setlength {\rightskip }{0pt plus 5cm}long Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Most\discretionary {-}{}{}Common\discretionary {-}{}{}Class\discretionary {-}{}{}Count ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs})}{101}
+\contentsline {subsubsection}{\numberline {8.24.3.14}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Most\discretionary {-}{}{}Common\discretionary {-}{}{}Class\discretionary {-}{}{}For\discretionary {-}{}{}Att\discretionary {-}{}{}Val ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att}, int {\em val})}{101}
+\contentsline {subsubsection}{\numberline {8.24.3.15}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Most\discretionary {-}{}{}Common\discretionary {-}{}{}Class\discretionary {-}{}{}Laplace ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em add\discretionary {-}{}{}Class}, int {\em add\discretionary {-}{}{}Count})}{101}
+\contentsline {subsubsection}{\numberline {8.24.3.16}\setlength {\rightskip }{0pt plus 5cm}float Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Percent\discretionary {-}{}{}Below\discretionary {-}{}{}Threshold ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, float {\em thresh})}{101}
+\contentsline {subsubsection}{\numberline {8.24.3.17}\setlength {\rightskip }{0pt plus 5cm}double Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Value\discretionary {-}{}{}Given\discretionary {-}{}{}Class\discretionary {-}{}{}MEstimate ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, int {\em val\discretionary {-}{}{}Num}, int {\em class\discretionary {-}{}{}Num})}{101}
+\contentsline {subsubsection}{\numberline {8.24.3.18}\setlength {\rightskip }{0pt plus 5cm}double Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Value\discretionary {-}{}{}Given\discretionary {-}{}{}Class\discretionary {-}{}{}MEstimate\discretionary {-}{}{}Log\discretionary {-}{}{}P ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, int {\em val\discretionary {-}{}{}Num}, int {\em class\discretionary {-}{}{}Num})}{101}
+\contentsline {subsubsection}{\numberline {8.24.3.19}\setlength {\rightskip }{0pt plus 5cm}float Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Get\discretionary {-}{}{}Value\discretionary {-}{}{}Percent ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, int {\em val\discretionary {-}{}{}Num})}{102}
+\contentsline {subsubsection}{\numberline {8.24.3.20}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Gini\discretionary {-}{}{}Continuous\discretionary {-}{}{}Attribute\discretionary {-}{}{}Split ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, float $\ast $ {\em first\discretionary {-}{}{}Index}, float $\ast $ {\em first\discretionary {-}{}{}Thresh}, float $\ast $ {\em second\discretionary {-}{}{}Index}, float $\ast $ {\em second\discretionary {-}{}{}Thresh})}{102}
+\contentsline {subsubsection}{\numberline {8.24.3.21}\setlength {\rightskip }{0pt plus 5cm}float Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Gini\discretionary {-}{}{}Discrete\discretionary {-}{}{}Attribute\discretionary {-}{}{}Split ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num})}{102}
+\contentsline {subsubsection}{\numberline {8.24.3.22}\setlength {\rightskip }{0pt plus 5cm}float Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Gini\discretionary {-}{}{}Total ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs})}{102}
+\contentsline {subsubsection}{\numberline {8.24.3.23}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ignore\discretionary {-}{}{}Attribute ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em num})}{102}
+\contentsline {subsubsection}{\numberline {8.24.3.24}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ignore\discretionary {-}{}{}Splits\discretionary {-}{}{}Worse\discretionary {-}{}{}Than\discretionary {-}{}{}Entropy ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, float {\em entropy\discretionary {-}{}{}Thresh})}{102}
+\contentsline {subsubsection}{\numberline {8.24.3.25}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ignore\discretionary {-}{}{}Splits\discretionary {-}{}{}Worse\discretionary {-}{}{}Than\discretionary {-}{}{}Gini ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, float {\em gini\discretionary {-}{}{}Thresh})}{103}
+\contentsline {subsubsection}{\numberline {8.24.3.26}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Is\discretionary {-}{}{}Attribute\discretionary {-}{}{}Active ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em num})}{103}
+\contentsline {subsubsection}{\numberline {8.24.3.27}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Is\discretionary {-}{}{}Pure ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs})}{103}
+\contentsline {subsubsection}{\numberline {8.24.3.28}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Limit\discretionary {-}{}{}Splits\discretionary {-}{}{}Entropy ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num}, int {\em max\discretionary {-}{}{}Splits}, int {\em prune\discretionary {-}{}{}Down\discretionary {-}{}{}To})}{103}
+\contentsline {subsubsection}{\numberline {8.24.3.29}\setlength {\rightskip }{0pt plus 5cm}{\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}New ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, Attribute\discretionary {-}{}{}Tracker\discretionary {-}{}{}Ptr {\em at})}{103}
+\contentsline {subsubsection}{\numberline {8.24.3.30}\setlength {\rightskip }{0pt plus 5cm}long Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Num\discretionary {-}{}{}Examples\discretionary {-}{}{}Seen ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs})}{104}
+\contentsline {subsubsection}{\numberline {8.24.3.31}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Num\discretionary {-}{}{}Split\discretionary {-}{}{}Thresholds ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num})}{104}
+\contentsline {subsubsection}{\numberline {8.24.3.32}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Reactivate ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs})}{104}
+\contentsline {subsubsection}{\numberline {8.24.3.33}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Stop\discretionary {-}{}{}Adding\discretionary {-}{}{}Splits ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, int {\em att\discretionary {-}{}{}Num})}{104}
+\contentsline {subsubsection}{\numberline {8.24.3.34}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Write ({\bf Example\discretionary {-}{}{}Group\discretionary {-}{}{}Stats\discretionary {-}{}{}Ptr} {\em egs}, FILE $\ast $ {\em out})}{104}
+\contentsline {section}{\numberline {8.25}Example\discretionary {-}{}{}Spec.h File Reference}{105}
+\contentsline {subsection}{\numberline {8.25.1}Detailed Description}{105}
+\contentsline {subsection}{\numberline {8.25.2}Define Documentation}{107}
+\contentsline {subsubsection}{\numberline {8.25.2.1}\setlength {\rightskip }{0pt plus 5cm}\#define Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Get\discretionary {-}{}{}Attribute\discretionary {-}{}{}Type(es, num)\ ( Attribute\discretionary {-}{}{}Spec\discretionary {-}{}{}Get\discretionary {-}{}{}Type(((Attribute\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr)VALIndex(es $\rightarrow $ attributes, num))) )}{107}
+\contentsline {subsubsection}{\numberline {8.25.2.2}\setlength {\rightskip }{0pt plus 5cm}\#define Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Get\discretionary {-}{}{}Attribute\discretionary {-}{}{}Value\discretionary {-}{}{}Count(es, att\discretionary {-}{}{}Num)\ ( Attribute\discretionary {-}{}{}Spec\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Values(((Attribute\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr)VALIndex(es $\rightarrow $ attributes, att\discretionary {-}{}{}Num))) )}{107}
+\contentsline {subsubsection}{\numberline {8.25.2.3}\setlength {\rightskip }{0pt plus 5cm}\#define Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Get\discretionary {-}{}{}Attribute\discretionary {-}{}{}Value\discretionary {-}{}{}Name(es, att\discretionary {-}{}{}Num, val\discretionary {-}{}{}Num)\ ( (char $\ast $)Attribute\discretionary {-}{}{}Spec\discretionary {-}{}{}Get\discretionary {-}{}{}Value\discretionary {-}{}{}Name(((Attribute\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr)VALIndex(es $\rightarrow $ attributes, att\discretionary {-}{}{}Num)), val\discretionary {-}{}{}Num) )}{107}
+\contentsline {subsection}{\numberline {8.25.3}Typedef Documentation}{107}
+\contentsline {subsubsection}{\numberline {8.25.3.1}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Example\discretionary {-}{}{}Spec\_\discretionary {-}{}{}} {\bf Example\discretionary {-}{}{}Spec}}{107}
+\contentsline {subsubsection}{\numberline {8.25.3.2}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Example\discretionary {-}{}{}Spec\_\discretionary {-}{}{}} $\ast $ {\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr}}{107}
+\contentsline {subsection}{\numberline {8.25.4}Function Documentation}{108}
+\contentsline {subsubsection}{\numberline {8.25.4.1}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Add\discretionary {-}{}{}Attribute\discretionary {-}{}{}Value ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, int {\em att\discretionary {-}{}{}Num}, char $\ast $ {\em name})}{108}
+\contentsline {subsubsection}{\numberline {8.25.4.2}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Add\discretionary {-}{}{}Class ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, char $\ast $ {\em class\discretionary {-}{}{}Name})}{108}
+\contentsline {subsubsection}{\numberline {8.25.4.3}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Add\discretionary {-}{}{}Continuous\discretionary {-}{}{}Attribute ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, char $\ast $ {\em name})}{108}
+\contentsline {subsubsection}{\numberline {8.25.4.4}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Add\discretionary {-}{}{}Discrete\discretionary {-}{}{}Attribute ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, char $\ast $ {\em name})}{108}
+\contentsline {subsubsection}{\numberline {8.25.4.5}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Free ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es})}{108}
+\contentsline {subsubsection}{\numberline {8.25.4.6}\setlength {\rightskip }{0pt plus 5cm}char$\ast $ Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Get\discretionary {-}{}{}Attribute\discretionary {-}{}{}Name ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, int {\em att\discretionary {-}{}{}Num})}{109}
+\contentsline {subsubsection}{\numberline {8.25.4.7}\setlength {\rightskip }{0pt plus 5cm}char$\ast $ Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Get\discretionary {-}{}{}Class\discretionary {-}{}{}Value\discretionary {-}{}{}Name ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, int {\em class\discretionary {-}{}{}Num})}{109}
+\contentsline {subsubsection}{\numberline {8.25.4.8}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Attributes ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es})}{109}
+\contentsline {subsubsection}{\numberline {8.25.4.9}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Classes ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es})}{109}
+\contentsline {subsubsection}{\numberline {8.25.4.10}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Is\discretionary {-}{}{}Attribute\discretionary {-}{}{}Continuous ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, int {\em num})}{109}
+\contentsline {subsubsection}{\numberline {8.25.4.11}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Is\discretionary {-}{}{}Attribute\discretionary {-}{}{}Discrete ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, int {\em num})}{109}
+\contentsline {subsubsection}{\numberline {8.25.4.12}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Is\discretionary {-}{}{}Attribute\discretionary {-}{}{}Ignored ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, int {\em num})}{109}
+\contentsline {subsubsection}{\numberline {8.25.4.13}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Lookup\discretionary {-}{}{}Attribute\discretionary {-}{}{}Name ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, char $\ast $ {\em val\discretionary {-}{}{}Name})}{109}
+\contentsline {subsubsection}{\numberline {8.25.4.14}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Lookup\discretionary {-}{}{}Attribute\discretionary {-}{}{}Value\discretionary {-}{}{}Name ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, int {\em att\discretionary {-}{}{}Num}, char $\ast $ {\em val\discretionary {-}{}{}Name})}{110}
+\contentsline {subsubsection}{\numberline {8.25.4.15}\setlength {\rightskip }{0pt plus 5cm}int Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Lookup\discretionary {-}{}{}Class\discretionary {-}{}{}Name ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, char $\ast $ {\em name})}{110}
+\contentsline {subsubsection}{\numberline {8.25.4.16}\setlength {\rightskip }{0pt plus 5cm}{\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} Example\discretionary {-}{}{}Spec\discretionary {-}{}{}New (void)}{110}
+\contentsline {subsubsection}{\numberline {8.25.4.17}\setlength {\rightskip }{0pt plus 5cm}{\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Read (char $\ast $ {\em file\discretionary {-}{}{}Name})}{110}
+\contentsline {subsubsection}{\numberline {8.25.4.18}\setlength {\rightskip }{0pt plus 5cm}void Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Write ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em es}, FILE $\ast $ {\em out})}{110}
+\contentsline {section}{\numberline {8.26}folddata File Reference}{111}
+\contentsline {subsection}{\numberline {8.26.1}Detailed Description}{111}
+\contentsline {section}{\numberline {8.27}Hash\discretionary {-}{}{}Table.h File Reference}{113}
+\contentsline {subsection}{\numberline {8.27.1}Detailed Description}{113}
+\contentsline {subsection}{\numberline {8.27.2}Function Documentation}{113}
+\contentsline {subsubsection}{\numberline {8.27.2.1}\setlength {\rightskip }{0pt plus 5cm}void$\ast $ Hash\discretionary {-}{}{}Table\discretionary {-}{}{}Find ({\bf Hash\discretionary {-}{}{}Table} $\ast $ {\em table}, int {\em index}, int($\ast $ {\em cmp})(const void $\ast $, const int))}{113}
+\contentsline {subsubsection}{\numberline {8.27.2.2}\setlength {\rightskip }{0pt plus 5cm}void Hash\discretionary {-}{}{}Table\discretionary {-}{}{}Free ({\bf Hash\discretionary {-}{}{}Table} $\ast $ {\em table})}{114}
+\contentsline {subsubsection}{\numberline {8.27.2.3}\setlength {\rightskip }{0pt plus 5cm}void Hash\discretionary {-}{}{}Table\discretionary {-}{}{}Insert ({\bf Hash\discretionary {-}{}{}Table} $\ast $ {\em table}, int {\em index}, void $\ast $ {\em element})}{114}
+\contentsline {subsubsection}{\numberline {8.27.2.4}\setlength {\rightskip }{0pt plus 5cm}{\bf Hash\discretionary {-}{}{}Table}$\ast $ Hash\discretionary {-}{}{}Table\discretionary {-}{}{}New (int {\em size})}{114}
+\contentsline {subsubsection}{\numberline {8.27.2.5}\setlength {\rightskip }{0pt plus 5cm}void$\ast $ Hash\discretionary {-}{}{}Table\discretionary {-}{}{}Remove ({\bf Hash\discretionary {-}{}{}Table} $\ast $ {\em table}, int {\em index}, int($\ast $ {\em cmp})(const void $\ast $, const int))}{114}
+\contentsline {section}{\numberline {8.28}kmeans File Reference}{115}
+\contentsline {subsection}{\numberline {8.28.1}Detailed Description}{115}
+\contentsline {section}{\numberline {8.29}lists.h File Reference}{116}
+\contentsline {subsection}{\numberline {8.29.1}Detailed Description}{116}
+\contentsline {subsection}{\numberline {8.29.2}Define Documentation}{117}
+\contentsline {subsubsection}{\numberline {8.29.2.1}\setlength {\rightskip }{0pt plus 5cm}\#define VALIndex(list, index)\ ( (index $<$ ((Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr)list) $\rightarrow $ size) ? (((Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr)list) $\rightarrow $ array[index]) : (0) )}{117}
+\contentsline {subsubsection}{\numberline {8.29.2.2}\setlength {\rightskip }{0pt plus 5cm}\#define VALLength(list)\ (((Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr)(list)) $\rightarrow $ size)}{117}
+\contentsline {subsection}{\numberline {8.29.3}Function Documentation}{117}
+\contentsline {subsubsection}{\numberline {8.29.3.1}\setlength {\rightskip }{0pt plus 5cm}void VALAppend (Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr {\em list}, void $\ast $ {\em element})}{117}
+\contentsline {subsubsection}{\numberline {8.29.3.2}\setlength {\rightskip }{0pt plus 5cm}void VALFree (Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr {\em list})}{117}
+\contentsline {subsubsection}{\numberline {8.29.3.3}\setlength {\rightskip }{0pt plus 5cm}void VALInsert (Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr {\em list}, void $\ast $ {\em element}, long {\em index})}{117}
+\contentsline {subsubsection}{\numberline {8.29.3.4}\setlength {\rightskip }{0pt plus 5cm}Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr VALNew (void)}{118}
+\contentsline {subsubsection}{\numberline {8.29.3.5}\setlength {\rightskip }{0pt plus 5cm}void VALPush (Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr {\em list}, void $\ast $ {\em element})}{118}
+\contentsline {subsubsection}{\numberline {8.29.3.6}\setlength {\rightskip }{0pt plus 5cm}void$\ast $ VALRemove (Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr {\em list}, long {\em index})}{118}
+\contentsline {subsubsection}{\numberline {8.29.3.7}\setlength {\rightskip }{0pt plus 5cm}void VALSet (Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr {\em list}, long {\em index}, void $\ast $ {\em new\discretionary {-}{}{}Val})}{118}
+\contentsline {subsubsection}{\numberline {8.29.3.8}\setlength {\rightskip }{0pt plus 5cm}void VALSort (Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr {\em list}, int($\ast $ {\em cmp})(const void $\ast $, const void $\ast $))}{118}
+\contentsline {section}{\numberline {8.30}memory.h File Reference}{119}
+\contentsline {subsection}{\numberline {8.30.1}Detailed Description}{119}
+\contentsline {subsection}{\numberline {8.30.2}Define Documentation}{119}
+\contentsline {subsubsection}{\numberline {8.30.2.1}\setlength {\rightskip }{0pt plus 5cm}\#define MMem\discretionary {-}{}{}Move(dst, src, bytes)\ \_\discretionary {-}{}{}\_\discretionary {-}{}{}System\discretionary {-}{}{}Move\discretionary {-}{}{}Memory(dst, src, bytes)}{119}
+\contentsline {subsection}{\numberline {8.30.3}Function Documentation}{120}
+\contentsline {subsubsection}{\numberline {8.30.3.1}\setlength {\rightskip }{0pt plus 5cm}void MFree\discretionary {-}{}{}Ptr (void $\ast $ {\em ptr})}{120}
+\contentsline {subsubsection}{\numberline {8.30.3.2}\setlength {\rightskip }{0pt plus 5cm}int MGet\discretionary {-}{}{}Active\discretionary {-}{}{}Pool (void)}{120}
+\contentsline {subsubsection}{\numberline {8.30.3.3}\setlength {\rightskip }{0pt plus 5cm}long MGet\discretionary {-}{}{}Pool\discretionary {-}{}{}Allocation (int {\em pool\discretionary {-}{}{}ID})}{120}
+\contentsline {subsubsection}{\numberline {8.30.3.4}\setlength {\rightskip }{0pt plus 5cm}long MGet\discretionary {-}{}{}Total\discretionary {-}{}{}Allocation (void)}{120}
+\contentsline {subsubsection}{\numberline {8.30.3.5}\setlength {\rightskip }{0pt plus 5cm}void MMove\discretionary {-}{}{}Ptr\discretionary {-}{}{}To\discretionary {-}{}{}Pool (void $\ast $ {\em ptr}, int {\em pool\discretionary {-}{}{}ID})}{120}
+\contentsline {subsubsection}{\numberline {8.30.3.6}\setlength {\rightskip }{0pt plus 5cm}void$\ast $ MNew\discretionary {-}{}{}Ptr (int {\em size})}{120}
+\contentsline {subsubsection}{\numberline {8.30.3.7}\setlength {\rightskip }{0pt plus 5cm}void MSet\discretionary {-}{}{}Active\discretionary {-}{}{}Pool (int {\em pool\discretionary {-}{}{}ID})}{120}
+\contentsline {subsubsection}{\numberline {8.30.3.8}\setlength {\rightskip }{0pt plus 5cm}void MSet\discretionary {-}{}{}Alloc\discretionary {-}{}{}Fail\discretionary {-}{}{}Function (void($\ast $ {\em Alloc\discretionary {-}{}{}Fail})(int allocation\discretionary {-}{}{}Size))}{121}
+\contentsline {section}{\numberline {8.31}mostcommonclass File Reference}{122}
+\contentsline {subsection}{\numberline {8.31.1}Detailed Description}{122}
+\contentsline {section}{\numberline {8.32}naivebayes File Reference}{123}
+\contentsline {subsection}{\numberline {8.32.1}Detailed Description}{123}
+\contentsline {section}{\numberline {8.33}random.h File Reference}{124}
+\contentsline {subsection}{\numberline {8.33.1}Detailed Description}{124}
+\contentsline {subsection}{\numberline {8.33.2}Function Documentation}{124}
+\contentsline {subsubsection}{\numberline {8.33.2.1}\setlength {\rightskip }{0pt plus 5cm}double Random\discretionary {-}{}{}Double (void)}{124}
+\contentsline {subsubsection}{\numberline {8.33.2.2}\setlength {\rightskip }{0pt plus 5cm}void Random\discretionary {-}{}{}Free\discretionary {-}{}{}State (void $\ast $ {\em state})}{124}
+\contentsline {subsubsection}{\numberline {8.33.2.3}\setlength {\rightskip }{0pt plus 5cm}double Random\discretionary {-}{}{}Gaussian (double {\em mean}, double {\em stdev})}{125}
+\contentsline {subsubsection}{\numberline {8.33.2.4}\setlength {\rightskip }{0pt plus 5cm}void Random\discretionary {-}{}{}Init (void)}{125}
+\contentsline {subsubsection}{\numberline {8.33.2.5}\setlength {\rightskip }{0pt plus 5cm}long Random\discretionary {-}{}{}Long (void)}{125}
+\contentsline {subsubsection}{\numberline {8.33.2.6}\setlength {\rightskip }{0pt plus 5cm}void$\ast $ Random\discretionary {-}{}{}New\discretionary {-}{}{}State (unsigned int {\em seed})}{125}
+\contentsline {subsubsection}{\numberline {8.33.2.7}\setlength {\rightskip }{0pt plus 5cm}int Random\discretionary {-}{}{}Range (int {\em min}, int {\em max})}{125}
+\contentsline {subsubsection}{\numberline {8.33.2.8}\setlength {\rightskip }{0pt plus 5cm}void Random\discretionary {-}{}{}Seed (unsigned int {\em seed})}{125}
+\contentsline {subsubsection}{\numberline {8.33.2.9}\setlength {\rightskip }{0pt plus 5cm}void$\ast $ Random\discretionary {-}{}{}Set\discretionary {-}{}{}State (void $\ast $ {\em state})}{125}
+\contentsline {subsubsection}{\numberline {8.33.2.10}\setlength {\rightskip }{0pt plus 5cm}double Random\discretionary {-}{}{}Standard\discretionary {-}{}{}Normal (void)}{125}
+\contentsline {section}{\numberline {8.34}REPrune.h File Reference}{126}
+\contentsline {subsection}{\numberline {8.34.1}Detailed Description}{126}
+\contentsline {subsection}{\numberline {8.34.2}Function Documentation}{126}
+\contentsline {subsubsection}{\numberline {8.34.2.1}\setlength {\rightskip }{0pt plus 5cm}void REPrune\discretionary {-}{}{}Batch ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, Void\discretionary {-}{}{}AList\discretionary {-}{}{}Ptr {\em examples})}{126}
+\contentsline {subsubsection}{\numberline {8.34.2.2}\setlength {\rightskip }{0pt plus 5cm}void REPrune\discretionary {-}{}{}Batch\discretionary {-}{}{}File ({\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} {\em dt}, FILE $\ast $ {\em example\discretionary {-}{}{}In}, long {\em prune\discretionary {-}{}{}Max})}{126}
+\contentsline {section}{\numberline {8.35}sampledata File Reference}{127}
+\contentsline {subsection}{\numberline {8.35.1}Detailed Description}{127}
+\contentsline {section}{\numberline {8.36}shuffledata File Reference}{128}
+\contentsline {subsection}{\numberline {8.36.1}Detailed Description}{128}
+\contentsline {section}{\numberline {8.37}sprint File Reference}{129}
+\contentsline {subsection}{\numberline {8.37.1}Detailed Description}{129}
+\contentsline {section}{\numberline {8.38}stats.h File Reference}{131}
+\contentsline {subsection}{\numberline {8.38.1}Detailed Description}{131}
+\contentsline {subsection}{\numberline {8.38.2}Typedef Documentation}{132}
+\contentsline {subsubsection}{\numberline {8.38.2.1}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Stat\discretionary {-}{}{}Tracker\_\discretionary {-}{}{}} $\ast $ {\bf Stat\discretionary {-}{}{}Tracker}}{132}
+\contentsline {subsubsection}{\numberline {8.38.2.2}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}Stat\discretionary {-}{}{}Tracker\_\discretionary {-}{}{}} {\bf Stat\discretionary {-}{}{}Tracker\discretionary {-}{}{}Struct}}{132}
+\contentsline {subsection}{\numberline {8.38.3}Function Documentation}{132}
+\contentsline {subsubsection}{\numberline {8.38.3.1}\setlength {\rightskip }{0pt plus 5cm}double Stat\discretionary {-}{}{}Get\discretionary {-}{}{}Normal\discretionary {-}{}{}Bound (double {\em variance}, long {\em n}, double {\em delta})}{132}
+\contentsline {subsubsection}{\numberline {8.38.3.2}\setlength {\rightskip }{0pt plus 5cm}double Stat\discretionary {-}{}{}Hoeffding\discretionary {-}{}{}Bound\discretionary {-}{}{}One (double {\em range}, double {\em delta}, long {\em n})}{132}
+\contentsline {subsubsection}{\numberline {8.38.3.3}\setlength {\rightskip }{0pt plus 5cm}double Stat\discretionary {-}{}{}Hoeffding\discretionary {-}{}{}Bound\discretionary {-}{}{}Two (double {\em range}, double {\em delta}, long {\em n})}{133}
+\contentsline {subsubsection}{\numberline {8.38.3.4}\setlength {\rightskip }{0pt plus 5cm}float Stat\discretionary {-}{}{}Log\discretionary {-}{}{}Gamma (float {\em xx})}{133}
+\contentsline {subsubsection}{\numberline {8.38.3.5}\setlength {\rightskip }{0pt plus 5cm}void Stat\discretionary {-}{}{}Tracker\discretionary {-}{}{}Add\discretionary {-}{}{}Sample ({\bf Stat\discretionary {-}{}{}Tracker} {\em st}, double {\em x})}{133}
+\contentsline {subsubsection}{\numberline {8.38.3.6}\setlength {\rightskip }{0pt plus 5cm}void Stat\discretionary {-}{}{}Tracker\discretionary {-}{}{}Free ({\bf Stat\discretionary {-}{}{}Tracker} {\em st})}{133}
+\contentsline {subsubsection}{\numberline {8.38.3.7}\setlength {\rightskip }{0pt plus 5cm}double Stat\discretionary {-}{}{}Tracker\discretionary {-}{}{}Get\discretionary {-}{}{}Mean ({\bf Stat\discretionary {-}{}{}Tracker} {\em st})}{133}
+\contentsline {subsubsection}{\numberline {8.38.3.8}\setlength {\rightskip }{0pt plus 5cm}double Stat\discretionary {-}{}{}Tracker\discretionary {-}{}{}Get\discretionary {-}{}{}Normal\discretionary {-}{}{}Bound ({\bf Stat\discretionary {-}{}{}Tracker} {\em st}, double {\em delta})}{133}
+\contentsline {subsubsection}{\numberline {8.38.3.9}\setlength {\rightskip }{0pt plus 5cm}long Stat\discretionary {-}{}{}Tracker\discretionary {-}{}{}Get\discretionary {-}{}{}Num\discretionary {-}{}{}Samples ({\bf Stat\discretionary {-}{}{}Tracker} {\em st})}{133}
+\contentsline {subsubsection}{\numberline {8.38.3.10}\setlength {\rightskip }{0pt plus 5cm}double Stat\discretionary {-}{}{}Tracker\discretionary {-}{}{}Get\discretionary {-}{}{}Stdev ({\bf Stat\discretionary {-}{}{}Tracker} {\em st})}{133}
+\contentsline {subsubsection}{\numberline {8.38.3.11}\setlength {\rightskip }{0pt plus 5cm}double Stat\discretionary {-}{}{}Tracker\discretionary {-}{}{}Get\discretionary {-}{}{}Variance ({\bf Stat\discretionary {-}{}{}Tracker} {\em st})}{133}
+\contentsline {subsubsection}{\numberline {8.38.3.12}\setlength {\rightskip }{0pt plus 5cm}{\bf Stat\discretionary {-}{}{}Tracker} Stat\discretionary {-}{}{}Tracker\discretionary {-}{}{}New (void)}{134}
+\contentsline {section}{\numberline {8.39}treedata File Reference}{135}
+\contentsline {subsection}{\numberline {8.39.1}Detailed Description}{135}
+\contentsline {section}{\numberline {8.40}u\discretionary {-}{}{}Runner File Reference}{137}
+\contentsline {subsection}{\numberline {8.40.1}Detailed Description}{137}
+\contentsline {section}{\numberline {8.41}vfbn1 File Reference}{139}
+\contentsline {subsection}{\numberline {8.41.1}Detailed Description}{139}
+\contentsline {section}{\numberline {8.42}vfbn2 File Reference}{141}
+\contentsline {subsection}{\numberline {8.42.1}Detailed Description}{141}
+\contentsline {section}{\numberline {8.43}vfdt File Reference}{143}
+\contentsline {subsection}{\numberline {8.43.1}Detailed Description}{143}
+\contentsline {section}{\numberline {8.44}vfdt-engine.h File Reference}{146}
+\contentsline {subsection}{\numberline {8.44.1}Detailed Description}{146}
+\contentsline {subsection}{\numberline {8.44.2}Typedef Documentation}{148}
+\contentsline {subsubsection}{\numberline {8.44.2.1}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}VFDT\_\discretionary {-}{}{}} {\bf VFDT}}{148}
+\contentsline {subsubsection}{\numberline {8.44.2.2}\setlength {\rightskip }{0pt plus 5cm}typedef struct {\bf \_\discretionary {-}{}{}VFDT\_\discretionary {-}{}{}} $\ast $ {\bf VFDTPtr}}{148}
+\contentsline {subsection}{\numberline {8.44.3}Function Documentation}{148}
+\contentsline {subsubsection}{\numberline {8.44.3.1}\setlength {\rightskip }{0pt plus 5cm}void VFDTBatch\discretionary {-}{}{}Examples\discretionary {-}{}{}Done ({\bf VFDTPtr} {\em vfdt})}{148}
+\contentsline {subsubsection}{\numberline {8.44.3.2}\setlength {\rightskip }{0pt plus 5cm}void VFDTFree ({\bf VFDTPtr} {\em vfdt})}{148}
+\contentsline {subsubsection}{\numberline {8.44.3.3}\setlength {\rightskip }{0pt plus 5cm}{\bf Decision\discretionary {-}{}{}Tree\discretionary {-}{}{}Ptr} VFDTGet\discretionary {-}{}{}Learned\discretionary {-}{}{}Tree ({\bf VFDTPtr} {\em vfdt})}{148}
+\contentsline {subsubsection}{\numberline {8.44.3.4}\setlength {\rightskip }{0pt plus 5cm}long VFDTGet\discretionary {-}{}{}Num\discretionary {-}{}{}Bounds\discretionary {-}{}{}Used ({\bf VFDTPtr} {\em vfdt})}{148}
+\contentsline {subsubsection}{\numberline {8.44.3.5}\setlength {\rightskip }{0pt plus 5cm}long VFDTGet\discretionary {-}{}{}Num\discretionary {-}{}{}Growing ({\bf VFDTPtr} {\em vfdt})}{148}
+\contentsline {subsubsection}{\numberline {8.44.3.6}\setlength {\rightskip }{0pt plus 5cm}int VFDTIs\discretionary {-}{}{}Done\discretionary {-}{}{}Learning ({\bf VFDTPtr} {\em vfdt})}{148}
+\contentsline {subsubsection}{\numberline {8.44.3.7}\setlength {\rightskip }{0pt plus 5cm}{\bf VFDTPtr} VFDTNew ({\bf Example\discretionary {-}{}{}Spec\discretionary {-}{}{}Ptr} {\em spec}, float {\em split\discretionary {-}{}{}Confidence}, float {\em tie\discretionary {-}{}{}Confidence})}{148}
+\contentsline {subsubsection}{\numberline {8.44.3.8}\setlength {\rightskip }{0pt plus 5cm}void VFDTPrint\discretionary {-}{}{}Stats ({\bf VFDTPtr} {\em vfdt}, FILE $\ast $ {\em out})}{149}
+\contentsline {subsubsection}{\numberline {8.44.3.9}\setlength {\rightskip }{0pt plus 5cm}void VFDTProcess\discretionary {-}{}{}Example ({\bf VFDTPtr} {\em vfdt}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{149}
+\contentsline {subsubsection}{\numberline {8.44.3.10}\setlength {\rightskip }{0pt plus 5cm}void VFDTProcess\discretionary {-}{}{}Example\discretionary {-}{}{}Batch ({\bf VFDTPtr} {\em vfdt}, {\bf Example\discretionary {-}{}{}Ptr} {\em e})}{149}
+\contentsline {subsubsection}{\numberline {8.44.3.11}\setlength {\rightskip }{0pt plus 5cm}void VFDTProcess\discretionary {-}{}{}Examples ({\bf VFDTPtr} {\em vfdt}, FILE $\ast $ {\em input})}{149}
+\contentsline {subsubsection}{\numberline {8.44.3.12}\setlength {\rightskip }{0pt plus 5cm}void VFDTProcess\discretionary {-}{}{}Examples\discretionary {-}{}{}Batch ({\bf VFDTPtr} {\em vfdt}, FILE $\ast $ {\em input})}{149}
+\contentsline {subsubsection}{\numberline {8.44.3.13}\setlength {\rightskip }{0pt plus 5cm}void VFDTSet\discretionary {-}{}{}Cache\discretionary {-}{}{}Training\discretionary {-}{}{}Examples ({\bf VFDTPtr} {\em vfdt}, int {\em value})}{149}
+\contentsline {subsubsection}{\numberline {8.44.3.14}\setlength {\rightskip }{0pt plus 5cm}void VFDTSet\discretionary {-}{}{}Laplace ({\bf VFDTPtr} {\em vfdt}, int {\em value})}{149}
+\contentsline {subsubsection}{\numberline {8.44.3.15}\setlength {\rightskip }{0pt plus 5cm}void VFDTSet\discretionary {-}{}{}Max\discretionary {-}{}{}Allocation\discretionary {-}{}{}Megs ({\bf VFDTPtr} {\em vfdt}, int {\em value})}{149}
+\contentsline {subsubsection}{\numberline {8.44.3.16}\setlength {\rightskip }{0pt plus 5cm}void VFDTSet\discretionary {-}{}{}Message\discretionary {-}{}{}Level ({\bf VFDTPtr} {\em vfdt}, int {\em value})}{150}
+\contentsline {subsubsection}{\numberline {8.44.3.17}\setlength {\rightskip }{0pt plus 5cm}void VFDTSet\discretionary {-}{}{}Pre\discretionary {-}{}{}Prune\discretionary {-}{}{}Tau ({\bf VFDTPtr} {\em vfdt}, float {\em value})}{150}
+\contentsline {subsubsection}{\numberline {8.44.3.18}\setlength {\rightskip }{0pt plus 5cm}void VFDTSet\discretionary {-}{}{}Process\discretionary {-}{}{}Chunk\discretionary {-}{}{}Size ({\bf VFDTPtr} {\em vfdt}, int {\em value})}{150}
+\contentsline {subsubsection}{\numberline {8.44.3.19}\setlength {\rightskip }{0pt plus 5cm}void VFDTSet\discretionary {-}{}{}Restart\discretionary {-}{}{}Leaves ({\bf VFDTPtr} {\em vfdt}, int {\em value})}{150}
+\contentsline {subsubsection}{\numberline {8.44.3.20}\setlength {\rightskip }{0pt plus 5cm}void VFDTSet\discretionary {-}{}{}Use\discretionary {-}{}{}Gini ({\bf VFDTPtr} {\em vfdt}, int {\em value})}{150}
+\contentsline {section}{\numberline {8.45}vfem File Reference}{151}
+\contentsline {subsection}{\numberline {8.45.1}Detailed Description}{151}
+\contentsline {section}{\numberline {8.46}vfkm File Reference}{154}
+\contentsline {subsection}{\numberline {8.46.1}Detailed Description}{154}
+\contentsline {section}{\numberline {8.47}xvalidate File Reference}{156}
+\contentsline {subsection}{\numberline {8.47.1}Detailed Description}{156}
+\contentsline {chapter}{\numberline {9}VFML Page Documentation}{159}
+\contentsline {section}{\numberline {9.1}Thanks}{159}
+\contentsline {section}{\numberline {9.2}Wish List}{160}
+\contentsline {section}{\numberline {9.3}Bug List}{162}

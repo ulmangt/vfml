@@ -1,0 +1,79 @@
+/** \ingroup Tools
+*/
+
+/** \file
+
+\brief Performs cross validation of a learner on a data set.
+
+You will probably want to use the \ref batchtest tool for large
+experiments; xvalidate will help you to quickly test things, perhaps
+as a debugging aid.
+
+<p>You can use xvalidate with large datasets, but you will need enough
+disk space to hold 'folds' copies of the data.&nbsp; The learner you
+use with xvalidate must also be able to work with large datasets.</p>
+
+<p>Xvalidate takes input in <a href="appendixes/c45.htm">C4.5
+format</a> and uses \ref folddata, which must be in your path. You use
+the -c option to tell xvalidate how to run the learner.
+Xvalidate will append the names of the folds of the datasets to the
+end of the -c string, the learner must accept the name and read input
+appropriately.</p>
+
+<p>Xvalidate expects the learner to output results in the following format: </p>
+
+<p><code>error-rate size</code> </p>
+
+<p>The learner's error rate on the test set, followed by some
+whitespace, followed by the size of the learned model (in whatever
+unit you want), followed by a newline. </p>
+
+<p>Xvalidate will collect the output of the runs of the learner, average them, and report:</p>
+
+<p><code>mean-error-rate (standard deviation of error rate) mean-size
+(standard deviation of size) average-utime (standard deviation of
+utime) average-stime (standard deviation of stime)</code></p>
+
+<p>for example:</p>
+
+<p><code>26.111 (5.500) 0.000 (0.000) 0.013 (0.005) 0.010 (0.008)</code></p>
+
+<p>The times are very accurate on UNIX. Under CYGNUS (windows) utime
+will be slightly overestimated and stime will be zero.</p>
+
+<h2>Arguments</h2>
+
+- -f &lt;filestem&gt; 
+  - Set the name of the dataset (default DF)
+- -source &lt;dir&gt; 
+  - Set the source data directory (default '.')
+- -c &lt;command&gt; 
+  - Set the learner command. The name of the dataset will be appended to the end of this string and used to invoke the learner (<strong>This is a required argument</strong>)
+- -folds &lt;n&gt; 
+  - Sets the number of train/test sets to create (default 10)
+- -seed &lt;n&gt; 
+  - Sets the random seed, multiple runs with the same seed will
+  produce the same datasets (defaults to a random seed).&nbsp; If you
+  use a random seed, the value of the randomly selected seed will be
+  printed at the start of the run.&nbsp; You can later use that seed
+  to repeat the experiment.&nbsp; You can also pass the same seed to
+  \ref folddata to recreate the exact test/training sets for closer inspection.
+- -v 
+  - Can be used multiple times to increase the debugging output 
+
+<h2>Example</h2>
+<code>
+
+<p>xvalidate -source datasets/mushroom -f mushroom -folds 15 -seed 100 -c
+&quot;mostcommonclass -u -f&quot;</code> </p>
+
+<p>Does 15-fold cross-validation of the 'mostcommonclass' learner on
+the dataset called 'mushroom' in the 'datasets/mushroom'
+directory.&nbsp; The mostcommonclass learner will be invoked as:
+<code>mostcommonclass -u -f &lt;constructed-dataset-name&gt;
+</code>for each of the 15 constructed datasets.&nbsp; It will use a
+seeded random number generator so the exact experiment could be
+reproduced. </p>
+
+
+*/

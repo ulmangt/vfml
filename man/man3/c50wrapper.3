@@ -1,0 +1,38 @@
+.TH "c50wrapper" 3 "28 Jul 2003" "VFML" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+c50wrapper \- 
+.SH "Detailed Description"
+.PP 
+Calls C5.0 and tests the learned tree. 
+
+A wrapper that calls C5.0 to learn a decision tree, times its execution, and extracts the important bits from its output. C5.0 must be in your path for this learner to work. It is a commercial product and you can get information about purchasing it from Professor Quinlan's homepage at \fChttp://www.cse.unsw.edu.au/~quinlan/\fP.
+.PP
+This wrapper runs C5.0, tests the lerned tree on the test data (if appropriate) and outputs: \fCtest set error rate <whitespace> size of tree <whitespace> seconds\fP.
+.PP
+.SS "Arguments"
+.PP
+.IP "\(bu" 2
+-f <filestem> -Set the stem name (default DF)
+.IP "\(bu" 2
+-args <string>
+.IP "  \(bu" 4
+Passes these additional arguments to C4.5 (default none)
+.PP
+
+.IP "\(bu" 2
+-v
+.IP "  \(bu" 4
+Can be used multiple times to increase the debugging output
+.PP
+
+.PP
+
+.PP
+.SH SYNOPSIS
+.br
+.PP
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for VFML from the source code.

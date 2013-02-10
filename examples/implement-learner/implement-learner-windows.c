@@ -1,0 +1,179 @@
+#include "uwml.h"
+#include <stdio.h>
+#include <string.h>
+
+
+/* parsed from command line arguments */
+char *gFileStem = "DF";
+char *gSourceDirectory = ".";
+int   gDoTests = 0;
+int   gMessageLevel = 0;
+
+double gDummyDouble = .1;
+int    gDummyInt = 10;
+
+/* the example spec for the current run */
+ExampleSpecPtr gEs;
+
+static void _printUsage(char  *name) {
+     printf("%s: A 'learner' which predicts the most common class in the\n",
+	                                                                            name);
+        printf("   training set.\n");
+
+	   printf("-f <filestem>\tSet the name of the dataset (default DF)\n");
+	      printf("-source <dir>\tSet the source data directory (default '.')\n");
+	         printf("-u\t\tTest the learner's accuracy on data in <stem>.test\n");
+
+		    printf("-dummyDouble <double>\tDemonstrate reading a double (default .1)\n");
+		       printf("-dummyInt    <int>\tDemonstrate reading an int (default 10)\n");
+		          printf("-v\t\tCan be used multiple times to increase the debugging output\n");
+}
+
+
+static void _processArgs(int argc, char *argv[]) {
+     int i;
+
+     for(i = 1 ; i < argc ; i++) {
+       if(!strcmp(argv[i], "-f")) {
+	          gFileStem = argv[i+1];
+		  /* ignore the next argument */
+		           i++;
+       } else if(!strcmp(argv[i], "-source")) {
+	          gSourceDirectory = argv[i+1];
+		  /* ignore the next argument */
+		           i++;
+       } else if(!strcmp(argv[i], "-u")) {
+	          gDoTests = 1;
+       } else if(!strcmp(argv[i], "-dummyDouble")) {
+	          sscanf(argv[i+1], "%lf", &gDummyDouble);
+		  /* ignore the next argument */
+		           i++;
+       } else if(!strcmp(argv[i], "-dummyInt")) {
+	          sscanf(argv[i+1], "%d", &gDummyInt);
+		  /* ignore the next argument */
+		           i++;
+       } else if(!strcmp(argv[i], "-v")) {
+	          gMessageLevel++;
+       } else if(!strcmp(argv[i], "-h")) {
+	          _printUsage(argv[0]);
+		           exit(0);
+       } else {
+	          printf("Unknown argument: %s.  use -h for help\n", argv[i]);
+		           exit(0);
+       }
+     }
+
+     if(gMessageLevel >= 1) {
+             printf("Stem: %s\n", gFileStem);
+	           printf("Source: %s\n", gSourceDirectory);
+		         printf("Dummy Double: %lf\n", gDummyDouble);
+			       printf("Dummy Int: %d\n", gDummyInt);
+			       if(gDoTests) {
+				          printf("Running tests\n");
+			       }
+     }
+}
+
+static void _DoTests(int mostCommonClass) {
+     char fileNames[255];
+        FILE *exampleIn;
+	   ExamplePtr e;
+
+	      long tested, errors;
+
+	         tested = 0;
+		    errors = 0;
+
+		       sprintf(fileNames, "%s/%s.test", gSourceDirectory, gFileStem);
+		          exampleIn = fopen(fileNames, "r");
+			     DebugError(exampleIn == 0, "Unable to open the .test file");
+
+			     if(gMessageLevel >= 1) {
+			             printf("opened test file, starting scan...\n");
+			     }
+
+			        e = ExampleRead(exampleIn, gEs);
+				while(e != 0) {
+				  if(!ExampleIsClassUnknown(e)) {
+				             tested++;
+					     if(ExampleGetClass(e) != mostCommonClass) {
+					                   errors++;
+					     }
+				  }
+				        ExampleFree(e);
+					      e = ExampleRead(exampleIn, gEs);
+				}
+				   fclose(exampleIn);
+
+				      printf("%f\t0\n", ((float)errors/(float)tested) * 100);
+}
+
+int main(int argc, char *argv[]) {
+     char fileNames[255];
+
+        FILE *exampleIn;
+	   ExamplePtr e;
+
+	      long *classCounts;
+	         int i;
+		    int mostCommonClass;
+
+
+		    /* This processes the command line arguments and sets some globals */
+		       _processArgs(argc, argv);
+
+		       /* open the names file and read the example spec into a global */
+		          sprintf(fileNames, "%s/%s.names", gSourceDirectory, gFileStem);
+			     gEs = ExampleSpecRead(fileNames);
+			        DebugError(gEs == 0, "Unable to open the .names file");
+
+				/* initialize the class counts */
+				   classCounts = MNewPtr(sizeof(long) * ExampleSpecGetNumClasses(gEs));
+				   for(i = 0 ; i < ExampleSpecGetNumClasses(gEs) ; i++) {
+				           classCounts[i] = 0;
+				   }
+
+				   /* open the data file */
+				      sprintf(fileNames, "%s/%s.data", gSourceDirectory, gFileStem);
+				         exampleIn = fopen(fileNames, "r");
+					    DebugError(exampleIn == 0, "Unable to open the data file");
+
+					    /* scan the data and count the classes */
+					       e = ExampleRead(exampleIn, gEs);
+					       while(e != 0) {
+						 if(!ExampleIsClassUnknown(e)) {
+						            classCounts[ExampleGetClass(e)]++;
+						 }
+
+						       ExampleFree(e);
+						             e = ExampleRead(exampleIn, gEs);
+					       }
+					          fclose(exampleIn);
+
+						  if(gMessageLevel >= 1) {
+						          printf("done scanning...\n");
+						  }
+
+						  /* examine the counts to find the most common class */
+						     mostCommonClass = 0;
+						     for(i = 0 ; i < ExampleSpecGetNumClasses(gEs) ; i++) {
+						       if(classCounts[i] > classCounts[mostCommonClass]) {
+							          mostCommonClass = i;
+						       }
+						     }
+
+						     /* if we had the -u flag do tests, if not just print the most
+							common class's name */
+						     if(gDoTests) {
+						             _DoTests(mostCommonClass);
+
+						     } else {
+						             printf("The most common class is %s.\n",
+								                   ExampleSpecGetClassValueName(gEs, mostCommonClass));
+						     }
+
+						        return 0;
+}
+
+
+

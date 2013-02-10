@@ -1,0 +1,54 @@
+/** \ingroup Tools BeliefNet
+*/
+
+
+/** \file
+
+\brief Tests a BeliefNet in several ways.
+
+
+<p>This program determines the log-likelihood of a data set given a
+belief net.  It can also compare the structure of two networks.  In
+log-likelihood mode it loads the belief net, and then scans the data
+set, accumulating the likelihood of each example in the data set given
+the network.
+
+<p>beliefnetscore can smooth the parameters in the network before
+computing this likelihood.  (Run beliefnetscore -h for the precice
+parameters to use.)  This smoothing works as follows.  Each
+parameter in the network is multiplied by the desired strength, and
+then 1 is added to each local model is renormalized.  If you do not
+use this argument, and there is a 0 probability in the network, but
+that even occurs in the data set, beliefnetscore will crash.
+
+<p>In comparison mode it loads both networks and the outputs the
+structural difference between the two networks.  This is sometimes
+known as the symetric difference and is measured by iterating over the
+nodes in each network and counting the number of times that the node
+has a parent that the coresponding node in the other network does not
+have.
+
+\wish Move the comparision mode from this tool into a new tool,
+beliefnetcompare, and have that tool do more interesting comparisions
+(e.g. measure the KL-distance between the distriutions encoded in the
+networks).
+
+<h2>Arguments</h2>
+
+
+- -f 'test set file'
+  - (default DF.data)
+- -bnf 'file containing belief net'
+  - (default DF.bif)
+- -compareWith 'file containing belief net'
+  - (default get ll of BN from -bnf on stem.data)
+- -stdin
+  - Get test set from stdin (default to -f's file)
+- -smooth 'prior-str'
+  - Counts net at 'prior-str' samples and adds one additional sample to each CPT entry before testing
+- -v
+  - Increase the message level
+- -h
+  - Run with this argument to get a list of arguments and their meanings.<br>
+
+*/

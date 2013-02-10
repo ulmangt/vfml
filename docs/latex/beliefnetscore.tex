@@ -1,0 +1,36 @@
+\section{beliefnetscore File Reference}
+\label{beliefnetscore}\index{beliefnetscore@{beliefnetscore}}
+
+
+\subsection{Detailed Description}
+Tests a Belief\-Net in several ways. 
+
+This program determines the log-likelihood of a data set given a belief net. It can also compare the structure of two networks. In log-likelihood mode it loads the belief net, and then scans the data set, accumulating the likelihood of each example in the data set given the network.
+
+beliefnetscore can smooth the parameters in the network before computing this likelihood. (Run beliefnetscore -h for the precice parameters to use.) This smoothing works as follows. Each parameter in the network is multiplied by the desired strength, and then 1 is added to each local model is renormalized. If you do not use this argument, and there is a 0 probability in the network, but that even occurs in the data set, beliefnetscore will crash.
+
+In comparison mode it loads both networks and the outputs the structural difference between the two networks. This is sometimes known as the symetric difference and is measured by iterating over the nodes in each network and counting the number of times that the node has a parent that the coresponding node in the other network does not have.
+
+\begin{Desc}
+\item[{\bf Wish List}]Move the comparision mode from this tool into a new tool, beliefnetcompare, and have that tool do more interesting comparisions (e.g. measure the KL-distance between the distriutions encoded in the networks). \end{Desc}
+\subsubsection*{Arguments}
+
+\begin{itemize}
+\item -f 'test set file'\begin{itemize}
+\item (default DF.data)\end{itemize}
+\item -bnf 'file containing belief net'\begin{itemize}
+\item (default DF.bif)\end{itemize}
+\item -compare\-With 'file containing belief net'\begin{itemize}
+\item (default get ll of BN from -bnf on stem.data)\end{itemize}
+\item -stdin\begin{itemize}
+\item Get test set from stdin (default to -f's file)\end{itemize}
+\item -smooth 'prior-str'\begin{itemize}
+\item Counts net at 'prior-str' samples and adds one additional sample to each CPT entry before testing\end{itemize}
+\item -v\begin{itemize}
+\item Increase the message level\end{itemize}
+\item -h\begin{itemize}
+\item Run with this argument to get a list of arguments and their meanings.\par
+\end{itemize}
+\end{itemize}
+
+
