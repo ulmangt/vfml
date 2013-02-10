@@ -1,0 +1,8 @@
+lib
+bin
+src/*.o
+src/*.a
+src/*.tab.c
+src/*.tab.h
+src/*.bif.c
+src/*.fc45.c
