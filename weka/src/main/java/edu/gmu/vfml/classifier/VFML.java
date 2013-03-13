@@ -7,6 +7,11 @@ import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
 import weka.core.TechnicalInformationHandler;
 
+/**
+ * 
+ * @see weka.classifiers.trees.Id3
+ * @author ulman
+ */
 public class VFML extends Classifier implements TechnicalInformationHandler
 {
     private static final long serialVersionUID = 1L;
