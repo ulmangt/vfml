@@ -59,7 +59,11 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
                 classCount = instanceClassCount;
                 classValue = instance.value( classAttribute );
             }
-            
+        }
+        
+        public int getCount( )
+        {
+            return counts.getTotalCount( );
         }
     }
     
@@ -142,12 +146,14 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     private Attribute classAttribute;
     
     private int numClasses;
+    private double R_squared; // log2( numClasses )^2 
     private int numAttributes;
     private int sumAttributeValues;
     // cumulative sum of number of attribute 
     private int[] cumSumAttributeValues;
 
     private double delta;
+    private double ln_inv_delta; // ln( 1 / delta )
     
     /**
      * See equation (1) in "Mining High-Speed Data Streams." The Hoeffding Bound provides
@@ -169,6 +175,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     public void setConfidenceLevel( double delta )
     {
         this.delta = delta;
+        this.ln_inv_delta = Math.log( 1 / delta );
     }
     
     /**
@@ -267,11 +274,15 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
         data = new Instances( data );
         data.deleteWithMissingClass( );
         
+        // create root node
+        root = new Node( );
+        
         // store the class attribute for the data set
         classAttribute = data.classAttribute( );
         
         // record number of class values, attributes, and values for each attribute
         numClasses = data.classAttribute( ).numValues( );
+        R_squared = Math.pow( Math.log( numClasses ) / Math.log( 2 ), 2 );
         numAttributes = data.numAttributes( );
         cumSumAttributeValues = new int[ numAttributes ];
         sumAttributeValues = 0;
@@ -281,7 +292,14 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             cumSumAttributeValues[i] = sumAttributeValues;
             sumAttributeValues += attribute.numValues( );
         }
+        
+        // cap confidence level
+        if ( delta <= 0 || delta > 1 )
+        {
+            setConfidenceLevel( 0.05 );
+        }
 
+        // build the Hoeffding tree
         makeTree( data );
     }
 
@@ -308,7 +326,17 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             
             // update the counts associated with this instance
             node.incrementCounts( instance );
+            
+            // determine based on Hoeffding Bound whether to split node
+            
         }
+    }
+    
+    private double calculateHoeffdingBound( Node node )
+    {
+        int n = node.getCount( );
+        double epsilon = Math.sqrt( ( R_squared * ln_inv_delta ) / ( 2 * n ) );
+        return epsilon;
     }
     
     /**
