@@ -34,6 +34,9 @@ public class VFML extends Classifier implements TechnicalInformationHandler
         /** Class value if node is leaf. */
         public double classValue;
         
+        /** The count of the class corresponding to classValue. */
+        public int classCount;
+        
         /** instance counts at node per class, per attribute, per value */
         public Counts counts;
         
@@ -45,16 +48,35 @@ public class VFML extends Classifier implements TechnicalInformationHandler
         public void incrementCounts( Instance instance )
         {
             counts.incrementCounts( instance );
+            
+            // update classValue and classCount
+            int instanceClassCount = counts.getCount( classAttribute.index( ) );
+            
+            // if the count of the class we just added is greater than the current
+            // largest count, it becomes the new classification for this node
+            if ( instanceClassCount > classCount )
+            {
+                classCount = instanceClassCount;
+                classValue = instance.value( classAttribute );
+            }
+            
         }
     }
     
     private class Counts
     {
         int[] counts;
+        int[] classCounts;
         
         public Counts( )
         {
             counts = new int[ numClasses * sumAttributeValues ];
+            classCounts = new int[ numClasses ];
+        }
+        
+        public int getCount( int classIndex )
+        {
+            return classCounts[ classIndex ];
         }
         
         public int getCount( Instance instance, Attribute attribute )
@@ -83,6 +105,7 @@ public class VFML extends Classifier implements TechnicalInformationHandler
         {
             int attributeStartIndex = cumSumAttributeValues[attributeIndex];
             counts[ classIndex * sumAttributeValues + attributeStartIndex + valueIndex ] += 1;
+            classCounts[ classIndex ] += 1;
         }
         
         public void incrementCounts( Instance instance )
@@ -107,6 +130,30 @@ public class VFML extends Classifier implements TechnicalInformationHandler
     // cumulative sum of number of attribute 
     private int[] cumSumAttributeValues;
 
+    private double delta;
+    
+    /**
+     * See equation (1) in "Mining High-Speed Data Streams." The Hoeffding Bound provides
+     * a bound on the true mean of a random variable given n independent
+     * observations of the random variable, with probability 1 - delta
+     * (where delta is the confidence level returned by this method).
+     * 
+     * @return the Hoeffding Bound confidence level
+     */
+    public double getConfidenceLevel( )
+    {
+        return delta;
+    }
+    
+    /**
+     * @see #getConfidenceLevel( )
+     * @param delta
+     */
+    public void setConfidenceLevel( double delta )
+    {
+        this.delta = delta;
+    }
+    
     /**
      * Returns a string describing the classifier.
      * @return a description suitable for the GUI.
