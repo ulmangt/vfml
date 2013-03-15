@@ -5,7 +5,7 @@ import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
-import edu.gmu.vfml.classifier.VFML;
+import edu.gmu.vfml.classifier.VFDT;
 
 public class Test1
 {
@@ -46,7 +46,7 @@ public class Test1
         data.add( instance1 );
 
         // build a VFML classifier using the data set
-        Classifier classifier = new VFML( );
+        Classifier classifier = new VFDT( );
         classifier.buildClassifier( data );
     }
 }

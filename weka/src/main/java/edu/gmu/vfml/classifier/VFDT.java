@@ -19,7 +19,7 @@ import weka.core.TechnicalInformationHandler;
  * @see weka.classifiers.trees.Id3
  * @author ulman
  */
-public class VFML extends Classifier implements TechnicalInformationHandler
+public class VFDT extends Classifier implements TechnicalInformationHandler
 {
     private static final long serialVersionUID = 1L;
 
@@ -63,15 +63,31 @@ public class VFML extends Classifier implements TechnicalInformationHandler
         }
     }
     
+    /**
+     * <p>VFDT does not store entire training instances, only sufficient statistics
+     * necessary to calculate Hoeffding bound and decide when to split nodes
+     * and on which attributes to make the split.</p>
+     * 
+     * <p>Counts stores per-Node count values (in lieu of storing the entire set
+     * of instances used at each Node.</p>
+     * 
+     * @author ulman
+     */
     private class Counts
     {
         int[] counts;
         int[] classCounts;
+        int totalCount;
         
         public Counts( )
         {
             counts = new int[ numClasses * sumAttributeValues ];
             classCounts = new int[ numClasses ];
+        }
+        
+        public int getTotalCount( )
+        {
+            return totalCount;
         }
         
         public int getCount( int classIndex )
@@ -106,6 +122,7 @@ public class VFML extends Classifier implements TechnicalInformationHandler
             int attributeStartIndex = cumSumAttributeValues[attributeIndex];
             counts[ classIndex * sumAttributeValues + attributeStartIndex + valueIndex ] += 1;
             classCounts[ classIndex ] += 1;
+            totalCount += 1;
         }
         
         public void incrementCounts( Instance instance )
