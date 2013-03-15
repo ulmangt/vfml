@@ -33,6 +33,56 @@ public class VFML extends Classifier implements TechnicalInformationHandler
 
         /** Class value if node is leaf. */
         public double classValue;
+        
+        /** instance counts at node per class, per attribute, per value */
+        public Counts counts;
+    }
+    
+    private class Counts
+    {
+        int[] counts;
+        
+        public Counts( Instances instances )
+        {
+            counts = new int[ numClasses * sumAttributeValues ];
+        }
+        
+        public int getCount( Instance instance, Attribute attribute )
+        {
+            int classValue = (int) instance.value( classAttribute );
+            int attributeIndex = attribute.index( );
+            int attributeValue = (int) instance.value( attribute );
+            return getCount( classValue, attributeIndex, attributeValue );
+        }
+        
+        public int getCount( int classIndex, int attributeIndex, int valueIndex )
+        {
+            int attributeStartIndex = cumSumAttributeValues[attributeIndex];
+            return counts[ classIndex * sumAttributeValues + attributeStartIndex + valueIndex ];
+        }
+        
+        public void incrementCount( Instance instance, Attribute attribute )
+        {
+            int classValue = (int) instance.value( classAttribute );
+            int attributeIndex = attribute.index( );
+            int attributeValue = (int) instance.value( attribute );
+            incrementCount( classValue, attributeIndex, attributeValue );
+        }
+        
+        public void incrementCount( int classIndex, int attributeIndex, int valueIndex )
+        {
+            int attributeStartIndex = cumSumAttributeValues[attributeIndex];
+            counts[ classIndex * sumAttributeValues + attributeStartIndex + valueIndex ] += 1;
+        }
+        
+        public void incrementCounts( Instance instance )
+        {
+            for ( int i = 0 ; i < instance.numAttributes( ) ; i++ )
+            {
+                Attribute attribute = instance.attribute( i );
+                incrementCount( instance, attribute );
+            }
+        }
     }
 
     /** Root node of classification tree. */
@@ -40,6 +90,11 @@ public class VFML extends Classifier implements TechnicalInformationHandler
 
     /** Class attribute of dataset. */
     private Attribute classAttribute;
+    
+    int numClasses;
+    int numAttributes;
+    int sumAttributeValues;
+    int[] cumSumAttributeValues;
 
     /**
      * Returns a string describing the classifier.
@@ -130,13 +185,27 @@ public class VFML extends Classifier implements TechnicalInformationHandler
     @Override
     public void buildClassifier( Instances data ) throws Exception
     {
-
         // can classifier handle the data?
         getCapabilities( ).testWithFail( data );
 
         // remove instances with missing class
         data = new Instances( data );
         data.deleteWithMissingClass( );
+        
+        // store the class attribute for the data set
+        classAttribute = data.classAttribute( );
+        
+        // record number of class values, attributes, and values for each attribute
+        numClasses = data.classAttribute( ).numValues( );
+        numAttributes = data.numAttributes( );
+        cumSumAttributeValues = new int[ numAttributes ];
+        sumAttributeValues = 0;
+        for ( int i = 0 ; i < numAttributes ; i++ )
+        {
+            Attribute attribute = data.attribute( i );
+            cumSumAttributeValues[i] = sumAttributeValues;
+            sumAttributeValues += attribute.numValues( );
+        }
 
         makeTree( data );
     }
