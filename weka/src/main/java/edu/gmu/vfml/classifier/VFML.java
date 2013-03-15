@@ -36,13 +36,23 @@ public class VFML extends Classifier implements TechnicalInformationHandler
         
         /** instance counts at node per class, per attribute, per value */
         public Counts counts;
+        
+        public Node( )
+        {
+            counts = new Counts( );
+        }
+        
+        public void incrementCounts( Instance instance )
+        {
+            counts.incrementCounts( instance );
+        }
     }
     
     private class Counts
     {
         int[] counts;
         
-        public Counts( Instances instances )
+        public Counts( )
         {
             counts = new int[ numClasses * sumAttributeValues ];
         }
@@ -91,10 +101,11 @@ public class VFML extends Classifier implements TechnicalInformationHandler
     /** Class attribute of dataset. */
     private Attribute classAttribute;
     
-    int numClasses;
-    int numAttributes;
-    int sumAttributeValues;
-    int[] cumSumAttributeValues;
+    private int numClasses;
+    private int numAttributes;
+    private int sumAttributeValues;
+    // cumulative sum of number of attribute 
+    private int[] cumSumAttributeValues;
 
     /**
      * Returns a string describing the classifier.
@@ -225,8 +236,23 @@ public class VFML extends Classifier implements TechnicalInformationHandler
     {
         while ( data.hasMoreElements( ) )
         {
+            // retrieve the next data instance
             Instance instance = ( Instance ) data.nextElement( );
+            
+            // traverse the classification tree to find the leaf node for this instance
+            Node node = getLeafNode( instance );
+            
+            // update the counts associated with this instance
+            node.incrementCounts( instance );
         }
+    }
+    
+    /**
+     * @see #getLeafNode(Node, Instance)
+     */
+    private Node getLeafNode( Instance instance )
+    {
+        return getLeafNode( root, instance );
     }
 
     /**
