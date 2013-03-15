@@ -3,10 +3,12 @@ package edu.gmu.vfml.classifier;
 import java.util.Enumeration;
 
 import weka.classifiers.Classifier;
+import weka.core.Attribute;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.NoSupportForMissingValuesException;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -20,6 +22,18 @@ import weka.core.TechnicalInformationHandler;
 public class VFML extends Classifier implements TechnicalInformationHandler
 {
     private static final long serialVersionUID = 1L;
+
+    /** The node's successors. */
+    private VFML[] m_Successors;
+
+    /** Attribute used for splitting. */
+    private Attribute m_Attribute;
+
+    /** Class value if node is leaf. */
+    private double m_ClassValue;
+
+    /** Class attribute of dataset. */
+    private Attribute m_ClassAttribute;
 
     /**
      * Returns a string describing the classifier.
@@ -83,6 +97,25 @@ public class VFML extends Classifier implements TechnicalInformationHandler
     }
 
     /**
+     * Classifies a given test instance using the decision tree.
+     *
+     * @param instance the instance to be classified
+     * @return the classification
+     * @throws NoSupportForMissingValuesException if instance has missing values
+     * @see weka.classifiers.trees.Id3#classifyInstance(Instance)
+     */
+    public double classifyInstance( Instance instance ) throws NoSupportForMissingValuesException
+    {
+        if ( instance.hasMissingValue( ) )
+        {
+            throw new NoSupportForMissingValuesException( "Id3: missing values not supported." );
+        }
+        
+        // get the class value for the leaf node corresponding to the provided instance
+        return getLeafNode( instance ).m_ClassValue;
+    }
+
+    /**
      * Builds Id3 decision tree classifier.
      *
      * @param data the training data
@@ -112,12 +145,34 @@ public class VFML extends Classifier implements TechnicalInformationHandler
     {
         makeTree( data.enumerateInstances( ) );
     }
-    
+
     private void makeTree( Enumeration data )
     {
-        while( data.hasMoreElements( ) )
+        while ( data.hasMoreElements( ) )
         {
-            Instance instance = (Instance) data.nextElement( );
+            Instance instance = ( Instance ) data.nextElement( );
+        }
+    }
+    
+    /**
+     * Traverses the node tree for the provided instance and returns the leaf node
+     * associated with the provided instance.
+     * 
+     * @param instance the instance to be classified
+     * @return the leaf node for the instance
+     * @see weka.classifiers.trees.Id3#classifyInstance(Instance)
+     */
+    private VFML getLeafNode( Instance instance )
+    {
+        // this is a leaf node, so return this node
+        if ( m_Attribute == null )
+        {
+            return this;
+        }
+        // this is an internal node, move to the next child based on the m_Attribute for this node
+        else
+        {
+            return m_Successors[( int ) instance.value( m_Attribute )].getLeafNode( instance );
         }
     }
 }
