@@ -23,17 +23,23 @@ public class VFML extends Classifier implements TechnicalInformationHandler
 {
     private static final long serialVersionUID = 1L;
 
-    /** The node's successors. */
-    private VFML[] m_Successors;
+    private class Node
+    {
+        /** The node's successors. */
+        public Node[] successors;
 
-    /** Attribute used for splitting. */
-    private Attribute m_Attribute;
+        /** Attribute used for splitting. */
+        public Attribute attribute;
 
-    /** Class value if node is leaf. */
-    private double m_ClassValue;
+        /** Class value if node is leaf. */
+        public double classValue;
+    }
+
+    /** Root node of classification tree. */
+    private Node root;
 
     /** Class attribute of dataset. */
-    private Attribute m_ClassAttribute;
+    private Attribute classAttribute;
 
     /**
      * Returns a string describing the classifier.
@@ -110,9 +116,9 @@ public class VFML extends Classifier implements TechnicalInformationHandler
         {
             throw new NoSupportForMissingValuesException( "Id3: missing values not supported." );
         }
-        
+
         // get the class value for the leaf node corresponding to the provided instance
-        return getLeafNode( instance ).m_ClassValue;
+        return getLeafNode( root, instance ).classValue;
     }
 
     /**
@@ -153,7 +159,7 @@ public class VFML extends Classifier implements TechnicalInformationHandler
             Instance instance = ( Instance ) data.nextElement( );
         }
     }
-    
+
     /**
      * Traverses the node tree for the provided instance and returns the leaf node
      * associated with the provided instance.
@@ -162,17 +168,19 @@ public class VFML extends Classifier implements TechnicalInformationHandler
      * @return the leaf node for the instance
      * @see weka.classifiers.trees.Id3#classifyInstance(Instance)
      */
-    private VFML getLeafNode( Instance instance )
+    private Node getLeafNode( Node node, Instance instance )
     {
         // this is a leaf node, so return this node
-        if ( m_Attribute == null )
+        if ( node.attribute == null )
         {
-            return this;
+            return node;
         }
         // this is an internal node, move to the next child based on the m_Attribute for this node
         else
         {
-            return m_Successors[( int ) instance.value( m_Attribute )].getLeafNode( instance );
+            int attributeValue = ( int ) instance.value( node.attribute );
+            Node childNode = node.successors[attributeValue];
+            return getLeafNode( childNode, instance );
         }
     }
 }
