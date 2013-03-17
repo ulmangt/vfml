@@ -26,7 +26,9 @@ public class Test2
         data.setClassIndex( data.numAttributes( ) - 1 );
 
         // replace missing values with modes from the data set
-        data = Filter.useFilter( data, new ReplaceMissingValues( ) );
+        ReplaceMissingValues filter = new ReplaceMissingValues( );
+        filter.setInputFormat( data );
+        data = Filter.useFilter( data, filter );
         
         // build a VFDT classifier and apply it to the data
         VFDT classifier = new VFDT( );
