@@ -30,8 +30,11 @@ public class Test2
         filter.setInputFormat( data );
         data = Filter.useFilter( data, filter );
         
-        // build a VFDT classifier and apply it to the data
+        // build a VFDT classifier
         VFDT classifier = new VFDT( );
+        // set a very low confidence level so that not much data is needed for each split
+        classifier.setConfidenceLevel( 0.1 );
+        // apply the classifier to the data set
         classifier.buildClassifier( data );
     }
 }
