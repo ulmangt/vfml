@@ -1,6 +1,9 @@
 package edu.gmu.vfml.classifier;
 
+import static com.metsci.glimpse.util.logging.LoggerUtils.*;
+
 import java.util.Enumeration;
+import java.util.logging.Logger;
 
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
@@ -22,6 +25,8 @@ import weka.core.Utils;
  */
 public class VFDT extends Classifier implements TechnicalInformationHandler
 {
+    private static final Logger logger = Logger.getLogger( VFDT.class.getName( ) );
+    
     private static final long serialVersionUID = 1L;
 
     /**
@@ -347,7 +352,53 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             node.incrementCounts( instance );
 
             // determine based on Hoeffding Bound whether to split node
-
+            
+            int firstIndex = 0;
+            int secondIndex = 0;
+            double firstGain = 0.0;
+            double secondGain = 0.0;
+            
+            try
+            {
+                // loop through all the attributes, calculating information gains
+                // and keeping the attributes with the two highest information gains
+                for ( int i = 0 ; i < instance.numAttributes( ) ; i++ )
+                {
+                    Attribute attribute = instance.attribute( i );
+                    double gain = computeInfoGain( node, attribute );
+                    
+                    if ( gain > firstGain )
+                    {
+                        secondGain = firstGain;
+                        secondIndex = firstIndex;
+                        
+                        firstGain = gain;
+                        firstIndex = i;
+                    }
+                    else if ( gain > secondGain )
+                    {
+                        secondGain = gain;
+                        secondIndex = i;
+                    }
+                }
+            }
+            catch ( Exception e )
+            {
+                logWarning( logger, "Trouble calculating information gain.", e );
+            }
+            finally
+            {
+                
+            }
+            
+            // if the difference between the information gain of the two best attributes
+            // has exceeded the Hoeffding bound (which will continually shrink as more
+            // attributes are added to the node) then split on the best attribute 
+            double hoeffdingBound = calculateHoeffdingBound( node );
+            if ( firstGain - secondGain > hoeffdingBound )
+            {
+                
+            }
         }
     }
 
@@ -381,8 +432,8 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     /**
      * Computes the entropy of a dataset.
      * 
-     * @param data the data for which entropy is to be computed
-     * @return the entropy of the data's class distribution
+     * @param node the tree node for which entropy is to be computed
+     * @return the entropy of the node's class distribution
      * @throws Exception if computation fails
      * @see weka.classifiers.trees.Id3#computeEntropy( Instances )
      */
@@ -406,10 +457,12 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
      * Computes the entropy of the child node created by splitting on the
      * provided attribute and value.
      * 
-     * @param node
-     * @param attr
-     * @return
-     * @throws Exception
+     * @param node the tree node for which entropy is to be computed
+     * @param attr the attribute to split on before calculating entropy
+     * @param valueIndex calculate entropy for the child node corresponding
+     *        to this nominal attribute value index
+     * @return calculated entropy
+     * @throws Exception if computation fails
      */
     private double computeEntropy( Node node, Attribute attr, int valueIndex ) throws Exception
     {
@@ -429,6 +482,15 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
         return entropy + Utils.log2( count );
     }
 
+    /**
+     * Calculates the difference in information gain, epsilon, between the 
+     * attribute with the best and second best information gain necessary to
+     * make a splitting decision based on the current set of observed attributes.
+     * As more attributes are gathered, the required difference will decrease.
+     * 
+     * @param node
+     * @return
+     */
     private double calculateHoeffdingBound( Node node )
     {
         int n = node.getCount( );
