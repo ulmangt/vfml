@@ -103,6 +103,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
          * @param instance the instance to get attribute value from
          * @return the total number of instances with the provided class and attribute value
          */
+        @SuppressWarnings( "unused" )
         public int getCount( Attribute attribute, Instance instance )
         {
             int classValue = ( int ) instance.value( classAttribute );
@@ -338,6 +339,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
         makeTree( data.enumerateInstances( ) );
     }
 
+    @SuppressWarnings( "rawtypes" )
     private void makeTree( Enumeration data )
     {
         while ( data.hasMoreElements( ) )
@@ -352,9 +354,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             node.incrementCounts( instance );
 
             // determine based on Hoeffding Bound whether to split node
-            
             int firstIndex = 0;
-            int secondIndex = 0;
             double firstGain = 0.0;
             double secondGain = 0.0;
             
@@ -362,23 +362,20 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             {
                 // loop through all the attributes, calculating information gains
                 // and keeping the attributes with the two highest information gains
-                for ( int i = 0 ; i < instance.numAttributes( ) ; i++ )
+                for ( int attrIndex = 0 ; attrIndex < instance.numAttributes( ) ; attrIndex++ )
                 {
-                    Attribute attribute = instance.attribute( i );
+                    Attribute attribute = instance.attribute( attrIndex );
                     double gain = computeInfoGain( node, attribute );
                     
                     if ( gain > firstGain )
                     {
                         secondGain = firstGain;
-                        secondIndex = firstIndex;
-                        
                         firstGain = gain;
-                        firstIndex = i;
+                        firstIndex = attrIndex;
                     }
                     else if ( gain > secondGain )
                     {
                         secondGain = gain;
-                        secondIndex = i;
                     }
                 }
             }
@@ -397,7 +394,15 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             double hoeffdingBound = calculateHoeffdingBound( node );
             if ( firstGain - secondGain > hoeffdingBound )
             {
+                Attribute attribute = instance.attribute( firstIndex );
                 
+                node.successors = new Node[ attribute.numValues( ) ];
+                node.attribute = attribute;
+                
+                for ( int valueIndex = 0 ; valueIndex < attribute.numValues( ) ; valueIndex++ )
+                {
+                    node.successors[ valueIndex ] = new Node( );
+                }
             }
         }
     }
