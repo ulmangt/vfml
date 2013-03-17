@@ -235,6 +235,9 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
                 // and keeping the attributes with the two highest information gains
                 for ( int attrIndex = 0 ; attrIndex < instance.numAttributes( ) ; attrIndex++ )
                 {
+                    // don't consider the class attribute
+                    if ( attrIndex == classAttribute.index( ) ) continue;
+                    
                     Attribute attribute = instance.attribute( attrIndex );
                     double gain = computeInfoGain( node, attribute );
                     

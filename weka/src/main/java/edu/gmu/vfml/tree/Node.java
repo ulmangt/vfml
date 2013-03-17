@@ -50,6 +50,11 @@ public class Node
 
     public void incrementCounts( Instance instance )
     {
+        int instanceClassValue = (int) instance.classValue( );
+     
+        incrementTotalCount( );
+        incrementClassCount( instanceClassValue );
+        
         for ( int i = 0; i < instance.numAttributes( ); i++ )
         {
             Attribute attribute = instance.attribute( i );
@@ -57,7 +62,7 @@ public class Node
         }
 
         // update classValue and classCount
-        int instanceClassCount = getCount( classAttribute.index( ) );
+        int instanceClassCount = getCount( instanceClassValue );
 
         // if the count of the class we just added is greater than the current
         // largest count, it becomes the new classification for this node
@@ -140,12 +145,20 @@ public class Node
         int attributeValue = ( int ) instance.value( attribute );
         incrementCount( classValue, attributeIndex, attributeValue );
     }
+    
+    private void incrementTotalCount( )
+    {
+        totalCount += 1;
+    }
+    
+    private void incrementClassCount( int classIndex )
+    {
+        classCounts[classIndex] += 1;
+    }
 
     private void incrementCount( int classIndex, int attributeIndex, int valueIndex )
     {
         int attributeStartIndex = cumSumAttributeValues[attributeIndex];
         counts[classIndex * sumAttributeValues + attributeStartIndex + valueIndex] += 1;
-        classCounts[classIndex] += 1;
-        totalCount += 1;
     }
 }
