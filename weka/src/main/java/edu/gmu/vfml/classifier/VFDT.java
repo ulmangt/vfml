@@ -266,9 +266,12 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             // has exceeded the Hoeffding bound (which will continually shrink as more
             // attributes are added to the node) then split on the best attribute 
             double hoeffdingBound = calculateHoeffdingBound( node );
+            
             if ( firstGain - secondGain > hoeffdingBound )
             {
                 Attribute attribute = instance.attribute( firstIndex );
+             
+                System.out.println( "Splitting on " + firstIndex + " size " + node.getCount( ) );
                 
                 node.successors = new Node[ attribute.numValues( ) ];
                 node.attribute = attribute;
