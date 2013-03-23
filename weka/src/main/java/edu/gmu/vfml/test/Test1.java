@@ -1,4 +1,4 @@
-package edu.gmu.vfml.classifier.test;
+package edu.gmu.vfml.test;
 
 import weka.classifiers.Classifier;
 import weka.core.Attribute;

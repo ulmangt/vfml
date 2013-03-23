@@ -1,4 +1,4 @@
-package edu.gmu.vfml.classifier.test;
+package edu.gmu.vfml.test;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
