@@ -1,37 +1,52 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-        <groupId>edu.gmu.vfml</groupId>
-        <artifactId>vfml-weka</artifactId>
-        <version>CURRENT-SNAPSHOT</version>
+	<groupId>edu.gmu.vfml</groupId>
+	<artifactId>vfml-weka</artifactId>
+	<version>CURRENT-SNAPSHOT</version>
 
-<dependencies>
-    <dependency>
-        <groupId>com.metsci.glimpse</groupId>
-        <artifactId>glimpse-core</artifactId>
-        <version>1.3.1</version>
-    </dependency>
+	<dependencies>
+		<dependency>
+			<groupId>com.metsci.glimpse</groupId>
+			<artifactId>glimpse-core</artifactId>
+			<version>1.3.1</version>
+		</dependency>
 
-<dependency>
-    <groupId>nz.ac.waikato.cms.weka</groupId>
-    <artifactId>weka-stable</artifactId>
-    <version>3.6.9</version>
-</dependency>
-</dependencies>
+		<dependency>
+			<groupId>nz.ac.waikato.cms.weka</groupId>
+			<artifactId>weka-stable</artifactId>
+			<version>3.6.9</version>
+		</dependency>
+	</dependencies>
 
-<repositories>
-    <repository>
-        <id>glimpse-releases</id>
-        <url>http://glimpse.metsci.com/maven2/metsci-releases</url>
-    </repository>
-    <repository>
-        <id>glimpse-snapshots</id>
-        <url>http://glimpse.metsci.com/maven2/metsci-snapshots</url>
-    </repository>
-    <repository>
-        <id>glimpse-thirdparty</id>
-        <url>http://glimpse.metsci.com/maven2/thirdparty</url>
-    </repository>
-</repositories>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>glimpse-releases</id>
+			<url>http://glimpse.metsci.com/maven2/metsci-releases</url>
+		</repository>
+		<repository>
+			<id>glimpse-snapshots</id>
+			<url>http://glimpse.metsci.com/maven2/metsci-snapshots</url>
+		</repository>
+		<repository>
+			<id>glimpse-thirdparty</id>
+			<url>http://glimpse.metsci.com/maven2/thirdparty</url>
+		</repository>
+	</repositories>
 
 </project>
