@@ -187,16 +187,22 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             setConfidenceLevel( 0.05 );
         }
         
-        // create root node
-        root = newNode( );
 
+        // create root node
+        root = newNode( data );
+        
         // build the Hoeffding tree
         makeTree( data );
     }
     
-    private Node newNode( )
+    private Node newNode( Instances instances )
     {
-        return new Node( classAttribute, numClasses, sumAttributeValues, cumSumAttributeValues );
+        return new Node( instances, classAttribute );
+    }
+    
+    private Node newNode( Instance instance )
+    {
+        return new Node( instance, classAttribute );
     }
 
     /**
@@ -214,10 +220,10 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     private void makeTree( Enumeration data )
     {
         while ( data.hasMoreElements( ) )
-        {
+        {            
             // retrieve the next data instance
             Instance instance = ( Instance ) data.nextElement( );
-
+            
             // traverse the classification tree to find the leaf node for this instance
             Node node = getLeafNode( instance );
 
@@ -257,10 +263,6 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             {
                 logWarning( logger, "Trouble calculating information gain.", e );
             }
-            finally
-            {
-                
-            }
             
             // if the difference between the information gain of the two best attributes
             // has exceeded the Hoeffding bound (which will continually shrink as more
@@ -278,7 +280,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
                 
                 for ( int valueIndex = 0 ; valueIndex < attribute.numValues( ) ; valueIndex++ )
                 {
-                    node.successors[ valueIndex ] = newNode( );
+                    node.successors[ valueIndex ] = newNode( instance );
                 }
             }
         }
@@ -322,17 +324,19 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     private double computeEntropy( Node node ) throws Exception
     {
         double entropy = 0;
+        double totalCount = ( double ) node.getCount( );
         for ( int classIndex = 0; classIndex < numClasses; classIndex++ )
         {
-            int classCount = node.getCount( classIndex );
+            int count = node.getCount( classIndex );
             
-            if ( classCount > 0 )
+            if ( count > 0 )
             {
-                entropy -= classCount * Utils.log2( classCount );
+                double p = count / totalCount;
+                entropy -= p * Utils.log2( p );
             }
         }
-        entropy /= ( double ) node.getCount( );
-        return entropy + Utils.log2( node.getCount( ) );
+        
+        return entropy;
     }
 
     /**
@@ -340,28 +344,28 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
      * provided attribute and value.
      * 
      * @param node the tree node for which entropy is to be computed
-     * @param attr the attribute to split on before calculating entropy
+     * @param attribute the attribute to split on before calculating entropy
      * @param valueIndex calculate entropy for the child node corresponding
      *        to this nominal attribute value index
      * @return calculated entropy
      * @throws Exception if computation fails
      */
-    private double computeEntropy( Node node, Attribute attr, int valueIndex ) throws Exception
+    private double computeEntropy( Node node, Attribute attribute, int valueIndex ) throws Exception
     {
         double entropy = 0;
+        double totalCount = (double) node.getCount( attribute, valueIndex );
         for ( int classIndex = 0; classIndex < numClasses; classIndex++ )
         {
-            int count = node.getCount( classIndex, attr, valueIndex );
+            int count = node.getCount( attribute, valueIndex, classIndex );
 
             if ( count > 0 )
             {
-                entropy -= count * Utils.log2( count );
+                double p = count / totalCount;
+                entropy -= p * Utils.log2( p );
             }
         }
         
-        int count = node.getCount( attr, valueIndex );
-        entropy /= ( double ) count;
-        return entropy + Utils.log2( count );
+        return entropy
     }
 
     /**

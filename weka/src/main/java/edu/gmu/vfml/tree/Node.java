@@ -2,6 +2,7 @@ package edu.gmu.vfml.tree;
 
 import weka.core.Attribute;
 import weka.core.Instance;
+import weka.core.Instances;
 
 /**
  * <p>VFDT does not store entire training instances, only sufficient statistics
@@ -28,24 +29,48 @@ public class Node
 
     // fields copied from VFDT
     Attribute classAttribute;
-    int numClasses;
-    int sumAttributeValues;
-    int[] cumSumAttributeValues;
 
-    // counts
-    int[] counts;
+    // counts indexed by [attribute][value][class]
+    int[][][] counts;
     int[] classCounts;
     int totalCount;
 
-    public Node( Attribute classAttribute, int numClasses, int sumAttributeValues, int[] cumSumAttributeValues )
+    public Node( Instances instance, Attribute classAttribute )
     {
         this.classAttribute = classAttribute;
-        this.numClasses = numClasses;
-        this.sumAttributeValues = sumAttributeValues;
-        this.cumSumAttributeValues = cumSumAttributeValues;
 
-        this.counts = new int[numClasses * sumAttributeValues];
-        this.classCounts = new int[numClasses];
+        this.classCounts = new int[classAttribute.numValues( )];
+        this.counts = new int[instance.numAttributes( )][][];
+        for ( int i = 0 ; i < instance.numAttributes( ) ; i++ )
+        {
+            Attribute attribute = instance.attribute( i );
+            int[][] attributeCounts = new int[attribute.numValues( )][];
+            this.counts[i] = attributeCounts;
+            
+            for ( int j = 0 ; j < attribute.numValues( ) ; j++ )
+            {
+                attributeCounts[j] = new int[ classAttribute.numValues( ) ];
+            }
+        }
+    }
+    
+    public Node( Instance instance, Attribute classAttribute )
+    {
+        this.classAttribute = classAttribute;
+
+        this.classCounts = new int[classAttribute.numValues( )];
+        this.counts = new int[instance.numAttributes( )][][];
+        for ( int i = 0 ; i < instance.numAttributes( ) ; i++ )
+        {
+            Attribute attribute = instance.attribute( i );
+            int[][] attributeCounts = new int[attribute.numValues( )][];
+            this.counts[i] = attributeCounts;
+            
+            for ( int j = 0 ; j < attribute.numValues( ) ; j++ )
+            {
+                attributeCounts[j] = new int[ classAttribute.numValues( ) ];
+            }
+        }
     }
 
     public void incrementCounts( Instance instance )
@@ -58,7 +83,7 @@ public class Node
         for ( int i = 0; i < instance.numAttributes( ); i++ )
         {
             Attribute attribute = instance.attribute( i );
-            incrementCount( instance, attribute );
+            incrementCount( attribute, instance );
         }
 
         // update classValue and classCount
@@ -89,6 +114,24 @@ public class Node
     {
         return classCounts[classIndex];
     }
+    
+    /**
+    * @param attribute the attribute to get a count for
+    * @param valueIndex the value of the attribute
+    * @return the total number of instances with the provided attribute value
+    */
+    public int getCount( Attribute attribute, int valueIndex )
+    {
+        int attributeIndex = attribute.index( );
+
+        int count = 0;
+        for ( int classIndex = 0; classIndex < classAttribute.numValues( ); classIndex++ )
+        {
+            count += getCount( attributeIndex, valueIndex, classIndex );
+        }
+
+        return count;
+    }
 
     /**
      * @param attribute the attribute to get a count for
@@ -100,30 +143,12 @@ public class Node
         int classValue = ( int ) instance.value( classAttribute );
         int attributeIndex = attribute.index( );
         int attributeValue = ( int ) instance.value( attribute );
-        return getCount( classValue, attributeIndex, attributeValue );
+        return getCount( attributeIndex, attributeValue, classValue );
     }
 
-    /**
-     * @param classIndex
-     * @param attribute
-     * @return the total number of instances with the provided class
-     */
-    public int getCount( Attribute attribute, int valueIndex )
+    public int getCount( Attribute attribute, int valueIndex, int classIndex )
     {
-        int attributeIndex = attribute.index( );
-
-        int count = 0;
-        for ( int classIndex = 0; classIndex < numClasses; classIndex++ )
-        {
-            count += getCount( classIndex, attributeIndex, valueIndex );
-        }
-
-        return count;
-    }
-
-    public int getCount( int classIndex, Attribute attribute, int valueIndex )
-    {
-        return getCount( classIndex, attribute.index( ), valueIndex );
+        return getCount( attribute.index( ), valueIndex, classIndex );
     }
 
     /**
@@ -132,18 +157,9 @@ public class Node
      * @param valueIndex
      * @return the number of instances with the provided class and attribute value
      */
-    public int getCount( int classIndex, int attributeIndex, int valueIndex )
+    public int getCount( int attributeIndex, int valueIndex, int classIndex )
     {
-        int attributeStartIndex = cumSumAttributeValues[attributeIndex];
-        return counts[classIndex * sumAttributeValues + attributeStartIndex + valueIndex];
-    }
-
-    private void incrementCount( Instance instance, Attribute attribute )
-    {
-        int classValue = ( int ) instance.value( classAttribute );
-        int attributeIndex = attribute.index( );
-        int attributeValue = ( int ) instance.value( attribute );
-        incrementCount( classValue, attributeIndex, attributeValue );
+        return counts[ attributeIndex ][ valueIndex ][ classIndex ]++;
     }
     
     private void incrementTotalCount( )
@@ -155,10 +171,17 @@ public class Node
     {
         classCounts[classIndex] += 1;
     }
-
-    private void incrementCount( int classIndex, int attributeIndex, int valueIndex )
+    
+    private void incrementCount( Attribute attribute, Instance instance )
     {
-        int attributeStartIndex = cumSumAttributeValues[attributeIndex];
-        counts[classIndex * sumAttributeValues + attributeStartIndex + valueIndex] += 1;
+        int attributeIndex = attribute.index( );
+        int classValue = ( int ) instance.value( classAttribute );
+        int attributeValue = ( int ) instance.value( attribute );
+        incrementCount( attributeIndex, attributeValue, classValue );
+    }
+
+    private void incrementCount( int attributeIndex, int valueIndex, int classIndex )
+    {
+        counts[ attributeIndex ][ valueIndex ][ classIndex ]++;
     }
 }
