@@ -1,11 +1,9 @@
 package edu.gmu.vfml.classifier;
 
-import static com.metsci.glimpse.util.logging.LoggerUtils.*;
+import static com.metsci.glimpse.util.logging.LoggerUtils.logWarning;
 
 import java.util.Enumeration;
 import java.util.logging.Logger;
-
-import edu.gmu.vfml.tree.Node;
 
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
@@ -19,6 +17,7 @@ import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
 import weka.core.TechnicalInformationHandler;
 import weka.core.Utils;
+import edu.gmu.vfml.tree.Node;
 
 /**
  * 
@@ -37,12 +36,8 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
 
     private Attribute classAttribute;
     private int numClasses;
+    
     private double R_squared; // log2( numClasses )^2 
-    private int numAttributes;
-    private int sumAttributeValues;
-    // cumulative sum of number of attribute 
-    private int[] cumSumAttributeValues;
-
     private double delta;
     private double ln_inv_delta; // ln( 1 / delta )
 
@@ -171,15 +166,6 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
         // record number of class values, attributes, and values for each attribute
         numClasses = data.classAttribute( ).numValues( );
         R_squared = Math.pow( Utils.log2( numClasses ), 2 );
-        numAttributes = data.numAttributes( );
-        cumSumAttributeValues = new int[numAttributes];
-        sumAttributeValues = 0;
-        for ( int i = 0; i < numAttributes; i++ )
-        {
-            Attribute attribute = data.attribute( i );
-            cumSumAttributeValues[i] = sumAttributeValues;
-            sumAttributeValues += attribute.numValues( );
-        }
 
         // cap confidence level
         if ( delta <= 0 || delta > 1 )
@@ -365,7 +351,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             }
         }
         
-        return entropy
+        return entropy;
     }
 
     /**
