@@ -4,7 +4,7 @@
 
 	<groupId>edu.gmu.vfml</groupId>
 	<artifactId>vfml-weka</artifactId>
-	<version>CURRENT-SNAPSHOT</version>
+	<version>1.0.0</version>
 
 	<dependencies>
 		<dependency>
