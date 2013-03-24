@@ -38,9 +38,15 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     private int numClasses;
     
     private double R_squared; // log2( numClasses )^2 
-    private double delta;
     private double ln_inv_delta; // ln( 1 / delta )
 
+    // if the hoeffding bound drops below tie confidence, assume the best two attributes
+    // are very similar (and thus might require an extremely large number of instances
+    // to separate with high confidence), so just choose the current best
+    private double tieConfidence = 0.05;
+    // 1-delta is the probability of choosing the correct attribute at any given node
+    private double delta;
+    
     /**
      * See equation (1) in "Mining High-Speed Data Streams." The Hoeffding Bound provides
      * a bound on the true mean of a random variable given n independent
@@ -62,6 +68,16 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     {
         this.delta = delta;
         this.ln_inv_delta = Math.log( 1 / delta );
+    }
+    
+    public double getTieConfidence( )
+    {
+        return this.tieConfidence;
+    }
+    
+    public void setTieConfidence( double tieConfidence )
+    {
+        this.tieConfidence = tieConfidence;
     }
 
     /**
@@ -172,7 +188,6 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
         {
             setConfidenceLevel( 0.05 );
         }
-        
 
         // create root node
         root = newNode( data );
@@ -218,8 +233,8 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
 
             // determine based on Hoeffding Bound whether to split node
             int firstIndex = 0;
-            double firstGain = 0.0;
-            double secondGain = 0.0;
+            double firstValue = Double.MAX_VALUE;
+            double secondValue = Double.MAX_VALUE;
             
             try
             {
@@ -231,17 +246,17 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
                     if ( attrIndex == classAttribute.index( ) ) continue;
                     
                     Attribute attribute = instance.attribute( attrIndex );
-                    double gain = computeInfoGain( node, attribute );
+                    double value = computeEntropySum( node, attribute );
                     
-                    if ( gain > firstGain )
+                    if ( value < firstValue )
                     {
-                        secondGain = firstGain;
-                        firstGain = gain;
+                        secondValue = firstValue;
+                        firstValue = value;
                         firstIndex = attrIndex;
                     }
-                    else if ( gain > secondGain )
+                    else if ( value < secondValue )
                     {
-                        secondGain = gain;
+                        secondValue = value;
                     }
                 }
             }
@@ -255,11 +270,27 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             // attributes are added to the node) then split on the best attribute 
             double hoeffdingBound = calculateHoeffdingBound( node );
             
-            if ( firstGain - secondGain > hoeffdingBound )
+            if ( node.getCount( ) % 1000 == 0 )
+            {
+                System.out.printf( "%f %f %d%n", secondValue - firstValue, hoeffdingBound, node.getCount( ) );
+            }
+            
+            boolean tie = tieConfidence > hoeffdingBound;
+            boolean confident = secondValue - firstValue > hoeffdingBound;
+            
+            // see: vfdt-engine.c:871
+            if ( tie || confident )
             {
                 Attribute attribute = instance.attribute( firstIndex );
              
-                System.out.println( "Splitting on " + firstIndex + " size " + node.getCount( ) );
+                if ( tie )
+                {
+                    System.out.println( "Tie. Splitting on " + firstIndex + " size " + node.getCount( ) );   
+                }
+                else
+                {
+                    System.out.println( "Splitting on " + firstIndex + " size " + node.getCount( ) );
+                }
                 
                 node.successors = new Node[ attribute.numValues( ) ];
                 node.attribute = attribute;
@@ -281,9 +312,15 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
      * @throws Exception if computation fails
      * @see weka.classifiers.trees.Id3#computeInfoGain( Instances, Attribute )
      */
+    @SuppressWarnings( "unused" )
     private double computeInfoGain( Node node, Attribute attr ) throws Exception
     {
-        double infoGain = computeEntropy( node );
+        return computeEntropy( node ) - computeEntropySum( node, attr );
+    }
+    
+    private double computeEntropySum( Node node, Attribute attr ) throws Exception
+    {
+        double sum = 0.0;
         for ( int valueIndex = 0; valueIndex < attr.numValues( ); valueIndex++ )
         {
             int count = node.getCount( attr, valueIndex );
@@ -292,11 +329,10 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             {
                 double entropy = computeEntropy( node, attr, valueIndex );
                 double ratio = ( ( double ) count / ( double ) node.getCount( ) ); 
-                infoGain -= ratio * entropy;
+                sum += ratio * entropy;
             }
         }
-        
-        return infoGain;
+        return sum;
     }
 
     /**
@@ -363,6 +399,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
      * @param node
      * @return
      */
+    // see: vfdt-engine.c:833
     private double calculateHoeffdingBound( Node node )
     {
         int n = node.getCount( );

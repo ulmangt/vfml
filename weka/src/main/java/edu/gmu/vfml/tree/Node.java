@@ -159,7 +159,7 @@ public class Node
      */
     public int getCount( int attributeIndex, int valueIndex, int classIndex )
     {
-        return counts[ attributeIndex ][ valueIndex ][ classIndex ]++;
+        return counts[ attributeIndex ][ valueIndex ][ classIndex ];
     }
     
     private void incrementTotalCount( )
