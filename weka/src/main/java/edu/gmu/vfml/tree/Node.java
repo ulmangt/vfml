@@ -89,12 +89,17 @@ public class Node implements Serializable
         }
     }
     
+    public Attribute getClassAttribute( )
+    {
+        return classAttribute;
+    }
+    
     public Attribute getAttribute( )
     {
         return attribute;
     }
     
-    public double getClasValue( )
+    public double getClassValue( )
     {
         return classValue;
     }

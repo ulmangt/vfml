@@ -189,7 +189,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
         }
 
         // get the class value for the leaf node corresponding to the provided instance
-        return getLeafNode( root, instance ).getClasValue( );
+        return getLeafNode( root, instance ).getClassValue( );
     }
 
     /**
@@ -448,5 +448,51 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             Node childNode = node.getSuccessor( attributeValue );
             return getLeafNode( childNode, instance );
         }
+    }
+
+    /**
+     * Prints the decision tree using the private toString method from below.
+     *
+     * @return a textual description of the classifier
+     */
+    public String toString( )
+    {
+
+        if ( root == null )
+        {
+            return "VFDT: No model built yet.";
+        }
+        return "VFDT\n\n" + toString( root, 0 );
+    }
+
+    /**
+     * Outputs a tree at a certain level.
+     *
+     * @param level the level at which the tree is to be printed
+     * @return the tree as string at the given level
+     */
+    private String toString( Node node, int level )
+    {
+
+        StringBuffer text = new StringBuffer( );
+
+        if ( node.getAttribute( ) == null )
+        {
+            text.append( ": " + node.getClassAttribute( ).value( ( int ) node.getClassValue( ) ) );
+        }
+        else
+        {
+            for ( int j = 0; j < node.getAttribute( ).numValues( ); j++ )
+            {
+                text.append( "\n" );
+                for ( int i = 0; i < level; i++ )
+                {
+                    text.append( "|  " );
+                }
+                text.append( node.getAttribute( ).name( ) + " = " + node.getAttribute( ).value( j ) );
+                text.append( toString( node.getSuccessor( j ), level + 1 ) );
+            }
+        }
+        return text.toString( );
     }
 }
