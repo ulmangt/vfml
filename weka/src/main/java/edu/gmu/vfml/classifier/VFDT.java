@@ -70,11 +70,24 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
         this.ln_inv_delta = Math.log( 1 / delta );
     }
     
+    /**
+     * If two attributes have very similar information gain, then
+     * it may take many instances to choose between them with
+     * high confidence. Tie confidence sets an alternative threshold
+     * which causes a split decision to be automatically made if the
+     * Hoeffding bound drops below the tie confidence.
+     * 
+     * @return
+     */
     public double getTieConfidence( )
     {
         return this.tieConfidence;
     }
     
+    /**
+     * #see {@link #getConfidenceLevel()}
+     * @param tieConfidence
+     */
     public void setTieConfidence( double tieConfidence )
     {
         this.tieConfidence = tieConfidence;
@@ -282,15 +295,6 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             if ( tie || confident )
             {
                 Attribute attribute = instance.attribute( firstIndex );
-             
-                if ( tie )
-                {
-                    System.out.println( "Tie. Splitting on " + firstIndex + " size " + node.getCount( ) );   
-                }
-                else
-                {
-                    System.out.println( "Splitting on " + firstIndex + " size " + node.getCount( ) );
-                }
                 
                 node.successors = new Node[ attribute.numValues( ) ];
                 node.attribute = attribute;
