@@ -3,6 +3,7 @@ package weka.classifiers.trees;
 import static com.metsci.glimpse.util.logging.LoggerUtils.logWarning;
 
 import java.util.Enumeration;
+import java.util.Vector;
 import java.util.logging.Logger;
 
 import weka.classifiers.Classifier;
@@ -12,6 +13,8 @@ import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.NoSupportForMissingValuesException;
+import weka.core.Option;
+import weka.core.OptionHandler;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -20,11 +23,22 @@ import weka.core.Utils;
 import edu.gmu.vfml.tree.Node;
 
 /**
+ * <!-- globalinfo-start -->
+ * will be automatically replaced
+ * <!-- globalinfo-end -->
+ * 
+ *  <!-- technical-bibtex-start -->
+ * will be automatically replaced
+ * <!-- technical-bibtex-end -->
+ * 
+ *  <!-- options-start -->
+ * will be automatically replaced
+ * <!-- options-end -->
  * 
  * @see weka.classifiers.trees.Id3
  * @author ulman
  */
-public class VFDT extends Classifier implements TechnicalInformationHandler
+public class VFDT extends Classifier implements TechnicalInformationHandler, OptionHandler
 {
     private static final Logger logger = Logger.getLogger( VFDT.class.getName( ) );
 
@@ -36,15 +50,15 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     private Attribute classAttribute;
     private int numClasses;
 
-    private double R_squared; // log2( numClasses )^2 
-    private double ln_inv_delta; // ln( 1 / delta )
-
     // if the hoeffding bound drops below tie confidence, assume the best two attributes
     // are very similar (and thus might require an extremely large number of instances
     // to separate with high confidence), so just choose the current best
     private double tieConfidence = 0.05;
     // 1-delta is the probability of choosing the correct attribute at any given node
-    private double delta;
+    private double delta = 1e-4;
+
+    transient private double R_squared; // log2( numClasses )^2 
+    transient private double ln_inv_delta; // ln( 1 / delta )
 
     /**
      * Returns the tip text for this property.
@@ -76,7 +90,6 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     public void setConfidenceLevel( double delta )
     {
         this.delta = delta;
-        this.ln_inv_delta = Math.log( 1 / delta );
     }
 
     /**
@@ -110,6 +123,63 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     public void setTieConfidence( double tieConfidence )
     {
         this.tieConfidence = tieConfidence;
+    }
+
+    /**
+     * Lists the command line options available to this classifier.
+     */
+    @SuppressWarnings( { "rawtypes", "unchecked" } )
+    public Enumeration listOptions( )
+    {
+        Vector newVector = new Vector( 2 );
+        newVector.addElement( new Option( "\tTie Confidence.", "T", 1, "-T <tie confidence>" ) );
+        newVector.addElement( new Option( "\tHoeffding Confidence.\n", "H", 1, "-H <hoeffding confidence>" ) );
+        return newVector.elements( );
+    }
+
+    /**
+     * Parses a given list of options.
+     * 
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    public void setOptions( String[] options ) throws Exception
+    {
+        String tieConfidenceString = Utils.getOption( 'T', options );
+        if ( !tieConfidenceString.isEmpty( ) )
+        {
+            tieConfidence = Double.parseDouble( tieConfidenceString );
+        }
+
+        String hoeffdingConfidenceString = Utils.getOption( 'H', options );
+        if ( !hoeffdingConfidenceString.isEmpty( ) )
+        {
+            delta = Double.parseDouble( hoeffdingConfidenceString );
+        }
+    }
+
+    /**
+     * Gets the current settings of the Classifier.
+     *
+     * @return an array of strings suitable for passing to setOptions
+     */
+    public String[] getOptions( )
+    {
+        String[] options = new String[4];
+        int current = 0;
+
+        options[current++] = "-H";
+        options[current++] = String.valueOf( delta );
+
+        options[current++] = "-T";
+        options[current++] = String.valueOf( tieConfidence );
+
+        while ( current < options.length )
+        {
+            options[current++] = "";
+        }
+
+        return options;
     }
 
     /**
@@ -214,12 +284,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
         // record number of class values, attributes, and values for each attribute
         numClasses = data.classAttribute( ).numValues( );
         R_squared = Math.pow( Utils.log2( numClasses ), 2 );
-
-        // cap confidence level
-        if ( delta <= 0 || delta > 1 )
-        {
-            setConfidenceLevel( 0.05 );
-        }
+        ln_inv_delta = Math.log( 1 / delta );
 
         // create root node
         root = newNode( data );
