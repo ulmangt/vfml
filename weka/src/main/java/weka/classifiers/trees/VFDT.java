@@ -1,4 +1,4 @@
-package edu.gmu.vfml.classifier;
+package weka.classifiers.trees;
 
 import static com.metsci.glimpse.util.logging.LoggerUtils.logWarning;
 
@@ -17,7 +17,6 @@ import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
 import weka.core.TechnicalInformationHandler;
 import weka.core.Utils;
-import edu.gmu.vfml.tree.Node;
 
 /**
  * 
@@ -27,16 +26,15 @@ import edu.gmu.vfml.tree.Node;
 public class VFDT extends Classifier implements TechnicalInformationHandler
 {
     private static final Logger logger = Logger.getLogger( VFDT.class.getName( ) );
-    
-    private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = 1L;
 
     /** Root node of classification tree. */
     private Node root;
 
     private Attribute classAttribute;
     private int numClasses;
-    
+
     private double R_squared; // log2( numClasses )^2 
     private double ln_inv_delta; // ln( 1 / delta )
 
@@ -46,7 +44,17 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     private double tieConfidence = 0.05;
     // 1-delta is the probability of choosing the correct attribute at any given node
     private double delta;
-    
+
+    /**
+     * Returns the tip text for this property.
+     * @return tip text for this property suitable for
+     * displaying in the explorer/experimenter gui
+     */
+    public String confidenceLevelTipText( )
+    {
+        return "One minus the probability that each attribute split in " + "the VFDT tree will be the same as a batch generated tree.";
+    }
+
     /**
      * See equation (1) in "Mining High-Speed Data Streams." The Hoeffding Bound provides
      * a bound on the true mean of a random variable given n independent
@@ -69,7 +77,17 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
         this.delta = delta;
         this.ln_inv_delta = Math.log( 1 / delta );
     }
-    
+
+    /**
+     * Returns the tip text for this property.
+     * @return tip text for this property suitable for
+     * displaying in the explorer/experimenter gui
+     */
+    public String tieConfidenceTipText( )
+    {
+        return "If the Hoeffding bound falls below this value, the node will " + "be automatically split on the current best attribute. This" + "prevents nodes with two very similar attributes from taking " + "excessiely many instances to split with high confidence.";
+    }
+
     /**
      * If two attributes have very similar information gain, then
      * it may take many instances to choose between them with
@@ -83,7 +101,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     {
         return this.tieConfidence;
     }
-    
+
     /**
      * #see {@link #getConfidenceLevel()}
      * @param tieConfidence
@@ -204,16 +222,16 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
 
         // create root node
         root = newNode( data );
-        
+
         // build the Hoeffding tree
         makeTree( data );
     }
-    
+
     private Node newNode( Instances instances )
     {
         return new Node( instances, classAttribute );
     }
-    
+
     private Node newNode( Instance instance )
     {
         return new Node( instance, classAttribute );
@@ -234,10 +252,10 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     private void makeTree( Enumeration data )
     {
         while ( data.hasMoreElements( ) )
-        {            
+        {
             // retrieve the next data instance
             Instance instance = ( Instance ) data.nextElement( );
-            
+
             // traverse the classification tree to find the leaf node for this instance
             Node node = getLeafNode( instance );
 
@@ -248,19 +266,19 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             int firstIndex = 0;
             double firstValue = Double.MAX_VALUE;
             double secondValue = Double.MAX_VALUE;
-            
+
             try
             {
                 // loop through all the attributes, calculating information gains
                 // and keeping the attributes with the two highest information gains
-                for ( int attrIndex = 0 ; attrIndex < instance.numAttributes( ) ; attrIndex++ )
+                for ( int attrIndex = 0; attrIndex < instance.numAttributes( ); attrIndex++ )
                 {
                     // don't consider the class attribute
                     if ( attrIndex == classAttribute.index( ) ) continue;
-                    
+
                     Attribute attribute = instance.attribute( attrIndex );
                     double value = computeEntropySum( node, attribute );
-                    
+
                     if ( value < firstValue )
                     {
                         secondValue = firstValue;
@@ -277,31 +295,31 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             {
                 logWarning( logger, "Trouble calculating information gain.", e );
             }
-            
+
             // if the difference between the information gain of the two best attributes
             // has exceeded the Hoeffding bound (which will continually shrink as more
             // attributes are added to the node) then split on the best attribute 
             double hoeffdingBound = calculateHoeffdingBound( node );
-            
+
             if ( node.getCount( ) % 1000 == 0 )
             {
                 System.out.printf( "%f %f %d%n", secondValue - firstValue, hoeffdingBound, node.getCount( ) );
             }
-            
+
             boolean tie = tieConfidence > hoeffdingBound;
             boolean confident = secondValue - firstValue > hoeffdingBound;
-            
+
             // see: vfdt-engine.c:871
             if ( tie || confident )
             {
                 Attribute attribute = instance.attribute( firstIndex );
-                
-                node.successors = new Node[ attribute.numValues( ) ];
+
+                node.successors = new Node[attribute.numValues( )];
                 node.attribute = attribute;
-                
-                for ( int valueIndex = 0 ; valueIndex < attribute.numValues( ) ; valueIndex++ )
+
+                for ( int valueIndex = 0; valueIndex < attribute.numValues( ); valueIndex++ )
                 {
-                    node.successors[ valueIndex ] = newNode( instance );
+                    node.successors[valueIndex] = newNode( instance );
                 }
             }
         }
@@ -321,18 +339,18 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     {
         return computeEntropy( node ) - computeEntropySum( node, attr );
     }
-    
+
     private double computeEntropySum( Node node, Attribute attr ) throws Exception
     {
         double sum = 0.0;
         for ( int valueIndex = 0; valueIndex < attr.numValues( ); valueIndex++ )
         {
             int count = node.getCount( attr, valueIndex );
-            
+
             if ( count > 0 )
             {
                 double entropy = computeEntropy( node, attr, valueIndex );
-                double ratio = ( ( double ) count / ( double ) node.getCount( ) ); 
+                double ratio = ( ( double ) count / ( double ) node.getCount( ) );
                 sum += ratio * entropy;
             }
         }
@@ -354,14 +372,14 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
         for ( int classIndex = 0; classIndex < numClasses; classIndex++ )
         {
             int count = node.getCount( classIndex );
-            
+
             if ( count > 0 )
             {
                 double p = count / totalCount;
                 entropy -= p * Utils.log2( p );
             }
         }
-        
+
         return entropy;
     }
 
@@ -379,7 +397,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
     private double computeEntropy( Node node, Attribute attribute, int valueIndex ) throws Exception
     {
         double entropy = 0;
-        double totalCount = (double) node.getCount( attribute, valueIndex );
+        double totalCount = ( double ) node.getCount( attribute, valueIndex );
         for ( int classIndex = 0; classIndex < numClasses; classIndex++ )
         {
             int count = node.getCount( attribute, valueIndex, classIndex );
@@ -390,7 +408,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
                 entropy -= p * Utils.log2( p );
             }
         }
-        
+
         return entropy;
     }
 
@@ -440,6 +458,175 @@ public class VFDT extends Classifier implements TechnicalInformationHandler
             int attributeValue = ( int ) instance.value( node.attribute );
             Node childNode = node.successors[attributeValue];
             return getLeafNode( childNode, instance );
+        }
+    }
+
+    /**
+     * <p>VFDT does not store entire training instances, only sufficient statistics
+     * necessary to calculate Hoeffding bound and decide when to split nodes
+     * and on which attributes to make the split.</p>
+     * 
+     * <p>Counts stores per-Node count values (in lieu of storing the entire set
+     * of instances used at each Node.</p>
+     */
+    private static class Node
+    {
+        /** The node's successors. */
+        public Node[] successors;
+
+        /** Attribute used for splitting. */
+        public Attribute attribute;
+
+        /** Class value if node is leaf. */
+        public double classValue;
+
+        /** Number of instances corresponding to classValue.
+         *  This is equal to classCounts[classAttribute.index()]. */
+        public int classCount;
+
+        // fields copied from VFDT
+        Attribute classAttribute;
+
+        // counts indexed by [attribute][value][class]
+        int[][][] counts;
+        int[] classCounts;
+        int totalCount;
+
+        public Node( Instances instance, Attribute classAttribute )
+        {
+            this.classAttribute = classAttribute;
+
+            this.classCounts = new int[classAttribute.numValues( )];
+            this.counts = new int[instance.numAttributes( )][][];
+            for ( int i = 0; i < instance.numAttributes( ); i++ )
+            {
+                Attribute attribute = instance.attribute( i );
+                int[][] attributeCounts = new int[attribute.numValues( )][];
+                this.counts[i] = attributeCounts;
+
+                for ( int j = 0; j < attribute.numValues( ); j++ )
+                {
+                    attributeCounts[j] = new int[classAttribute.numValues( )];
+                }
+            }
+        }
+
+        public Node( Instance instance, Attribute classAttribute )
+        {
+            this.classAttribute = classAttribute;
+
+            this.classCounts = new int[classAttribute.numValues( )];
+            this.counts = new int[instance.numAttributes( )][][];
+            for ( int i = 0; i < instance.numAttributes( ); i++ )
+            {
+                Attribute attribute = instance.attribute( i );
+                int[][] attributeCounts = new int[attribute.numValues( )][];
+                this.counts[i] = attributeCounts;
+
+                for ( int j = 0; j < attribute.numValues( ); j++ )
+                {
+                    attributeCounts[j] = new int[classAttribute.numValues( )];
+                }
+            }
+        }
+
+        public void incrementCounts( Instance instance )
+        {
+            int instanceClassValue = ( int ) instance.classValue( );
+
+            incrementTotalCount( );
+            incrementClassCount( instanceClassValue );
+
+            for ( int i = 0; i < instance.numAttributes( ); i++ )
+            {
+                Attribute attribute = instance.attribute( i );
+                incrementCount( attribute, instance );
+            }
+
+            // update classValue and classCount
+            int instanceClassCount = getCount( instanceClassValue );
+
+            // if the count of the class we just added is greater than the current
+            // largest count, it becomes the new classification for this node
+            if ( instanceClassCount > classCount )
+            {
+                classCount = instanceClassCount;
+                classValue = instance.value( classAttribute );
+            }
+        }
+
+        /**
+         * @return the total number of instances in this Node
+         */
+        public int getCount( )
+        {
+            return totalCount;
+        }
+
+        /**
+         * @param classIndex the class to get counts for
+         * @return the total number of instances for the provided class
+         */
+        public int getCount( int classIndex )
+        {
+            return classCounts[classIndex];
+        }
+
+        /**
+        * @param attribute the attribute to get a count for
+        * @param valueIndex the value of the attribute
+        * @return the total number of instances with the provided attribute value
+        */
+        public int getCount( Attribute attribute, int valueIndex )
+        {
+            int attributeIndex = attribute.index( );
+
+            int count = 0;
+            for ( int classIndex = 0; classIndex < classAttribute.numValues( ); classIndex++ )
+            {
+                count += getCount( attributeIndex, valueIndex, classIndex );
+            }
+
+            return count;
+        }
+
+        public int getCount( Attribute attribute, int valueIndex, int classIndex )
+        {
+            return getCount( attribute.index( ), valueIndex, classIndex );
+        }
+
+        /**
+         * @param classIndex
+         * @param attributeIndex
+         * @param valueIndex
+         * @return the number of instances with the provided class and attribute value
+         */
+        public int getCount( int attributeIndex, int valueIndex, int classIndex )
+        {
+            return counts[attributeIndex][valueIndex][classIndex];
+        }
+
+        private void incrementTotalCount( )
+        {
+            totalCount += 1;
+        }
+
+        private void incrementClassCount( int classIndex )
+        {
+            classCounts[classIndex] += 1;
+        }
+
+        private void incrementCount( Attribute attribute, Instance instance )
+        {
+            int attributeIndex = attribute.index( );
+            int classValue = ( int ) instance.value( classAttribute );
+            int attributeValue = ( int ) instance.value( attribute );
+            incrementCount( attributeIndex, attributeValue, classValue );
+        }
+
+        private void incrementCount( int attributeIndex, int valueIndex, int classIndex )
+        {
+            counts[attributeIndex][valueIndex][classIndex]++;
         }
     }
 }

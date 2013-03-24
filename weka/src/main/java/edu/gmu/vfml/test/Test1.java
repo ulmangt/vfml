@@ -1,11 +1,11 @@
 package edu.gmu.vfml.test;
 
 import weka.classifiers.Classifier;
+import weka.classifiers.trees.VFDT;
 import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
-import edu.gmu.vfml.classifier.VFDT;
 
 public class Test1
 {

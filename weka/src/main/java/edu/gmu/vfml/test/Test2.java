@@ -4,13 +4,13 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import weka.classifiers.trees.VFDT;
 import weka.core.Instances;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.ReplaceMissingValues;
 
 import com.metsci.glimpse.util.io.StreamOpener;
 
-import edu.gmu.vfml.classifier.VFDT;
 
 public class Test2
 {

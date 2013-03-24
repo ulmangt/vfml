@@ -2,9 +2,9 @@ package edu.gmu.vfml.test;
 
 import java.io.File;
 
+import weka.classifiers.trees.VFDT;
 import weka.core.Instances;
 import weka.core.converters.C45Loader;
-import edu.gmu.vfml.classifier.VFDT;
 
 public class Test3
 {
@@ -12,7 +12,8 @@ public class Test3
     {
         C45Loader loader = new C45Loader( );
         ClassLoader classloader = Test3.class.getClassLoader( );
-        File file = new File( classloader.getResource( "data/binary.names" ).getFile( ) );
+        //File file = new File( classloader.getResource( "data/binary.names" ).getFile( ) );
+        File file = new File( "/home/ulman/GMU/Spring2013/CS782/Project/data/binary.names" );
         loader.setSource( file );
         Instances data = loader.getDataSet( );
 
@@ -22,7 +23,7 @@ public class Test3
         // build a VFDT classifier
         VFDT classifier = new VFDT( );
         // set a very low confidence level so that not much data is needed for each split
-        classifier.setConfidenceLevel( 1e-1 );
+        classifier.setConfidenceLevel( 1e-2 );
         // apply the classifier to the data set
         classifier.buildClassifier( data );
     }
