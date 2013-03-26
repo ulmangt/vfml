@@ -56,10 +56,32 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     private double tieConfidence = 0.05;
     // 1-delta is the probability of choosing the correct attribute at any given node
     private double delta = 1e-4;
+    // nodes are only rechecked for potential splits every nmin data instances
+    private int nmin = 30;
 
     transient private double R_squared; // log2( numClasses )^2 
     transient private double ln_inv_delta; // ln( 1 / delta )
 
+    /**
+     * Returns the tip text for this property.
+     * @return tip text for this property suitable for
+     * displaying in the explorer/experimenter gui
+     */
+    public String instanceSubsampleTipText( )
+    {
+        return "Nodes are only rechecked for splits every multiple of this many data instances.";
+    }
+    
+    public int getInstanceSubsample( )
+    {
+        return nmin;
+    }
+    
+    public void setInstanceSubsample( int nmin )
+    {
+        this.nmin = nmin;
+    }
+    
     /**
      * Returns the tip text for this property.
      * @return tip text for this property suitable for
@@ -331,55 +353,58 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
                 // update the counts associated with this instance
                 node.incrementCounts( instance );
 
-                // compute the node entropy with no split
-                double nullValue = computeEntropy( node );
-
-                // determine based on Hoeffding Bound whether to split node
-                int firstIndex = 0;
-                double firstValue = Double.MAX_VALUE;
-                double secondValue = Double.MAX_VALUE;
-
-                // loop through all the attributes, calculating information gains
-                // and keeping the attributes with the two highest information gains
-                for ( int attrIndex = 0; attrIndex < instance.numAttributes( ); attrIndex++ )
+                if ( node.getCount( ) % nmin == 0 )
                 {
-                    // don't consider the class attribute
-                    if ( attrIndex == classAttribute.index( ) ) continue;
-
-                    Attribute attribute = instance.attribute( attrIndex );
-                    double value = computeEntropySum( node, attribute );
-
-                    if ( value < firstValue )
+                    // compute the node entropy with no split
+                    double nullValue = computeEntropy( node );
+    
+                    // determine based on Hoeffding Bound whether to split node
+                    int firstIndex = 0;
+                    double firstValue = Double.MAX_VALUE;
+                    double secondValue = Double.MAX_VALUE;
+    
+                    // loop through all the attributes, calculating information gains
+                    // and keeping the attributes with the two highest information gains
+                    for ( int attrIndex = 0; attrIndex < instance.numAttributes( ); attrIndex++ )
                     {
-                        secondValue = firstValue;
-                        firstValue = value;
-                        firstIndex = attrIndex;
+                        // don't consider the class attribute
+                        if ( attrIndex == classAttribute.index( ) ) continue;
+    
+                        Attribute attribute = instance.attribute( attrIndex );
+                        double value = computeEntropySum( node, attribute );
+    
+                        if ( value < firstValue )
+                        {
+                            secondValue = firstValue;
+                            firstValue = value;
+                            firstIndex = attrIndex;
+                        }
+                        else if ( value < secondValue )
+                        {
+                            secondValue = value;
+                        }
                     }
-                    else if ( value < secondValue )
+    
+                    // if the difference between the information gain of the two best attributes
+                    // has exceeded the Hoeffding bound (which will continually shrink as more
+                    // attributes are added to the node) then split on the best attribute 
+                    double hoeffdingBound = calculateHoeffdingBound( node );
+    
+                    // split if there is a large enough entropy difference between the first/second place attributes
+                    boolean confident = secondValue - firstValue > hoeffdingBound;
+                    // or if the first/second attributes are so close that the hoeffding bound has decreased below
+                    // the tie threshold (in this case it really doesn't matter which attribute is chosen
+                    boolean tie = tieConfidence > hoeffdingBound;
+                    
+                    // don't split if even the best split would increase overall entropy
+                    boolean preprune = nullValue <= firstValue;
+    
+                    // see: vfdt-engine.c:871
+                    if ( ( tie || confident ) && !preprune )
                     {
-                        secondValue = value;
+                        Attribute attribute = instance.attribute( firstIndex );
+                        node.split( attribute, instance );
                     }
-                }
-
-                // if the difference between the information gain of the two best attributes
-                // has exceeded the Hoeffding bound (which will continually shrink as more
-                // attributes are added to the node) then split on the best attribute 
-                double hoeffdingBound = calculateHoeffdingBound( node );
-
-                // split if there is a large enough entropy difference between the first/second place attributes
-                boolean confident = secondValue - firstValue > hoeffdingBound;
-                // or if the first/second attributes are so close that the hoeffding bound has decreased below
-                // the tie threshold (in this case it really doesn't matter which attribute is chosen
-                boolean tie = tieConfidence > hoeffdingBound;
-                
-                // don't split if even the best split would increase overall entropy
-                boolean preprune = nullValue <= firstValue;
-
-                // see: vfdt-engine.c:871
-                if ( ( tie || confident ) && !preprune )
-                {
-                    Attribute attribute = instance.attribute( firstIndex );
-                    node.split( attribute, instance );
                 }
             }
             catch ( Exception e )
