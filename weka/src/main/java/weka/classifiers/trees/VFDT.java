@@ -298,7 +298,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     {
         if ( instance.hasMissingValue( ) )
         {
-            throw new NoSupportForMissingValuesException( "Id3: missing values not supported." );
+            throw new NoSupportForMissingValuesException( "VFDT: missing values not supported." );
         }
 
         // get the class value for the leaf node corresponding to the provided instance
