@@ -366,11 +366,6 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
                 // attributes are added to the node) then split on the best attribute 
                 double hoeffdingBound = calculateHoeffdingBound( node );
 
-                if ( node.getCount( ) % 1000 == 0 )
-                {
-                    System.out.printf( "%f %f %d%n", secondValue - firstValue, hoeffdingBound, node.getCount( ) );
-                }
-
                 // split if there is a large enough entropy difference between the first/second place attributes
                 boolean confident = secondValue - firstValue > hoeffdingBound;
                 // or if the first/second attributes are so close that the hoeffding bound has decreased below
@@ -379,24 +374,10 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
                 
                 // don't split if even the best split would increase overall entropy
                 boolean preprune = nullValue <= firstValue;
-                
-                if ( preprune )
-                {
-                    System.out.println( "Prepruned" );
-                }
-                
+
                 // see: vfdt-engine.c:871
                 if ( ( tie || confident ) && !preprune )
                 {
-                    if ( tie )
-                    {
-                    System.out.println( "tie " + node.getCount( ) +  " " + firstIndex );
-                    }
-                    else
-                    {
-                    System.out.println( "split " + node.getCount( ) + " " + firstIndex );
-                    }
-                    
                     Attribute attribute = instance.attribute( firstIndex );
                     node.split( attribute, instance );
                 }
