@@ -28,7 +28,7 @@ import edu.gmu.vfml.tree.Node;
 public class CVFDT extends VFDT
 {
     private static final long serialVersionUID = 1L;
-
+    
     /**
      * Returns an instance of a TechnicalInformation object, containing 
      * detailed information about the technical background of this class,
@@ -76,6 +76,6 @@ public class CVFDT extends VFDT
     @SuppressWarnings( "rawtypes" )
     protected void makeTree( Enumeration data )
     {
-
+        
     }
 }
