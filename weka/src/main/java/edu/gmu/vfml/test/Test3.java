@@ -24,9 +24,12 @@ public class Test3
         VFDT classifier = new VFDT( );
         // set a very low confidence level so that not much data is needed for each split
         classifier.setConfidenceLevel( 1e-2 );
+        classifier.setInstanceSubsample( 30 );
         // apply the classifier to the data set
         classifier.buildClassifier( data );
         
         System.out.println( "Final tree size: " + classifier.getRoot( ).getTreeSize( ) );
+        
+        System.out.println( classifier.toString( ) );
     }
 }
