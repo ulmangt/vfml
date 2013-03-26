@@ -1,5 +1,7 @@
 package edu.gmu.vfml.tree;
 
+import static edu.gmu.vfml.util.InstanceUtils.getAttributes;
+
 import java.io.Serializable;
 
 import weka.core.Attribute;
@@ -7,6 +9,9 @@ import weka.core.Instance;
 import weka.core.Instances;
 
 /**
+ * <p>A helper class for {@code weka.classifiers.trees.VFDT}. Stores the nested
+ * tree structure of attribute splits and associated Node statistics.</p>
+ * 
  * <p>VFDT does not store entire training instances, only sufficient statistics
  * necessary to calculate Hoeffding bound and decide when to split nodes
  * and on which attributes to make the split.</p>
@@ -39,15 +44,16 @@ public class Node implements Serializable
     transient int[] classCounts;
     transient int totalCount;
 
-    public Node( Instances instance, Attribute classAttribute )
+    public Node( Attribute[] attributes, Attribute classAttribute )
     {
         this.classAttribute = classAttribute;
 
+        int attributeCount = attributes.length;
         this.classCounts = new int[classAttribute.numValues( )];
-        this.counts = new int[instance.numAttributes( )][][];
-        for ( int i = 0; i < instance.numAttributes( ); i++ )
+        this.counts = new int[attributeCount][][];
+        for ( int i = 0; i < attributeCount; i++ )
         {
-            Attribute attribute = instance.attribute( i );
+            Attribute attribute = attributes[i];
             int[][] attributeCounts = new int[attribute.numValues( )][];
             this.counts[i] = attributeCounts;
 
@@ -56,27 +62,18 @@ public class Node implements Serializable
                 attributeCounts[j] = new int[classAttribute.numValues( )];
             }
         }
+    }
+
+    public Node( Instances instances, Attribute classAttribute )
+    {
+        this( getAttributes( instances ), classAttribute );
     }
 
     public Node( Instance instance, Attribute classAttribute )
     {
-        this.classAttribute = classAttribute;
-
-        this.classCounts = new int[classAttribute.numValues( )];
-        this.counts = new int[instance.numAttributes( )][][];
-        for ( int i = 0; i < instance.numAttributes( ); i++ )
-        {
-            Attribute attribute = instance.attribute( i );
-            int[][] attributeCounts = new int[attribute.numValues( )][];
-            this.counts[i] = attributeCounts;
-
-            for ( int j = 0; j < attribute.numValues( ); j++ )
-            {
-                attributeCounts[j] = new int[classAttribute.numValues( )];
-            }
-        }
+        this( getAttributes( instance ), classAttribute );
     }
-    
+
     public int getTreeSize( )
     {
         if ( successors != null )
@@ -86,7 +83,7 @@ public class Node implements Serializable
             {
                 count += node.getTreeSize( );
             }
-            
+
             // add one for this node
             return count + 1;
         }
@@ -95,7 +92,7 @@ public class Node implements Serializable
             return 1;
         }
     }
-    
+
     public Node getSuccessor( int value )
     {
         if ( successors != null )
@@ -107,22 +104,22 @@ public class Node implements Serializable
             return null;
         }
     }
-    
+
     public Attribute getClassAttribute( )
     {
         return classAttribute;
     }
-    
+
     public Attribute getAttribute( )
     {
         return attribute;
     }
-    
+
     public double getClassValue( )
     {
         return classValue;
     }
-    
+
     public void split( Attribute attribute, Instance instance )
     {
         this.successors = new Node[attribute.numValues( )];
