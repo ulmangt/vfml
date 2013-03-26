@@ -242,6 +242,11 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
 
         return result;
     }
+    
+    public Node getRoot( )
+    {
+        return root;
+    }
 
     /**
      * Classifies a given test instance using the decision tree.
@@ -314,22 +319,26 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     {
         while ( data.hasMoreElements( ) )
         {
-            // retrieve the next data instance
-            Instance instance = ( Instance ) data.nextElement( );
-
-            // traverse the classification tree to find the leaf node for this instance
-            Node node = getLeafNode( instance );
-
-            // update the counts associated with this instance
-            node.incrementCounts( instance );
-
-            // determine based on Hoeffding Bound whether to split node
-            int firstIndex = 0;
-            double firstValue = Double.MAX_VALUE;
-            double secondValue = Double.MAX_VALUE;
 
             try
             {
+                // retrieve the next data instance
+                Instance instance = ( Instance ) data.nextElement( );
+
+                // traverse the classification tree to find the leaf node for this instance
+                Node node = getLeafNode( instance );
+
+                // update the counts associated with this instance
+                node.incrementCounts( instance );
+
+                // compute the node entropy with no split
+                double nullValue = computeEntropy( node );
+
+                // determine based on Hoeffding Bound whether to split node
+                int firstIndex = 0;
+                double firstValue = Double.MAX_VALUE;
+                double secondValue = Double.MAX_VALUE;
+
                 // loop through all the attributes, calculating information gains
                 // and keeping the attributes with the two highest information gains
                 for ( int attrIndex = 0; attrIndex < instance.numAttributes( ); attrIndex++ )
@@ -351,30 +360,50 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
                         secondValue = value;
                     }
                 }
+
+                // if the difference between the information gain of the two best attributes
+                // has exceeded the Hoeffding bound (which will continually shrink as more
+                // attributes are added to the node) then split on the best attribute 
+                double hoeffdingBound = calculateHoeffdingBound( node );
+
+                if ( node.getCount( ) % 1000 == 0 )
+                {
+                    System.out.printf( "%f %f %d%n", secondValue - firstValue, hoeffdingBound, node.getCount( ) );
+                }
+
+                // split if there is a large enough entropy difference between the first/second place attributes
+                boolean confident = secondValue - firstValue > hoeffdingBound;
+                // or if the first/second attributes are so close that the hoeffding bound has decreased below
+                // the tie threshold (in this case it really doesn't matter which attribute is chosen
+                boolean tie = tieConfidence > hoeffdingBound;
+                
+                // don't split if even the best split would increase overall entropy
+                boolean preprune = nullValue <= firstValue;
+                
+                if ( preprune )
+                {
+                    System.out.println( "Prepruned" );
+                }
+                
+                // see: vfdt-engine.c:871
+                if ( ( tie || confident ) && !preprune )
+                {
+                    if ( tie )
+                    {
+                    System.out.println( "tie " + node.getCount( ) +  " " + firstIndex );
+                    }
+                    else
+                    {
+                    System.out.println( "split " + node.getCount( ) + " " + firstIndex );
+                    }
+                    
+                    Attribute attribute = instance.attribute( firstIndex );
+                    node.split( attribute, instance );
+                }
             }
             catch ( Exception e )
             {
-                logWarning( logger, "Trouble calculating information gain.", e );
-            }
-
-            // if the difference between the information gain of the two best attributes
-            // has exceeded the Hoeffding bound (which will continually shrink as more
-            // attributes are added to the node) then split on the best attribute 
-            double hoeffdingBound = calculateHoeffdingBound( node );
-
-            if ( node.getCount( ) % 1000 == 0 )
-            {
-                System.out.printf( "%f %f %d%n", secondValue - firstValue, hoeffdingBound, node.getCount( ) );
-            }
-
-            boolean tie = tieConfidence > hoeffdingBound;
-            boolean confident = secondValue - firstValue > hoeffdingBound;
-
-            // see: vfdt-engine.c:871
-            if ( tie || confident )
-            {
-                Attribute attribute = instance.attribute( firstIndex );
-                node.split( attribute, instance );
+                logWarning( logger, "Trouble processing instance.", e );
             }
         }
     }
@@ -389,12 +418,12 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @see weka.classifiers.trees.Id3#computeInfoGain( Instances, Attribute )
      */
     @SuppressWarnings( "unused" )
-    private double computeInfoGain( Node node, Attribute attr ) throws Exception
+    private double computeInfoGain( Node node, Attribute attr )
     {
         return computeEntropy( node ) - computeEntropySum( node, attr );
     }
 
-    private double computeEntropySum( Node node, Attribute attr ) throws Exception
+    private double computeEntropySum( Node node, Attribute attr )
     {
         double sum = 0.0;
         for ( int valueIndex = 0; valueIndex < attr.numValues( ); valueIndex++ )
@@ -419,7 +448,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @throws Exception if computation fails
      * @see weka.classifiers.trees.Id3#computeEntropy( Instances )
      */
-    private double computeEntropy( Node node ) throws Exception
+    private double computeEntropy( Node node )
     {
         double entropy = 0;
         double totalCount = ( double ) node.getCount( );
@@ -448,7 +477,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @return calculated entropy
      * @throws Exception if computation fails
      */
-    private double computeEntropy( Node node, Attribute attribute, int valueIndex ) throws Exception
+    private double computeEntropy( Node node, Attribute attribute, int valueIndex )
     {
         double entropy = 0;
         double totalCount = ( double ) node.getCount( attribute, valueIndex );

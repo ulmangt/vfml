@@ -77,6 +77,25 @@ public class Node implements Serializable
         }
     }
     
+    public int getTreeSize( )
+    {
+        if ( successors != null )
+        {
+            int count = 0;
+            for ( Node node : successors )
+            {
+                count += node.getTreeSize( );
+            }
+            
+            // add one for this node
+            return count + 1;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    
     public Node getSuccessor( int value )
     {
         if ( successors != null )

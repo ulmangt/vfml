@@ -26,5 +26,7 @@ public class Test3
         classifier.setConfidenceLevel( 1e-2 );
         // apply the classifier to the data set
         classifier.buildClassifier( data );
+        
+        System.out.println( "Final tree size: " + classifier.getRoot( ).getTreeSize( ) );
     }
 }
