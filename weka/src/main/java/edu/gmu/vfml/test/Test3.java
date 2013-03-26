@@ -11,9 +11,14 @@ public class Test3
     public static void main( String[] args ) throws Exception
     {
         C45Loader loader = new C45Loader( );
+        
+        // example of data file location specified relative to classpath
         ClassLoader classloader = Test3.class.getClassLoader( );
-        //File file = new File( classloader.getResource( "data/binary.names" ).getFile( ) );
-        File file = new File( "/home/ulman/GMU/Spring2013/CS782/Project/data/binary.names" );
+        File file = new File( classloader.getResource( "data/binary.names" ).getFile( ) );
+        
+        // example of data file location specified with absolute path 
+        //File file = new File( "/home/ulman/GMU/Spring2013/CS782/Project/data/binary.names" );
+        
         loader.setSource( file );
         Instances data = loader.getDataSet( );
 
@@ -27,9 +32,9 @@ public class Test3
         classifier.setNMin( 30 );
         // apply the classifier to the data set
         classifier.buildClassifier( data );
-        
+
         System.out.println( "Final tree size: " + classifier.getRoot( ).getTreeSize( ) );
-        
+
         System.out.println( classifier.toString( ) );
     }
 }
