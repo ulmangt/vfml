@@ -45,22 +45,22 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     private static final long serialVersionUID = 1L;
 
     /** Root node of classification tree. */
-    private Node root;
+    protected Node root;
 
-    private Attribute classAttribute;
-    private int numClasses;
+    protected Attribute classAttribute;
+    protected int numClasses;
 
     // if the hoeffding bound drops below tie confidence, assume the best two attributes
     // are very similar (and thus might require an extremely large number of instances
     // to separate with high confidence), so just choose the current best
-    private double tieConfidence = 0.05;
+    protected double tieConfidence = 0.05;
     // 1-delta is the probability of choosing the correct attribute at any given node
-    private double delta = 1e-4;
+    protected double delta = 1e-4;
     // nodes are only rechecked for potential splits every nmin data instances
-    private int nMin = 30;
+    protected int nMin = 30;
 
-    transient private double R_squared; // log2( numClasses )^2 
-    transient private double ln_inv_delta; // ln( 1 / delta )
+    transient protected double R_squared; // log2( numClasses )^2 
+    transient protected double ln_inv_delta; // ln( 1 / delta )
 
     /**
      * Returns the tip text for this property.
@@ -336,24 +336,24 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
         makeTree( data );
     }
 
-    private Node newNode( Instances instances )
+    protected Node newNode( Instances instances )
     {
         return new Node( instances, classAttribute );
     }
 
     /**
-     * Method for building an Id3 tree.
+     * Method for building a VFDT tree.
      *
      * @param data the training data
      * @exception Exception if decision tree can't be built successfully
      */
-    private void makeTree( Instances data ) throws Exception
+    protected void makeTree( Instances data ) throws Exception
     {
         makeTree( data.enumerateInstances( ) );
     }
 
     @SuppressWarnings( "rawtypes" )
-    private void makeTree( Enumeration data )
+    protected void makeTree( Enumeration data )
     {
         while ( data.hasMoreElements( ) )
         {
@@ -439,13 +439,12 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @throws Exception if computation fails
      * @see weka.classifiers.trees.Id3#computeInfoGain( Instances, Attribute )
      */
-    @SuppressWarnings( "unused" )
-    private double computeInfoGain( Node node, Attribute attr )
+    protected double computeInfoGain( Node node, Attribute attr )
     {
         return computeEntropy( node ) - computeEntropySum( node, attr );
     }
 
-    private double computeEntropySum( Node node, Attribute attr )
+    protected double computeEntropySum( Node node, Attribute attr )
     {
         double sum = 0.0;
         for ( int valueIndex = 0; valueIndex < attr.numValues( ); valueIndex++ )
@@ -470,7 +469,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @throws Exception if computation fails
      * @see weka.classifiers.trees.Id3#computeEntropy( Instances )
      */
-    private double computeEntropy( Node node )
+    protected double computeEntropy( Node node )
     {
         double entropy = 0;
         double totalCount = ( double ) node.getCount( );
@@ -499,7 +498,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @return calculated entropy
      * @throws Exception if computation fails
      */
-    private double computeEntropy( Node node, Attribute attribute, int valueIndex )
+    protected double computeEntropy( Node node, Attribute attribute, int valueIndex )
     {
         double entropy = 0;
         double totalCount = ( double ) node.getCount( attribute, valueIndex );
@@ -527,7 +526,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @return
      */
     // see: vfdt-engine.c:833
-    private double calculateHoeffdingBound( Node node )
+    protected double calculateHoeffdingBound( Node node )
     {
         int n = node.getCount( );
         double epsilon = Math.sqrt( ( R_squared * ln_inv_delta ) / ( 2 * n ) );
@@ -537,7 +536,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     /**
      * @see #getLeafNode(Node, Instance)
      */
-    private Node getLeafNode( Instance instance )
+    protected Node getLeafNode( Instance instance )
     {
         return getLeafNode( root, instance );
     }
@@ -550,7 +549,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @return the leaf node for the instance
      * @see weka.classifiers.trees.Id3#classifyInstance(Instance)
      */
-    private Node getLeafNode( Node node, Instance instance )
+    protected Node getLeafNode( Node node, Instance instance )
     {
         // this is a leaf node, so return this node
         if ( node.getAttribute( ) == null )
@@ -587,7 +586,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @param level the level at which the tree is to be printed
      * @return the tree as string at the given level
      */
-    private String toString( Node node, int level )
+    protected String toString( Node node, int level )
     {
 
         StringBuffer text = new StringBuffer( );
