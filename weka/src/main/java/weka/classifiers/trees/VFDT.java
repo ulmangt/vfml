@@ -57,7 +57,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     // 1-delta is the probability of choosing the correct attribute at any given node
     private double delta = 1e-4;
     // nodes are only rechecked for potential splits every nmin data instances
-    private int nmin = 30;
+    private int nMin = 30;
 
     transient private double R_squared; // log2( numClasses )^2 
     transient private double ln_inv_delta; // ln( 1 / delta )
@@ -67,19 +67,25 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @return tip text for this property suitable for
      * displaying in the explorer/experimenter gui
      */
-    public String instanceSubsampleTipText( )
+    public String nMinTipText( )
     {
         return "Nodes are only rechecked for splits every multiple of this many data instances.";
     }
     
-    public int getInstanceSubsample( )
+    /**
+     * Nodes are only checked for splits when the reach multiple of nMin instances.
+     */
+    public int getNMin( )
     {
-        return nmin;
+        return nMin;
     }
     
-    public void setInstanceSubsample( int nmin )
+    /**
+     * @see #getNMin()
+     */
+    public void setNMin( int nmin )
     {
-        this.nmin = nmin;
+        this.nMin = nmin;
     }
     
     /**
@@ -156,6 +162,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
         Vector newVector = new Vector( 2 );
         newVector.addElement( new Option( "\tTie Confidence.", "T", 1, "-T <tie confidence>" ) );
         newVector.addElement( new Option( "\tHoeffding Confidence.\n", "H", 1, "-H <hoeffding confidence>" ) );
+        newVector.addElement( new Option( "\tN Minimum.\n", "N", 1, "-N <nmin>" ) );
         return newVector.elements( );
     }
 
@@ -178,6 +185,12 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
         {
             delta = Double.parseDouble( hoeffdingConfidenceString );
         }
+        
+        String nMinString = Utils.getOption( 'N', options );
+        if ( !nMinString.isEmpty( ) )
+        {
+            nMin = Integer.parseInt( nMinString );
+        }
     }
 
     /**
@@ -187,7 +200,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      */
     public String[] getOptions( )
     {
-        String[] options = new String[4];
+        String[] options = new String[6];
         int current = 0;
 
         options[current++] = "-H";
@@ -195,6 +208,9 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
 
         options[current++] = "-T";
         options[current++] = String.valueOf( tieConfidence );
+        
+        options[current++] = "-N";
+        options[current++] = String.valueOf( nMin );
 
         while ( current < options.length )
         {
@@ -353,7 +369,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
                 // update the counts associated with this instance
                 node.incrementCounts( instance );
 
-                if ( node.getCount( ) % nmin == 0 )
+                if ( node.getCount( ) % nMin == 0 )
                 {
                     // compute the node entropy with no split
                     double nullValue = computeEntropy( node );
