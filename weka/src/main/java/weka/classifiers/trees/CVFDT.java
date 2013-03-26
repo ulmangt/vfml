@@ -1,12 +1,18 @@
 package weka.classifiers.trees;
 
 import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
 
 import weka.core.Instances;
+import weka.core.Option;
 import weka.core.TechnicalInformation;
+import weka.core.Utils;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
 import edu.gmu.vfml.tree.CNode;
+import edu.gmu.vfml.tree.InstanceId;
 import edu.gmu.vfml.tree.Node;
 
 /**
@@ -28,6 +34,62 @@ import edu.gmu.vfml.tree.Node;
 public class CVFDT extends VFDT
 {
     private static final long serialVersionUID = 1L;
+
+    /**
+     * Linked list of instances currently inside the CVFDT learning window.
+     */
+    protected LinkedList<InstanceId> window;
+    
+    /**
+     * The maximum size of the window list.
+     */
+    protected int windowSize;
+
+    /**
+     * Lists the command line options available to this classifier.
+     */
+    @Override
+    @SuppressWarnings( { "rawtypes", "unchecked" } )
+    public Vector listOptionsVector( )
+    {
+        Vector list = super.listOptionsVector( );
+        list.addElement( new Option( "\tWindow Size.\n", "W", 1, "-W <window size>" ) );
+        return list;
+    }
+
+    /**
+     * Parses a given list of options.
+     * 
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    @Override
+    public void setOptions( String[] options ) throws Exception
+    {
+        super.setOptions( options );
+        
+        String windowSizeString = Utils.getOption( 'W', options );
+        if ( !windowSizeString.isEmpty( ) )
+        {
+            windowSize = Integer.parseInt( windowSizeString );
+        }
+    }
+    
+    /**
+     * Gets the current settings of the Classifier.
+     *
+     * @return an array of strings suitable for passing to setOptions
+     */
+    @Override
+    public List<String> getOptionsList( )
+    {
+        List<String> options = super.getOptionsList( );
+        
+        options.add( "-W" );
+        options.add( String.valueOf( windowSize ) );
+        
+        return options;
+    }
     
     /**
      * Returns an instance of a TechnicalInformation object, containing 
@@ -36,6 +98,7 @@ public class CVFDT extends VFDT
      * 
      * @return the technical information about this class
      */
+    @Override
     public TechnicalInformation getTechnicalInformation( )
     {
         TechnicalInformation info = new TechnicalInformation( Type.ARTICLE );
@@ -53,7 +116,7 @@ public class CVFDT extends VFDT
 
         return info;
     }
-    
+
     @Override
     public Node newNode( Instances instances )
     {
@@ -76,6 +139,6 @@ public class CVFDT extends VFDT
     @SuppressWarnings( "rawtypes" )
     protected void makeTree( Enumeration data )
     {
-        
+
     }
 }

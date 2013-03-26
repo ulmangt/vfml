@@ -3,6 +3,8 @@ package weka.classifiers.trees;
 import static com.metsci.glimpse.util.logging.LoggerUtils.logWarning;
 
 import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 import java.util.logging.Logger;
 
@@ -156,14 +158,24 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     /**
      * Lists the command line options available to this classifier.
      */
-    @SuppressWarnings( { "rawtypes", "unchecked" } )
+    @Override
+    @SuppressWarnings( { "rawtypes" } )
     public Enumeration listOptions( )
     {
-        Vector newVector = new Vector( 2 );
+        return listOptionsVector( ).elements( );
+    }
+    
+    /**
+     * @see #listOptions()
+     */
+    @SuppressWarnings( { "rawtypes", "unchecked" } )
+    public Vector listOptionsVector( )
+    {
+        Vector newVector = new Vector( );
         newVector.addElement( new Option( "\tTie Confidence.", "T", 1, "-T <tie confidence>" ) );
         newVector.addElement( new Option( "\tHoeffding Confidence.\n", "H", 1, "-H <hoeffding confidence>" ) );
         newVector.addElement( new Option( "\tN Minimum.\n", "N", 1, "-N <nmin>" ) );
-        return newVector.elements( );
+        return newVector;
     }
 
     /**
@@ -172,6 +184,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @param options the list of options as an array of strings
      * @throws Exception if an option is not supported
      */
+    @Override
     public void setOptions( String[] options ) throws Exception
     {
         String tieConfidenceString = Utils.getOption( 'T', options );
@@ -192,34 +205,40 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
             nMin = Integer.parseInt( nMinString );
         }
     }
+    
+    /**
+     * Gets the current settings of the Classifier.
+     *
+     * @see #getOptions()
+     * @return an array of strings suitable for passing to setOptions
+     */
+    public List<String> getOptionsList( )
+    {
+        List<String> options = new LinkedList<String>( );
+        
+        options.add( "-H" );
+        options.add( String.valueOf( delta ) );
+
+        options.add( "-T" );
+        options.add( String.valueOf( tieConfidence ) );
+        
+        options.add( "-N" );
+        options.add( String.valueOf( nMin ) );
+
+        return options;
+    }
 
     /**
      * Gets the current settings of the Classifier.
      *
      * @return an array of strings suitable for passing to setOptions
      */
+    @Override
     public String[] getOptions( )
     {
-        String[] options = new String[6];
-        int current = 0;
-
-        options[current++] = "-H";
-        options[current++] = String.valueOf( delta );
-
-        options[current++] = "-T";
-        options[current++] = String.valueOf( tieConfidence );
-        
-        options[current++] = "-N";
-        options[current++] = String.valueOf( nMin );
-
-        while ( current < options.length )
-        {
-            options[current++] = "";
-        }
-
-        return options;
+        return getOptionsList( ).toArray( new String[0] );
     }
-
+    
     /**
      * Returns a string describing the classifier.
      * @return a description suitable for the GUI.
@@ -240,6 +259,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * 
      * @return the technical information about this class
      */
+    @Override
     public TechnicalInformation getTechnicalInformation( )
     {
         TechnicalInformation info = new TechnicalInformation( Type.ARTICLE );
@@ -263,6 +283,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      *
      * @return the capabilities of this classifier
      */
+    @Override
     public Capabilities getCapabilities( )
     {
         Capabilities result = super.getCapabilities( );
@@ -294,6 +315,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      * @throws NoSupportForMissingValuesException if instance has missing values
      * @see weka.classifiers.trees.Id3#classifyInstance(Instance)
      */
+    @Override
     public double classifyInstance( Instance instance ) throws NoSupportForMissingValuesException
     {
         if ( instance.hasMissingValue( ) )
