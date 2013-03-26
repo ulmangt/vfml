@@ -306,7 +306,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     }
 
     /**
-     * Builds Id3 decision tree classifier.
+     * Builds VDFT decision tree classifier.
      *
      * @param data the training data
      * @exception Exception if classifier can't be built successfully
