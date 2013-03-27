@@ -3,9 +3,10 @@ package edu.gmu.vfml.tree;
 import weka.core.Instance;
 
 /**
- * <p>A wrapper class around a {@code weka.core.Instance} which automatically
- * assigns the instance a monotonically increasing identifier to each
- * instance created.</p>
+ * <p>A wrapper class around a {@code weka.core.Instance} which stores the largest
+ * id among the currently existing CNodes at the time the data was passed to
+ * CVFDT. This is used to remove the instance data from the Node counts when
+ * the instance rolls off the window.</p>
  * 
  * <p>Note: This class is not thread safe.</p>
  * 
@@ -14,15 +15,13 @@ import weka.core.Instance;
  */
 public class InstanceId
 {
-    private static long counter = 0;
-
     protected Instance instance;
-    protected long id;
+    protected int id;
 
-    public InstanceId( Instance instance )
+    public InstanceId( Instance instance, int id )
     {
         this.instance = instance;
-        this.id = counter++;
+        this.id = id;
     }
 
     public Instance getInstance( )
@@ -30,7 +29,7 @@ public class InstanceId
         return instance;
     }
 
-    public long getId( )
+    public int getId( )
     {
         return id;
     }

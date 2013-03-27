@@ -24,25 +24,25 @@ public class Node implements Serializable
     private static final long serialVersionUID = 1L;
 
     /** The node's successors. */
-    private Node[] successors;
+    protected Node[] successors;
 
     /** Attribute used for splitting. */
-    private Attribute attribute;
+    protected Attribute attribute;
 
     /** Class value if node is leaf. */
-    private double classValue;
+    protected double classValue;
 
     /** Number of instances corresponding to classValue.
      *  This is equal to classCounts[classAttribute.index()]. */
-    private int classCount;
+    protected int classCount;
 
     // fields copied from VFDT
-    Attribute classAttribute;
+    protected Attribute classAttribute;
 
     // counts indexed by [attribute][value][class]
-    transient int[][][] counts;
-    transient int[] classCounts;
-    transient int totalCount;
+    protected transient int[][][] counts;
+    protected transient int[] classCounts;
+    protected transient int totalCount;
 
     public Node( Attribute[] attributes, Attribute classAttribute )
     {
@@ -131,31 +131,6 @@ public class Node implements Serializable
         }
     }
 
-    public void incrementCounts( Instance instance )
-    {
-        int instanceClassValue = ( int ) instance.classValue( );
-
-        incrementTotalCount( );
-        incrementClassCount( instanceClassValue );
-
-        for ( int i = 0; i < instance.numAttributes( ); i++ )
-        {
-            Attribute attribute = instance.attribute( i );
-            incrementCount( attribute, instance );
-        }
-
-        // update classValue and classCount
-        int instanceClassCount = getCount( instanceClassValue );
-
-        // if the count of the class we just added is greater than the current
-        // largest count, it becomes the new classification for this node
-        if ( instanceClassCount > classCount )
-        {
-            classCount = instanceClassCount;
-            classValue = instance.value( classAttribute );
-        }
-    }
-
     /**
      * @return the total number of instances in this Node
      */
@@ -206,27 +181,89 @@ public class Node implements Serializable
     {
         return counts[attributeIndex][valueIndex][classIndex];
     }
-
-    private void incrementTotalCount( )
+    
+    public void incrementCounts( Instance instance )
     {
-        totalCount += 1;
+        adjustCounts( instance, 1 );
+    }
+    
+    public void decrementCounts( Instance instance )
+    {
+        adjustCounts( instance, -1 );
+    }
+    
+    public void adjustCounts( Instance instance, int amount )
+    {
+        //XXX assumes nominal class
+        int instanceClassValue = ( int ) instance.classValue( );
+
+        adjustTotalCount( amount );
+        adjustClassCount( instanceClassValue, amount );
+
+        for ( int i = 0; i < instance.numAttributes( ); i++ )
+        {
+            Attribute attribute = instance.attribute( i );
+            adjustCount( attribute, instance, amount );
+        }
+
+        // update classValue and classCount
+        int instanceClassCount = getCount( instanceClassValue );
+
+        // if we incremented, and
+        // if the count of the class we just added is greater than the current
+        // largest count, it becomes the new classification for this node
+        if ( amount > 0 && instanceClassCount > classCount )
+        {
+            classCount = instanceClassCount;
+            classValue = instance.value( classAttribute );
+        }
+        // if we decremented the current leading class, make sure it's
+        // still the leading class
+        else if ( amount < 0 && instanceClassValue == classValue )
+        {
+            updateClass( );
+        }
+    }
+    
+    protected void updateClass( )
+    {
+        int maxCount = 0;
+        int maxIndex = 0;
+        for ( int i = 0 ; i < classCounts.length ; i++ )
+        {
+            int count = classCounts[i];
+            if ( count > maxCount )
+            {
+                maxCount = count;
+                maxIndex = i;
+            }
+        }
+        
+        classCount = maxCount;
+        //XXX assumes nominal class
+        classValue = maxIndex;
     }
 
-    private void incrementClassCount( int classIndex )
+    protected void adjustTotalCount( int amount )
     {
-        classCounts[classIndex] += 1;
+        totalCount += amount;
     }
 
-    private void incrementCount( Attribute attribute, Instance instance )
+    protected void adjustClassCount( int classIndex, int amount )
+    {
+        classCounts[classIndex] += amount;
+    }
+
+    protected void adjustCount( Attribute attribute, Instance instance, int amount )
     {
         int attributeIndex = attribute.index( );
         int classValue = ( int ) instance.value( classAttribute );
         int attributeValue = ( int ) instance.value( attribute );
-        incrementCount( attributeIndex, attributeValue, classValue );
+        adjustCount( attributeIndex, attributeValue, classValue, amount );
     }
 
-    private void incrementCount( int attributeIndex, int valueIndex, int classIndex )
+    protected void adjustCount( int attributeIndex, int valueIndex, int classIndex, int amount )
     {
-        counts[attributeIndex][valueIndex][classIndex]++;
+        counts[attributeIndex][valueIndex][classIndex] += amount;
     }
 }

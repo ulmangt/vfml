@@ -73,7 +73,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     {
         return "Nodes are only rechecked for splits every multiple of this many data instances.";
     }
-    
+
     /**
      * Nodes are only checked for splits when the reach multiple of nMin instances.
      */
@@ -81,7 +81,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     {
         return nMin;
     }
-    
+
     /**
      * @see #getNMin()
      */
@@ -89,7 +89,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     {
         this.nMin = nmin;
     }
-    
+
     /**
      * Returns the tip text for this property.
      * @return tip text for this property suitable for
@@ -164,7 +164,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     {
         return listOptionsVector( ).elements( );
     }
-    
+
     /**
      * @see #listOptions()
      */
@@ -198,14 +198,14 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
         {
             delta = Double.parseDouble( hoeffdingConfidenceString );
         }
-        
+
         String nMinString = Utils.getOption( 'N', options );
         if ( !nMinString.isEmpty( ) )
         {
             nMin = Integer.parseInt( nMinString );
         }
     }
-    
+
     /**
      * Gets the current settings of the Classifier.
      *
@@ -215,13 +215,13 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     public List<String> getOptionsList( )
     {
         List<String> options = new LinkedList<String>( );
-        
+
         options.add( "-H" );
         options.add( String.valueOf( delta ) );
 
         options.add( "-T" );
         options.add( String.valueOf( tieConfidence ) );
-        
+
         options.add( "-N" );
         options.add( String.valueOf( nMin ) );
 
@@ -238,7 +238,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     {
         return getOptionsList( ).toArray( new String[0] );
     }
-    
+
     /**
      * Returns a string describing the classifier.
      * @return a description suitable for the GUI.
@@ -301,7 +301,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
 
         return result;
     }
-    
+
     public Node getRoot( )
     {
         return root;
@@ -336,6 +336,20 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     @Override
     public void buildClassifier( Instances data ) throws Exception
     {
+        // Initialize the classifier. As per the Weka classifier contract,
+        // this method takes care of completely resetting the classifier 
+        // from any previous runs.
+        initialize( data );
+
+        // build the Hoeffding tree
+        makeTree( data );
+    }
+
+    /**
+     * Perform classifier initialization steps.
+     */
+    protected void initialize( Instances data ) throws Exception
+    {
         // can classifier handle the data?
         getCapabilities( ).testWithFail( data );
 
@@ -353,9 +367,6 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
 
         // create root node
         root = newNode( data );
-
-        // build the Hoeffding tree
-        makeTree( data );
     }
 
     protected Node newNode( Instances instances )
@@ -379,7 +390,6 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     {
         while ( data.hasMoreElements( ) )
         {
-
             try
             {
                 // retrieve the next data instance
@@ -391,58 +401,10 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
                 // update the counts associated with this instance
                 node.incrementCounts( instance );
 
+                // check whether or not to split the node on an attribute
                 if ( node.getCount( ) % nMin == 0 )
                 {
-                    // compute the node entropy with no split
-                    double nullValue = computeEntropy( node );
-    
-                    // determine based on Hoeffding Bound whether to split node
-                    int firstIndex = 0;
-                    double firstValue = Double.MAX_VALUE;
-                    double secondValue = Double.MAX_VALUE;
-    
-                    // loop through all the attributes, calculating information gains
-                    // and keeping the attributes with the two highest information gains
-                    for ( int attrIndex = 0; attrIndex < instance.numAttributes( ); attrIndex++ )
-                    {
-                        // don't consider the class attribute
-                        if ( attrIndex == classAttribute.index( ) ) continue;
-    
-                        Attribute attribute = instance.attribute( attrIndex );
-                        double value = computeEntropySum( node, attribute );
-    
-                        if ( value < firstValue )
-                        {
-                            secondValue = firstValue;
-                            firstValue = value;
-                            firstIndex = attrIndex;
-                        }
-                        else if ( value < secondValue )
-                        {
-                            secondValue = value;
-                        }
-                    }
-    
-                    // if the difference between the information gain of the two best attributes
-                    // has exceeded the Hoeffding bound (which will continually shrink as more
-                    // attributes are added to the node) then split on the best attribute 
-                    double hoeffdingBound = calculateHoeffdingBound( node );
-    
-                    // split if there is a large enough entropy difference between the first/second place attributes
-                    boolean confident = secondValue - firstValue > hoeffdingBound;
-                    // or if the first/second attributes are so close that the hoeffding bound has decreased below
-                    // the tie threshold (in this case it really doesn't matter which attribute is chosen
-                    boolean tie = tieConfidence > hoeffdingBound;
-                    
-                    // don't split if even the best split would increase overall entropy
-                    boolean preprune = nullValue <= firstValue;
-    
-                    // see: vfdt-engine.c:871
-                    if ( ( tie || confident ) && !preprune )
-                    {
-                        Attribute attribute = instance.attribute( firstIndex );
-                        node.split( attribute, instance );
-                    }
+                    checkNodeSplit( instance, node );
                 }
             }
             catch ( Exception e )
@@ -450,6 +412,65 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
                 logWarning( logger, "Trouble processing instance.", e );
             }
         }
+    }
+
+    protected void checkNodeSplit( Instance instance, Node node )
+    {
+        // compute the node entropy with no split
+        double nullValue = computeEntropy( node );
+
+        // determine based on Hoeffding Bound whether to split node
+        int firstIndex = 0;
+        double firstValue = Double.MAX_VALUE;
+        double secondValue = Double.MAX_VALUE;
+
+        // loop through all the attributes, calculating information gains
+        // and keeping the attributes with the two highest information gains
+        for ( int attrIndex = 0; attrIndex < instance.numAttributes( ); attrIndex++ )
+        {
+            // don't consider the class attribute
+            if ( attrIndex == classAttribute.index( ) ) continue;
+
+            Attribute attribute = instance.attribute( attrIndex );
+            double value = computeEntropySum( node, attribute );
+
+            if ( value < firstValue )
+            {
+                secondValue = firstValue;
+                firstValue = value;
+                firstIndex = attrIndex;
+            }
+            else if ( value < secondValue )
+            {
+                secondValue = value;
+            }
+        }
+
+        // if the difference between the information gain of the two best attributes
+        // has exceeded the Hoeffding bound (which will continually shrink as more
+        // attributes are added to the node) then split on the best attribute 
+        double hoeffdingBound = calculateHoeffdingBound( node );
+
+        // split if there is a large enough entropy difference between the first/second place attributes
+        boolean confident = secondValue - firstValue > hoeffdingBound;
+        // or if the first/second attributes are so close that the hoeffding bound has decreased below
+        // the tie threshold (in this case it really doesn't matter which attribute is chosen
+        boolean tie = tieConfidence > hoeffdingBound;
+        
+        // don't split if even the best split would increase overall entropy
+        boolean preprune = nullValue <= firstValue;
+
+        // see: vfdt-engine.c:871
+        if ( ( tie || confident ) && !preprune )
+        {
+            Attribute attribute = instance.attribute( firstIndex );
+            splitNode( node, attribute, instance );
+        }
+    }
+
+    protected void splitNode( Node node, Attribute attribute, Instance instance )
+    {
+        node.split( attribute, instance );
     }
 
     /**

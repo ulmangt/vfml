@@ -7,9 +7,9 @@ import edu.gmu.vfml.tree.InstanceId;
 
 public class InstanceUtils
 {
-    public static InstanceId wrapInstance( Instance instance )
+    public static InstanceId wrapInstance( Instance instance, int id )
     {
-        return new InstanceId( instance );
+        return new InstanceId( instance, id );
     }
 
     public static Attribute[] getAttributes( Instances instances )
