@@ -1,6 +1,7 @@
 package edu.gmu.vfml.tree;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 
 import weka.core.Attribute;
@@ -37,15 +38,32 @@ public class CNode extends Node
     transient protected int testCount = 0;
 
     /**
+     * The number of correctly classified test instances.
+     */
+    transient protected int testCorrectCount = 0;
+    
+    /**
      * If true, new data instances are not used to grow the tree. Instead, they are
      * used to compare the error rate of this Node to that of its subtrees.
      */
     transient protected boolean testMode = false;
-
+    
     /**
-     * The number of correctly classified test instances.
+     * A flag set when a new alternative node is first created.
+     * Necessary because the test interval is based on per-node counts and the
+     * alternative node creation interval is based on the overall instance count.
+     * Therefore, a new alternative node may get created in the middle of the test
+     * phase for a node. This node shouldn't be included in the test (since it
+     * doesn't have a full set of instances).
      */
-    transient protected int testCorrectCount = 0;
+    transient protected boolean isNew = false;
+    
+    /**
+     * Only valid for alternative nodes. Stores the previous best error difference
+     * between the main tree and the alternative node. Used for pruning unpromising
+     * alternative trees.
+     */
+    transient protected double bestErrorDiff = 0.0;
 
     public CNode( Attribute[] attributes, Attribute classAttribute, int id, int testInterval, int testDuration )
     {
@@ -108,27 +126,47 @@ public class CNode extends Node
 
     public void incrementTestCount( )
     {
-        // check whether we should enter or exit test mode
-        this.testCount++;
-        if ( this.testMode )
+        // isNew flag will be reset by our parent after the end
+        // of the current test phase
+        if ( !isNew )
         {
-            if ( this.testCount > this.testDuration )
+            // check whether we should enter or exit test mode
+            this.testCount++;
+            if ( this.testMode )
             {
-                endTest( );
+                if ( this.testCount > this.testDuration )
+                {
+                    endTest( );
+                }
             }
-        }
-        else
-        {
-            if ( this.testCount > this.testInterval )
+            else
             {
-                startTest( );
+                if ( this.testCount > this.testInterval )
+                {
+                    startTest( );
+                }
             }
         }
     }
 
+    public boolean isNew( )
+    {
+        return this.isNew;
+    }
+    
+    public void setNew( boolean isNew )
+    {
+        this.isNew = isNew;
+    }
+    
     public boolean isTestMode( )
     {
         return this.testMode;
+    }
+    
+    public int getTestCount( )
+    {
+        return this.testCount;
     }
     
     public double getTestError( )
@@ -142,15 +180,45 @@ public class CNode extends Node
     protected void endTest( )
     {
         CNode bestAlt = null;
-        double bestError = getTestError( );
-        for ( CNode alt : getAlternativeTrees( ) )
+        double bestErrorDiff = 0;
+        double mainError = getTestError( );
+        Iterator<CNode> iter = getAlternativeTrees( ).iterator( );
+        while( iter.hasNext( ) )
         {
-            double error = alt.getTestError( );
-            if ( error < bestError )
+            CNode alt = iter.next( );
+            
+            // if an alternative tree was created while we were in
+            // test mode, it will not yet be in test mode and will
+            // not have collected enough examples yet to evaluate it properly
+            // so skip it until the next test mode
+            if ( !alt.isNew( ) )
             {
-                bestError = error;
-                bestAlt = alt;
+                double altError = alt.getTestError( );
+                double errorDiff = mainError - altError;
+                
+                // if the error difference improved, record the new improved value
+                if ( alt.bestErrorDiff < errorDiff )
+                {
+                    alt.bestErrorDiff = errorDiff;
+                }
+                // if the error difference increased by 1% above the current
+                // best, then drop the alternative node
+                else if ( errorDiff > alt.bestErrorDiff * 1.01 )
+                {
+                    iter.remove( );
+                }
+                
+                // remember the alternative node with the best error
+                if ( errorDiff < bestErrorDiff )
+                {
+                    bestErrorDiff = errorDiff;
+                    bestAlt = alt;
+                }
             }
+            
+            // mark all the alternative nodes as not new so they will
+            // participate in the next round of testing
+            alt.setNew( false );
         }
         
         // one of the alternative trees is better than the current tree!

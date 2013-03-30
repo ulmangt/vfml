@@ -241,6 +241,14 @@ public class CVFDT extends VFDT
     }
     
     /**
+     * Traverse the entire tree and determine if new alternative trees should be created.
+     */
+    public void traverseAndCheckSplitValidity( )
+    {
+        
+    }
+    
+    /**
      * In addition to incrementing the counts for the main tree,
      * increment the counts of any alternative trees being grown from this Node.
      */
