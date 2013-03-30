@@ -226,11 +226,14 @@ public class CVFDT extends VFDT
                 // add the new instance to the window and remove old instance (if necessary)
                 updateWindow( instance );
                 
+                // split nodes with attributes which have surpassed the hoeffding bound
+                // and/or test the alternative subtrees for nodes in test mode
                 traverseAndSplitOrTest( instance, getRoot( ) );
                 
+                // check whether new alternative nodes should be created
                 if ( ++splitValidityCounter % splitRecheckInterval == 0 )
                 {
-                    //TODO fill in alternative subtree start logic    
+                    traverseAndCheckSplitValidity( );
                 }
             }
             catch ( Exception e )
