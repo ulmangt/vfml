@@ -228,23 +228,10 @@ public class CVFDT extends VFDT
                 
                 traverseAndSplitOrTest( instance, getRoot( ) );
                 
-//                // traverse the classification tree to find the leaf node for this instance
-//                Node node = getLeafNode( instance );
-//                
-//                // check whether or not to split the node on an attribute
-//                if ( node.getCount( ) % nMin == 0 )
-//                {
-//                    checkNodeSplit( instance, node );
-//                }
-//                
-//                
-//                getRoot( ).traverseAndSplitOrTest( instance, nMin );
-//
-//                
-//                if ( ++splitValidityCounter % splitRecheckInterval == 0 )
-//                {
-//                    //TODO fill in alternative subtree start logic    
-//                }
+                if ( ++splitValidityCounter % splitRecheckInterval == 0 )
+                {
+                    //TODO fill in alternative subtree start logic    
+                }
             }
             catch ( Exception e )
             {
@@ -332,11 +319,6 @@ public class CVFDT extends VFDT
         if ( node.isTestMode( ) )
         {
             node.testInstance( instance );
-            
-            for ( CNode alt : node.getAlternativeTrees( ) )
-            {
-                alt.testInstance( instance );
-            }
         }
         
         // traverse into all the alternative nodes

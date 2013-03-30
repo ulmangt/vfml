@@ -130,12 +130,44 @@ public class CNode extends Node
     {
         return this.testMode;
     }
+    
+    public double getTestError( )
+    {
+        return 1 - (double) this.testCorrectCount / (double) this.testCount;
+    }
 
     /**
      * Called when enough data instances have been seen that it is time to end test mode.
      */
     protected void endTest( )
     {
+        CNode bestAlt = null;
+        double bestError = getTestError( );
+        for ( CNode alt : getAlternativeTrees( ) )
+        {
+            double error = alt.getTestError( );
+            if ( error < bestError )
+            {
+                bestError = error;
+                bestAlt = alt;
+            }
+        }
+        
+        // one of the alternative trees is better than the current tree!
+        // replace this node with the alternative node
+        if ( bestAlt != null )
+        {
+            this.successors = bestAlt.successors;
+            this.attribute = bestAlt.attribute;
+            this.classValue = bestAlt.classValue;
+            this.classCount = bestAlt.classCount;
+            this.counts = bestAlt.counts;
+            this.classCount = bestAlt.classCount;
+            this.totalCount = bestAlt.totalCount;
+            this.id = bestAlt.id;
+            this.altNodes = bestAlt.altNodes;
+        }
+        
         this.testCorrectCount = 0;
         this.testCount = 0;
         this.testMode = false;
