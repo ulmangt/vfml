@@ -1,5 +1,6 @@
 package edu.gmu.vfml.tree;
 
+import java.util.Collection;
 import java.util.Map;
 
 import weka.core.Attribute;
@@ -26,23 +27,48 @@ public class CNode extends Node
      * @see InstanceId
      */
     protected int id;
+    
+    protected int testInterval;
+    protected int testDuration;
+    
+    /**
+     * Number of instances until entering/exiting next test phase.
+     */
+    transient protected int testCount = 0;
+    
+    /**
+     * If true, new data instances are not used to grow the tree. Instead, they are
+     * used to compare the error rate of this Node to that of its subtrees.
+     */
+    transient protected boolean testMode = false;
+    
+    /**
+     * The number of correctly classified test instances.
+     */
+    transient protected int testCorrectCount = 0;
 
-    public CNode( Attribute[] attributes, Attribute classAttribute, int id )
+    public CNode( Attribute[] attributes, Attribute classAttribute, int id, int testInterval, int testDuration )
     {
         super( attributes, classAttribute );
         this.id = id;
     }
 
-    public CNode( Instances instances, Attribute classAttribute, int id )
+    public CNode( Instances instances, Attribute classAttribute, int id, int testInterval, int testDuration )
     {
         super( instances, classAttribute );
         this.id = id;
     }
 
-    public CNode( Instance instance, Attribute classAttribute, int id )
+    public CNode( Instance instance, Attribute classAttribute, int id, int testInterval, int testDuration )
     {
         super( instance, classAttribute );
         this.id = id;
+    }
+    
+    @Override
+    public CNode getLeafNode( Instance instance )
+    {
+        return (CNode) getLeafNode( this, instance );
     }
     
     @Override
@@ -58,62 +84,49 @@ public class CNode extends Node
         }
     }
     
-    /**
-     * Called when an instance rolls off the window. Removes the instance
-     * from the counts of each node
-     */
-    public void traverseAndDecrementCounts( Instance instance, int id )
+    public Collection<CNode> getAlternativeTrees( )
     {
-        // nodes with greater id than the instance id were created after the
-        // instance arrived and do not have the instance data included in their counts
-        if ( this.id <= id )
+        return altNodes.values( );
+    }
+    
+    public void incrementTestCount( )
+    {
+        // check whether we should enter or exit test mode
+        this.testCount++;
+        if ( this.testMode )
         {
-            decrementCounts( instance );
+            if ( this.testCount > this.testDuration )
+            {
+                endTest( );
+            }
         }
-        
-        // traverse into all the alternative nodes
-        for ( CNode alt : altNodes.values( ) )
+        else
         {
-            alt.traverseAndDecrementCounts( instance, id );
-        }
-        
-        // if the main tree node is not a leaf node,
-        // descend into the appropriate child node
-        if ( getAttribute( ) != null )
-        {
-            int attributeValue = ( int ) instance.value( getAttribute( ) );
-            CNode childNode = getSuccessor( attributeValue );
-            childNode.traverseAndDecrementCounts( instance, id );
+            if ( this.testCount > this.testInterval )
+            {
+                startTest( );
+            }
         }
     }
     
     /**
-     * In addition to incrementing the counts for the main tree,
-     * increment the counts of any alternative trees being grown from this Node.
+     * Called when enough data instances have been seen that it is time to end test mode.
      */
-    public void traverseAndIncrementCounts( Instance instance )
+    protected void endTest( )
     {
-        // increment the counts for this node
-        // (unlike VFDT, statistics are kept for each data instance
-        // at every node in the tree in order to continuously monitor
-        // the validity of previous decisions)
-        incrementCounts( instance );
-        
-        // traverse into all the alternative nodes
-        for ( CNode alt : altNodes.values( ) )
-        {
-            alt.traverseAndIncrementCounts( instance );
-        }
-        
-        // if the main tree node is not a leaf node,
-        // descend into the appropriate child node
-        if ( getAttribute( ) != null )
-        {
-            int attributeValue = ( int ) instance.value( getAttribute( ) );
-            CNode childNode = getSuccessor( attributeValue );
-            childNode.traverseAndIncrementCounts( instance );
-        }
+        this.testCount = 0;
+        this.testMode = false;
     }
+    
+    /**
+     * Called when enough data instances have been seen that it is time to enter test mode.
+     */
+    protected void startTest( )
+    {
+        this.testCount = 0;
+        this.testMode = true;
+    }
+    
     /**
      * Like {@code Node#split(Attribute, Instance)}, but creates CNodes and
      * assigns the specified id to the Node.
@@ -125,7 +138,7 @@ public class CNode extends Node
 
         for ( int valueIndex = 0; valueIndex < attribute.numValues( ); valueIndex++ )
         {
-            this.successors[valueIndex] = new CNode( instance, classAttribute, id );
+            this.successors[valueIndex] = new CNode( instance, classAttribute, id, testInterval, testDuration );
         }
     }
     

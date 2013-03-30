@@ -324,7 +324,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
         }
 
         // get the class value for the leaf node corresponding to the provided instance
-        return getLeafNode( root, instance ).getClassValue( );
+        return root.getLeafNode( instance ).getClassValue( );
     }
 
     /**
@@ -396,7 +396,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
                 Instance instance = ( Instance ) data.nextElement( );
 
                 // traverse the classification tree to find the leaf node for this instance
-                Node node = getLeafNode( instance );
+                Node node = root.getLeafNode( instance );
 
                 // update the counts associated with this instance
                 node.incrementCounts( instance );
@@ -574,38 +574,6 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
         int n = node.getCount( );
         double epsilon = Math.sqrt( ( R_squared * ln_inv_delta ) / ( 2 * n ) );
         return epsilon;
-    }
-
-    /**
-     * @see #getLeafNode(Node, Instance)
-     */
-    protected Node getLeafNode( Instance instance )
-    {
-        return getLeafNode( root, instance );
-    }
-
-    /**
-     * Traverses the node tree for the provided instance and returns the leaf node
-     * associated with the provided instance.
-     * 
-     * @param instance the instance to be classified
-     * @return the leaf node for the instance
-     * @see weka.classifiers.trees.Id3#classifyInstance(Instance)
-     */
-    protected Node getLeafNode( Node node, Instance instance )
-    {
-        // this is a leaf node, so return this node
-        if ( node.getAttribute( ) == null )
-        {
-            return node;
-        }
-        // this is an internal node, move to the next child based on the m_Attribute for this node
-        else
-        {
-            int attributeValue = ( int ) instance.value( node.getAttribute( ) );
-            Node childNode = node.getSuccessor( attributeValue );
-            return getLeafNode( childNode, instance );
-        }
     }
 
     /**

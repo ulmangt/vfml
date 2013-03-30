@@ -105,6 +105,38 @@ public class Node implements Serializable
         }
     }
 
+    /**
+     * @see #getLeafNode(Node, Instance)
+     */
+    public Node getLeafNode( Instance instance )
+    {
+        return getLeafNode( this, instance );
+    }
+
+    /**
+     * Traverses the node tree for the provided instance and returns the leaf node
+     * associated with the provided instance.
+     * 
+     * @param instance the instance to be classified
+     * @return the leaf node for the instance
+     * @see weka.classifiers.trees.Id3#classifyInstance(Instance)
+     */
+    protected Node getLeafNode( Node node, Instance instance )
+    {
+        // this is a leaf node, so return this node
+        if ( node.getAttribute( ) == null )
+        {
+            return node;
+        }
+        // this is an internal node, move to the next child based on the m_Attribute for this node
+        else
+        {
+            int attributeValue = ( int ) instance.value( node.getAttribute( ) );
+            Node childNode = node.getSuccessor( attributeValue );
+            return getLeafNode( childNode, instance );
+        }
+    }
+
     public Attribute getClassAttribute( )
     {
         return classAttribute;
@@ -129,6 +161,11 @@ public class Node implements Serializable
         {
             this.successors[valueIndex] = new Node( instance, classAttribute );
         }
+    }
+
+    public int getNumClasses( )
+    {
+        return this.classAttribute.numValues( );
     }
 
     /**
@@ -181,17 +218,17 @@ public class Node implements Serializable
     {
         return counts[attributeIndex][valueIndex][classIndex];
     }
-    
+
     public void incrementCounts( Instance instance )
     {
         adjustCounts( instance, 1 );
     }
-    
+
     public void decrementCounts( Instance instance )
     {
         adjustCounts( instance, -1 );
     }
-    
+
     public void adjustCounts( Instance instance, int amount )
     {
         //XXX assumes nominal class
@@ -224,12 +261,12 @@ public class Node implements Serializable
             updateClass( );
         }
     }
-    
+
     protected void updateClass( )
     {
         int maxCount = 0;
         int maxIndex = 0;
-        for ( int i = 0 ; i < classCounts.length ; i++ )
+        for ( int i = 0; i < classCounts.length; i++ )
         {
             int count = classCounts[i];
             if ( count > maxCount )
@@ -238,7 +275,7 @@ public class Node implements Serializable
                 maxIndex = i;
             }
         }
-        
+
         classCount = maxCount;
         //XXX assumes nominal class
         classValue = maxIndex;

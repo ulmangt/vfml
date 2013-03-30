@@ -181,7 +181,7 @@ public class CVFDT extends VFDT
     @Override
     public Node newNode( Instances instances )
     {
-        return new CNode( instances, classAttribute, ++largestNodeId );
+        return new CNode( instances, classAttribute, ++largestNodeId, altTestModeInterval, altTestModeDuration );
     }
 
     /**
@@ -218,30 +218,33 @@ public class CVFDT extends VFDT
                 // retrieve the next data instance
                 Instance instance = ( Instance ) data.nextElement( );
 
-                // traverse the classification tree to find the leaf node for this instance
-                Node node = getLeafNode( instance );
-
-                //TODO while incrementing node counts, keep track of when the
-                //     node should go in/out of testing mode
-                
                 // update the counts associated with this instance
                 // unlike VFDT, we start at the root because we will reach multiple
                 // leaf nodes in the various alternative trees
-                getRoot( ).traverseAndIncrementCounts( instance );
+                traverseAndIncrementCounts( instance, getRoot( ) );
                 
                 // add the new instance to the window and remove old instance (if necessary)
                 updateWindow( instance );
-
-                // check whether or not to split the node on an attribute
-                if ( node.getCount( ) % nMin == 0 )
-                {
-                    checkNodeSplit( instance, node );
-                }
                 
-                if ( ++splitValidityCounter % splitRecheckInterval == 0 )
-                {
-                    //TODO fill in alternative subtree start logic    
-                }
+                traverseAndSplitOrTest( instance, getRoot( ) );
+                
+//                // traverse the classification tree to find the leaf node for this instance
+//                Node node = getLeafNode( instance );
+//                
+//                // check whether or not to split the node on an attribute
+//                if ( node.getCount( ) % nMin == 0 )
+//                {
+//                    checkNodeSplit( instance, node );
+//                }
+//                
+//                
+//                getRoot( ).traverseAndSplitOrTest( instance, nMin );
+//
+//                
+//                if ( ++splitValidityCounter % splitRecheckInterval == 0 )
+//                {
+//                    //TODO fill in alternative subtree start logic    
+//                }
             }
             catch ( Exception e )
             {
@@ -250,8 +253,108 @@ public class CVFDT extends VFDT
         }
     }
     
+    /**
+     * In addition to incrementing the counts for the main tree,
+     * increment the counts of any alternative trees being grown from this Node.
+     */
+    public void traverseAndIncrementCounts( Instance instance, CNode node )
+    {
+        node.incrementTestCount( );
+            
+        // increment the counts for this node
+        // (unlike VFDT, statistics are kept for each data instance
+        // at every node in the tree in order to continuously monitor
+        // the validity of previous decisions)
+        node.incrementCounts( instance );
+        
+        // traverse into all the alternative nodes
+        for ( CNode alt : node.getAlternativeTrees( ) )
+        {
+            traverseAndIncrementCounts( instance, alt );
+        }
+        
+        // if tree node is not a leaf node,
+        // descend into the appropriate child node
+        if ( node.getAttribute( ) != null )
+        {
+            int attributeValue = ( int ) instance.value( node.getAttribute( ) );
+            CNode childNode = node.getSuccessor( attributeValue );
+            traverseAndIncrementCounts( instance, childNode );
+        }
+    }
+    
+    /**
+     * Called when an instance rolls off the window. Removes the instance
+     * from the counts of each node
+     */
+    public void traverseAndDecrementCounts( Instance instance, CNode node, int id )
+    {
+        // nodes with greater id than the instance id were created after the
+        // instance arrived and do not have the instance data included in their counts
+        if ( node.getId( ) <= id )
+        {
+            node.decrementCounts( instance );
+        }
+        
+        // traverse into all the alternative nodes
+        for ( CNode alt : node.getAlternativeTrees( ) )
+        {
+            traverseAndDecrementCounts( instance, alt, id );
+        }
+        
+        // if the main tree node is not a leaf node,
+        // descend into the appropriate child node
+        if ( node.getAttribute( ) != null )
+        {
+            int attributeValue = ( int ) instance.value( node.getAttribute( ) );
+            CNode childNode = node.getSuccessor( attributeValue );
+            traverseAndDecrementCounts( instance, childNode, id );
+        }
+    }
+    
+    /**
+     * <p>Traverses the main tree and alternative trees. If in test mode, classifies
+     * the instance and increments the testCorrectCount if the classification
+     * is correct.</p>
+     * 
+     * <p>If not in test mode, does nothing unless this is a leaf node and nMin
+     * instances have been reached. At that point it checks for potential new
+     * splits of the node.</p>
+     * 
+     * @param instance
+     */
+    protected void traverseAndSplitOrTest( Instance instance, CNode node )
+    {
+        // ignore test -- just consider splits for now
+        
+        // traverse into all the alternative nodes
+        for ( CNode alt : node.getAlternativeTrees( ) )
+        {
+            traverseAndSplitOrTest( instance, alt );
+        }
+        
+        // if tree node is not a leaf node,
+        // descend into the appropriate child node
+        if ( node.getAttribute( ) != null )
+        {
+            int attributeValue = ( int ) instance.value( node.getAttribute( ) );
+            CNode childNode = node.getSuccessor( attributeValue );
+            traverseAndSplitOrTest( instance, childNode );
+        }
+        // if the node is a leaf node and the count is a multiple of nMin
+        // check to see whether we should split the node
+        else if ( node.getCount( ) % nMin == 0 )
+        {
+            checkNodeSplit( instance, node );
+        }
+    }
+    
     protected void updateWindow( Instance instance )
     {
+        //XXX CVFDT Table 2 uses the largest ID *among the nodes that instance
+        //XXX passes through* I think using the overall largest ID has the
+        //XXX same affect, but I'm not 100% sure
+        
         // add the new instance to the window
         // tag it with the id of the largest currently existing node
         window.addLast( new InstanceId( instance, largestNodeId ) );
@@ -264,7 +367,7 @@ public class CVFDT extends VFDT
             
             // iterate through the tree (and all alternative trees) and decrement
             // counts if the node's id is less than or equal to oldId
-            getRoot( ).traverseAndDecrementCounts( instance, oldId );
+            traverseAndDecrementCounts( instance, getRoot( ), oldId );
         }
     }
     
