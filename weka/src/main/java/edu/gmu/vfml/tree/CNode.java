@@ -16,32 +16,32 @@ import weka.core.Instances;
 public class CNode extends Node
 {
     private static final long serialVersionUID = 1L;
-    
+
     /**
      * A map of subtrees made from splitting on alternative Attributes (instead of
      * splitting on the Attribute specified in this.attribute).
      */
-    protected Map<Attribute,CNode> altNodes;
-    
+    protected Map<Attribute, CNode> altNodes;
+
     /**
      * @see InstanceId
      */
     protected int id;
-    
+
     protected int testInterval;
     protected int testDuration;
-    
+
     /**
      * Number of instances until entering/exiting next test phase.
      */
     transient protected int testCount = 0;
-    
+
     /**
      * If true, new data instances are not used to grow the tree. Instead, they are
      * used to compare the error rate of this Node to that of its subtrees.
      */
     transient protected boolean testMode = false;
-    
+
     /**
      * The number of correctly classified test instances.
      */
@@ -64,31 +64,48 @@ public class CNode extends Node
         super( instance, classAttribute );
         this.id = id;
     }
-    
+
     @Override
     public CNode getLeafNode( Instance instance )
     {
-        return (CNode) getLeafNode( this, instance );
+        return ( CNode ) getLeafNode( this, instance );
     }
-    
+
     @Override
     public CNode getSuccessor( int value )
     {
         if ( successors != null )
         {
-            return (CNode) successors[value];
+            return ( CNode ) successors[value];
         }
         else
         {
             return null;
         }
     }
-    
+
     public Collection<CNode> getAlternativeTrees( )
     {
         return altNodes.values( );
     }
-    
+
+    /**
+     * Determines the class prediction of the tree rooted at this node for the given instance.
+     * Compares that prediction against the true class value, and if they are equal, increments
+     * the correct test counter for this node.
+     * 
+     * @param instance
+     */
+    public void testInstance( Instance instance )
+    {
+        double predicted = getLeafNode( instance ).getClassValue( );
+        double actual = instance.classValue( );
+        if ( predicted == actual )
+        {
+            this.testCorrectCount++;
+        }
+    }
+
     public void incrementTestCount( )
     {
         // check whether we should enter or exit test mode
@@ -108,25 +125,35 @@ public class CNode extends Node
             }
         }
     }
-    
+
+    public boolean isTestMode( )
+    {
+        return this.testMode;
+    }
+
     /**
      * Called when enough data instances have been seen that it is time to end test mode.
      */
     protected void endTest( )
     {
+        this.testCorrectCount = 0;
         this.testCount = 0;
         this.testMode = false;
     }
-    
+
     /**
      * Called when enough data instances have been seen that it is time to enter test mode.
      */
     protected void startTest( )
     {
+        this.testCorrectCount = 0;
         this.testCount = 0;
-        this.testMode = true;
+        
+        // if there are no alternative nodes to test, don't enter test mode (wait another
+        // testInterval instances then check again)
+        this.testMode = !this.altNodes.isEmpty( );
     }
-    
+
     /**
      * Like {@code Node#split(Attribute, Instance)}, but creates CNodes and
      * assigns the specified id to the Node.
@@ -141,7 +168,7 @@ public class CNode extends Node
             this.successors[valueIndex] = new CNode( instance, classAttribute, id, testInterval, testDuration );
         }
     }
-    
+
     /**
      * @see InstanceId
      */

@@ -325,7 +325,19 @@ public class CVFDT extends VFDT
      */
     protected void traverseAndSplitOrTest( Instance instance, CNode node )
     {
-        // ignore test -- just consider splits for now
+        // If we're in test mode, instead of considering splits, evaluate
+        // the predicted class of this instance and compare it to the correct
+        // classification then store whether or not it matches. Perform this
+        // calculation for this node and each alternative node.
+        if ( node.isTestMode( ) )
+        {
+            node.testInstance( instance );
+            
+            for ( CNode alt : node.getAlternativeTrees( ) )
+            {
+                alt.testInstance( instance );
+            }
+        }
         
         // traverse into all the alternative nodes
         for ( CNode alt : node.getAlternativeTrees( ) )
@@ -341,9 +353,10 @@ public class CVFDT extends VFDT
             CNode childNode = node.getSuccessor( attributeValue );
             traverseAndSplitOrTest( instance, childNode );
         }
-        // if the node is a leaf node and the count is a multiple of nMin
+        // if we are not in test mode and the node is a leaf node and
+        // the count is a multiple of nMin,
         // check to see whether we should split the node
-        else if ( node.getCount( ) % nMin == 0 )
+        else if ( !node.isTestMode( ) && node.getCount( ) % nMin == 0 )
         {
             checkNodeSplit( instance, node );
         }
