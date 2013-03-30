@@ -64,8 +64,8 @@ public class CVFDT extends VFDT
      * use the next altTestModeDuration instances to evaluate whether or not
      * to discard the current tree in favor of one of the Node's alternative trees.
      */
-    protected int altTestModeInterval = 9000;
-    protected int altTestModeDuration = 1000;
+    protected int testInterval = 9000;
+    protected int testDuration = 1000;
     
     transient protected int largestNodeId;
     transient protected int splitValidityCounter;
@@ -111,13 +111,13 @@ public class CVFDT extends VFDT
         String altTestModeIntervalString = Utils.getOption( 'I', options );
         if ( !splitRecheckString.isEmpty( ) )
         {
-            altTestModeInterval = Integer.parseInt( altTestModeIntervalString );
+            testInterval = Integer.parseInt( altTestModeIntervalString );
         }
         
         String altTestModeDurationString = Utils.getOption( 'D', options );
         if ( !splitRecheckString.isEmpty( ) )
         {
-            altTestModeDuration = Integer.parseInt( altTestModeDurationString );
+            testDuration = Integer.parseInt( altTestModeDurationString );
         }
     }
     
@@ -138,10 +138,10 @@ public class CVFDT extends VFDT
         options.add( String.valueOf( splitRecheckInterval ) );
         
         options.add( "-I" );
-        options.add( String.valueOf( altTestModeInterval ) );
+        options.add( String.valueOf( testInterval ) );
         
         options.add( "-D" );
-        options.add( String.valueOf( altTestModeDuration ) );
+        options.add( String.valueOf( testDuration ) );
         
         return options;
     }
@@ -181,7 +181,7 @@ public class CVFDT extends VFDT
     @Override
     public Node newNode( Instances instances )
     {
-        return new CNode( instances, classAttribute, ++largestNodeId, altTestModeInterval, altTestModeDuration );
+        return new CNode( instances, classAttribute, ++largestNodeId );
     }
 
     /**
@@ -233,7 +233,7 @@ public class CVFDT extends VFDT
                 // check whether new alternative nodes should be created
                 if ( ++splitValidityCounter % splitRecheckInterval == 0 )
                 {
-                    traverseAndCheckSplitValidity( );
+                    traverseAndCheckSplitValidity( getRoot( ) );
                 }
             }
             catch ( Exception e )
@@ -276,7 +276,7 @@ public class CVFDT extends VFDT
      */
     public void traverseAndIncrementCounts( Instance instance, CNode node )
     {
-        node.incrementTestCount( );
+        node.incrementTestCount( testInterval, testDuration );
             
         // increment the counts for this node
         // (unlike VFDT, statistics are kept for each data instance
@@ -400,5 +400,62 @@ public class CVFDT extends VFDT
     protected void splitNode( Node node, Attribute attribute, Instance instance )
     {
         ((CNode) node).split( attribute, instance, ++largestNodeId );
+    }
+    
+    /**
+     * Evaluates the attributes of an already split node to determine if
+     * a new alternative tree should be created.
+     * 
+     * @see VFDT#checkNodeSplit(Instance, Node)
+     */
+    protected void recheckNodeSplit( Instance instance, CNode node )
+    {
+        // determine based on Hoeffding Bound whether to split node
+        int firstIndex = 0;
+        double firstValue = Double.MAX_VALUE;
+        double secondValue = Double.MAX_VALUE;
+
+        // loop through all the attributes, calculating information gains
+        // and keeping the attributes with the two highest information gains
+        for ( int attrIndex = 0; attrIndex < instance.numAttributes( ); attrIndex++ )
+        {
+            // don't consider the class attribute
+            if ( attrIndex == classAttribute.index( ) ) continue;
+            // don't consider the current split attribute
+            if ( attrIndex == node.getAttribute( ).index( ) ) continue;
+            
+            Attribute attribute = instance.attribute( attrIndex );
+            double value = computeEntropySum( node, attribute );
+
+            if ( value < firstValue )
+            {
+                secondValue = firstValue;
+                firstValue = value;
+                firstIndex = attrIndex;
+            }
+            else if ( value < secondValue )
+            {
+                secondValue = value;
+            }
+        }
+        
+        // if the difference between the information gain of the two best attributes
+        // has exceeded the Hoeffding bound (which will continually shrink as more
+        // attributes are added to the node) then split on the best attribute 
+        double hoeffdingBound = calculateHoeffdingBound( node );
+
+        boolean noAltTree = node.doesAltNodeExist( firstIndex );
+        // split if there is a large enough entropy difference between the first/second place attributes
+        boolean confident = secondValue - firstValue > hoeffdingBound;
+        // or if the first/second attributes are so close that the hoeffding bound has decreased below
+        // the tie threshold (in this case it really doesn't matter which attribute is chosen
+        boolean tie = tieConfidence > hoeffdingBound && secondValue - firstValue >= tieConfidence / 2.0;
+
+        // see: vfdt-engine.c:871
+        if ( noAltTree && ( tie || confident ) )
+        {
+            Attribute attribute = instance.attribute( firstIndex );
+            node.addAlternativeNode( instance, attribute );
+        }
     }
 }

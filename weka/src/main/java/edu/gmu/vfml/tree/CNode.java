@@ -29,9 +29,6 @@ public class CNode extends Node
      */
     protected int id;
 
-    protected int testInterval;
-    protected int testDuration;
-
     /**
      * Number of instances until entering/exiting next test phase.
      */
@@ -65,19 +62,19 @@ public class CNode extends Node
      */
     transient protected double bestErrorDiff = 0.0;
 
-    public CNode( Attribute[] attributes, Attribute classAttribute, int id, int testInterval, int testDuration )
+    public CNode( Attribute[] attributes, Attribute classAttribute, int id )
     {
         super( attributes, classAttribute );
         this.id = id;
     }
 
-    public CNode( Instances instances, Attribute classAttribute, int id, int testInterval, int testDuration )
+    public CNode( Instances instances, Attribute classAttribute, int id )
     {
         super( instances, classAttribute );
         this.id = id;
     }
 
-    public CNode( Instance instance, Attribute classAttribute, int id, int testInterval, int testDuration )
+    public CNode( Instance instance, Attribute classAttribute, int id )
     {
         super( instance, classAttribute );
         this.id = id;
@@ -124,7 +121,7 @@ public class CNode extends Node
         }
     }
 
-    public void incrementTestCount( )
+    public void incrementTestCount( int testInterval, int testDuration )
     {
         // isNew flag will be reset by our parent after the end
         // of the current test phase
@@ -134,14 +131,14 @@ public class CNode extends Node
             this.testCount++;
             if ( this.testMode )
             {
-                if ( this.testCount > this.testDuration )
+                if ( this.testCount > testDuration )
                 {
                     endTest( );
                 }
             }
             else
             {
-                if ( this.testCount > this.testInterval )
+                if ( this.testCount > testInterval )
                 {
                     startTest( );
                 }
@@ -172,6 +169,28 @@ public class CNode extends Node
     public double getTestError( )
     {
         return 1 - (double) this.testCorrectCount / (double) this.testCount;
+    }
+    
+    public boolean doesAltNodeExist( int attributeIndex )
+    {
+        for ( Attribute altAttribute : altNodes.keySet( ) )
+        {
+            if ( altAttribute.index( ) == attributeIndex ) return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean doesAltNodeExist( Attribute attribute )
+    {
+        return doesAltNodeExist( attribute.index( ) );
+    }
+    
+    public void addAlternativeNode( Instance instance, Attribute attribute )
+    {
+        CNode alt = new CNode( instance, classAttribute, id );
+        alt.setNew( true );
+        altNodes.put( attribute, alt );
     }
 
     /**
@@ -265,7 +284,7 @@ public class CNode extends Node
 
         for ( int valueIndex = 0; valueIndex < attribute.numValues( ); valueIndex++ )
         {
-            this.successors[valueIndex] = new CNode( instance, classAttribute, id, testInterval, testDuration );
+            this.successors[valueIndex] = new CNode( instance, classAttribute, id );
         }
     }
 
