@@ -246,9 +246,28 @@ public class CVFDT extends VFDT
     /**
      * Traverse the entire tree and determine if new alternative trees should be created.
      */
-    public void traverseAndCheckSplitValidity( )
-    {
-        
+    public void traverseAndCheckSplitValidity( CNode node )
+    {        
+        // only check the validity of split for non-leaf node (i.e. nodes with splits)
+        if ( node.getAttribute( ) != null )
+        {
+            // check the validity of the split on node.getAttribute() by
+            // potentially creating a node with an alternative split
+            
+            // traverse into all the alternative nodes
+            for ( CNode alt : node.getAlternativeTrees( ) )
+            {
+                traverseAndCheckSplitValidity( alt );
+            }
+            
+            // descend into all child nodes
+            int numValues = node.getAttribute( ).numValues( );
+            for ( int attributeValue = 0 ; attributeValue < numValues ; attributeValue++ )
+            {
+                CNode childNode = node.getSuccessor( attributeValue );
+                traverseAndCheckSplitValidity( childNode );
+            }
+        }
     }
     
     /**
