@@ -30,7 +30,7 @@
 
       </header>
       <section>
-        <h3>Very Fast Machine Learning Toolkit</h3>
+        <h1>Very Fast Machine Learning Toolkit</h1>
 
 <p>Pedro Domingos and Geoff Hulten developed VFML in 2003 to experiment with applying machine learning techniques to situations where the scale of streaming data being learned from makes traditional techniques impractical. Their original work is described in:</p>
 
@@ -38,13 +38,39 @@
 <p>Hulten, G. and Domingos, P. "VFML -- A toolkit for mining high-speed time-changing data streams" <a href="http://www.cs.washington.edu/dm/vfml/">http://www.cs.washington.edu/dm/vfml/</a>. 2003.</p>
 </blockquote>
 
-<h3>Very Fast Decision Tree</h3>
+<h2>Very Fast Decision Tree</h2>
 
 <p>JVFML is a Java implementation of Hulten and Domingos' Very Fast Decision Tree (VFDT) algorithm for building decision trees from streaming data using a statistical result known as the Hoeffding Bound. The Hoeffding Bound is used to decide when enough data instances have been processed to split a tree node and be confident that a traditional batch learner with all the data available would have made the same decision.</p>
 
-<h3>Weka Integration</h3>
+<h2>Weka Integration</h2>
 
 <p>JVFML is designed to interface with <a href="http://www.cs.waikato.ac.nz/ml/weka/">Weka</a>. Although using Weka eliminates a major advantage of VFDT (its ability to process streaming data sets one data instance at a time without ever loading the entire data set into memory), we feel a Weka implementation of VFDT is still a useful tool for experimenting with the algorithm.</p>
+
+<h3>Installation Instructions</h3>
+
+<ol>
+<li>Download Weka from the project's <a href="http://www.cs.waikato.ac.nz/ml/weka/downloading.html">Downloads</a> page and install it.</li>
+<li>Download the compiled JVFML jar: <a href="https://docs.google.com/file/d/0B9qrDMuiaIaNdjRPUGNLUFBZRkU/edit">vfml-weka-1.0.0.jar</a>.</li>
+<li>Copy <em>vfml-weka-1.0.0.jar</em> into your Weka application home directory.</li>
+<li>Open a terminal (cmd.exe on Windows).</li>
+<li>Include <em>vfml-weka-1.0.0.jar</em> on the Java classpath when launching Weka:<br><code>java -classpath weka.jar;vfml-weka-1.0.0.jar weka.gui.GUIChooser</code>
+</li>
+</ol><p>Note: Linux users should use : instead of ; when typing the previous command into the terminal.</p>
+
+<h3>Usage Instructions</h3>
+
+<p>Once Weka has been launched with the JVFML jar on the Java classpath, it can be used like any other Weka classifier. There should be two new classifiers available under <em>weka/classifiers/trees</em>: VFDT and CVFDT (CVFDT is an extension which support adapting to concept drift). Note that both classifiers currently only support nominal attributes and do not support missing values.</p>
+
+<p>Follow these steps as a quick way to get started running VFML using the default Weka data sets:</p>
+
+<ol>
+<li>Open the Weka Explorer.</li>
+<li>Open the <em>breast-cancer.arff</em> data file.</li>
+<li>Choose <em>Filter &gt; weka/filters/unsupervised/attribute/ReplaceMissingValues</em> then click <em>Apply</em>.</li>
+<li>Click on the <em>Classify</em> tab.</li>
+<li>Choose <em>Classifier &gt; weka/classifiers/trees/VFDT</em>.</li>
+<li>Click <em>Start</em>.</li>
+</ol>
       </section>
       <footer>
         <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
