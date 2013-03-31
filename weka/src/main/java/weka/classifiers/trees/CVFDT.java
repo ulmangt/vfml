@@ -495,7 +495,7 @@ public class CVFDT extends VFDT
         if ( !alreadyExists && ( tie || confident ) )
         {
             Attribute attribute = instance.attribute( firstIndex );
-            node.addAlternativeNode( instance, attribute );
+            node.addAlternativeNode( instance, attribute, ++largestNodeId );
         }
     }
 }

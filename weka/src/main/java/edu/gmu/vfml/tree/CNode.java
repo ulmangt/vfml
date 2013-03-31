@@ -187,10 +187,14 @@ public class CNode extends Node
         return doesAltNodeExist( attribute.index( ) );
     }
     
-    public void addAlternativeNode( Instance instance, Attribute attribute )
+    public void addAlternativeNode( Instance instance, Attribute attribute, int newId )
     {
-        CNode alt = new CNode( instance, classAttribute, id );
+        CNode alt = new CNode( instance, classAttribute, newId );
+        
+        // the new alternative node should not be tested if this CNode is currently
+        // in test mode (wait until the next test mode)
         alt.setNew( true );
+        
         altNodes.put( attribute, alt );
     }
 
