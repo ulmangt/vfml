@@ -2,6 +2,7 @@ package edu.gmu.vfml.tree;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import weka.core.Attribute;
@@ -22,7 +23,7 @@ public class CNode extends Node
      * A map of subtrees made from splitting on alternative Attributes (instead of
      * splitting on the Attribute specified in this.attribute).
      */
-    protected Map<Attribute, CNode> altNodes;
+    protected Map<Attribute, CNode> altNodes = new LinkedHashMap<Attribute, CNode>( );
 
     /**
      * @see InstanceId
