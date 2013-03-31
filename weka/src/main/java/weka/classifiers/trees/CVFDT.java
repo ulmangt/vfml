@@ -317,8 +317,6 @@ public class CVFDT extends VFDT
      */
     public void traverseAndIncrementCounts( Instance instance, CNode node )
     {
-        node.incrementTestCount( testInterval, testDuration );
-            
         // increment the counts for this node
         // (unlike VFDT, statistics are kept for each data instance
         // at every node in the tree in order to continuously monitor
@@ -383,6 +381,8 @@ public class CVFDT extends VFDT
      */
     protected void traverseAndSplitOrTest( Instance instance, CNode node )
     {
+        node.incrementTestCount( testInterval, testDuration );
+        
         // If we're in test mode, instead of considering splits, evaluate
         // the predicted class of this instance and compare it to the correct
         // classification then store whether or not it matches. Perform this

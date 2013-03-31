@@ -24,6 +24,7 @@ public class CNode extends Node
      * splitting on the Attribute specified in this.attribute).
      */
     protected Map<Attribute, CNode> altNodes = new LinkedHashMap<Attribute, CNode>( );
+    protected Map<Attribute, TestStats> altStats = new LinkedHashMap<Attribute, TestStats>( );
 
     /**
      * @see InstanceId
@@ -39,29 +40,12 @@ public class CNode extends Node
      * The number of correctly classified test instances.
      */
     transient protected int testCorrectCount = 0;
-    
+
     /**
      * If true, new data instances are not used to grow the tree. Instead, they are
      * used to compare the error rate of this Node to that of its subtrees.
      */
     transient protected boolean testMode = false;
-    
-    /**
-     * A flag set when a new alternative node is first created.
-     * Necessary because the test interval is based on per-node counts and the
-     * alternative node creation interval is based on the overall instance count.
-     * Therefore, a new alternative node may get created in the middle of the test
-     * phase for a node. This node shouldn't be included in the test (since it
-     * doesn't have a full set of instances).
-     */
-    transient protected boolean isNew = false;
-    
-    /**
-     * Only valid for alternative nodes. Stores the previous best error difference
-     * between the main tree and the alternative node. Used for pruning unpromising
-     * alternative trees.
-     */
-    transient protected double bestErrorDiff = 0.0;
 
     public CNode( Attribute[] attributes, Attribute classAttribute, int id )
     {
@@ -114,88 +98,98 @@ public class CNode extends Node
      */
     public void testInstance( Instance instance )
     {
+        // test this node
         double predicted = getLeafNode( instance ).getClassValue( );
         double actual = instance.classValue( );
         if ( predicted == actual )
         {
             this.testCorrectCount++;
         }
-    }
-
-    public void incrementTestCount( int testInterval, int testDuration )
-    {
-        // isNew flag will be reset by our parent after the end
-        // of the current test phase
-        if ( !isNew )
+        
+        // test all alternative nodes
+        Iterator<Attribute> iter = altNodes.keySet( ).iterator( );
+        while ( iter.hasNext( ) )
         {
-            // check whether we should enter or exit test mode
-            this.testCount++;
-            if ( this.testMode )
+            Attribute attribute = iter.next( );
+            CNode alt = altNodes.get( attribute );
+            TestStats stats = altStats.get( attribute );
+            
+            double altPredicted = alt.getLeafNode( instance ).getClassValue( );
+            if ( altPredicted == actual )
             {
-                if ( this.testCount > testDuration )
-                {
-                    endTest( );
-                }
+                stats.correct( );
             }
             else
             {
-                if ( this.testCount > testInterval )
-                {
-                    startTest( );
-                }
+                stats.incorrect( );
             }
         }
     }
 
-    public boolean isNew( )
+    public void incrementTestCount( int testInterval, int testDuration )
     {
-        return this.isNew;
-    }
-    
-    public void setNew( boolean isNew )
-    {
-        this.isNew = isNew;
+        // check whether we should enter or exit test mode
+        this.testCount++;
+        if ( this.testMode )
+        {
+            if ( this.testCount > testDuration )
+            {
+                endTest( );
+            }
+        }
+        else
+        {
+            if ( this.testCount > testInterval )
+            {
+                startTest( );
+            }
+        }
     }
     
     public boolean isTestMode( )
     {
         return this.testMode;
     }
-    
+
     public int getTestCount( )
     {
         return this.testCount;
     }
-    
+
     public double getTestError( )
     {
-        return 1 - (double) this.testCorrectCount / (double) this.testCount;
+        return 1 - ( double ) this.testCorrectCount / ( double ) this.testCount;
     }
-    
+
     public boolean doesAltNodeExist( int attributeIndex )
     {
         for ( Attribute altAttribute : altNodes.keySet( ) )
         {
             if ( altAttribute.index( ) == attributeIndex ) return true;
         }
-        
+
         return false;
     }
-    
+
     public boolean doesAltNodeExist( Attribute attribute )
     {
         return doesAltNodeExist( attribute.index( ) );
     }
-    
+
     public void addAlternativeNode( Instance instance, Attribute attribute, int newId )
     {
-        CNode alt = new CNode( instance, classAttribute, newId );
+        CNode node = new CNode( instance, classAttribute, newId );
+        TestStats stats = new TestStats( );
         
         // the new alternative node should not be tested if this CNode is currently
         // in test mode (wait until the next test mode)
-        alt.setNew( true );
-        
-        altNodes.put( attribute, alt );
+        if ( isTestMode( ) )
+        {
+            stats.setNew( true );
+        }
+
+        altStats.put( attribute, stats );
+        altNodes.put( attribute, node );
     }
 
     /**
@@ -203,48 +197,50 @@ public class CNode extends Node
      */
     protected void endTest( )
     {
+        Attribute bestAttribute = null;
         CNode bestAlt = null;
         double bestErrorDiff = 0;
         double mainError = getTestError( );
-        Iterator<CNode> iter = getAlternativeTrees( ).iterator( );
-        while( iter.hasNext( ) )
+        Iterator<Attribute> iter = altNodes.keySet( ).iterator( );
+        while ( iter.hasNext( ) )
         {
-            CNode alt = iter.next( );
+            Attribute attribute = iter.next( );
+            CNode alt = altNodes.get( attribute );
+            TestStats stats = altStats.get( attribute );
             
             // if an alternative tree was created while we were in
             // test mode, it will not yet be in test mode and will
             // not have collected enough examples yet to evaluate it properly
             // so skip it until the next test mode
-            if ( !alt.isNew( ) )
+            if ( !stats.isNew( ) )
             {
-                double altError = alt.getTestError( );
+                double altError = stats.getError( );
                 double errorDiff = mainError - altError;
-                
+
                 // if the error difference improved, record the new improved value
-                if ( alt.bestErrorDiff < errorDiff )
+                if ( stats.getBestError( ) > errorDiff )
                 {
-                    alt.bestErrorDiff = errorDiff;
+                    stats.setBestError( errorDiff );
                 }
-                // if the error difference increased by 1% above the current
+                // if the error difference decreased by 1% below the current
                 // best, then drop the alternative node
-                else if ( errorDiff > alt.bestErrorDiff * 1.01 )
+                else if ( errorDiff < stats.getBestError( ) * 1.01 )
                 {
                     iter.remove( );
                 }
-                
+
                 // remember the alternative node with the best error
-                if ( errorDiff < bestErrorDiff )
+                if ( bestErrorDiff < errorDiff )
                 {
+                    bestAttribute = attribute;
                     bestErrorDiff = errorDiff;
                     bestAlt = alt;
                 }
             }
-            
-            // mark all the alternative nodes as not new so they will
-            // participate in the next round of testing
-            alt.setNew( false );
+
+            stats.reset( );
         }
-        
+
         // one of the alternative trees is better than the current tree!
         // replace this node with the alternative node
         if ( bestAlt != null )
@@ -258,8 +254,13 @@ public class CNode extends Node
             this.totalCount = bestAlt.totalCount;
             this.id = bestAlt.id;
             this.altNodes = bestAlt.altNodes;
+            
+            // remove the alternative node which was promoted
+            // from the list of alternative nodes
+            this.altNodes.remove( bestAttribute );
+            this.altStats.remove( bestAttribute );
         }
-        
+
         this.testCorrectCount = 0;
         this.testCount = 0;
         this.testMode = false;
@@ -272,7 +273,7 @@ public class CNode extends Node
     {
         this.testCorrectCount = 0;
         this.testCount = 0;
-        
+
         // if there are no alternative nodes to test, don't enter test mode (wait another
         // testInterval instances then check again)
         this.testMode = !this.altNodes.isEmpty( );
