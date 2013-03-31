@@ -16,7 +16,8 @@ public class TestStats
      * between the main tree and the alternative node. Used for pruning unpromising
      * alternative trees.
      */
-    private double bestErrorDiff = 0;
+    // start with infinitely bad error
+    private double bestErrorDiff = -Double.MAX_VALUE;
 
     /**
      * A flag set when a new alternative node is first created.

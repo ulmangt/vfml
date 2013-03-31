@@ -229,7 +229,10 @@ public class CNode extends Node
                 // best, then drop the alternative node
                 else if ( errorDiff < stats.getBestError( ) * 1.01 )
                 {
+                    //TODO having two maps is awkward (it's only done because we sometimes
+                    //     want lists of just CNodes)
                     iter.remove( );
+                    altStats.remove( attribute );
                 }
 
                 // remember the alternative node with the best error
@@ -314,7 +317,7 @@ public class CNode extends Node
         }
         else
         {
-            return String.format( "%s (%d alt)", super.getText( ), altNodes.size( ) );
+            return String.format( "id %d %s (%d alt)", id, super.getText( ), altNodes.size( ) );
         }
     }
     
@@ -327,7 +330,7 @@ public class CNode extends Node
         }
         else
         {
-            return String.format( "%s (%d alt)", super.getText( attributeIndex ), altNodes.size( ) );
+            return String.format( "id %d %s (%d alt)", id, super.getText( attributeIndex ), altNodes.size( ) );
         }
     }
 }
