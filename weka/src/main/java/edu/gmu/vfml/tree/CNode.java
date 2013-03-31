@@ -313,7 +313,7 @@ public class CNode extends Node
     {
         if ( altNodes.isEmpty( ) )
         {
-            return super.getText( );
+            return String.format( "id %d %s", id, super.getText( ) );
         }
         else
         {
@@ -326,7 +326,7 @@ public class CNode extends Node
     {
         if ( altNodes.isEmpty( ) )
         {
-            return super.getText( attributeIndex );
+            return String.format( "id %d %s", id, super.getText( attributeIndex ) );
         }
         else
         {
