@@ -178,7 +178,10 @@ public class CNode extends Node
 
     public void addAlternativeNode( Instance instance, Attribute attribute, int newId )
     {
+        // create the alternative node and immediately split it on the new attribute
         CNode node = new CNode( instance, classAttribute, newId );
+        node.split( attribute, instance, newId );
+        
         TestStats stats = new TestStats( );
         
         // the new alternative node should not be tested if this CNode is currently

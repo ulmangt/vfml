@@ -311,7 +311,7 @@ public class Node implements Serializable
      */
     public String toString( )
     {
-        return "VFDT\n\n" + toString( this, 0 );
+        return toString( this, 0 );
     }
 
     /**
