@@ -44,7 +44,13 @@
 
 <h2>Weka Integration</h2>
 
-<p>JVFML is designed to interface with <a href="http://www.cs.waikato.ac.nz/ml/weka/">Weka</a>. Although using Weka eliminates a major advantage of VFDT (its ability to process streaming data sets one data instance at a time without ever loading the entire data set into memory), we feel a Weka implementation of VFDT is still a useful tool for experimenting with the algorithm.</p>
+<p>JVFML is designed to interface with <a href="http://www.cs.waikato.ac.nz/ml/weka/">Weka</a>. Although using Weka eliminates a major advantage of VFDT (its ability to process streaming data sets one data instance at a time without ever loading the entire data set into memory), the Weka implementation is potentially a useful tool for experimenting with the algorithm.</p>
+
+<h2>Other Implementations</h2>
+
+<p>The developers of Weka have also developed a streaming machine learning toolkit called <a href="http://moa.cs.waikato.ac.nz/">Moa</a>. This software contains an implementation of VFML as well as a number of other stream classifiers.</p>
+
+<p>Domingos and Hulten also have an implementation of <a href="http://www.cs.washington.edu/dm/vfml/">VFML in C</a>. Their original source code can be downloaded from the <a href="http://sourceforge.net/projects/vfml/">VMFL Sourceforge repository</a>. However, on Ubuntu 12.04 LTS (and possibly other modern Linux distros), the project does not build as-is. A slightly modified version of Domingos and Hulten's original C code which compiles under Ubuntu 12.04 LTS is packaged with JVFML.</p>
 
 <h3>Installation Instructions</h3>
 
