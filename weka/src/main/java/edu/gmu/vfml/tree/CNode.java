@@ -307,11 +307,11 @@ public class CNode extends Node
     {
         if ( altNodes.isEmpty( ) )
         {
-            return getText( );
+            return super.getText( );
         }
         else
         {
-            return String.format( "%s (%d alt)", getText( ), altNodes.size( ) );
+            return String.format( "%s (%d alt)", super.getText( ), altNodes.size( ) );
         }
     }
     
@@ -320,11 +320,11 @@ public class CNode extends Node
     {
         if ( altNodes.isEmpty( ) )
         {
-            return getText( attributeIndex );
+            return super.getText( attributeIndex );
         }
         else
         {
-            return String.format( "%s (%d alt)", getText( attributeIndex ), altNodes.size( ) );
+            return String.format( "%s (%d alt)", super.getText( attributeIndex ), altNodes.size( ) );
         }
     }
 }
