@@ -303,4 +303,62 @@ public class Node implements Serializable
     {
         counts[attributeIndex][valueIndex][classIndex] += amount;
     }
+    
+    /**
+     * Prints the decision tree using the private toString method from below.
+     *
+     * @return a textual description of the classifier
+     */
+    public String toString( )
+    {
+        return "VFDT\n\n" + toString( this, 0 );
+    }
+
+    /**
+     * Outputs a tree at a certain level.
+     *
+     * @param level the level at which the tree is to be printed
+     * @return the tree as string at the given level
+     */
+    protected String toString( Node node, int level )
+    {
+
+        StringBuffer text = new StringBuffer( );
+
+        if ( node.getAttribute( ) == null )
+        {
+            text.append( ": " + node.getText( ) );
+        }
+        else
+        {
+            for ( int j = 0; j < node.getAttribute( ).numValues( ); j++ )
+            {
+                text.append( "\n" );
+                for ( int i = 0; i < level; i++ )
+                {
+                    text.append( "|  " );
+                }
+                text.append( node.getText( j ) );
+                text.append( toString( node.getSuccessor( j ), level + 1 ) );
+            }
+        }
+        return text.toString( );
+    }
+    
+    protected String getText( )
+    {
+        return getClassAttribute( ).value( ( int ) getClassValue( ) );
+    }
+    
+    protected String getText( int attributeIndex )
+    {
+        if ( getAttribute( ) != null )
+        {
+            return getAttribute( ).name( ) + " = " + getAttribute( ).value( attributeIndex );
+        }
+        else
+        {
+            return getText( );
+        }
+    }
 }

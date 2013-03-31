@@ -218,7 +218,7 @@ public class CNode extends Node
                 double errorDiff = mainError - altError;
 
                 // if the error difference improved, record the new improved value
-                if ( stats.getBestError( ) > errorDiff )
+                if ( errorDiff > stats.getBestError( ) )
                 {
                     stats.setBestError( errorDiff );
                 }
@@ -300,5 +300,31 @@ public class CNode extends Node
     public int getId( )
     {
         return id;
+    }
+    
+    @Override
+    protected String getText( )
+    {
+        if ( altNodes.isEmpty( ) )
+        {
+            return getText( );
+        }
+        else
+        {
+            return String.format( "%s (%d alt)", getText( ), altNodes.size( ) );
+        }
+    }
+    
+    @Override
+    protected String getText( int attributeIndex )
+    {
+        if ( altNodes.isEmpty( ) )
+        {
+            return getText( attributeIndex );
+        }
+        else
+        {
+            return String.format( "%s (%d alt)", getText( attributeIndex ), altNodes.size( ) );
+        }
     }
 }

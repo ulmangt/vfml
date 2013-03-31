@@ -583,42 +583,10 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
      */
     public String toString( )
     {
-
         if ( root == null )
         {
             return "VFDT: No model built yet.";
         }
-        return "VFDT\n\n" + toString( root, 0 );
-    }
-
-    /**
-     * Outputs a tree at a certain level.
-     *
-     * @param level the level at which the tree is to be printed
-     * @return the tree as string at the given level
-     */
-    protected String toString( Node node, int level )
-    {
-
-        StringBuffer text = new StringBuffer( );
-
-        if ( node.getAttribute( ) == null )
-        {
-            text.append( ": " + node.getClassAttribute( ).value( ( int ) node.getClassValue( ) ) );
-        }
-        else
-        {
-            for ( int j = 0; j < node.getAttribute( ).numValues( ); j++ )
-            {
-                text.append( "\n" );
-                for ( int i = 0; i < level; i++ )
-                {
-                    text.append( "|  " );
-                }
-                text.append( node.getAttribute( ).name( ) + " = " + node.getAttribute( ).value( j ) );
-                text.append( toString( node.getSuccessor( j ), level + 1 ) );
-            }
-        }
-        return text.toString( );
+        return "VFDT\n\n" + root.toString( );
     }
 }
