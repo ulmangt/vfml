@@ -50,7 +50,7 @@ public class CVFDT extends VFDT
     /**
      * The maximum size of the window list.
      */
-    protected int windowSize;
+    protected int windowSize = 200000;
     
     /**
      * The number of data instances between rechecks of the validity of all
@@ -69,6 +69,46 @@ public class CVFDT extends VFDT
     
     transient protected int largestNodeId;
     transient protected int splitValidityCounter;
+    
+    public int getWindowSize( )
+    {
+        return windowSize;
+    }
+
+    public void setWindowSize( int windowSize )
+    {
+        this.windowSize = windowSize;
+    }
+
+    public int getSplitRecheckInterval( )
+    {
+        return splitRecheckInterval;
+    }
+
+    public void setSplitRecheckInterval( int splitRecheckInterval )
+    {
+        this.splitRecheckInterval = splitRecheckInterval;
+    }
+
+    public int getTestInterval( )
+    {
+        return testInterval;
+    }
+
+    public void setTestInterval( int testInterval )
+    {
+        this.testInterval = testInterval;
+    }
+
+    public int getTestDuration( )
+    {
+        return testDuration;
+    }
+
+    public void setTestDuration( int testDuration )
+    {
+        this.testDuration = testDuration;
+    }
 
     /**
      * Lists the command line options available to this classifier.
@@ -445,15 +485,14 @@ public class CVFDT extends VFDT
         // attributes are added to the node) then split on the best attribute 
         double hoeffdingBound = calculateHoeffdingBound( node );
 
-        boolean noAltTree = node.doesAltNodeExist( firstIndex );
+        boolean alreadyExists = node.doesAltNodeExist( firstIndex );
         // split if there is a large enough entropy difference between the first/second place attributes
         boolean confident = secondValue - firstValue > hoeffdingBound;
         // or if the first/second attributes are so close that the hoeffding bound has decreased below
         // the tie threshold (in this case it really doesn't matter which attribute is chosen
         boolean tie = tieConfidence > hoeffdingBound && secondValue - firstValue >= tieConfidence / 2.0;
 
-        // see: vfdt-engine.c:871
-        if ( noAltTree && ( tie || confident ) )
+        if ( !alreadyExists && ( tie || confident ) )
         {
             Attribute attribute = instance.attribute( firstIndex );
             node.addAlternativeNode( instance, attribute );
