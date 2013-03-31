@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>JVFML by ulmangt</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">JVFML</h1>
+        <p class="header">Java Very Fast Machine Learning Toolkit</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/ulmangt/vfml/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/ulmangt/vfml/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/ulmangt/vfml">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/ulmangt">ulmangt</a></p>
+
+
+      </header>
+      <section>
+        <h3>Very Fast Machine Learning Toolkit</h3>
+
+<p>Pedro Domingos and Geoff Hulten developed VFML in 2003 to experiment with applying machine learning techniques to situations where the scale of streaming data being learned from makes traditional techniques impractical. Their original work is described in:</p>
+
+<blockquote>
+<p>Hulten, G. and Domingos, P. "VFML -- A toolkit for mining high-speed time-changing data streams" <a href="http://www.cs.washington.edu/dm/vfml/">http://www.cs.washington.edu/dm/vfml/</a>. 2003.</p>
+</blockquote>
+
+<h3>Very Fast Decision Tree</h3>
+
+<p>JVFML is a Java implementation of Hulten and Domingos' Very Fast Decision Tree (VFDT) algorithm for building decision trees from streaming data using a statistical result known as the Hoeffding Bound. The Hoeffding Bound is used to decide when enough data instances have been processed to split a tree node and be confident that a traditional batch learner with all the data available would have made the same decision.</p>
+
+<h3>Weka Integration</h3>
+
+<p>JVFML is designed to interface with <a href="http://www.cs.waikato.ac.nz/ml/weka/">Weka</a>. Although using Weka eliminates a major advantage of VFDT (its ability to process streaming data sets one data instance at a time without ever loading the entire data set into memory), we feel a Weka implementation of VFDT is still a useful tool for experimenting with the algorithm.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-39727776-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
