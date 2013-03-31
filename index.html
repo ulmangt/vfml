@@ -57,6 +57,8 @@
 </li>
 </ol><p>Note: Linux users should use : instead of ; when typing the previous command into the terminal.</p>
 
+<p>Note: To work with large data sets, the Java heap space allocated to Weka may need to be increased. To give Weka 2GB of memory (for example) add the following option to the command above `-Xmx2g`.</p>
+
 <h3>Usage Instructions</h3>
 
 <p>Once Weka has been launched with the JVFML jar on the Java classpath, it can be used like any other Weka classifier. There should be two new classifiers available under <em>weka/classifiers/trees</em>: VFDT and CVFDT (CVFDT is an extension which support adapting to concept drift). Note that both classifiers currently only support nominal attributes and do not support missing values.</p>
