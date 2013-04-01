@@ -73,6 +73,21 @@ public class Node implements Serializable
     {
         this( getAttributes( instance ), classAttribute );
     }
+    
+    /**
+     * Modified this Node to look like the provided node. Does not deep copy fields.
+     */
+    public void copyNode( Node node )
+    {
+        this.successors = node.successors;
+        this.attribute = node.attribute;
+        this.classAttribute = node.classAttribute;
+        this.classValue = node.classValue;
+        this.classCount = node.classCount;
+        this.counts = node.counts;
+        this.classCount = node.classCount;
+        this.totalCount = node.totalCount;
+    }
 
     public int getTreeSize( )
     {

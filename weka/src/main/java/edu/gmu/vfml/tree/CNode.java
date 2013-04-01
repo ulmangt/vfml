@@ -64,6 +64,24 @@ public class CNode extends Node
         super( instance, classAttribute );
         this.id = id;
     }
+    
+    /**
+     * Modified this Node to look like the provided node. Does not deep copy fields.
+     */
+    @Override
+    public void copyNode( Node node )
+    {
+        super.copyNode( node );
+        
+        if ( node instanceof CNode )
+        {
+            CNode cnode = (CNode) node;
+            
+            this.id = cnode.id;
+            this.altNodes = cnode.altNodes;
+            this.altStats = cnode.altStats;
+        }
+    }
 
     @Override
     public CNode getLeafNode( Instance instance )
@@ -251,16 +269,7 @@ public class CNode extends Node
         // replace this node with the alternative node
         if ( bestAlt != null )
         {
-            this.successors = bestAlt.successors;
-            this.attribute = bestAlt.attribute;
-            this.classValue = bestAlt.classValue;
-            this.classCount = bestAlt.classCount;
-            this.counts = bestAlt.counts;
-            this.classCount = bestAlt.classCount;
-            this.totalCount = bestAlt.totalCount;
-            this.id = bestAlt.id;
-            this.altNodes = bestAlt.altNodes;
-            
+            this.copyNode( bestAlt );
             // remove the alternative node which was promoted
             // from the list of alternative nodes
             this.altNodes.remove( bestAttribute );
