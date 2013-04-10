@@ -13,9 +13,3 @@ do
     bunzip2 "${year}.csv.bz2"
 done
 
-# run data formatting python script to make one large arff formatted file
-python formatData.py . data.arff header.arff
-
-# the arff header and data are written to two files which need to be combined
-cat header.arff data.arff > FlightDelay.arff
-rm header.arff data.arff
