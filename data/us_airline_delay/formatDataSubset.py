@@ -66,8 +66,21 @@ for file_name in files:
 
                 # write line back to output file
                 part1 = ','.join(tokens[0:9])
-                part2 = ','.join(tokens[11:21])
-                out_file.write(part1+','+part2+'\n')
+                part2 = ','.join(tokens[11:15])
+                part3 = ','.join(tokens[16:21])
+
+                # create synthetic attribute
+                # (whether plane's arrival was delayed)
+                if tokens[14] == '?':
+                    delayed = '?'
+                else:
+                    arrivalDelay = int(tokens[14])
+                    if arrivalDelay > 0:
+                        delayed = 'yes'
+                    else:
+                        delayed = 'no'
+
+                out_file.write(part1+','+part2+','+part3+','+delayed+'\n')
         except:
             pass
 
@@ -96,13 +109,13 @@ header_file.write( '@ATTRIBUTE UniqueCarrier ' + '{' + ','.join(nom_carrier) + '
 header_file.write( '@ATTRIBUTE ActualElapsedTime NUMERIC\n' )
 header_file.write( '@ATTRIBUTE CRSElapsedTime NUMERIC\n' )
 header_file.write( '@ATTRIBUTE AirTime NUMERIC\n' )
-header_file.write( '@ATTRIBUTE ArrDelay NUMERIC\n' )
 header_file.write( '@ATTRIBUTE DepDelay NUMERIC\n' )
 header_file.write( '@ATTRIBUTE Origin ' + '{' + ','.join(nom_origin) + '}\n' )
 header_file.write( '@ATTRIBUTE Dest ' + '{' + ','.join(nom_dest) + '}\n' )
 header_file.write( '@ATTRIBUTE Distance NUMERIC\n' )
 header_file.write( '@ATTRIBUTE TaxiIn NUMERIC\n' )
 header_file.write( '@ATTRIBUTE TaxiOut NUMERIC\n' )
+header_file.write( '@ATTRIBUTE ArrivalDelayed {yes,no}\n' )
 
 # close output files
 header_file.flush()
