@@ -9,7 +9,7 @@ Modules
 ====
 
 ### original
-Hulten and Domingos' original VFML C code with minor modifications to support compilation on Ubuntu 10.04 and gcc 4.6.3/
+Hulten and Domingos' original VFML C code with minor modifications to support compilation on Ubuntu 10.04 and gcc 4.6.3.
 
 ### weka
 Weka implementation of the VFDT and CVFDT tree-based classification algorithms. Developed mainly for educational purposes. For actual streaming classification problems, the [Moa VFDT implemention](http://moa.cms.waikato.ac.nz/) is recommended.
