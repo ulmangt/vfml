@@ -1,5 +1,7 @@
-lib
-bin
+lib/*
+!lib/.gitignore
+bin/*
+!bin/.gitignore
 src/*.o
 src/*.a
 src/*.tab.c
