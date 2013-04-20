@@ -66,8 +66,8 @@ for file_name in files:
 
                 # write line back to output file
                 part1 = ','.join(tokens[0:9])
-                part2 = ','.join(tokens[11:15])
-                part3 = ','.join(tokens[16:21])
+                part2 = ','.join(tokens[11:14])
+                part3 = ','.join(tokens[15:21])
 
                 # create synthetic attribute
                 # (whether plane's arrival was delayed)
