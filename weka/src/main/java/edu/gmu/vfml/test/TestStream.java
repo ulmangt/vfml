@@ -14,8 +14,10 @@ public class TestStream
 {
     public static void main( String[] args ) throws Exception
     {
+        boolean conceptFlag = true;
+        
         // define a boolean concept
-        BooleanConcept concept = new BooleanConcept( )
+        BooleanConcept concept1 = new BooleanConcept( )
         {
             @Override
             public boolean f( boolean[] v )
@@ -24,14 +26,25 @@ public class TestStream
             }
         };
 
+        // define another boolean concept
+        BooleanConcept concept2 = new BooleanConcept( )
+        {
+            @Override
+            public boolean f( boolean[] v )
+            {
+                return ( v[1] && ( !v[5] || v[6] || !v[12] ) && v[7] ) || ( v[3] && v[4] && v[12] ) || ( v[6] && v[12] );
+            }
+        };
+        
         // build a random data generator using the concept
         // (which randomly flips the class value 5% of the time)
-        RandomDataGenerator generator = new RandomDataGenerator( concept, 15, 0.05 );
+        RandomDataGenerator generator = new RandomDataGenerator( concept1, 15, 0.05 );
 
         // build a CVFDT classifier
         final CVFDT classifier = new CVFDT( );
         classifier.setConfidenceLevel( 1e-6 );
         classifier.setNMin( 30 );
+        classifier.setSplitRecheckInterval( 5000 );
         classifier.initialize( generator.getDataset( ) );
 
         final TreeVisualization visualization = new TreeVisualization( );
@@ -43,6 +56,20 @@ public class TestStream
             Instance instance = generator.next( );
             classifier.addInstance( instance );
 
+            // periodically switch the concept to test concept drift adaptation
+            if ( i % 200000 == 0 )
+            {
+                if ( conceptFlag ) generator.setConcept( concept2 );
+                else generator.setConcept( concept1 );
+                
+                conceptFlag = !conceptFlag;
+            }
+            
+            if ( i % 5000 == 0 )
+            {
+                System.out.println( i );
+            }
+            
             if ( i % 200 == 0 )
             {
                 // make a copy of the current classifier tree structure

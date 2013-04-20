@@ -52,6 +52,11 @@ public class RandomDataGenerator
         return attributeValues;
     }
     
+    public void setConcept( BooleanConcept concept )
+    {
+        this.concept = concept;
+    }
+    
     public Instances getDataset( )
     {
         return dataset;
