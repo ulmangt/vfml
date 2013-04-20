@@ -1,13 +1,15 @@
 package edu.gmu.vfml.test;
 
+import weka.classifiers.trees.CVFDT;
 import weka.core.Instance;
 import edu.gmu.vfml.data.BooleanConcept;
 import edu.gmu.vfml.data.RandomDataGenerator;
 
 public class TestStream
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws Exception
     {
+        // define a boolean concept
         BooleanConcept concept = new BooleanConcept( )
         {
             @Override
@@ -17,12 +19,25 @@ public class TestStream
             }
         };
         
+        // build a random data generator using the concept
+        // (which randomly flips the class value 5% of the time)
         RandomDataGenerator generator = new RandomDataGenerator( concept, 15, 0.05 );
         
-        while ( true )
+        // build a CVFDT classifier
+        CVFDT classifier = new CVFDT( );
+        classifier.setConfidenceLevel( 1e-6 );
+        classifier.setNMin( 30 );
+        classifier.initialize( generator.getDataset( ) );
+        
+        for ( int i = 0 ; ; i++ )
         {
             Instance instance = generator.next( );
-            System.out.println( instance );
+            classifier.addInstance( instance );
+            
+            if ( i % 10000 == 0 )
+            {
+                System.out.println( classifier.toString( ) );
+            }
         }
     }
 }

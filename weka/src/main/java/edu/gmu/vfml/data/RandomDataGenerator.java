@@ -11,7 +11,7 @@ public class RandomDataGenerator
 {
     private int numAttributes;
     private double errorRate;
-    private Instances instances;
+    private Instances dataset;
     private BooleanConcept concept;
     private Random r;
 
@@ -22,6 +22,7 @@ public class RandomDataGenerator
         this.errorRate = errorRate;
         this.r = new Random( );
         
+        // build the attributes
         FastVector attributes = new FastVector( );
         for ( int i = 0 ; i < numAttributes ; i++ )
         {
@@ -29,9 +30,18 @@ public class RandomDataGenerator
             attributes.addElement( new Attribute( attributeName, getAttributeValues() ) );
         }
         
-        attributes.addElement( new Attribute( "class", getAttributeValues() ) );
+        // build the class attribute
+        Attribute classAttribute = new Attribute( "class", getAttributeValues() );
+        attributes.addElement( classAttribute );
         
-        instances = new Instances( "data", attributes, 0 );
+        // build the dataset wrapper
+        dataset = new Instances( "data", attributes, 0 );
+        
+        // add a single example instance
+        dataset.add( next( ) );
+        
+        // set the class attribute
+        dataset.setClass( classAttribute );
     }
     
     private static final FastVector getAttributeValues( )
@@ -40,6 +50,11 @@ public class RandomDataGenerator
         attributeValues.addElement( "0" );
         attributeValues.addElement( "1" );
         return attributeValues;
+    }
+    
+    public Instances getDataset( )
+    {
+        return dataset;
     }
 
     public Instance next( )
@@ -63,7 +78,7 @@ public class RandomDataGenerator
         wekaValues[numAttributes] = classValue ? 1 : 0;
         
         Instance instance = new Instance( 1.0, wekaValues );
-        instance.setDataset( instances );
+        instance.setDataset( dataset );
         
         return instance;
     }

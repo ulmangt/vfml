@@ -46,19 +46,19 @@ public class CVFDT extends VFDT
      * Linked list of instances currently inside the CVFDT learning window.
      */
     protected LinkedList<InstanceId> window;
-    
+
     /**
      * The maximum size of the window list.
      */
     protected int windowSize = 200000;
-    
+
     /**
      * The number of data instances between rechecks of the validity of all
      * alternative trees. This is a global count on instances (see
      * splitValidityCounter).
      */
     protected int splitRecheckInterval = 20000;
-    
+
     /**
      * Every altTestModeInterval instances, CNodes enter a test state where they
      * use the next altTestModeDuration instances to evaluate whether or not
@@ -66,10 +66,10 @@ public class CVFDT extends VFDT
      */
     protected int testInterval = 9000;
     protected int testDuration = 1000;
-    
+
     transient protected int largestNodeId;
     transient protected int splitValidityCounter;
-    
+
     public int getWindowSize( )
     {
         return windowSize;
@@ -135,32 +135,32 @@ public class CVFDT extends VFDT
     public void setOptions( String[] options ) throws Exception
     {
         super.setOptions( options );
-        
+
         String windowSizeString = Utils.getOption( 'W', options );
         if ( !windowSizeString.isEmpty( ) )
         {
             windowSize = Integer.parseInt( windowSizeString );
         }
-        
+
         String splitRecheckString = Utils.getOption( 'F', options );
         if ( !splitRecheckString.isEmpty( ) )
         {
             splitRecheckInterval = Integer.parseInt( splitRecheckString );
         }
-        
+
         String altTestModeIntervalString = Utils.getOption( 'I', options );
         if ( !splitRecheckString.isEmpty( ) )
         {
             testInterval = Integer.parseInt( altTestModeIntervalString );
         }
-        
+
         String altTestModeDurationString = Utils.getOption( 'D', options );
         if ( !splitRecheckString.isEmpty( ) )
         {
             testDuration = Integer.parseInt( altTestModeDurationString );
         }
     }
-    
+
     /**
      * Gets the current settings of the Classifier.
      *
@@ -170,22 +170,22 @@ public class CVFDT extends VFDT
     public List<String> getOptionsList( )
     {
         List<String> options = super.getOptionsList( );
-        
+
         options.add( "-W" );
         options.add( String.valueOf( windowSize ) );
-        
+
         options.add( "-F" );
         options.add( String.valueOf( splitRecheckInterval ) );
-        
+
         options.add( "-I" );
         options.add( String.valueOf( testInterval ) );
-        
+
         options.add( "-D" );
         options.add( String.valueOf( testDuration ) );
-        
+
         return options;
     }
-    
+
     /**
      * Returns an instance of a TechnicalInformation object, containing 
      * detailed information about the technical background of this class,
@@ -215,11 +215,64 @@ public class CVFDT extends VFDT
     @Override
     public CNode getRoot( )
     {
-        return (CNode) root;
+        return ( CNode ) root;
+    }
+
+    /**
+     * Perform classifier initialization steps.
+     */
+    @Override
+    public void initialize( Instances data ) throws Exception
+    {
+        super.initialize( data );
+
+        this.window = new LinkedList<InstanceId>( );
+        this.largestNodeId = 0;
+        this.splitValidityCounter = 0;
+    }
+
+    public void addInstance( Instance instance )
+    {
+        try
+        {
+            // update the counts associated with this instance
+            // unlike VFDT, we start at the root because we will reach multiple
+            // leaf nodes in the various alternative trees
+            traverseAndIncrementCounts( instance, getRoot( ) );
+
+            // add the new instance to the window and remove old instance (if necessary)
+            updateWindow( instance );
+
+            // split nodes with attributes which have surpassed the hoeffding bound
+            // and/or test the alternative subtrees for nodes in test mode
+            traverseAndSplitOrTest( instance, getRoot( ) );
+
+            // check whether new alternative nodes should be created
+            if ( ++splitValidityCounter % splitRecheckInterval == 0 )
+            {
+                traverseAndCheckSplitValidity( instance, getRoot( ) );
+            }
+        }
+        catch ( Exception e )
+        {
+            logWarning( logger, "Trouble processing instance.", e );
+        }
+    }
+
+    @SuppressWarnings( "rawtypes" )
+    protected void makeTree( Enumeration data )
+    {
+        while ( data.hasMoreElements( ) )
+        {
+            // retrieve the next data instance
+            Instance instance = ( Instance ) data.nextElement( );
+
+            addInstance( instance );
+        }
     }
     
     @Override
-    public Node newNode( Instances instances )
+    protected Node newNode( Instances instances )
     {
         return new CNode( instances, classAttribute, ++largestNodeId );
     }
@@ -235,100 +288,53 @@ public class CVFDT extends VFDT
     {
         makeTree( data.enumerateInstances( ) );
     }
-    
-    /**
-     * Perform classifier initialization steps.
-     */
-    protected void initialize( Instances data ) throws Exception
-    {
-        super.initialize( data );
-        
-        this.window = new LinkedList<InstanceId>( );
-        this.largestNodeId = 0;
-        this.splitValidityCounter = 0;
-    }
 
-    @SuppressWarnings( "rawtypes" )
-    protected void makeTree( Enumeration data )
-    {
-        while ( data.hasMoreElements( ) )
-        {
-            try
-            {
-                // retrieve the next data instance
-                Instance instance = ( Instance ) data.nextElement( );
-
-                // update the counts associated with this instance
-                // unlike VFDT, we start at the root because we will reach multiple
-                // leaf nodes in the various alternative trees
-                traverseAndIncrementCounts( instance, getRoot( ) );
-                
-                // add the new instance to the window and remove old instance (if necessary)
-                updateWindow( instance );
-                
-                // split nodes with attributes which have surpassed the hoeffding bound
-                // and/or test the alternative subtrees for nodes in test mode
-                traverseAndSplitOrTest( instance, getRoot( ) );
-                
-                // check whether new alternative nodes should be created
-                if ( ++splitValidityCounter % splitRecheckInterval == 0 )
-                {
-                    traverseAndCheckSplitValidity( instance, getRoot( ) );
-                }
-            }
-            catch ( Exception e )
-            {
-                logWarning( logger, "Trouble processing instance.", e );
-            }
-        }
-    }
-    
     /**
      * Traverse the entire tree and determine if new alternative trees should be created.
      */
-    public void traverseAndCheckSplitValidity( Instance instance, CNode node )
-    {        
+    protected void traverseAndCheckSplitValidity( Instance instance, CNode node )
+    {
         // only check the validity of split for non-leaf node (i.e. nodes with splits)
         if ( node.getAttribute( ) != null )
         {
             // check the validity of the split on node.getAttribute() by
             // potentially creating a node with an alternative split
             recheckNodeSplit( instance, node );
-            
+
             // traverse into all the alternative nodes
             for ( CNode alt : node.getAlternativeTrees( ) )
             {
                 traverseAndCheckSplitValidity( instance, alt );
             }
-            
+
             // descend into all child nodes
             int numValues = node.getAttribute( ).numValues( );
-            for ( int attributeValue = 0 ; attributeValue < numValues ; attributeValue++ )
+            for ( int attributeValue = 0; attributeValue < numValues; attributeValue++ )
             {
                 CNode childNode = node.getSuccessor( attributeValue );
                 traverseAndCheckSplitValidity( instance, childNode );
             }
         }
     }
-    
+
     /**
      * In addition to incrementing the counts for the main tree,
      * increment the counts of any alternative trees being grown from this Node.
      */
-    public void traverseAndIncrementCounts( Instance instance, CNode node )
+    protected void traverseAndIncrementCounts( Instance instance, CNode node )
     {
         // increment the counts for this node
         // (unlike VFDT, statistics are kept for each data instance
         // at every node in the tree in order to continuously monitor
         // the validity of previous decisions)
         node.incrementCounts( instance );
-        
+
         // traverse into all the alternative nodes
         for ( CNode alt : node.getAlternativeTrees( ) )
         {
             traverseAndIncrementCounts( instance, alt );
         }
-        
+
         // if tree node is not a leaf node,
         // descend into the appropriate child node
         if ( node.getAttribute( ) != null )
@@ -338,12 +344,12 @@ public class CVFDT extends VFDT
             traverseAndIncrementCounts( instance, childNode );
         }
     }
-    
+
     /**
      * Called when an instance rolls off the window. Removes the instance
      * from the counts of each node
      */
-    public void traverseAndDecrementCounts( Instance instance, CNode node, int id )
+    protected void traverseAndDecrementCounts( Instance instance, CNode node, int id )
     {
         // nodes with greater id than the instance id were created after the
         // instance arrived and do not have the instance data included in their counts
@@ -351,13 +357,13 @@ public class CVFDT extends VFDT
         {
             node.decrementCounts( instance );
         }
-        
+
         // traverse into all the alternative nodes
         for ( CNode alt : node.getAlternativeTrees( ) )
         {
             traverseAndDecrementCounts( instance, alt, id );
         }
-        
+
         // if the main tree node is not a leaf node,
         // descend into the appropriate child node
         if ( node.getAttribute( ) != null )
@@ -367,7 +373,7 @@ public class CVFDT extends VFDT
             traverseAndDecrementCounts( instance, childNode, id );
         }
     }
-    
+
     /**
      * <p>Traverses the main tree and alternative trees. If in test mode, classifies
      * the instance and increments the testCorrectCount if the classification
@@ -382,7 +388,7 @@ public class CVFDT extends VFDT
     protected void traverseAndSplitOrTest( Instance instance, CNode node )
     {
         node.incrementTestCount( testInterval, testDuration );
-        
+
         // If we're in test mode, instead of considering splits, evaluate
         // the predicted class of this instance and compare it to the correct
         // classification then store whether or not it matches. Perform this
@@ -391,13 +397,13 @@ public class CVFDT extends VFDT
         {
             node.testInstance( instance );
         }
-        
+
         // traverse into all the alternative nodes
         for ( CNode alt : node.getAlternativeTrees( ) )
         {
             traverseAndSplitOrTest( instance, alt );
         }
-        
+
         // if tree node is not a leaf node,
         // descend into the appropriate child node
         if ( node.getAttribute( ) != null )
@@ -414,35 +420,35 @@ public class CVFDT extends VFDT
             checkNodeSplit( instance, node );
         }
     }
-    
+
     protected void updateWindow( Instance instance )
     {
         //XXX CVFDT Table 2 uses the largest ID *among the nodes that instance
         //XXX passes through* I think using the overall largest ID has the
         //XXX same affect, but I'm not 100% sure
-        
+
         // add the new instance to the window
         // tag it with the id of the largest currently existing node
         window.addLast( new InstanceId( instance, largestNodeId ) );
-        
+
         // drop the oldest instance from the window
         if ( window.size( ) > windowSize )
         {
             InstanceId oldInstanceId = window.removeFirst( );
             int oldId = oldInstanceId.getId( );
-            
+
             // iterate through the tree (and all alternative trees) and decrement
             // counts if the node's id is less than or equal to oldId
             traverseAndDecrementCounts( instance, getRoot( ), oldId );
         }
     }
-    
+
     @Override
     protected void splitNode( Node node, Attribute attribute, Instance instance )
     {
-        ((CNode) node).split( attribute, instance, ++largestNodeId );
+        ( ( CNode ) node ).split( attribute, instance, ++largestNodeId );
     }
-    
+
     /**
      * Evaluates the attributes of an already split node to determine if
      * a new alternative tree should be created.
@@ -464,7 +470,7 @@ public class CVFDT extends VFDT
             if ( attrIndex == classAttribute.index( ) ) continue;
             // don't consider the current split attribute
             if ( attrIndex == node.getAttribute( ).index( ) ) continue;
-            
+
             Attribute attribute = instance.attribute( attrIndex );
             double value = computeEntropySum( node, attribute );
 
@@ -479,7 +485,7 @@ public class CVFDT extends VFDT
                 secondValue = value;
             }
         }
-        
+
         // if the difference between the information gain of the two best attributes
         // has exceeded the Hoeffding bound (which will continually shrink as more
         // attributes are added to the node) then split on the best attribute 

@@ -348,7 +348,7 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     /**
      * Perform classifier initialization steps.
      */
-    protected void initialize( Instances data ) throws Exception
+    public void initialize( Instances data ) throws Exception
     {
         // can classifier handle the data?
         getCapabilities( ).testWithFail( data );
@@ -367,6 +367,28 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
 
         // create root node
         root = newNode( data );
+    }
+    
+    public void addInstance( Instance instance )
+    {
+        try
+        {
+            // traverse the classification tree to find the leaf node for this instance
+            Node node = root.getLeafNode( instance );
+
+            // update the counts associated with this instance
+            node.incrementCounts( instance );
+
+            // check whether or not to split the node on an attribute
+            if ( node.getCount( ) % nMin == 0 )
+            {
+                checkNodeSplit( instance, node );
+            }
+        }
+        catch ( Exception e )
+        {
+            logWarning( logger, "Trouble processing instance.", e );
+        }
     }
 
     protected Node newNode( Instances instances )
@@ -390,27 +412,10 @@ public class VFDT extends Classifier implements TechnicalInformationHandler, Opt
     {
         while ( data.hasMoreElements( ) )
         {
-            try
-            {
-                // retrieve the next data instance
-                Instance instance = ( Instance ) data.nextElement( );
+            // retrieve the next data instance
+            Instance instance = ( Instance ) data.nextElement( );
 
-                // traverse the classification tree to find the leaf node for this instance
-                Node node = root.getLeafNode( instance );
-
-                // update the counts associated with this instance
-                node.incrementCounts( instance );
-
-                // check whether or not to split the node on an attribute
-                if ( node.getCount( ) % nMin == 0 )
-                {
-                    checkNodeSplit( instance, node );
-                }
-            }
-            catch ( Exception e )
-            {
-                logWarning( logger, "Trouble processing instance.", e );
-            }
+            addInstance( instance );
         }
     }
 
