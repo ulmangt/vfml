@@ -107,7 +107,7 @@ public class Node implements Serializable
             return 1;
         }
     }
-
+    
     public Node getSuccessor( int value )
     {
         if ( successors != null )
