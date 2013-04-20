@@ -31,6 +31,11 @@ public class VisualizableNode
         return this.y;
     }
     
+    public void setText( String text )
+    {
+        this.text = text;
+    }
+    
     public String getText( )
     {
         return this.text;
@@ -58,7 +63,7 @@ public class VisualizableNode
         for ( int i = 0 ; i < size ; i++ )
         {
             float newLeft = left + step * i;
-            float newRight = left + (step+1) * i;
+            float newRight = left + step * (i+1);
             int newLevel = level-1;
             VisualizableNode successor = node.getSuccessors( ).get( i );
             setPosition0( successor, newLevel, newLeft, newRight );
@@ -75,7 +80,7 @@ public class VisualizableNode
     private static final VisualizableNode copyTree0( Node node )
     {
         List<VisualizableNode> successors = new LinkedList<VisualizableNode>( );
-        String text = null;
+        String text = "";
 
         Attribute splitAttribute = node.getAttribute( );
         
@@ -83,12 +88,12 @@ public class VisualizableNode
         {
             int numValues = splitAttribute.numValues( );
             
-            for ( int i  = 0 ; i < numValues ; i++ )
+            for ( int i = 0 ; i < numValues ; i++ )
             {
                 Node successor = node.getSuccessor( i );
                 VisualizableNode vSuccessor = copyTree( successor );
                 successors.add( vSuccessor );
-                text = String.format( "%s = %s", splitAttribute.name( ), splitAttribute.value( i ) );
+                vSuccessor.setText( String.format( "%s = %s %s", splitAttribute.name( ), splitAttribute.value( i ), vSuccessor.getText( ) ) );
             }
         }
         else
