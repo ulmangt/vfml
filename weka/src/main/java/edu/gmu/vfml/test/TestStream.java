@@ -5,6 +5,7 @@ import com.metsci.glimpse.support.repaint.RepaintManager;
 
 import weka.classifiers.trees.CVFDT;
 import weka.core.Instance;
+import weka.core.NoSupportForMissingValuesException;
 import edu.gmu.vfml.data.BooleanConcept;
 import edu.gmu.vfml.data.RandomDataGenerator;
 import edu.gmu.vfml.ui.TreeVisualization;
@@ -70,20 +71,44 @@ public class TestStream
                 System.out.println( i );
             }
             
-            if ( i % 200 == 0 )
+            if ( i % 1000 == 0 )
             {
                 // make a copy of the current classifier tree structure
                 final VisualizableNode vNode = VisualizableNode.copyTree( classifier.getRoot( ) );
                 
-                repaintManager.syncExec( new Runnable( )
+                final double accuracy = testAccuracy( classifier, generator );
+                final int n = i;
+                
+                repaintManager.asyncExec( new Runnable( )
                 {
                     @Override
                     public void run( )
                     {
                         visualization.setNode( vNode );
+                        visualization.addAccuracy( n, accuracy );
                     }
                 });
             }
         }
+    }
+    
+    protected static double testAccuracy( CVFDT classifier, RandomDataGenerator generator ) throws NoSupportForMissingValuesException
+    {
+    	int total = 500;
+    	int correct = 0;
+    	
+    	int classIndex = generator.getDataset().classIndex();
+    	
+    	for ( int i = 0 ; i < total ; i++ )
+    	{
+    		Instance instance = generator.next();
+    		double result = classifier.classifyInstance( instance );
+    		if ( instance.value( classIndex ) == result )
+    		{
+    			correct++;
+    		}
+    	}
+    	
+    	return (double) correct / (double) total;
     }
 }
