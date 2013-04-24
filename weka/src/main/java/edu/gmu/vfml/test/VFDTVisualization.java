@@ -3,7 +3,7 @@ package edu.gmu.vfml.test;
 import com.metsci.glimpse.examples.Example;
 import com.metsci.glimpse.support.repaint.RepaintManager;
 
-import weka.classifiers.trees.CVFDT;
+import weka.classifiers.trees.VFDT;
 import weka.core.Instance;
 import weka.core.NoSupportForMissingValuesException;
 import edu.gmu.vfml.data.BooleanConcept;
@@ -11,9 +11,14 @@ import edu.gmu.vfml.data.RandomDataGenerator;
 import edu.gmu.vfml.ui.TreeVisualization;
 import edu.gmu.vfml.ui.VisualizableNode;
 
-public class TestStream
+public class VFDTVisualization
 {
     public static void main( String[] args ) throws Exception
+    {
+    	new VFDTVisualization( ).run( );
+    }
+	
+    public void run( ) throws Exception
     {
         boolean conceptFlag = true;
         
@@ -42,11 +47,7 @@ public class TestStream
         RandomDataGenerator generator = new RandomDataGenerator( concept1, 15, 0.05 );
 
         // build a CVFDT classifier
-        final CVFDT classifier = new CVFDT( );
-        classifier.setConfidenceLevel( 1e-6 );
-        classifier.setNMin( 30 );
-        classifier.setSplitRecheckInterval( 5000 );
-        classifier.initialize( generator.getDataset( ) );
+        final VFDT classifier = buildClassifier( generator );
 
         final TreeVisualization visualization = new TreeVisualization( );
         final Example example = Example.showWithSwing( visualization );
@@ -92,7 +93,18 @@ public class TestStream
         }
     }
     
-    protected static double testAccuracy( CVFDT classifier, RandomDataGenerator generator ) throws NoSupportForMissingValuesException
+    protected VFDT buildClassifier( RandomDataGenerator generator ) throws Exception
+    {
+        // build a VFDT classifier
+        final VFDT classifier = new VFDT( );
+        classifier.setConfidenceLevel( 1e-6 );
+        classifier.setNMin( 30 );
+        classifier.initialize( generator.getDataset( ) );
+        
+        return classifier;
+    }
+    
+    protected double testAccuracy( VFDT classifier, RandomDataGenerator generator ) throws NoSupportForMissingValuesException
     {
     	int total = 500;
     	int correct = 0;
