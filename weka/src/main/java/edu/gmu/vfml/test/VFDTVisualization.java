@@ -1,5 +1,10 @@
 package edu.gmu.vfml.test;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
 import com.metsci.glimpse.examples.Example;
 import com.metsci.glimpse.support.repaint.RepaintManager;
 
@@ -13,6 +18,11 @@ import edu.gmu.vfml.ui.VisualizableNode;
 
 public class VFDTVisualization
 {
+    boolean conceptFlag = true;
+    volatile boolean isPaused = false;
+    ReentrantLock lock = new ReentrantLock( );
+    Condition unpaused = lock.newCondition();
+	
     public static void main( String[] args ) throws Exception
     {
     	new VFDTVisualization( ).run( );
@@ -20,8 +30,6 @@ public class VFDTVisualization
 	
     public void run( ) throws Exception
     {
-        boolean conceptFlag = true;
-        
         // define a boolean concept
         BooleanConcept concept1 = new BooleanConcept( )
         {
@@ -53,8 +61,42 @@ public class VFDTVisualization
         final Example example = Example.showWithSwing( visualization );
         final RepaintManager repaintManager = example.getManager( );
         
+        example.getCanvas().addKeyListener( new KeyAdapter( )
+        {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				isPaused = !isPaused;
+				
+				if ( !isPaused )
+				{
+	        		lock.lock();
+	        		try
+	        		{
+	        			unpaused.signalAll();
+	        		}
+	        		finally
+	        		{
+	        			lock.unlock();
+	        		}
+				}
+			}
+        });
+        
         for ( int i = 0;; i++ )
         {
+        	while ( isPaused )
+        	{
+        		lock.lock();
+        		try
+        		{
+        			unpaused.await();
+        		}
+        		finally
+        		{
+        			lock.unlock();
+        		}
+        	}
+        	
             Instance instance = generator.next( );
             classifier.addInstance( instance );
 
